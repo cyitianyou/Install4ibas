@@ -1,4 +1,4 @@
-﻿namespace Steup4ibas
+﻿namespace Steup4ibas.UI
 {
     partial class ShellControl
     {

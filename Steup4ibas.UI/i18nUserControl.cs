@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using Steup4ibas.Tools.i18n;
+using System.Windows.Forms;
 
-namespace Steup4ibas.i18n
+namespace Steup4ibas.UI
 {
     public class i18nUserControl : UserControl
     {
