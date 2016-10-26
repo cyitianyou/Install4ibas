@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Steup4ibas.UI
 {
-    public partial class ShellControl : ParentControl
+    public partial class ShellControl : i18nControl
     {
         protected ParentControl CurrentControl;
         public ShellControl()
@@ -17,28 +17,7 @@ namespace Steup4ibas.UI
             InitializeComponent();
         }
 
-        protected override void InitializeEvent()
-        {
-            this.FinishEvent += ShellControl_FinishEvent;
-            this.BackEvent += ShellControl_BackEvent;
-            this.NextEvent += ShellControl_NextEvent;
-            this.CancelEvent += ShellControl_CancelEvent;
-        }
 
-        void ShellControl_CancelEvent(object sender, EventArgs e)
-        {
-        }
-
-        void ShellControl_NextEvent(object sender, EventArgs e)
-        {
-        }
-
-        void ShellControl_BackEvent(object sender, EventArgs e)
-        {
-        }
-
-        void ShellControl_FinishEvent(object sender, EventArgs e)
-        {
-        }
+        
     }
 }

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="i18nControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="IUIAction.cs" />
     <Compile Include="ParentControl.cs">
       <SubType>UserControl</SubType>
