@@ -73,9 +73,9 @@ namespace Steup4ibas.Tools.IISManager
         protected void RegIISForAspnet()
         {
             if (CheckOSBitness.Is64BitOperatingSystem())
-                ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v2.0.50727\aspnet_regiis -i"));
+                ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
             else
-                ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v2.0.50727\aspnet_regiis -i"));
+                ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
         }
         /// <summary>
         /// 执行命令行
