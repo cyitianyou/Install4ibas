@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonsVisibleStyle.cs" />
+    <Compile Include="i18nControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="IUIAction.cs" />
     <Compile Include="ParentControl.cs">
       <SubType>UserControl</SubType>
@@ -52,11 +56,20 @@
     <Compile Include="ShellControl.Designer.cs">
       <DependentUpon>ShellControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="WelcomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WelcomeControl.Designer.cs">
+      <DependentUpon>WelcomeControl.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ShellControl.resx">
       <DependentUpon>ShellControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeControl.resx">
+      <DependentUpon>WelcomeControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

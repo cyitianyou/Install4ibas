@@ -50,6 +50,7 @@ namespace Steup4ibas
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "$.MainForm.FormTitle";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
