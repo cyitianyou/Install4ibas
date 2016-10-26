@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonsVisibleStyle.cs" />
     <Compile Include="i18nControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

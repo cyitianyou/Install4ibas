@@ -9,9 +9,16 @@ namespace Steup4ibas.UI
     /// </summary>
     public class ParentControl : i18nControl, IUIAction
     {
+        public ButtonsVisibleStyle ButtonsVisibleStyle;
         public ParentControl()
         {
             this.InitializeEvent();
+            this.SetButtonsVisibleStyle();
+        }
+        protected virtual void SetButtonsVisibleStyle()
+        {
+            this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.Back
+                                        | ButtonsVisibleStyle.Next | ButtonsVisibleStyle.Finish;
         }
 
         protected virtual void InitializeEvent() {
