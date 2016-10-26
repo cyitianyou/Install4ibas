@@ -9,11 +9,17 @@ using System.Windows.Forms;
 
 namespace Steup4ibas.UI
 {
-    public partial class ShellControl : i18nUserControl
+    public partial class ShellControl : ParentControl
     {
+        protected ParentControl CurrentControl;
         public ShellControl()
         {
             InitializeComponent();
+        }
+
+        protected override void InitializeEvent()
+        {
+        
         }
     }
 }
