@@ -9,51 +9,51 @@ namespace Steup4ibas.Tools.IISManager
         public IISManager7()
         {
             this.SysocmgrCmd = "start /w pkgmgr /norestart /[option]:" +
-"IIS-WebServerRole;" +
-"IIS-WebServer;" +
-"IIS-CommonHttpFeatures;" +
-"IIS-StaticContent;" +
-"IIS-DefaultDocument;" +
-"IIS-DirectoryBrowsing;" +
-"IIS-HttpErrors;" +
-"IIS-HttpRedirect;" +
-"IIS-ApplicationDevelopment;" +
-"IIS-ASPNET;" +
-"IIS-NetFxExtensibility;" +
-"IIS-ASP;" +
-"IIS-ISAPIExtensions;" +
-"IIS-ISAPIFilter;" +
-"IIS-ServerSideIncludes;" +
-"IIS-HealthAndDiagnostics;" +
-"IIS-HttpLogging;" +
-"IIS-LoggingLibraries;" +
-"IIS-RequestMonitor;" +
-"IIS-HttpTracing;" +
-"IIS-CustomLogging;" +
-"IIS-ODBCLogging;" +
-"IIS-Security;" +
-"IIS-BasicAuthentication;" +
-"IIS-WindowsAuthentication;" +
-"IIS-DigestAuthentication;" +
-"IIS-ClientCertificateMappingAuthentication;" +
-"IIS-IISCertificateMappingAuthentication;" +
-"IIS-URLAuthorization;" +
-"IIS-RequestFiltering;" +
-"IIS-IPSecurity;" +
-"IIS-Performance;" +
-"IIS-WebServerManagementTools;" +
-"IIS-ManagementConsole;" +
-"IIS-ManagementScriptingTools;" +
-"IIS-ManagementService;" +
-"IIS-IIS6ManagementCompatibility;" +
-"IIS-Metabase;" +
-"IIS-WMICompatibility;" +
-"IIS-LegacyScripts;" +
-"IIS-LegacySnapIn;" +
-"WAS-WindowsActivationService;" +
-"WAS-ProcessModel;" +
-"WAS-NetFxEnvironment;" +
-"WAS-ConfigurationAPI";
+                                "IIS-WebServerRole;" +
+                                "IIS-WebServer;" +
+                                "IIS-CommonHttpFeatures;" +
+                                "IIS-StaticContent;" +
+                                "IIS-DefaultDocument;" +
+                                "IIS-DirectoryBrowsing;" +
+                                "IIS-HttpErrors;" +
+                                "IIS-HttpRedirect;" +
+                                "IIS-ApplicationDevelopment;" +
+                                "IIS-ASPNET;" +
+                                "IIS-NetFxExtensibility;" +
+                                "IIS-ASP;" +
+                                "IIS-ISAPIExtensions;" +
+                                "IIS-ISAPIFilter;" +
+                                "IIS-ServerSideIncludes;" +
+                                "IIS-HealthAndDiagnostics;" +
+                                "IIS-HttpLogging;" +
+                                "IIS-LoggingLibraries;" +
+                                "IIS-RequestMonitor;" +
+                                "IIS-HttpTracing;" +
+                                "IIS-CustomLogging;" +
+                                "IIS-ODBCLogging;" +
+                                "IIS-Security;" +
+                                "IIS-BasicAuthentication;" +
+                                "IIS-WindowsAuthentication;" +
+                                "IIS-DigestAuthentication;" +
+                                "IIS-ClientCertificateMappingAuthentication;" +
+                                "IIS-IISCertificateMappingAuthentication;" +
+                                "IIS-URLAuthorization;" +
+                                "IIS-RequestFiltering;" +
+                                "IIS-IPSecurity;" +
+                                "IIS-Performance;" +
+                                "IIS-WebServerManagementTools;" +
+                                "IIS-ManagementConsole;" +
+                                "IIS-ManagementScriptingTools;" +
+                                "IIS-ManagementService;" +
+                                "IIS-IIS6ManagementCompatibility;" +
+                                "IIS-Metabase;" +
+                                "IIS-WMICompatibility;" +
+                                "IIS-LegacyScripts;" +
+                                "IIS-LegacySnapIn;" +
+                                "WAS-WindowsActivationService;" +
+                                "WAS-ProcessModel;" +
+                                "WAS-NetFxEnvironment;" +
+                                "WAS-ConfigurationAPI";
         }
 
         #region Methods
