@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steup4ibas.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,5 +16,12 @@ namespace Steup4ibas
         {
             InitializeComponent();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            var control=new WelcomeControl();
+            this.shellControl1.SetCurrentControl(control);
+        }
+
     }
 }
