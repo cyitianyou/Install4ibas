@@ -1,5 +1,4 @@
-﻿using System;
-using Steup4ibas.Tools.i18n;
+﻿using Steup4ibas.Tools.i18n;
 using System.Windows.Forms;
 
 namespace Steup4ibas.UI

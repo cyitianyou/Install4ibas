@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Steup4ibas.Tools.IISManager
 {
     internal class IISManager7 : IISManager
