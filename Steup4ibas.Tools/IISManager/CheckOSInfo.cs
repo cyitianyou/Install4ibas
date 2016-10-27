@@ -70,6 +70,8 @@ namespace Steup4ibas.Tools.IISManager
                                     return "Microsoft Windows 7";
                                 else
                                     return "Microsoft Windows Server 2008 R2";
+                            default:
+                                return "The later version of Microsoft Windows Vista";
                         }
                         break;
                 }
