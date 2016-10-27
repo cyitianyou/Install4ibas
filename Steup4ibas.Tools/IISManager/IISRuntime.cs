@@ -51,6 +51,7 @@ namespace Steup4ibas.Tools.IISManager
                 case "Microsoft Windows Server 2008":
                 case "Microsoft Windows Server 2008 R2":
                 case "Microsoft Windows Vista":
+                case "The later version of Microsoft Windows Vista":
                     iisManager = new IISManager7();
                     break;
                 default:
