@@ -53,6 +53,9 @@ namespace Steup4ibas.Tools.IISManager
                 case "Microsoft Windows Vista":
                     iisManager = new IISManager7();
                     break;
+                default:
+                    iisManager = new IISManager7();
+                    break;
             }
             installIIS = new InstallIIS(iisManager.InstallIIS);
             unInstallIIS = new UnInstallIIS(iisManager.UnInstallIIS);
