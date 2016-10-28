@@ -22,7 +22,7 @@ namespace Steup4ibas.Tools.IISManager
                     RegistryModules.Add(new KeyValuePair<bool, string>(GetConfigurationData(module), module));
                 }
                 msg = String.Join(";", RegistryModules.Where(c => !c.Key).Select(c => c.Value));
-                return RegistryModules.Sum(c => c.Key ? 1 : 0) == 0;
+                return RegistryModules.Sum(c => c.Key ? 0 : 1) == 0;
             }
             catch (Exception error)
             {
