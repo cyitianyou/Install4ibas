@@ -9,7 +9,7 @@ namespace Steup4ibas.UnitTest
         [TestMethod]
         public void TestMethod1()
         {
-            IISRuntime IISRuntime = new IISRuntime();
+            
         }
     }
 }
