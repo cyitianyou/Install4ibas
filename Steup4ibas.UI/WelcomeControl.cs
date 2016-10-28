@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steup4ibas.Tools.IISManager;
+using System;
 using System.Windows.Forms;
 
 namespace Steup4ibas.UI
@@ -20,9 +21,20 @@ namespace Steup4ibas.UI
 
         void WelcomeControl_NextEvent(object sender, EventArgs e)
         {
-            MessageBox.Show("触发了点击下一步的事件");
+            var IISManager = IISManagerFactory.New().CreateIISManager();
+            if (IISManager.IsFullyInstalled())
+            {
+                MessageBox.Show("IIS已完全安装!");
+            }
+            else
+            {
+
+                MessageBox.Show(IISManager.ShowLastMessage(), "IIS未完全安装!");
+            }
         }
-       
+
+
+
 
     }
 }

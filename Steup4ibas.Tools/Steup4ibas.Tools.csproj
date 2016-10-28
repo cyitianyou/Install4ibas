@@ -43,10 +43,9 @@
     <Compile Include="i18n\i18n.cs" />
     <Compile Include="IISManager\CheckOSBitness.cs" />
     <Compile Include="IISManager\CheckOSInfo.cs" />
+    <Compile Include="IISManager\IIISManager.cs" />
     <Compile Include="IISManager\IISManager.cs" />
-    <Compile Include="IISManager\IISManager7.cs" />
-    <Compile Include="IISManager\IISManagerXP.cs" />
-    <Compile Include="IISManager\IISRuntime.cs" />
+    <Compile Include="IISManager\IISManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

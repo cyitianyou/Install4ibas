@@ -1,128 +1,131 @@
-﻿using System.Diagnostics;
-using System.IO;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Steup4ibas.Tools.IISManager
 {
-    internal abstract class IISManager
+    public class IISManager : IIISManager
     {
-        #region Properties
-        private string osVersion;
-        internal string OSVersion
+        public IISManager()
         {
-            get
+            RegistryModules = new List<KeyValuePair<bool, string>>();
+        }
+        public virtual bool IsFullyInstalled()
+        {
+            try
             {
-                if (osVersion == null)
+                RegistryModules.Clear();
+                foreach (var module in modules)
                 {
-                    var ver = new System.Management.ManagementObjectSearcher("select Version from SoftwareLicensingService");
-                    var items = ver.Get();
-                    foreach (var item in items)
-                    {
-                        object version = item.GetPropertyValue("Version");
-                        osVersion = version.ToString();
-                    }
+                    RegistryModules.Add(new KeyValuePair<bool, string>(GetConfigurationData(module), module));
                 }
-                return osVersion;
+                msg = String.Join(";", RegistryModules.Where(c => !c.Key).Select(c => c.Value));
+                return RegistryModules.Sum(c => c.Key ? 0 : 1) == 0;
             }
-        }
-        protected string I386PackPath { get; set; }
-        public string InOptionalFilePath { get; set; }
-        public string UnOptionalFilePath { get; set; }
-        /// <summary>
-        /// 注册表安装查找路径
-        /// </summary>
-        protected string regServicePackSourcePath;
-        /// <summary>
-        /// 注册表安装查找路径
-        /// </summary>
-        protected string regSourcePath;
-        /// <summary>
-        /// 安装IIS执行命令（后面应补充上配置文件TXT的文件路径）
-        /// </summary>
-        protected string SysocmgrCmd { get; set; }
-        #endregion
-
-        #region Methods
-        internal virtual void InstallIIS() { }
-        internal virtual void UnInstallIIS() { }
-        /// <summary>
-        /// 修改安装查找路径
-        /// </summary>
-        protected void AmendRegeditPath()
-        {
-            RegistryKey pRegKey = Registry.LocalMachine;
-            pRegKey = pRegKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Setup", true);
-            regServicePackSourcePath = pRegKey.GetValue("ServicePackSourcePath").ToString();
-            regSourcePath = pRegKey.GetValue("SourcePath").ToString();
-            pRegKey.SetValue("ServicePackSourcePath", I386PackPath);
-            pRegKey.SetValue("SourcePath", I386PackPath);
-        }
-        /// <summary>
-        /// 恢复安装查找路径
-        /// </summary>
-        protected void ReStoreRegeditPath()
-        {
-            RegistryKey pRegKey = Registry.LocalMachine;
-            pRegKey = pRegKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Setup", true);
-            pRegKey.SetValue("ServicePackSourcePath", regServicePackSourcePath);
-            pRegKey.SetValue("SourcePath", regSourcePath);
-        }
-        /// <summary>
-        /// 在ASP.NET中注册IIS
-        /// </summary>
-        protected void RegIISForAspnet()
-        {
-            if (CheckOSBitness.Is64BitOperatingSystem())
-                ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
-            else
-                ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
-        }
-        /// <summary>
-        /// 执行命令行
-        /// </summary>
-        /// <param name="optionalFilePaths">命令</param>
-        /// <returns>返回结果</returns>
-        protected virtual string ExecuteCmd(string[] optionalFilePaths)
-        {
-            //运行命令行
-            Process p = new Process();
-            // 设定程序名
-            p.StartInfo.FileName = "cmd.exe";
-            // 关闭Shell的使用
-            p.StartInfo.UseShellExecute = false;
-            // 重定向标准输入
-            p.StartInfo.RedirectStandardInput = true;
-            // 重定向标准输出
-            p.StartInfo.RedirectStandardOutput = true;
-            //重定向错误输出
-            p.StartInfo.RedirectStandardError = true;
-            // 设置不显示窗口
-            p.StartInfo.CreateNoWindow = true;
-            // 启动进程
-            p.Start();
-            for (int i = 0; i < optionalFilePaths.Length; i++)
+            catch (Exception error)
             {
-                p.StandardInput.WriteLine(optionalFilePaths[i]);
+
             }
-            p.StandardInput.WriteLine("exit");
-            // 从输出流获取命令执行结果
-            string strRst = p.StandardOutput.ReadToEnd();
-            p.WaitForExit();
-            p.Close();
-            return strRst;
+            return false;
         }
-        /// <summary>
-        /// 执行命令行
-        /// </summary>
-        /// <param name="optionalFilePath">命令</param>
-        /// <returns>optionalFilePaths</returns>
-        protected virtual string ExecuteCmd(string optionalFilePath)
+
+        [System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.PermitOnly,
+            Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures")]
+        public bool GetConfigurationData(string key, string namedValue = "Selection")
         {
-            string[] optionalFilePaths = new string[] { optionalFilePath };
-            return ExecuteCmd(optionalFilePaths);
+            try
+            {
+                RegistryKey pRegKey = Registry.LocalMachine.OpenSubKey(RegistryPath);
+                pRegKey = pRegKey.OpenSubKey(key);
+                if (pRegKey == null) return false;
+                int value = -1;
+                Int32.TryParse(Convert.ToString(pRegKey.GetValue(namedValue, -1)), out value);
+                return value == 1;
+            }
+            catch (Exception error)
+            {
+
+            }
+            return false;
+        }
+        private string msg;
+        public string ShowLastMessage()
+        {
+            return msg;
+        }
+        public virtual void InstallIIS()
+        {
+            throw new NotImplementedException();
         }
 
+        public virtual void RegIISForAspnet()
+        {
+            throw new NotImplementedException();
+        }
 
+        public virtual void UninstallIIS()
+        {
+            throw new NotImplementedException();
+        }
+        #region 属性及常量
+        List<KeyValuePair<bool, string>> RegistryModules;
+        //const string RegistryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures";
+        const string RegistryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures";
+        //string[] RegistryPath = new string[] {"SOFTWARE","Microsoft","Windows","CurrentVersion","Component Based Servicing","Notifications","OptionalFeatures"};
+        string[] modules = new string[] {
+                                "IIS-WebServerRole" ,
+                                "IIS-WebServer" ,
+                                "IIS-CommonHttpFeatures" ,
+                                "IIS-StaticContent" ,
+                                "IIS-DefaultDocument" ,
+                                "IIS-DirectoryBrowsing" ,
+                                "IIS-HttpErrors" ,
+                                "IIS-HttpRedirect" ,
+                                "IIS-ApplicationDevelopment" ,
+                                "IIS-ASPNET" ,
+                                "IIS-NetFxExtensibility" ,
+                                "IIS-ASP" ,
+                                "IIS-ISAPIExtensions" ,
+                                "IIS-ISAPIFilter" ,
+                                "IIS-ServerSideIncludes" ,
+                                "IIS-HealthAndDiagnostics" ,
+                                "IIS-HttpLogging" ,
+                                "IIS-LoggingLibraries" ,
+                                "IIS-RequestMonitor" ,
+                                "IIS-HttpTracing" ,
+                                "IIS-CustomLogging" ,
+                                //"IIS-ODBCLogging" ,
+                                "IIS-Security" ,
+                                "IIS-BasicAuthentication" ,
+                                //"IIS-WindowsAuthentication" ,
+                                //"IIS-DigestAuthentication" ,
+                                //"IIS-ClientCertificateMappingAuthentication" ,
+                                //"IIS-IISCertificateMappingAuthentication" ,
+                                "IIS-URLAuthorization" ,
+                                "IIS-RequestFiltering" ,
+                                "IIS-IPSecurity" ,
+                                "IIS-Performance" ,
+                                "IIS-WebServerManagementTools" ,
+                                "IIS-ManagementConsole" ,
+                                "IIS-ManagementScriptingTools" ,
+                                "IIS-ManagementService" ,
+                                "IIS-IIS6ManagementCompatibility" ,
+                                "IIS-Metabase" ,
+                                "IIS-WMICompatibility" ,
+                                "IIS-LegacyScripts" ,
+                                "IIS-LegacySnapIn" ,
+                                "WAS-WindowsActivationService" ,
+                                "WAS-ProcessModel" ,
+                                "WAS-NetFxEnvironment" ,
+                                "WAS-ConfigurationAPI"
+    };
         #endregion
+
+
+
+
+        
     }
 }
