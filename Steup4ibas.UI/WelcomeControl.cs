@@ -28,12 +28,13 @@ namespace Steup4ibas.UI
             }
             else
             {
-                MessageBox.Show("IIS未完全安装!");
+
+                MessageBox.Show(IISManager.ShowLastMessage(), "IIS未完全安装!");
             }
         }
 
-        
-       
+
+
 
     }
 }

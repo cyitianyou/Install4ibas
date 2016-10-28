@@ -24,5 +24,7 @@ namespace Steup4ibas.Tools.IISManager
         /// 卸载IIS
         /// </summary>
         void UninstallIIS();
+
+        string ShowLastMessage();
     }
 }

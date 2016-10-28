@@ -21,6 +21,7 @@ namespace Steup4ibas.Tools.IISManager
                 {
                     RegistryModules.Add(new KeyValuePair<bool, string>(GetConfigurationData(module), module));
                 }
+                msg = String.Join(";", RegistryModules.Where(c => !c.Key).Select(c => c.Value));
                 return RegistryModules.Sum(c => c.Key ? 1 : 0) == 0;
             }
             catch (Exception error)
@@ -49,7 +50,11 @@ namespace Steup4ibas.Tools.IISManager
             }
             return false;
         }
-
+        private string msg;
+        public string ShowLastMessage()
+        {
+            return msg;
+        }
         public virtual void InstallIIS()
         {
             throw new NotImplementedException();
@@ -117,5 +122,10 @@ namespace Steup4ibas.Tools.IISManager
                                 "WAS-ConfigurationAPI"
     };
         #endregion
+
+
+
+
+        
     }
 }
