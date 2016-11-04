@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Steup4ibas.UI
+namespace Install4ibas.UI
 {
     [System.Flags]
     public enum ButtonsVisibleStyle

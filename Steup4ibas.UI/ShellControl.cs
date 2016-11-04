@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using Steup4ibas.Tools.i18n;
+using Install4ibas.Tools.i18n;
 
-namespace Steup4ibas.UI
+namespace Install4ibas.UI
 {
     public partial class ShellControl : i18nControl
     {

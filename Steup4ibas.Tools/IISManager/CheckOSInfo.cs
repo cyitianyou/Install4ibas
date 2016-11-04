@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Steup4ibas.Tools.IISManager
+namespace Install4ibas.Tools.IISManager
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct _OSVERSIONINFOEX

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Steup4ibas.UI
+namespace Install4ibas.UI
 {
     public interface IUIAction
     {

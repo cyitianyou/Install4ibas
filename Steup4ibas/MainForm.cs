@@ -1,8 +1,8 @@
-﻿using Steup4ibas.UI;
+﻿using Install4ibas.UI;
 using System;
 using System.Windows.Forms;
 
-namespace Steup4ibas
+namespace Install4ibas
 {
     public partial class MainForm : Form
     {

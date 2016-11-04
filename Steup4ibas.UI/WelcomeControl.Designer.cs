@@ -1,4 +1,4 @@
-﻿namespace Steup4ibas.UI
+﻿namespace Install4ibas.UI
 {
     partial class WelcomeControl
     {

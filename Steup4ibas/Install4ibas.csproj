@@ -7,7 +7,7 @@
     <ProjectGuid>{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Steup4ibas</RootNamespace>
+    <RootNamespace>Install4ibas</RootNamespace>
     <AssemblyName>Steup4ibas</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -72,6 +72,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -85,13 +86,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Steup4ibas.Tools\Steup4ibas.Tools.csproj">
+    <ProjectReference Include="..\Steup4ibas.Tools\Install4ibas.Tools.csproj">
       <Project>{0c4e7178-9566-4898-8bcb-cbf4ff4193a0}</Project>
-      <Name>Steup4ibas.Tools</Name>
+      <Name>Install4ibas.Tools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Steup4ibas.UI\Steup4ibas.UI.csproj">
+    <ProjectReference Include="..\Steup4ibas.UI\Install4ibas.UI.csproj">
       <Project>{bf2a331e-dfd1-4d0f-9c7e-da2dedfc5d29}</Project>
-      <Name>Steup4ibas.UI</Name>
+      <Name>Install4ibas.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

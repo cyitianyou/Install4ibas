@@ -1,5 +1,5 @@
-﻿using Steup4ibas.UI;
-namespace Steup4ibas
+﻿using Install4ibas.UI;
+namespace Install4ibas
 {
     partial class MainForm
     {
@@ -29,7 +29,7 @@ namespace Steup4ibas
         /// </summary>
         private void InitializeComponent()
         {
-            this.shellControl1 = new Steup4ibas.UI.ShellControl();
+            this.shellControl1 = new Install4ibas.UI.ShellControl();
             this.SuspendLayout();
             // 
             // shellControl1

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Steup4ibas
+namespace Install4ibas
 {
     static class Program
     {
