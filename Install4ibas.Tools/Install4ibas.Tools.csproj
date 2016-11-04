@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Plugin\FileOperation\FileOperation.cs" />
     <Compile Include="Plugin\i18n\i18n.cs" />
     <Compile Include="Plugin\IISManager\CheckOSBitness.cs" />
     <Compile Include="Plugin\IISManager\CheckOSInfo.cs" />
@@ -55,7 +56,14 @@
     <Folder Include="Services\AppendInstall\" />
     <Folder Include="Services\Basis\" />
     <Folder Include="Services\NewInstall\" />
-    <Folder Include="SteupConfig\" />
+    <Folder Include="WebFile\~packages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebFile\Tools\7zip\7z.dll" />
+    <EmbeddedResource Include="WebFile\Tools\7zip\7z.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebFile\deploy_ibas_web_services.bat" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
