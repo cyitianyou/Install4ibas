@@ -10,7 +10,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
 {
     public class FileOperation
     {
-        const string WebFolderName = "Install4ibas.Tools.WebFile.";
+        const string WebFolderName = "Install4ibas.Tools.Resource.WebFile.";
         public static void CopyResourceFiles(string Path)
         {
             var ResourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
