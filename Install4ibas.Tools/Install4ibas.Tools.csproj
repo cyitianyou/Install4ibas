@@ -47,11 +47,14 @@
     <Compile Include="IISManager\IISManager.cs" />
     <Compile Include="IISManager\IISManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\ServiceEventArgs.cs" />
+    <Compile Include="Common\ServiceEventHandle.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Services\AppendInstall\" />
     <Folder Include="Services\Basis\" />
-    <Folder Include="Services\FullSteup\" />
+    <Folder Include="Services\NewInstall\" />
     <Folder Include="SteupConfig\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
