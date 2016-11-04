@@ -73,7 +73,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Steup4ibas.Tools\Install4ibas.Tools.csproj">
+    <ProjectReference Include="..\Install4ibas.Tools\Install4ibas.Tools.csproj">
       <Project>{0c4e7178-9566-4898-8bcb-cbf4ff4193a0}</Project>
       <Name>Install4ibas.Tools</Name>
     </ProjectReference>

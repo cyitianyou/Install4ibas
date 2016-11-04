@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Install4ibas.Tools.IISManager
+namespace Install4ibas.Tools.Plugin.IISManager
 {
     public class IISManager : IIISManager
     {

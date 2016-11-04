@@ -86,11 +86,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Steup4ibas.Tools\Install4ibas.Tools.csproj">
+    <ProjectReference Include="..\Install4ibas.Tools\Install4ibas.Tools.csproj">
       <Project>{0c4e7178-9566-4898-8bcb-cbf4ff4193a0}</Project>
       <Name>Install4ibas.Tools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Steup4ibas.UI\Install4ibas.UI.csproj">
+    <ProjectReference Include="..\Install4ibas.UI\Install4ibas.UI.csproj">
       <Project>{bf2a331e-dfd1-4d0f-9c7e-da2dedfc5d29}</Project>
       <Name>Install4ibas.UI</Name>
     </ProjectReference>

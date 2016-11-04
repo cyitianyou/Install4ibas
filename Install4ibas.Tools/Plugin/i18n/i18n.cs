@@ -1,5 +1,5 @@
 ﻿
-namespace Install4ibas.Tools.i18n
+namespace Install4ibas.Tools.Plugin.i18n
 {
     public class i18n
     {

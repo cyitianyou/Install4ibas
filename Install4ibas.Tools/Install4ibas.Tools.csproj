@@ -40,12 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="i18n\i18n.cs" />
-    <Compile Include="IISManager\CheckOSBitness.cs" />
-    <Compile Include="IISManager\CheckOSInfo.cs" />
-    <Compile Include="IISManager\IIISManager.cs" />
-    <Compile Include="IISManager\IISManager.cs" />
-    <Compile Include="IISManager\IISManagerFactory.cs" />
+    <Compile Include="Plugin\i18n\i18n.cs" />
+    <Compile Include="Plugin\IISManager\CheckOSBitness.cs" />
+    <Compile Include="Plugin\IISManager\CheckOSInfo.cs" />
+    <Compile Include="Plugin\IISManager\IIISManager.cs" />
+    <Compile Include="Plugin\IISManager\IISManager.cs" />
+    <Compile Include="Plugin\IISManager\IISManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ServiceEventArgs.cs" />
     <Compile Include="Common\ServiceEventHandle.cs" />
