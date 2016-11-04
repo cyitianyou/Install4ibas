@@ -58,17 +58,17 @@
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resource\WebFile\~packages\" />
     <Folder Include="Services\AppendInstall\" />
     <Folder Include="Services\Basis\" />
     <Folder Include="Services\NewInstall\" />
-    <Folder Include="WebFile\~packages\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WebFile\Tools\7zip\7z.dll" />
-    <EmbeddedResource Include="WebFile\Tools\7zip\7z.exe" />
+    <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.dll" />
+    <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.exe" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WebFile\deploy_ibas_web_services.bat" />
+    <EmbeddedResource Include="Resource\WebFile\deploy_ibas_web_services.bat" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -76,7 +76,16 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dlls\BTulz.ModelsTransformer.B1.dll" />
+    <Content Include="Dlls\BTulz.ModelsTransformer.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
+
+if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
