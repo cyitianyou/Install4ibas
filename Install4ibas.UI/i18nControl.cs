@@ -1,4 +1,4 @@
-﻿using Install4ibas.Tools.i18n;
+﻿using Install4ibas.Tools.Plugin.i18n;
 using System.Windows.Forms;
 
 namespace Install4ibas.UI
