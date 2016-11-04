@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
-    public partial class FinishControl : ParentControl
+    public partial class FinishControl : ChildControl
     {
         public FinishControl()
         {

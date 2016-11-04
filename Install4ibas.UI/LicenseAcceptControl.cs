@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
-    public partial class LicenseAcceptControl : ParentControl
+    public partial class LicenseAcceptControl : ChildControl
     {
         public LicenseAcceptControl()
         {

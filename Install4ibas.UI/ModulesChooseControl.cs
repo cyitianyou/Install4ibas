@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
-    public partial class ModulesChooseControl : ParentControl
+    public partial class ModulesChooseControl : ChildControl
     {
         public ModulesChooseControl()
         {

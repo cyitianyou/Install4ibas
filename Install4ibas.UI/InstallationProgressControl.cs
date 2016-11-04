@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
-    public partial class InstallationProgressControl : ParentControl
+    public partial class InstallationProgressControl : ChildControl
     {
         public InstallationProgressControl()
         {

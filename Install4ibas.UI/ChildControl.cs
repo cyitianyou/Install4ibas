@@ -5,11 +5,11 @@ namespace Install4ibas.UI
     /// <summary>
     /// 父项控件,设定一些通用操作
     /// </summary>
-    public class ParentControl : i18nControl, IUIAction
+    public class ChildControl : i18nControl, IUIAction
     {
         public ButtonsVisibleStyle ButtonsVisibleStyle;
         public ShellControl ShellControl;
-        public ParentControl()
+        public ChildControl()
         {
             this.InitializeEvent();
             this.SetButtonsVisibleStyle();
