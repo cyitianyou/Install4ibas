@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Steup4ibas.UI
+namespace Install4ibas.UI
 {
     /// <summary>
     /// 父项控件,设定一些通用操作

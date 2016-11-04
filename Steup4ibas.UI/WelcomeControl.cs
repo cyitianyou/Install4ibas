@@ -1,8 +1,8 @@
-﻿using Steup4ibas.Tools.IISManager;
+﻿using Install4ibas.Tools.IISManager;
 using System;
 using System.Windows.Forms;
 
-namespace Steup4ibas.UI
+namespace Install4ibas.UI
 {
     public partial class WelcomeControl : ParentControl
     {

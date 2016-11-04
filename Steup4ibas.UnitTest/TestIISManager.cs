@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Steup4ibas.Tools.IISManager;
+using Install4ibas.Tools.IISManager;
 
-namespace Steup4ibas.UnitTest
+namespace Install4ibas.UnitTest
 {
     [TestClass]
     public class TestIISManager

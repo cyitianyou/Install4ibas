@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-namespace Steup4ibas.Tools.IISManager
+namespace Install4ibas.Tools.IISManager
 {
     class CheckOSBitness
     {
