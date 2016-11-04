@@ -62,7 +62,7 @@
             this.btn_Next.Name = "btn_Next";
             this.btn_Next.Size = new System.Drawing.Size(80, 34);
             this.btn_Next.TabIndex = 3;
-            this.btn_Next.Text = "$.ShellControl.Button.Next";
+            this.btn_Next.Text = "下一步";
             this.btn_Next.UseVisualStyleBackColor = true;
             this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
             // 
@@ -72,7 +72,7 @@
             this.btn_Finish.Name = "btn_Finish";
             this.btn_Finish.Size = new System.Drawing.Size(80, 34);
             this.btn_Finish.TabIndex = 2;
-            this.btn_Finish.Text = "$.ShellControl.Button.Finish";
+            this.btn_Finish.Text = "完成";
             this.btn_Finish.UseVisualStyleBackColor = true;
             this.btn_Finish.Click += new System.EventHandler(this.btn_Finish_Click);
             // 
@@ -82,7 +82,7 @@
             this.btn_Back.Name = "btn_Back";
             this.btn_Back.Size = new System.Drawing.Size(80, 34);
             this.btn_Back.TabIndex = 1;
-            this.btn_Back.Text = "$.ShellControl.Button.Back";
+            this.btn_Back.Text = "上一步";
             this.btn_Back.UseVisualStyleBackColor = true;
             this.btn_Back.Click += new System.EventHandler(this.btn_Back_Click);
             // 
@@ -92,7 +92,7 @@
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(80, 34);
             this.btn_Cancel.TabIndex = 0;
-            this.btn_Cancel.Text = "$.ShellControl.Button.Cancel";
+            this.btn_Cancel.Text = "取消";
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
