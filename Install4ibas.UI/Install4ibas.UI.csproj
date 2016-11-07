@@ -83,7 +83,7 @@
     <Compile Include="ModulesChooseControl.Designer.cs">
       <DependentUpon>ModulesChooseControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParentControl.cs">
+    <Compile Include="ChildControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

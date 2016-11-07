@@ -17,8 +17,8 @@ namespace Install4ibas.UI
             this.btn_Next.Visible = style.HasFlag(ButtonsVisibleStyle.Next);
             this.btn_Finish.Visible = style.HasFlag(ButtonsVisibleStyle.Finish);
         }
-        protected ParentControl CurrentControl;
-        public bool SetCurrentControl(ParentControl control)
+        protected ChildControl CurrentControl;
+        public bool SetCurrentControl(ChildControl control)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Install4ibas.UI
         }
         public bool SetCurrentControl(ControlTypes type)
         {
-            ParentControl control = null;
+            ChildControl control = null;
             switch (type)
             {
                 case ControlTypes.Welcome:

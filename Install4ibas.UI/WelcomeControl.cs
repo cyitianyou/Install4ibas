@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
-    public partial class WelcomeControl : ParentControl
+    public partial class WelcomeControl : ChildControl
     {
         public WelcomeControl()
         {

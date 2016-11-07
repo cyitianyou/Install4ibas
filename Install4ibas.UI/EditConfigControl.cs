@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
-    public partial class EditConfigControl :  ParentControl
+    public partial class EditConfigControl :  ChildControl
     {
         public EditConfigControl()
         {
