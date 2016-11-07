@@ -118,7 +118,7 @@ namespace Install4ibas.Tools.Services.Basis
                     setStream = myAssembly.GetManifestResourceStream(item);
                 }
                 if (setStream == null)
-                    throw new Exception(string.Format("没有找到预置文件资源。", ""));
+                    return null;// throw new Exception(string.Format("没有找到预置文件资源。", ""));
                 var knownTypes = new List<Type>() { typeof(InstallInformation), typeof(InstallInformationStep) };
                 var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(InstallInformation), knownTypes);
                 var information = serializer.ReadObject(setStream) as InstallInformation;
