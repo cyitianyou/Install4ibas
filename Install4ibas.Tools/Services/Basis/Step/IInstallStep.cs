@@ -10,7 +10,7 @@ namespace Install4ibas.Tools.Services.Basis
     {
         string StepCode { get; }
         string StepName { get; }
-        InstallInformation AppSetting { get; set; }
+        AppSetting AppSetting { get; set; }
 
         bool Excute();
     }
