@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Install4ibas.Tools.Common.InstallInformation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,6 @@ namespace Install4ibas.Tools.Services.Basis
             this.CheckMyInitializedStatus();
             try
             {
-
                 foreach (var item in this.AppSetting.Steps)
                 {
                     //循环方案步骤
@@ -39,9 +39,11 @@ namespace Install4ibas.Tools.Services.Basis
                     {
                         //步骤没有完成
                         executed = this.ExecutingStep(item);//运行步骤
+                        if (executed)
+                            this.ExecutingStepDone(item);//执行完成
+                        else
+                            throw new Exception(string.Format("步骤[{0} - {1}]执行返回失败，运行终止。", item.StepCode, item.StepName));
                     }
-                    if (!executed)//步骤运行没有返回正确的值，终止方案运行
-                        throw new Exception(string.Format("步骤[{0} - {1}]执行返回失败，运行终止。", item.StepCode, item.StepName));
                 }
                 //安装完成
                 return true;
@@ -53,6 +55,15 @@ namespace Install4ibas.Tools.Services.Basis
         }
 
         protected abstract bool ExecutingStep(InstallInformationStep step);
+        protected virtual void ExecutingStepDone(InstallInformationStep step)
+        {
+            step.Completed = true;
+            if (this.UpdateInstallationScheduleEvent != null)
+            {
+                var args = new Common.ServiceEventArgs();
+                this.UpdateInstallationScheduleEvent.Invoke(this, args);
+            }
+        }
 
 
         public event Common.ServiceEventHandle UpdateInstallationScheduleEvent;

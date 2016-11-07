@@ -1,4 +1,5 @@
-﻿using Install4ibas.Tools.Services.Common;
+﻿using Install4ibas.Tools.Common.InstallInformation;
+using Install4ibas.Tools.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
