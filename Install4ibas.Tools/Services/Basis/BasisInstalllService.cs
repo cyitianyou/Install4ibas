@@ -9,13 +9,13 @@ namespace Install4ibas.Tools.Services.Basis
 {
     public abstract class BasisInstalllService : IInstallService
     {
-        InstallInformation _AppSetting;
-        public InstallInformation AppSetting
+        AppSetting _AppSetting;
+        public AppSetting AppSetting
         {
             get
             {
                 if (_AppSetting == null)
-                    _AppSetting = new InstallInformation();
+                    _AppSetting = new AppSetting();
                 return _AppSetting;
             }
         }
@@ -104,7 +104,7 @@ namespace Install4ibas.Tools.Services.Basis
         /// 获取预设的安装信息
         /// </summary>
         /// <returns></returns>
-        protected virtual InstallInformation GetPresetInstallInformation()
+        protected virtual AppSetting GetPresetInstallInformation()
         {
             try
             {
@@ -119,9 +119,9 @@ namespace Install4ibas.Tools.Services.Basis
                 }
                 if (setStream == null)
                     return null;// throw new Exception(string.Format("没有找到预置文件资源。", ""));
-                var knownTypes = new List<Type>() { typeof(InstallInformation), typeof(InstallInformationStep) };
-                var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(InstallInformation), knownTypes);
-                var information = serializer.ReadObject(setStream) as InstallInformation;
+                var knownTypes = new List<Type>() { typeof(AppSetting), typeof(InstallInformationStep) };
+                var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(AppSetting), knownTypes);
+                var information = serializer.ReadObject(setStream) as AppSetting;
                 if (information == null)
                     throw new Exception("预置方案配置不是有效的数据。");
                 setStream.Close();

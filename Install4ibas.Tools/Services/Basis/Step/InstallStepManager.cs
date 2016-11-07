@@ -8,7 +8,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
 {
     public class InstallStepManager
     {
-        public InstallInformation AppSetting { get; set; }
+        public AppSetting AppSetting { get; set; }
         IEnumerable<IInstallStep> _StepMaps;
         public IEnumerable<IInstallStep> StepMaps
         {
@@ -21,7 +21,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 return _StepMaps;
             }
         }
-        public void SetAppSetting (InstallInformation Setting)
+        public void SetAppSetting (AppSetting Setting)
         {
             this.AppSetting = Setting;
         }

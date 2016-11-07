@@ -76,7 +76,7 @@
     <Compile Include="Services\Basis\IInstallService.cs" />
     <Compile Include="Services\Basis\Step\IInstallStep.cs" />
     <Compile Include="Common\InstallInformation\IIsInstallBasicInformation.cs" />
-    <Compile Include="Common\InstallInformation\InstallInformation.cs" />
+    <Compile Include="Common\InstallInformation\AppSetting.cs" />
     <Compile Include="Services\Basis\Step\InstallStepManager.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>

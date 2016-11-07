@@ -7,7 +7,7 @@ using System.Text;
 namespace Install4ibas.Tools.Common.InstallInformation
 {
     [DataContract(Namespace = "http://ibas.club/install")]
-    public class InstallInformation
+    public class AppSetting
     {
         [DataMember]
        public IList<InstallInformationStep> Steps;
