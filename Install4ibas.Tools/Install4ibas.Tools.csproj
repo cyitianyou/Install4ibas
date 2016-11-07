@@ -101,6 +101,7 @@
   <ItemGroup>
     <Content Include="Dlls\BTulz.ModelsTransformer.B1.dll" />
     <Content Include="Dlls\BTulz.ModelsTransformer.dll" />
+    <Content Include="Dlls\Microsoft.Web.Administration.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
