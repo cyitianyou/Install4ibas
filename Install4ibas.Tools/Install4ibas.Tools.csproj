@@ -65,8 +65,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Basis\BasisInstalllService.cs" />
     <Compile Include="Services\Basis\DataType.cs" />
     <Compile Include="Services\Basis\DBInstallBasicInformation.cs" />
+    <Compile Include="Services\Basis\IInstallService.cs" />
+    <Compile Include="Services\Basis\IInstallStep.cs" />
     <Compile Include="Services\Basis\IIsInstallBasicInformation.cs" />
     <Compile Include="Services\Basis\InstallInformation.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
