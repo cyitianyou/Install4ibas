@@ -10,16 +10,19 @@ namespace Install4ibas.Tools.Common.InstallInformation
     public class AppSetting
     {
         [DataMember]
-       public IList<InstallInformationStep> Steps;
+        public IList<InstallInformationStep> Steps;
 
         public IList<ibasModule> InstallModules;
     }
-
+    [DataContract]
     public class InstallInformationStep
     {
+        [DataMember]
         public bool Completed;
+        [DataMember]
         public string StepCode;
+        [DataMember]
         public string StepName;
     }
-    
+
 }
