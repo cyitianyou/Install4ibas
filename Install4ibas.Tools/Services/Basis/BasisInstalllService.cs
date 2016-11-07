@@ -114,7 +114,7 @@ namespace Install4ibas.Tools.Services.Basis
                 foreach (var item in myAssembly.GetManifestResourceNames())
                 {
                     if (item.IndexOf(myNamespace) < 0) continue;
-                    if (!item.EndsWith("InstallInformationSteps.xml", StringComparison.InvariantCultureIgnoreCase)) continue;
+                    if (!item.EndsWith("InstallSteps.xml", StringComparison.InvariantCultureIgnoreCase)) continue;
                     setStream = myAssembly.GetManifestResourceStream(item);
                 }
                 if (setStream == null)

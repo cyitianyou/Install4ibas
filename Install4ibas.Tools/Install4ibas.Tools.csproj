@@ -72,10 +72,8 @@
     </Compile>
     <Compile Include="Services\Basis\BasisInstalllService.cs" />
     <Compile Include="Common\InstallInformation\DataType.cs" />
-    <Compile Include="Common\InstallInformation\DBInstallBasicInformation.cs" />
     <Compile Include="Services\Basis\IInstallService.cs" />
     <Compile Include="Services\Basis\Step\IInstallStep.cs" />
-    <Compile Include="Common\InstallInformation\IIsInstallBasicInformation.cs" />
     <Compile Include="Common\InstallInformation\AppSetting.cs" />
     <Compile Include="Services\Basis\Step\InstallStepManager.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
@@ -97,11 +95,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Dlls\BTulz.ModelsTransformer.B1.dll" />
-    <Content Include="Dlls\BTulz.ModelsTransformer.dll" />
-    <Content Include="Dlls\Microsoft.Web.Administration.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
