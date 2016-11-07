@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\InstallInformation\Module.cs" />
     <Compile Include="Common\Licenses\LicensesInformation.cs" />
     <Compile Include="Plugin\FileOperation\FileOperation.cs" />
     <Compile Include="Plugin\i18n\i18n.cs" />
