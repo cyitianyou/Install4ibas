@@ -37,14 +37,15 @@ namespace Install4ibas
             this.shellControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.shellControl1.Location = new System.Drawing.Point(0, 0);
             this.shellControl1.Name = "shellControl1";
-            this.shellControl1.Size = new System.Drawing.Size(659, 505);
+            this.shellControl1.Size = new System.Drawing.Size(650, 518);
             this.shellControl1.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 505);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(650, 518);
             this.Controls.Add(this.shellControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

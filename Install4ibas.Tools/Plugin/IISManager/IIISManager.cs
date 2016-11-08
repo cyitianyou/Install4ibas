@@ -30,6 +30,10 @@ namespace Install4ibas.Tools.Plugin.IISManager
 
         Site CreateSite(string siteName, int port, string physicsPath, string protocolName);
 
+        IList<string> GetSiteNames(bool onlyIbas = true);
+
+        Site GetSite(string siteName);
+
         Application CreateApplication(string appName, Site site, string Path, string physicsPath, string appPoolName);
 
         string ShowLastMessage();

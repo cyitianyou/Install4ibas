@@ -17,7 +17,7 @@ namespace Install4ibas.UI
         /// </summary>
         Back = 2,
         /// <summary>
-        /// 下一步按钮
+        /// 下一步按钮可用
         /// </summary>
         NextEnable = 4,
         /// <summary>

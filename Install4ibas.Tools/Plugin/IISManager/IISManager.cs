@@ -14,6 +14,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
         protected bool checkedFullyInstalled;
         public IISManager()
         {
+            serverManager = new ServerManager();
             RegistryModules = new List<KeyValuePair<bool, string>>();
         }
         public virtual bool IsFullyInstalled()
@@ -66,7 +67,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 this.IsFullyInstalled();
             StringBuilder sb = new StringBuilder();
             sb.Append(SysocmgrCmd);
-            foreach (var item in RegistryModules.Where(c=>!c.Key))
+            foreach (var item in RegistryModules.Where(c => !c.Key))
             {
                 sb.Append(item.Value).Append(";");
             }
@@ -132,6 +133,22 @@ namespace Install4ibas.Tools.Plugin.IISManager
             {
                 throw new Exception(string.Format("创建网站时出错:{0}", error.Message));
             }
+        }
+        public IList<string> GetSiteNames(bool onlyIbas = true)
+        {
+            var result = new List<string>();
+            foreach (var item in serverManager.Sites)
+            {
+                if (!onlyIbas || item.Applications.Count(c => c.Path.Equals("/SystemCenter",StringComparison.InvariantCultureIgnoreCase)) == 1)
+                {
+                    result.Add(item.Name);
+                }
+            }
+            return result;
+        }
+        public Site GetSite(string siteName)
+        {
+            return serverManager.Sites[siteName];
         }
         public virtual Application CreateApplication(string appName, Site site, string Path, string physicsPath, string appPoolName)
         {
@@ -214,6 +231,12 @@ namespace Install4ibas.Tools.Plugin.IISManager
 
 
 
-        
+
+
+
+
+
+
+
     }
 }

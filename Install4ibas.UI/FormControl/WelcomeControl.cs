@@ -21,16 +21,7 @@ namespace Install4ibas.UI
 
         void WelcomeControl_NextEvent(object sender, EventArgs e)
         {
-            var IISManager = IISManagerFactory.New().CreateIISManager();
-            if (IISManager.IsFullyInstalled())
-            {
-                MessageBox.Show("IIS已完全安装!");
-            }
-            else
-            {
-
-                MessageBox.Show(IISManager.ShowLastMessage(), "IIS未完全安装!");
-            }
+            this.ShellControl.SetCurrentControl(ControlTypes.LicenseAccept);
         }
 
 
