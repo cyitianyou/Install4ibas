@@ -14,14 +14,14 @@ namespace Install4ibas.Tools.Services.Basis.Step
         {
             get
             {
-                if(_StepMaps==null)
+                if (_StepMaps == null)
                 {
                     _StepMaps = this.GetInstances<IInstallStep>();
                 }
                 return _StepMaps;
             }
         }
-        public void SetAppSetting (AppSetting Setting)
+        public void SetAppSetting(AppSetting Setting)
         {
             this.AppSetting = Setting;
         }
@@ -30,7 +30,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         {
             try
             {
-                var step= this.StepMaps.FirstOrDefault(c => c.StepCode == Code);
+                var step = this.StepMaps.FirstOrDefault(c => String.Equals(c.StepCode, Code, StringComparison.InvariantCultureIgnoreCase));
                 if (step == null) throw new Exception("未找到指定的安装步骤。");
                 step.AppSetting = this.AppSetting;
                 return step;
