@@ -10,7 +10,6 @@ namespace Install4ibas.Tools.Common.InstallInformation
     
     [DataContract(Namespace = "http://ibas.club/install")]
     [KnownType(typeof(AppSetting))]
-    [KnownType(typeof(ibasModule))]
     [KnownType(typeof(InstallInformationStep))]
     public class AppSetting
     {
