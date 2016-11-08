@@ -1,6 +1,6 @@
 ﻿namespace Install4ibas.UI
 {
-    partial class ModulesChooseControl
+    partial class EditConfigControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Size = new System.Drawing.Size(650, 440);
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Install4ibas.Tools.Plugin.IISManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,17 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IIISManager manager = IISManagerFactory.New().CreateIISManager();
+                if (!manager.IsFullyInstalled())
+                    manager.InstallIIS();
+                return true;
+            }
+            catch(Exception error)
+            {
+                return false;
+            }
         }
     }
 }
