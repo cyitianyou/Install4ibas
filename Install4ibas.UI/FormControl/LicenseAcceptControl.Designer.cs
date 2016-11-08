@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Size = new System.Drawing.Size(650, 440);
         }
 
         #endregion
