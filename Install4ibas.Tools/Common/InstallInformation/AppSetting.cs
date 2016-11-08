@@ -19,12 +19,47 @@ namespace Install4ibas.Tools.Common.InstallInformation
             this.Steps = new List<InstallInformationStep>();
             this.InstallModules = new List<ibasModule>();
         }
+
+        #endregion
+        #region 基础信息
+        /// <summary>
+        /// 安装包文件夹
+        /// </summary>
+        public string SourcepackageDir
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 安装文件夹
+        /// </summary>
+        public string InstallDiraddress
+        {
+            set;
+            get;
+        }
         #endregion
         #region 数据库相关
         /// <summary>
-        /// 数据库类型
+        /// IIS地址
         /// </summary>
-        public emDatabaseType DatabaseType
+        public string IISAddress
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// IIS端口号
+        /// </summary>
+        public string IISPort
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 数据库类型("HANA","MSSQL""MYSQL""ORACLE""PostgreSQL")
+        /// </summary>
+        public string DatabaseType
         {
             set;
             get;

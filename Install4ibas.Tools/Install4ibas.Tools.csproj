@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dlls\BTulz.ModelsTransformer.B1.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.SAPbobsCOM">
+      <HintPath>Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dlls\Microsoft.Web.Administration.dll</HintPath>
@@ -55,6 +59,10 @@
   <ItemGroup>
     <Compile Include="Common\InstallInformation\Module.cs" />
     <Compile Include="Common\Licenses\LicensesInformation.cs" />
+    <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
+    <Compile Include="Plugin\DbManager\SQLMapFactory.cs" />
+    <Compile Include="Plugin\FileOperation\DataStructureItem.cs" />
+    <Compile Include="Plugin\FileOperation\DataStructuresGetter.cs" />
     <Compile Include="Plugin\FileOperation\FileOperation.cs" />
     <Compile Include="Plugin\i18n\i18n.cs" />
     <Compile Include="Plugin\IISManager\CheckOSBitness.cs" />
