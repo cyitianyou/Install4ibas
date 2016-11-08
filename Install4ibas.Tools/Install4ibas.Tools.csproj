@@ -70,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\AppendInstall\AppendInstallService.cs" />
     <Compile Include="Services\Basis\BasisInstalllService.cs" />
     <Compile Include="Common\InstallInformation\DataType.cs" />
     <Compile Include="Services\Basis\IInstallService.cs" />
@@ -86,11 +87,11 @@
     <Compile Include="Services\Basis\Step\InstallStep_IIsWebsiteCreate.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_ServicesInforEdit.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_WebconfigEdit.cs" />
+    <Compile Include="Services\NewInstall\NewInstallService.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resource\WebFile\~packages\" />
-    <Folder Include="Services\AppendInstall\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.dll" />
@@ -107,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Services\NewInstall\InstallSteps.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
