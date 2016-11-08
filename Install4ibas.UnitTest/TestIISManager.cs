@@ -13,7 +13,7 @@ namespace Install4ibas.UnitTest
         {
             //FileOperation.CopyResourceFiles("");
             var service = new NewInstallService();
-            service.GetPresetInstallInformation();
+            //service.GetPresetInstallInformation();
         }
     }
 }
