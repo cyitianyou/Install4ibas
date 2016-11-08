@@ -35,12 +35,13 @@ namespace Install4ibas.Tools.Services.Basis.Step
         bool B1Included { get { return string.IsNullOrEmpty(this.AppSetting.B1User) ? false : true; } }
  
         public bool Excute()
-        {
+        { 
+           
             var shell= this.AppSetting.InstallModules.Where(c => c.ModuleName == "shell").FirstOrDefault();
             var dsGetter = new DataStructuresGetter();
             dsGetter.WorkFolder = shell.ModuleInstallPath;
             var dsItems = dsGetter.Get();
-            dsGetter.AutoSelected(this.B1Included, this.AppSetting.DatabaseType, dsItems);
+            dsGetter.AutoSelected(this.B1Included, this.GetCurrentDBType(), dsItems);
             return true;
         }
         private void ModuleToDB(ibasModule module)
@@ -50,7 +51,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 var dsGetter = new DataStructuresGetter();
                 dsGetter.WorkFolder = module.ModuleInstallPath;
                 var dsItems = dsGetter.Get();
-                dsGetter.AutoSelected(this.B1Included, this.AppSetting.DatabaseType, dsItems);
+                dsGetter.AutoSelected(this.B1Included, this.GetCurrentDBType(), dsItems);
                 if (dsItems == null) return;
              
                 var logPath = string.Format(@"{0}Log\data_structures_{1}.txt", System.AppDomain.CurrentDomain.BaseDirectory, DateTime.Now.ToString("yyyyMMddhhmmss"));
