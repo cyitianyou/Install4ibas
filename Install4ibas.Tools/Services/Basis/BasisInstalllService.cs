@@ -104,7 +104,7 @@ namespace Install4ibas.Tools.Services.Basis
         /// 获取预设的安装信息
         /// </summary>
         /// <returns></returns>
-        public virtual AppSetting GetPresetInstallInformation()
+        protected virtual AppSetting GetPresetInstallInformation()
         {
             try
             {
