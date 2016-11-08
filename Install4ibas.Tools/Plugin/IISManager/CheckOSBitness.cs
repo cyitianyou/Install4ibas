@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-namespace Install4ibas.Tools.IISManager
+namespace Install4ibas.Tools.Plugin.IISManager
 {
     class CheckOSBitness
     {

@@ -1,10 +1,10 @@
-﻿using Install4ibas.Tools.IISManager;
+﻿using Install4ibas.Tools.Plugin.IISManager;
 using System;
 using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
-    public partial class WelcomeControl : ParentControl
+    public partial class WelcomeControl : ChildControl
     {
         public WelcomeControl()
         {

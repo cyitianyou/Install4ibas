@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.Web.Administration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Install4ibas.Tools.IISManager
+namespace Install4ibas.Tools.Plugin.IISManager
 {
     public interface IIISManager
     {
@@ -24,6 +25,12 @@ namespace Install4ibas.Tools.IISManager
         /// 卸载IIS
         /// </summary>
         void UninstallIIS();
+
+        ApplicationPool CreateApplicationPool(string appPoolName, string runtimeVersion, ManagedPipelineMode mode);
+
+        Site CreateSite(string siteName, int port, string physicsPath, string protocolName);
+
+        Application CreateApplication(string appName, Site site, string Path, string physicsPath, string appPoolName);
 
         string ShowLastMessage();
     }

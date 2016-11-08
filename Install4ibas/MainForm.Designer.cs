@@ -49,7 +49,7 @@ namespace Install4ibas
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.Text = "$.MainForm.FormTitle";
+            this.Text = "ibas部署向导";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 

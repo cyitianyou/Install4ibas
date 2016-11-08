@@ -42,11 +42,48 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ButtonsVisibleStyle.cs" />
+    <Compile Include="ControlTypes.cs" />
+    <Compile Include="EditConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditConfigControl.Designer.cs">
+      <DependentUpon>EditConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinishControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FinishControl.Designer.cs">
+      <DependentUpon>FinishControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="i18nControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="InstallationOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InstallationOptionsControl.Designer.cs">
+      <DependentUpon>InstallationOptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstallationProgressControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InstallationProgressControl.Designer.cs">
+      <DependentUpon>InstallationProgressControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="IUIAction.cs" />
-    <Compile Include="ParentControl.cs">
+    <Compile Include="LicenseAcceptControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LicenseAcceptControl.Designer.cs">
+      <DependentUpon>LicenseAcceptControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModulesChooseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModulesChooseControl.Designer.cs">
+      <DependentUpon>ModulesChooseControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,7 +110,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Steup4ibas.Tools\Install4ibas.Tools.csproj">
+    <ProjectReference Include="..\Install4ibas.Tools\Install4ibas.Tools.csproj">
       <Project>{0c4e7178-9566-4898-8bcb-cbf4ff4193a0}</Project>
       <Name>Install4ibas.Tools</Name>
     </ProjectReference>

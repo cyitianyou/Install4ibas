@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Install4ibas.Tools.i18n;
+using Install4ibas.Tools.Plugin.i18n;
 
 namespace Install4ibas.UI
 {
@@ -17,11 +17,12 @@ namespace Install4ibas.UI
             this.btn_Next.Visible = style.HasFlag(ButtonsVisibleStyle.Next);
             this.btn_Finish.Visible = style.HasFlag(ButtonsVisibleStyle.Finish);
         }
-        protected ParentControl CurrentControl;
-        public bool SetCurrentControl(ParentControl control)
+        protected ChildControl CurrentControl;
+        public bool SetCurrentControl(ChildControl control)
         {
             try
             {
+                if (control == null) return false;
                 this.splitContainer.Panel1.Controls.Clear();
                 this.splitContainer.Panel1.Controls.Add(control);
                 control.Dock = DockStyle.Fill;
@@ -36,7 +37,38 @@ namespace Install4ibas.UI
             }
 
         }
+        public bool SetCurrentControl(ControlTypes type)
+        {
+            ChildControl control = null;
+            switch (type)
+            {
+                case ControlTypes.Welcome:
+                    control = new WelcomeControl();
+                    break;
+                case ControlTypes.LicenseAccept:
+                    control = new LicenseAcceptControl();
+                    break;
+                case ControlTypes.InstallationOptions:
+                    control = new InstallationOptionsControl();
+                    break;
+                case ControlTypes.ModulesChoose:
+                    control = new ModulesChooseControl();
+                    break;
+                case ControlTypes.EditConfig:
+                    control = new EditConfigControl();
+                    break;
+                case ControlTypes.InstallationProgress:
+                    control = new InstallationProgressControl();
+                    break;
+                case ControlTypes.Finish:
+                    control = new FinishControl();
+                    break;
+                default:
+                    break;
+            }
+            return SetCurrentControl(control);
 
+        }
         private void btn_Next_Click(object sender, EventArgs e)
         {
             var flag = false;//子项控件事件是否执行

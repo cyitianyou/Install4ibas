@@ -30,9 +30,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BTulz.ModelsTransformer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dlls\BTulz.ModelsTransformer.dll</HintPath>
+    </Reference>
+    <Reference Include="BTulz.ModelsTransformer.B1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dlls\BTulz.ModelsTransformer.B1.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dlls\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,21 +53,71 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="i18n\i18n.cs" />
-    <Compile Include="IISManager\CheckOSBitness.cs" />
-    <Compile Include="IISManager\CheckOSInfo.cs" />
-    <Compile Include="IISManager\IIISManager.cs" />
-    <Compile Include="IISManager\IISManager.cs" />
-    <Compile Include="IISManager\IISManagerFactory.cs" />
+    <Compile Include="Common\InstallInformation\Module.cs" />
+    <Compile Include="Common\Licenses\LicensesInformation.cs" />
+    <Compile Include="Plugin\FileOperation\FileOperation.cs" />
+    <Compile Include="Plugin\i18n\i18n.cs" />
+    <Compile Include="Plugin\IISManager\CheckOSBitness.cs" />
+    <Compile Include="Plugin\IISManager\CheckOSInfo.cs" />
+    <Compile Include="Plugin\IISManager\IIISManager.cs" />
+    <Compile Include="Plugin\IISManager\IISManager.cs" />
+    <Compile Include="Plugin\IISManager\IISManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\ServiceEventArgs.cs" />
+    <Compile Include="Common\ServiceEventHandle.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\AppendInstall\AppendInstallService.cs" />
+    <Compile Include="Services\Basis\BasisInstalllService.cs" />
+    <Compile Include="Common\InstallInformation\DataType.cs" />
+    <Compile Include="Services\Basis\IInstallService.cs" />
+    <Compile Include="Services\Basis\Step\IInstallStep.cs" />
+    <Compile Include="Common\InstallInformation\AppSetting.cs" />
+    <Compile Include="Services\Basis\Step\InstallStepManager.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_B1_CommonRegister.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_CopyModuleFile.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_CopyToolsFile.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_DbCreate.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_ExecuteBat.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_IIsAPPCreate.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_IIsInstall.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_IIsWebsiteCreate.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_ServicesInforEdit.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_WebconfigEdit.cs" />
+    <Compile Include="Services\NewInstall\NewInstallService.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\Basis\" />
-    <Folder Include="Services\FullSteup\" />
-    <Folder Include="SteupConfig\" />
+    <Folder Include="Resource\WebFile\~packages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.dll" />
+    <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\WebFile\deploy_ibas_web_services.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Services\NewInstall\InstallSteps.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
+
+REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

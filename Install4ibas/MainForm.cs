@@ -13,8 +13,7 @@ namespace Install4ibas
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            var control=new WelcomeControl();
-            this.shellControl1.SetCurrentControl(control);
+            this.shellControl1.SetCurrentControl(ControlTypes.Welcome);
         }
 
     }
