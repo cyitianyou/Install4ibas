@@ -39,6 +39,50 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 Console.WriteLine("Exception Occurred :{0}运行失败,{1}，{2}",filename, ex.Message, ex.StackTrace.ToString());
             }
         }
+        /// <summary>
+        /// 执行命令行
+        /// </summary>
+        /// <param name="optionalFilePaths">命令</param>
+        /// <returns>返回结果</returns>
+        public static string ExecuteCmd(string[] optionalFilePaths)
+        {
+            //运行命令行
+            Process p = new Process();
+            // 设定程序名
+            p.StartInfo.FileName = "cmd.exe";
+            // 关闭Shell的使用
+            p.StartInfo.UseShellExecute = false;
+            // 重定向标准输入
+            p.StartInfo.RedirectStandardInput = true;
+            // 重定向标准输出
+            p.StartInfo.RedirectStandardOutput = true;
+            //重定向错误输出
+            p.StartInfo.RedirectStandardError = true;
+            // 设置不显示窗口
+            p.StartInfo.CreateNoWindow = true;
+            // 启动进程
+            p.Start();
+            for (int i = 0; i < optionalFilePaths.Length; i++)
+            {
+                p.StandardInput.WriteLine(optionalFilePaths[i]);
+            }
+            p.StandardInput.WriteLine("exit");
+            // 从输出流获取命令执行结果
+            string strRst = p.StandardOutput.ReadToEnd();
+            p.WaitForExit();
+            p.Close();
+            return strRst;
+        }
+        /// <summary>
+        /// 执行命令行
+        /// </summary>
+        /// <param name="optionalFilePath">命令</param>
+        /// <returns>optionalFilePaths</returns>
+        public static string ExecuteCmd(string optionalFilePath)
+        {
+            string[] optionalFilePaths = new string[] { optionalFilePath };
+            return ExecuteCmd(optionalFilePaths);
+        }
         public static IList<ibasModule> LoadModules(string SourcePath)
         {
             IList<ibasModule> Modules = new List<ibasModule>();
