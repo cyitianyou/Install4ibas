@@ -21,28 +21,96 @@ namespace Install4ibas.Tools.Common.InstallInformation
         }
         #endregion
         #region 数据库相关
-        ///// <summary>
-        ///// 数据库类型
-        ///// </summary>
-        //public emDatabaseType DatabaseType
-        //{
-        //    set;
-        //    get;
-        //}
-        ///// <summary>
-        ///// 平台
-        ///// </summary>
-        //public emPlatform Platform
-        //{
-        //    set;
-        //    get;
-        //}
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
+        public emDatabaseType DatabaseType
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 平台
+        /// </summary>
+        public emPlatform Platform
+        {
+            set;
+            get;
+        }
+         /// <summary>
+        /// 数据库地址
+        /// </summary>
+        public string DBServer
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 数据库登陆用户名
+        /// </summary>
+        public string DBUser
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 数据库登陆密码
+        /// </summary>
+        public string DBPassword
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 数据库名称
+        /// </summary>
+        public string DBName
+        {
+            set;
+            get;
+        }
+         /// <summary>
+        /// B1类型
+        /// </summary>
+        public string B1Type
+        {
+            set;
+            get;
+        }
+           /// <summary>
+        /// B1用户
+        /// </summary>
+        public string B1User
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// B1密码
+        /// </summary>
+        public string B1Password
+        {
+            set;
+            get;
+        }
+            /// <summary>
+        /// B1语言
+        /// </summary>
+        public string cmbLanguage
+        {
+            set;
+            get;
+        }
+        
+        
         #endregion
         #region IIS相关
 
         #endregion
         #region ibas模块
         public IList<ibasModule> InstallModules;
+        #endregion
+        #region Licenses相关
         #endregion
         #region 安装步骤
         [DataMember(Name = "Steps")]
