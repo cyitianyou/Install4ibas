@@ -76,6 +76,16 @@
     <Compile Include="Services\Basis\Step\IInstallStep.cs" />
     <Compile Include="Common\InstallInformation\AppSetting.cs" />
     <Compile Include="Services\Basis\Step\InstallStepManager.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_B1_CommonRegister.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_CopyModuleFile.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_CopyToolsFile.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_DbCreate.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_ExecuteBat.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_IIsAPPCreate.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_IIsInstall.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_IIsWebsiteCreate.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_ServicesInforEdit.cs" />
+    <Compile Include="Services\Basis\Step\InstallStep_WebconfigEdit.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
   <ItemGroup>
