@@ -116,6 +116,7 @@ namespace Install4ibas.Tools.Services.Basis
                     if (item.IndexOf(myNamespace) < 0) continue;
                     if (!item.EndsWith("InstallSteps.xml", StringComparison.InvariantCultureIgnoreCase)) continue;
                     setStream = myAssembly.GetManifestResourceStream(item);
+                    break;
                 }
                 if (setStream == null)
                     return null;// throw new Exception(string.Format("没有找到预置文件资源。", ""));
