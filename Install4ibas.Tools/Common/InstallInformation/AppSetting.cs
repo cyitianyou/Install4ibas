@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Install4ibas.Tools.Common.InstallInformation
 {
+    
     [DataContract(Namespace = "http://ibas.club/install")]
     [KnownType(typeof(AppSetting))]
     [KnownType(typeof(ibasModule))]
-    [KnownType(typeof(IList<ibasModule>))]
     [KnownType(typeof(InstallInformationStep))]
-    [KnownType(typeof(IList<InstallInformationStep>))]
     public class AppSetting
     {
         #region 初始化
@@ -46,19 +46,19 @@ namespace Install4ibas.Tools.Common.InstallInformation
         public IList<ibasModule> InstallModules;
         #endregion
         #region 安装步骤
-        [DataMember(EmitDefaultValue=true)]
+        [DataMember(Name = "Steps")]
         public IList<InstallInformationStep> Steps;
         #endregion
     }
-    [DataContract]
+    [DataContract(Namespace = "http://ibas.club/install",Name="anyType")]
     public class InstallInformationStep
     {
-        [DataMember]
-        public bool Completed;
-        [DataMember]
+        [DataMember(Name = "StepCode")]
         public string StepCode;
-        [DataMember]
+        [DataMember(Name = "StepName")]
         public string StepName;
+        [DataMember(Name = "Completed")]
+        public bool Completed;
     }
 
 }

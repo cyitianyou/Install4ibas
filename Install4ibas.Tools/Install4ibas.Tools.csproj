@@ -96,7 +96,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Services\NewInstall\InstallSteps.xml" />
+    <EmbeddedResource Include="Services\NewInstall\InstallSteps.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -26,7 +26,7 @@ namespace Install4ibas.UnitTest
             var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(AppSetting));
             var stringbuilder = new StringBuilder();
             var xml = System.Xml.XmlWriter.Create(stringbuilder);
-            serializer.WriteObject(xml, this);
+            serializer.WriteObject(xml, setting);
             xml.Flush();
             var str = stringbuilder.ToString();
         }
