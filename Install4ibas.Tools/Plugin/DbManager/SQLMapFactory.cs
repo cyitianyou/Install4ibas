@@ -43,6 +43,7 @@ namespace Install4ibas.Tools.Plugin.DbManager
         public SQLMap GetSQLMap(string dbType)
         {
             var mapFactory = BTulz.ModelsTransformer.Transformer.SQLs.SQLMapFactory.New();
+            mapFactory.SQLMapFilePath = string.Format(@"{0}Plugin\SQLMaps.xml", System.AppDomain.CurrentDomain.BaseDirectory);
             var map = mapFactory.GetMap(dbType);
             if (map != null)
             {

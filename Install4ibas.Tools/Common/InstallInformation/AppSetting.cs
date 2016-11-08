@@ -40,6 +40,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
         }
         #endregion
         #region 数据库相关
+
         /// <summary>
         /// IIS地址
         /// </summary>
@@ -128,6 +129,15 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
+         /// <summary>
+        /// B1许可证
+        /// </summary>
+        public string B1Server
+        {
+            set;
+            get;
+        }
+        
             /// <summary>
         /// B1语言
         /// </summary>

@@ -184,6 +184,45 @@ namespace Install4ibas.Tools.Services.Basis.Step
             }
             return emDatabaseType.all;
         }
+        SAPbobsCOM.Company GetNewCompany()
+        {
+            try
+            {
+                SAPbobsCOM.Company Company = new SAPbobsCOM.Company();
+                Company.DbServerType = (SAPbobsCOM.BoDataServerTypes)System.Enum.Parse(typeof(SAPbobsCOM.BoDataServerTypes), this.AppSetting.B1Type);
+                Company.Server = this.AppSetting.DBServer; 
+                Company.DbUserName = this.AppSetting.DBUser;
+                Company.DbPassword = this.AppSetting.DBPassword; 
+                Company.CompanyDB = this.AppSetting.DBName; 
+                Company.UserName = this.AppSetting.B1User; 
+                Company.Password =  this.AppSetting.B1Password;
+                Company.LicenseServer =  this.AppSetting.B1Server ;
+                Company.language = (SAPbobsCOM.BoSuppLangs)System.Enum.Parse(typeof(SAPbobsCOM.BoSuppLangs), this.AppSetting.cmbLanguage);
+
+                int ret = Company.Connect();
+                if (ret != 0)
+                    throw new Exception(string.Format("连接B1失败，{0}", Company.GetLastErrorDescription()));
+                return Company;
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("[DI API]初始化失败");
+                if ((ex) is System.IO.FileNotFoundException & ex.Message.IndexOf("632F4591-AA62-4219-8FB6-22BCF5F60090") > 0)
+                {
+                    string msg_no_di = string.Format("{0}，{1}", message, "可能是此计算机没有安装匹配的{0}位版本DI。");
+                    if ((System.Environment.Is64BitProcess))
+                        //'64位客户端
+                        message = string.Format(msg_no_di, "64");
+                    else
+                        //'32位客户端
+                        message = string.Format(msg_no_di, "32");
+                }
+                else
+                    message = string.Format("{0}，{1}", message, ex.Message);
+                throw new Exception(message, ex);
+            }
+
+        }
         private void CreateAddonConfig()
         {
             try
