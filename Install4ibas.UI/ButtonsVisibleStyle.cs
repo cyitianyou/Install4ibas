@@ -19,10 +19,14 @@ namespace Install4ibas.UI
         /// <summary>
         /// 下一步按钮
         /// </summary>
-        Next = 4,
+        NextEnable = 4,
+        /// <summary>
+        /// 下一步按钮不可用
+        /// </summary>
+        NextDisable = 8,
         /// <summary>
         /// 完成按钮
         /// </summary>
-        Finish = 8
+        Finish = 16
     }
 }

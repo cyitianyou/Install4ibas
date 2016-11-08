@@ -12,7 +12,7 @@ namespace Install4ibas.UI
         }
         protected override void SetButtonsVisibleStyle()
         {
-            this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.Next;
+            this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.NextEnable;
         }
         protected override void InitializeEvent()
         {
