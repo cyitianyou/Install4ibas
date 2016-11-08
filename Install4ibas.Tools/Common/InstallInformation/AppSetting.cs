@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Install4ibas.Tools.Common.InstallInformation
 {
-    
+
     [DataContract(Namespace = "http://ibas.club/install")]
     [KnownType(typeof(AppSetting))]
     [KnownType(typeof(InstallInformationStep))]
@@ -49,7 +49,8 @@ namespace Install4ibas.Tools.Common.InstallInformation
         public IList<InstallInformationStep> Steps;
         #endregion
     }
-    [DataContract(Namespace = "http://ibas.club/install",Name="anyType")]
+    #region InstallInformationStep
+    [DataContract(Namespace = "http://ibas.club/install", Name = "anyType")]
     public class InstallInformationStep
     {
         [DataMember(Name = "StepCode")]
@@ -59,5 +60,6 @@ namespace Install4ibas.Tools.Common.InstallInformation
         [DataMember(Name = "Completed")]
         public bool Completed;
     }
+    #endregion
 
 }
