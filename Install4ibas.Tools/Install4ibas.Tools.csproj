@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Install4ibas.Tools</RootNamespace>
-    <AssemblyName>Steup4ibas.Tools</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AssemblyName>Install4ibas.Tools</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BTulz.ModelsTransformer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -37,6 +40,10 @@
     <Reference Include="BTulz.ModelsTransformer.B1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dlls\BTulz.ModelsTransformer.B1.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SAPbobsCOM">
+      <HintPath>Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -55,6 +62,10 @@
   <ItemGroup>
     <Compile Include="Common\InstallInformation\Module.cs" />
     <Compile Include="Common\Licenses\LicensesInformation.cs" />
+    <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
+    <Compile Include="Plugin\DbManager\SQLMapFactory.cs" />
+    <Compile Include="Plugin\FileOperation\DataStructureItem.cs" />
+    <Compile Include="Plugin\FileOperation\DataStructuresGetter.cs" />
     <Compile Include="Plugin\FileOperation\FileOperation.cs" />
     <Compile Include="Plugin\i18n\i18n.cs" />
     <Compile Include="Plugin\IISManager\CheckOSBitness.cs" />
@@ -87,6 +98,7 @@
     <Compile Include="Services\Basis\Step\InstallStep_IIsWebsiteCreate.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_ServicesInforEdit.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_WebconfigEdit.cs" />
+    <Compile Include="Services\License\LicenseInstallService.cs" />
     <Compile Include="Services\NewInstall\NewInstallService.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
@@ -112,11 +124,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\WebFile\Tools\7zip\7zSD.sfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\SQLMaps\SQLMaps.xml" />
+    <Content Include="Resource\WebFile\Tools\7zip\Config.txt" />
+    <EmbeddedResource Include="Services\License\InstallSteps.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
 
-REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"</PreBuildEvent>
+REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
+
+ if exist "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" copy /y "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" ..\..\..\Install4ibas\bin\Debug</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

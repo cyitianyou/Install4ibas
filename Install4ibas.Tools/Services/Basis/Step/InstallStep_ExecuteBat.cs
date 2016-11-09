@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Install4ibas.Tools.Plugin.FileOperation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_ExecuteBat : IInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "ExecuteBat";
+        const string STEPNAME = "执行发布脚本";
 
         public string StepCode
         {
@@ -29,7 +30,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            throw new NotImplementedException();
+            FileOperation.RunBatFile(this.AppSetting.InstallDiraddress + "deploy_ibas_web_services.bat");
+            return true;
         }
     }
 }

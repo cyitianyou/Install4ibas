@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -10,14 +11,17 @@ namespace Install4ibas.Tools.Plugin.IISManager
     public class IISManager : IIISManager
     {
         protected ServerManager serverManager;
+        protected bool checkedFullyInstalled;
         public IISManager()
         {
+            serverManager = new ServerManager();
             RegistryModules = new List<KeyValuePair<bool, string>>();
         }
         public virtual bool IsFullyInstalled()
         {
             try
             {
+                checkedFullyInstalled = true;
                 RegistryModules.Clear();
                 foreach (var module in modules)
                 {
@@ -59,17 +63,37 @@ namespace Install4ibas.Tools.Plugin.IISManager
         }
         public virtual void InstallIIS()
         {
-            throw new NotImplementedException();
+            if (!checkedFullyInstalled)
+                this.IsFullyInstalled();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(SysocmgrCmd);
+            foreach (var item in RegistryModules.Where(c => !c.Key))
+            {
+                sb.Append(item.Value).Append(";");
+            }
+            FileOperation.FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "iu"));
+            RegIISForAspnet();
         }
 
         public virtual void RegIISForAspnet()
         {
-            throw new NotImplementedException();
+            if (CheckOSBitness.Is64BitOperatingSystem())
+                FileOperation.FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
+            else
+                FileOperation.FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
         }
 
         public virtual void UninstallIIS()
         {
-            throw new NotImplementedException();
+            if (!checkedFullyInstalled)
+                this.IsFullyInstalled();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(SysocmgrCmd);
+            foreach (var item in RegistryModules.Where(c => c.Key))
+            {
+                sb.Append(item.Value).Append(";");
+            }
+            FileOperation.FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "uu"));
         }
         public virtual ApplicationPool CreateApplicationPool(string appPoolName, string runtimeVersion = "v4.0", ManagedPipelineMode mode = ManagedPipelineMode.Integrated)
         {
@@ -110,6 +134,22 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 throw new Exception(string.Format("创建网站时出错:{0}", error.Message));
             }
         }
+        public IList<string> GetSiteNames(bool onlyIbas = true)
+        {
+            var result = new List<string>();
+            foreach (var item in serverManager.Sites)
+            {
+                if (!onlyIbas || item.Applications.Count(c => c.Path.Equals("/SystemCenter",StringComparison.InvariantCultureIgnoreCase)) == 1)
+                {
+                    result.Add(item.Name);
+                }
+            }
+            return result;
+        }
+        public Site GetSite(string siteName)
+        {
+            return serverManager.Sites[siteName];
+        }
         public virtual Application CreateApplication(string appName, Site site, string Path, string physicsPath, string appPoolName)
         {
             try
@@ -137,9 +177,8 @@ namespace Install4ibas.Tools.Plugin.IISManager
         }
         #region 属性及常量
         List<KeyValuePair<bool, string>> RegistryModules;
-        //const string RegistryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures";
         const string RegistryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures";
-        //string[] RegistryPath = new string[] {"SOFTWARE","Microsoft","Windows","CurrentVersion","Component Based Servicing","Notifications","OptionalFeatures"};
+        const string SysocmgrCmd = "start /w pkgmgr /norestart /[option]:";
         string[] modules = new string[] {
                                 "IIS-WebServerRole" ,
                                 "IIS-WebServer" ,
@@ -192,6 +231,12 @@ namespace Install4ibas.Tools.Plugin.IISManager
 
 
 
-        
+
+
+
+
+
+
+
     }
 }

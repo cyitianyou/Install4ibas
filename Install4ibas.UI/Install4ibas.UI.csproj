@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Install4ibas.UI</RootNamespace>
-    <AssemblyName>Steup4ibas.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AssemblyName>Install4ibas.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,48 +45,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ButtonsVisibleStyle.cs" />
-    <Compile Include="ControlTypes.cs" />
-    <Compile Include="EditConfigControl.cs">
+    <Compile Include="FormControl\ControlTypes.cs" />
+    <Compile Include="FormControl\EditConfigControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditConfigControl.Designer.cs">
+    <Compile Include="FormControl\EditConfigControl.Designer.cs">
       <DependentUpon>EditConfigControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="FinishControl.cs">
+    <Compile Include="FormControl\FinishControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FinishControl.Designer.cs">
+    <Compile Include="FormControl\FinishControl.Designer.cs">
       <DependentUpon>FinishControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="i18nControl.cs">
+    <Compile Include="FormControl\InstallationOptionsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InstallationOptionsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="InstallationOptionsControl.Designer.cs">
+    <Compile Include="FormControl\InstallationOptionsControl.Designer.cs">
       <DependentUpon>InstallationOptionsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="InstallationProgressControl.cs">
+    <Compile Include="FormControl\InstallationProgressControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InstallationProgressControl.Designer.cs">
+    <Compile Include="FormControl\InstallationProgressControl.Designer.cs">
       <DependentUpon>InstallationProgressControl.cs</DependentUpon>
     </Compile>
     <Compile Include="IUIAction.cs" />
-    <Compile Include="LicenseAcceptControl.cs">
+    <Compile Include="FormControl\LicenseAcceptControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LicenseAcceptControl.Designer.cs">
+    <Compile Include="FormControl\LicenseAcceptControl.Designer.cs">
       <DependentUpon>LicenseAcceptControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModulesChooseControl.cs">
+    <Compile Include="FormControl\ModulesChooseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ModulesChooseControl.Designer.cs">
+    <Compile Include="FormControl\ModulesChooseControl.Designer.cs">
       <DependentUpon>ModulesChooseControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildControl.cs">
+    <Compile Include="FormControl\ChildControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,19 +93,25 @@
     <Compile Include="ShellControl.Designer.cs">
       <DependentUpon>ShellControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="WelcomeControl.cs">
+    <Compile Include="FormControl\WelcomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WelcomeControl.Designer.cs">
+    <Compile Include="FormControl\WelcomeControl.Designer.cs">
       <DependentUpon>WelcomeControl.cs</DependentUpon>
     </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormControl\InstallationOptionsControl.resx">
+      <DependentUpon>InstallationOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\LicenseAcceptControl.resx">
+      <DependentUpon>LicenseAcceptControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ShellControl.resx">
       <DependentUpon>ShellControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WelcomeControl.resx">
+    <EmbeddedResource Include="FormControl\WelcomeControl.resx">
       <DependentUpon>WelcomeControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

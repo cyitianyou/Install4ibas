@@ -1,13 +1,26 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Install4ibas.UI
 {
     /// <summary>
     /// 父项控件,设定一些通用操作
     /// </summary>
-    public class ChildControl : i18nControl, IUIAction
+    public class ChildControl : UserControl, IUIAction
     {
-        public ButtonsVisibleStyle ButtonsVisibleStyle;
+        ButtonsVisibleStyle _ButtonsVisibleStyle;
+        public ButtonsVisibleStyle ButtonsVisibleStyle {
+            get
+            {
+                return this._ButtonsVisibleStyle;
+            }
+            set
+            {
+                this._ButtonsVisibleStyle = value;
+                if (ShellControl != null)
+                    ShellControl.setButtonsVisible(this.ButtonsVisibleStyle);
+            }
+        }
         public ShellControl ShellControl;
         public ChildControl()
         {
@@ -17,13 +30,21 @@ namespace Install4ibas.UI
         protected virtual void SetButtonsVisibleStyle()
         {
             this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.Back
-                                        | ButtonsVisibleStyle.Next | ButtonsVisibleStyle.Finish;
+                                        | ButtonsVisibleStyle.NextEnable | ButtonsVisibleStyle.Finish;
         }
 
         protected virtual void InitializeEvent() {
             
         }
+        public virtual void LoadAppSetting()
+        {
 
+        }
+
+        public virtual void SaveAppSetting()
+        {
+
+        }
         #region UIAction
         
 
