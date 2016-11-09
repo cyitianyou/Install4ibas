@@ -2,7 +2,7 @@
 
 namespace Install4ibas.Tools.Services.License
 {
-    class LicenseInstallService : BasisInstalllService
+    public class LicenseInstallService : BasisInstalllService
     {
         public const string SERVICECODE = "License";
         public override string ServiceCode
