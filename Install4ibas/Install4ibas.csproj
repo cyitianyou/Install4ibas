@@ -108,7 +108,15 @@ copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7zSD.sfx" 7zSD.
 copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\Config.txt" Config.txt
 "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.7z -r Install4ibas.exe *.dll
 copy /b 7zSD.sfx + config.txt + setup.7z "setup.exe"
-) else (print "no packager")</PostBuildEvent>
+del /q "7zSD.sfx"
+del /q "Config.txt"
+del /q "setup.7z"
+) else (print "no packager")
+
+cd "$(TargetDir)"
+if not exist ..\..\..\Release MD ..\..\..\Release
+cd "$(TargetDir)"
+copy /y "setup.exe" ..\..\..\Release</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
