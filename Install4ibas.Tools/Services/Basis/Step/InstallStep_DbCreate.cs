@@ -35,13 +35,29 @@ namespace Install4ibas.Tools.Services.Basis.Step
         bool B1Included { get { return string.IsNullOrEmpty(this.AppSetting.B1User) ? false : true; } }
  
         public bool Excute()
-        { 
-           
-            var shell= this.AppSetting.InstallModules.Where(c => c.ModuleName == "shell").FirstOrDefault();
-            var dsGetter = new DataStructuresGetter();
-            dsGetter.WorkFolder = shell.ModuleInstallPath;
-            var dsItems = dsGetter.Get();
-            dsGetter.AutoSelected(this.B1Included, this.GetCurrentDBType(), dsItems);
+        {
+              var shell = this.AppSetting.InstallModules.Where(c => c.ModuleName == "shell").FirstOrDefault();
+            try
+            {
+                this.ModuleToDB(shell);
+               
+            }
+            catch (Exception e)
+            {
+                throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}",shell.ModuleName,e.Message));
+            }
+            foreach (var item in this.AppSetting.InstallModules.Where(c => c.ModuleName != "shell"))
+            {
+                try
+                {
+                    this.ModuleToDB(item);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}", item.ModuleName, e.Message));
+                }
+               
+            }
             return true;
         }
         private void ModuleToDB(ibasModule module)
