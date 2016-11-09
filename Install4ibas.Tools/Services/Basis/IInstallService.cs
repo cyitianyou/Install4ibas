@@ -9,6 +9,7 @@ namespace Install4ibas.Tools.Services.Basis
 {
     public interface IInstallService
     {
+        string ServiceCode { get; }
         AppSetting AppSetting { get; }
 
         bool Excute();

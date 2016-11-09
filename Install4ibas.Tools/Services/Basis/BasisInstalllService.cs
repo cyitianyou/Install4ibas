@@ -9,6 +9,11 @@ namespace Install4ibas.Tools.Services.Basis
 {
     public abstract class BasisInstalllService : IInstallService
     {
+        const string SERVICECODE = "Basis";
+        public virtual string ServiceCode
+        {
+            get { return SERVICECODE; }
+        }
         AppSetting _AppSetting;
         public AppSetting AppSetting
         {
@@ -133,5 +138,7 @@ namespace Install4ibas.Tools.Services.Basis
                 throw new Exception(string.Format("获取预置方案失败，{0}", error.Message), error);
             }
         }
+
+        
     }
 }
