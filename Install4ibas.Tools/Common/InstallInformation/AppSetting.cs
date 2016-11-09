@@ -25,7 +25,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
         /// <summary>
         /// 安装包文件夹
         /// </summary>
-        public string SourcepackageDir
+        public string SourcePackageDir
         {
             set;
             get;
@@ -150,7 +150,14 @@ namespace Install4ibas.Tools.Common.InstallInformation
         
         #endregion
         #region IIS相关
-
+        /// <summary>
+        /// 网站名
+        /// </summary>
+        public string SiteName
+        {
+            set;
+            get;
+        }
         #endregion
         #region ibas模块
         public IList<ibasModule> InstallModules;
