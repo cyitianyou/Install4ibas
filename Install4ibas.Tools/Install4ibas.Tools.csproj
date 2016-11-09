@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Install4ibas.Tools</RootNamespace>
-    <AssemblyName>Steup4ibas.Tools</AssemblyName>
+    <AssemblyName>Install4ibas.Tools</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -124,10 +124,10 @@
     <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dlls\B1\9.0\x64\Interop.SAPbobsCOM.dll" />
-    <Content Include="Dlls\B1\9.0\x64\Interop.SAPbouiCOM.dll" />
-    <Content Include="Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll" />
-    <Content Include="Dlls\B1\9.0\x86\Interop.SAPbouiCOM.dll" />
+    <None Include="Resource\WebFile\Tools\7zip\7zSD.sfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\WebFile\Tools\7zip\Config.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -57,9 +57,11 @@
             this.splitContainer.Size = new System.Drawing.Size(650, 520);
             this.splitContainer.SplitterDistance = 440;
             this.splitContainer.TabIndex = 0;
+            this.splitContainer.SizeChanged += new System.EventHandler(this.splitContainer_SizeChanged);
             // 
             // btn_Next
             // 
+            this.btn_Next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Next.Location = new System.Drawing.Point(462, 22);
             this.btn_Next.Name = "btn_Next";
             this.btn_Next.Size = new System.Drawing.Size(80, 34);
@@ -70,6 +72,7 @@
             // 
             // btn_Finish
             // 
+            this.btn_Finish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Finish.Location = new System.Drawing.Point(462, 22);
             this.btn_Finish.Name = "btn_Finish";
             this.btn_Finish.Size = new System.Drawing.Size(80, 34);
@@ -80,6 +83,7 @@
             // 
             // btn_Back
             // 
+            this.btn_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Back.Location = new System.Drawing.Point(376, 22);
             this.btn_Back.Name = "btn_Back";
             this.btn_Back.Size = new System.Drawing.Size(80, 34);
@@ -90,6 +94,7 @@
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Cancel.Location = new System.Drawing.Point(559, 22);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(80, 34);
