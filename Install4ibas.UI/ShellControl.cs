@@ -126,6 +126,11 @@ namespace Install4ibas.UI
             Application.Exit();
         }
 
+        private void splitContainer_SizeChanged(object sender, EventArgs e)
+        {
+            this.splitContainer.SplitterDistance = this.splitContainer.Height * 11 / 13;
+        }
+
 
 
 
