@@ -127,13 +127,16 @@
     <None Include="Resource\WebFile\Tools\7zip\7zSD.sfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resource\SQLMaps\SQLMaps.xml" />
     <Content Include="Resource\WebFile\Tools\7zip\Config.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
 
-REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"</PreBuildEvent>
+REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
+
+ if exist "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" copy /y "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" ..\..\..\Install4ibas\bin\Debug</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
