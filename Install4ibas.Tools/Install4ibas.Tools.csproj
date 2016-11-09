@@ -123,6 +123,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dlls\B1\9.0\x64\Interop.SAPbobsCOM.dll" />
+    <Content Include="Dlls\B1\9.0\x64\Interop.SAPbouiCOM.dll" />
+    <Content Include="Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll" />
+    <Content Include="Dlls\B1\9.0\x86\Interop.SAPbouiCOM.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
