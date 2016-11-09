@@ -98,6 +98,7 @@
     <Compile Include="Services\Basis\Step\InstallStep_IIsWebsiteCreate.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_ServicesInforEdit.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_WebconfigEdit.cs" />
+    <Compile Include="Services\License\LicenseInstallService.cs" />
     <Compile Include="Services\NewInstall\NewInstallService.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
@@ -129,6 +130,7 @@
   <ItemGroup>
     <Content Include="Resource\SQLMaps\SQLMaps.xml" />
     <Content Include="Resource\WebFile\Tools\7zip\Config.txt" />
+    <EmbeddedResource Include="Services\License\InstallSteps.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
