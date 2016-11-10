@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Install4ibas.Tools.Plugin.IISManager;
+using Install4ibas.Tools.Services.NewInstall;
+using Install4ibas.Tools.Services.AppendInstall;
+using Install4ibas.Tools.Services.License;
 
 namespace Install4ibas.UI
 {
@@ -20,14 +23,65 @@ namespace Install4ibas.UI
         {
             this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.NextEnable;
         }
-        protected override void InitializeEvent()
+        public override void Initialize()
         {
             this.NextEvent += InstallationOptionsControl_NextEvent;
+        }
+        public override void LoadAppSetting()
+        {
+            if (this.ShellControl.installService != null)
+            {
+                switch (this.ShellControl.installService.ServiceCode)
+                {
+                    case NewInstallService.SERVICECODE:
+                        this.radio_New.Checked = true;
+                        break;
+                    case AppendInstallService.SERVICECODE:
+                        this.radio_Append.Checked = true;
+                        break;
+                    case LicenseInstallService.SERVICECODE:
+                        this.radio_License.Checked = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public override void SaveAppSetting()
+        {
+            var code = this.radio_New.Checked ? NewInstallService.SERVICECODE :
+                       this.radio_Append.Checked ? AppendInstallService.SERVICECODE :
+                       this.radio_License.Checked ? LicenseInstallService.SERVICECODE : "";
+            if (this.ShellControl.installService == null //服务未创建
+                || !this.ShellControl.installService.ServiceCode.Equals(code)) //上一步至此页面,服务被更改
+                this.ShellControl.installService = Install4ibas.Tools.Services.ServicesFactory.New().GetService(code);
+            if (!this.ShellControl.installService.ServiceCode.Equals(NewInstallService.SERVICECODE))
+            {
+                this.ShellControl.installService.AppSetting.SiteName = Convert.ToString(this.cmb_Sites.SelectedItem);
+                this.ShellControl.installService.AppSetting.LoadSiteName();
+            }
         }
 
         void InstallationOptionsControl_NextEvent(object sender, EventArgs e)
         {
-            //this.ShellControl.SetCurrentControl(ControlTypes.LicenseAccept);
+            try
+            {
+                var type = ControlTypes.ModulesChoose;
+                if (!(this.radio_New.Checked
+                        | this.radio_Append.Checked
+                        | this.radio_License.Checked)
+                    ) throw new Exception("请选择要执行的操作。");  //都没选中
+                if (!this.radio_New.Checked && String.IsNullOrEmpty(Convert.ToString(this.cmb_Sites.SelectedItem)))
+                    throw new Exception("请选择已安装的ibas网站。");
+                if (this.radio_License.Checked) ;//TODO:此处跳转到License管理后续流程
+
+                this.ShellControl.SetCurrentControl(type);
+            }
+            catch(Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
         private void radio_CheckedChanged(object sender, EventArgs e)
         {

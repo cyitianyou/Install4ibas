@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Install4ibas.Tools.Plugin.DbManager
 {
-    class SQLMapFactory
+    public class SQLMapFactory
     {
         public SQLMapFactory(string dbServer, string dbUser, string dbPasswrod, string dbName)
         {
@@ -74,5 +74,11 @@ namespace Install4ibas.Tools.Plugin.DbManager
             throw new Exception("无法解析的数据库类型。");
         }
 
+        public static List<SQLMap> GetMaps()
+        {
+            var mapFactory = BTulz.ModelsTransformer.Transformer.SQLs.SQLMapFactory.New();
+            mapFactory.SQLMapFilePath = string.Format(@"{0}SQLMaps.xml", System.AppDomain.CurrentDomain.BaseDirectory);
+            return mapFactory.GetMaps();
+        }
     }
 }

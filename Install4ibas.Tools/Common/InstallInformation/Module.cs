@@ -27,7 +27,13 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-        public bool IsShell
+        public emModuleType Type
+        {
+            set;
+            get;
+        }
+
+        public bool IsInstalled
         {
             set;
             get;

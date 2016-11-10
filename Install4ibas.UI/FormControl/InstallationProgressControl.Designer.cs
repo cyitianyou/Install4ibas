@@ -28,11 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.lab_Msg = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(58, 173);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(530, 50);
+            this.progressBar.TabIndex = 0;
+            // 
+            // lab_Msg
+            // 
+            this.lab_Msg.AutoSize = true;
+            this.lab_Msg.Location = new System.Drawing.Point(58, 240);
+            this.lab_Msg.Name = "lab_Msg";
+            this.lab_Msg.Size = new System.Drawing.Size(0, 17);
+            this.lab_Msg.TabIndex = 1;
+            // 
+            // InstallationProgressControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lab_Msg);
+            this.Controls.Add(this.progressBar);
+            this.Name = "InstallationProgressControl";
             this.Size = new System.Drawing.Size(650, 440);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label lab_Msg;
     }
 }
