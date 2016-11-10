@@ -15,5 +15,18 @@ namespace Install4ibas.UI
         {
             InitializeComponent();
         }
+        protected override void InitializeEvent()
+        {
+            this.FinishEvent += FinishControl_FinishEvent;
+        }
+
+        void FinishControl_FinishEvent(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        protected override void SetButtonsVisibleStyle()
+        {
+            this.ButtonsVisibleStyle = UI.ButtonsVisibleStyle.Finish;
+        }
     }
 }

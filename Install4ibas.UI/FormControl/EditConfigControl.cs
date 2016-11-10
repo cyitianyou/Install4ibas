@@ -22,7 +22,16 @@ namespace Install4ibas.UI
             this.LoadComboxValuesB1Type();
             this.LoadComboxValuesLanguageType();
         }
+        protected override void InitializeEvent()
+        {
+            this.NextEvent += EditConfigControl_NextEvent;
+        }
 
+        void EditConfigControl_NextEvent(object sender, EventArgs e)
+        {
+            this.ShellControl.SetCurrentControl(ControlTypes.InstallationProgress);
+        }
+        #region 界面事件
         private void butCOList_Click(object sender, EventArgs e)
         {
             try
@@ -53,7 +62,34 @@ namespace Install4ibas.UI
                 MessageBox.Show(ex.Message, "错误");
             }
         }
-
+        private void cmbDBType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.txtB1Server.Text = string.Empty;
+            var myGroup = this.gpDB;
+            if (myGroup == null) return;
+            var mapFactory = BTulz.ModelsTransformer.Transformer.SQLs.SQLMapFactory.New();
+            var map = mapFactory.GetMap(this.cmbDBType.Text);
+            if (map != null)
+            {
+                foreach (var dbItem in map.DbConnectionItems)
+                {
+                    var sTxtName = string.Format("txt{0}", dbItem.ItemName);
+                    var txtItem = myGroup.Controls.OfType<TextBox>().FirstOrDefault(c => c.Name == sTxtName);
+                    if (txtItem == null) continue;
+                    //if (!string.IsNullOrEmpty(txtItem.Text)) continue;
+                    txtItem.Text = dbItem.ItemValue;
+                }
+            }
+            foreach (var item in this.cmbB1Type.Items)
+            {
+                if (item.ToString().IndexOf(this.cmbDBType.Text) >= 0)
+                {
+                    this.cmbB1Type.SelectedItem = item;
+                }
+            }
+        }
+        #endregion
+        #region 界面内方法
         private SAPbobsCOM.Company GetNewCompany()
         {
             try
@@ -140,32 +176,8 @@ namespace Install4ibas.UI
                 this.cmbB1Type.SelectedIndex = msIndex;
             }
         }
+        #endregion
 
-        private void cmbDBType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.txtB1Server.Text = string.Empty;
-            var myGroup = this.gpDB;
-            if (myGroup == null) return;
-            var mapFactory = BTulz.ModelsTransformer.Transformer.SQLs.SQLMapFactory.New();
-            var map = mapFactory.GetMap(this.cmbDBType.Text);
-            if (map != null)
-            {
-                foreach (var dbItem in map.DbConnectionItems)
-                {
-                    var sTxtName = string.Format("txt{0}", dbItem.ItemName);
-                    var txtItem = myGroup.Controls.OfType<TextBox>().FirstOrDefault(c => c.Name == sTxtName);
-                    if (txtItem == null) continue;
-                    //if (!string.IsNullOrEmpty(txtItem.Text)) continue;
-                    txtItem.Text = dbItem.ItemValue;
-                }
-            }
-            foreach (var item in this.cmbB1Type.Items)
-            {
-                if (item.ToString().IndexOf(this.cmbDBType.Text) >= 0)
-                {
-                    this.cmbB1Type.SelectedItem = item;
-                }
-            }
-        }
+
     }
 }

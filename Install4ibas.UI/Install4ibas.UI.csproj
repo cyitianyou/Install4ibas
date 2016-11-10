@@ -121,8 +121,14 @@
     <EmbeddedResource Include="FormControl\EditConfigControl.resx">
       <DependentUpon>EditConfigControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\FinishControl.resx">
+      <DependentUpon>FinishControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormControl\InstallationOptionsControl.resx">
       <DependentUpon>InstallationOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\InstallationProgressControl.resx">
+      <DependentUpon>InstallationProgressControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormControl\LicenseAcceptControl.resx">
       <DependentUpon>LicenseAcceptControl.cs</DependentUpon>
