@@ -63,6 +63,7 @@
     <Compile Include="Common\InstallInformation\Module.cs" />
     <Compile Include="Common\Licenses\LicensesInformation.cs" />
     <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
+    <Compile Include="Plugin\DbManager\SQLExecute.cs" />
     <Compile Include="Plugin\DbManager\SQLMapFactory.cs" />
     <Compile Include="Plugin\FileOperation\DataStructureItem.cs" />
     <Compile Include="Plugin\FileOperation\DataStructuresGetter.cs" />
