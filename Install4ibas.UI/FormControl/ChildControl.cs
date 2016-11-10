@@ -24,7 +24,6 @@ namespace Install4ibas.UI
         public ShellControl ShellControl;
         public ChildControl()
         {
-            this.InitializeEvent();
             this.SetButtonsVisibleStyle();
         }
         protected virtual void SetButtonsVisibleStyle()
@@ -33,7 +32,7 @@ namespace Install4ibas.UI
                                         | ButtonsVisibleStyle.NextEnable | ButtonsVisibleStyle.Finish;
         }
 
-        protected virtual void InitializeEvent() {
+        public virtual void Initialize() {
             
         }
         public virtual void LoadAppSetting()

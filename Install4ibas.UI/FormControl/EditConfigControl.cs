@@ -22,7 +22,7 @@ namespace Install4ibas.UI
             this.LoadComboxValuesB1Type();
             this.LoadComboxValuesLanguageType();
         }
-        protected override void InitializeEvent()
+        public override void Initialize()
         {
             this.NextEvent += EditConfigControl_NextEvent;
         }

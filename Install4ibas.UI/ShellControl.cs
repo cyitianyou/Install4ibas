@@ -45,6 +45,7 @@ namespace Install4ibas.UI
                 control.LoadAppSetting();
                 this.CurrentControl = control;
                 this.setButtonsVisible(control.ButtonsVisibleStyle);
+                control.Initialize();
                 return true;
             }
             catch (Exception error)

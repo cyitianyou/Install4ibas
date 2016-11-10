@@ -19,7 +19,7 @@ namespace Install4ibas.UI
         {
             this.chk_Standard.Left = (this.gp_Modules.Width - this.chk_Standard.Width) / 2;
         }
-        protected override void InitializeEvent()
+        public  override void Initialize()
         {
             this.NextEvent += ModulesChooseControl_NextEvent;
         }

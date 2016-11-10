@@ -15,7 +15,12 @@ namespace Install4ibas.UI
         {
             InitializeComponent();
         }
-        public override void LoadAppSetting()
+        protected override void SetButtonsVisibleStyle()
+        {
+            this.ButtonsVisibleStyle = UI.ButtonsVisibleStyle.Cancel;
+        }
+
+        public override void Initialize()
         {
             int step = 10;
             for (int i = 1; i < step + 1; i++)
@@ -31,5 +36,6 @@ namespace Install4ibas.UI
             System.Threading.Thread.Sleep(1500);
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
         }
+
     }
 }

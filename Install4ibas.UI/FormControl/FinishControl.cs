@@ -15,7 +15,7 @@ namespace Install4ibas.UI
         {
             InitializeComponent();
         }
-        protected override void InitializeEvent()
+        public override void Initialize()
         {
             this.FinishEvent += FinishControl_FinishEvent;
         }
