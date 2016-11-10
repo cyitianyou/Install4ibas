@@ -235,6 +235,7 @@
             this.butCOList.TabIndex = 61;
             this.butCOList.Text = "获取公司列表";
             this.butCOList.UseVisualStyleBackColor = true;
+            this.butCOList.Click += new System.EventHandler(this.butCOList_Click);
             // 
             // cmbDBName
             // 
@@ -380,6 +381,7 @@
             this.cmbDBType.Name = "cmbDBType";
             this.cmbDBType.Size = new System.Drawing.Size(170, 25);
             this.cmbDBType.TabIndex = 41;
+            this.cmbDBType.SelectedIndexChanged += new System.EventHandler(this.cmbDBType_SelectedIndexChanged);
             // 
             // txtB1User
             // 
