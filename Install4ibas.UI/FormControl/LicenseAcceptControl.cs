@@ -19,7 +19,7 @@ namespace Install4ibas.UI
         {
             this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.NextEnable;
         }
-        protected override void InitializeEvent()
+        public override void Initialize()
         {
             this.NextEvent += LicenseAcceptControl_NextEvent;
         }

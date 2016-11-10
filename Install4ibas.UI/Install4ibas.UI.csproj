@@ -33,6 +33,22 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BTulz.ModelsTransformer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Install4ibas.Tools\Dlls\BTulz.ModelsTransformer.dll</HintPath>
+    </Reference>
+    <Reference Include="BTulz.ModelsTransformer.B1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Install4ibas.Tools\Dlls\BTulz.ModelsTransformer.B1.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SAPbobsCOM">
+      <HintPath>..\Install4ibas.Tools\Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.SAPbouiCOM">
+      <HintPath>..\Install4ibas.Tools\Dlls\B1\9.0\x86\Interop.SAPbouiCOM.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -102,11 +118,23 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormControl\EditConfigControl.resx">
+      <DependentUpon>EditConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\FinishControl.resx">
+      <DependentUpon>FinishControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormControl\InstallationOptionsControl.resx">
       <DependentUpon>InstallationOptionsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\InstallationProgressControl.resx">
+      <DependentUpon>InstallationProgressControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormControl\LicenseAcceptControl.resx">
       <DependentUpon>LicenseAcceptControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\ModulesChooseControl.resx">
+      <DependentUpon>ModulesChooseControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShellControl.resx">
       <DependentUpon>ShellControl.cs</DependentUpon>
