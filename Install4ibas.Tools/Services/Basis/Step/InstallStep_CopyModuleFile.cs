@@ -30,7 +30,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            FileOperation.CopyModules(this.AppSetting.SourcepackageDir, this.AppSetting.InstallDiraddress, this.AppSetting.InstallModules);
+            FileOperation.CopyModules(this.AppSetting.SourcePackageDir, this.AppSetting.InstallDiraddress, this.AppSetting.InstallModules);
             return true;
         }
     
