@@ -102,11 +102,17 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormControl\EditConfigControl.resx">
+      <DependentUpon>EditConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormControl\InstallationOptionsControl.resx">
       <DependentUpon>InstallationOptionsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormControl\LicenseAcceptControl.resx">
       <DependentUpon>LicenseAcceptControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\ModulesChooseControl.resx">
+      <DependentUpon>ModulesChooseControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShellControl.resx">
       <DependentUpon>ShellControl.cs</DependentUpon>

@@ -15,5 +15,28 @@ namespace Install4ibas.UI
         {
             InitializeComponent();
         }
+        private void ModulesChooseControl_SizeChanged(object sender, EventArgs e)
+        {
+            this.chk_Standard.Left = (this.gp_Modules.Width - this.chk_Standard.Width) / 2;
+        }
+        protected override void InitializeEvent()
+        {
+            this.NextEvent += ModulesChooseControl_NextEvent;
+        }
+
+        void ModulesChooseControl_NextEvent(object sender, EventArgs e)
+        {
+            this.ShellControl.SetCurrentControl(ControlTypes.EditConfig);
+        }
+        public override void LoadAppSetting()
+        {
+            base.LoadAppSetting();
+        }
+        public override void SaveAppSetting()
+        {
+            base.SaveAppSetting();
+        }
+
+
     }
 }

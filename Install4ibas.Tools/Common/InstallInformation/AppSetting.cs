@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Install4ibas.Tools.Plugin.IISManager;
+using Microsoft.Web.Administration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -167,6 +169,15 @@ namespace Install4ibas.Tools.Common.InstallInformation
         #region 安装步骤
         [DataMember(Name = "Steps")]
         public IList<InstallInformationStep> Steps;
+        #endregion
+        #region 加载数据
+        public void LoadSiteName()
+        {
+            if (String.IsNullOrEmpty(this.SiteName)) return;
+            Site site = IISManagerFactory.New().CreateIISManager().GetSite(this.SiteName); ;
+            if (site == null) return;
+            //使用Site信息对AppSetting赋值
+        }
         #endregion
     }
     #region InstallInformationStep

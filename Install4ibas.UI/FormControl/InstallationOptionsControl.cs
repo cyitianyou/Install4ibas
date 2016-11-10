@@ -57,7 +57,10 @@ namespace Install4ibas.UI
                 || !this.ShellControl.installService.ServiceCode.Equals(code)) //上一步至此页面,服务被更改
                 this.ShellControl.installService = Install4ibas.Tools.Services.ServicesFactory.New().GetService(code);
             if (!this.ShellControl.installService.ServiceCode.Equals(NewInstallService.SERVICECODE))
+            {
                 this.ShellControl.installService.AppSetting.SiteName = Convert.ToString(this.cmb_Sites.SelectedItem);
+                this.ShellControl.installService.AppSetting.LoadSiteName();
+            }
         }
 
         void InstallationOptionsControl_NextEvent(object sender, EventArgs e)
