@@ -105,14 +105,14 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                         string modulename = filename.Substring(filename.LastIndexOf("_BizSys") + 8, filename.Length - filename.LastIndexOf("_BizSys") - 12);
                         ibasModule module = new ibasModule();
                         module.ModuleName = modulename;
-                        module.IsShell = false;
+                        module.Type = emModuleType.all;
                         Modules.Add(module);
                     }
                     else if (filename.StartsWith("ibas_4_shell_published") && filename.EndsWith("zip"))
                     {
                          ibasModule module = new ibasModule();
                          module.ModuleName = "shell";
-                         module.IsShell = true;
+                         module.Type = emModuleType.shell;
                          Modules.Add(module);
                     }
                 }
@@ -158,7 +158,6 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                         var module = Modules.FirstOrDefault(c => c.ModuleName == modulename);
                         if (module == null) continue;
                         module.ModuleInstallPath = InstallPath + "\\" + filename;
-                        module.IsShell = false;
                         System.IO.File.Copy(file, InstallPath + filename, true);
                     }
                     else if (filename.StartsWith("ibas_4_shell_published") && filename.EndsWith("zip"))
@@ -166,7 +165,6 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                         var module = Modules.FirstOrDefault(c => c.ModuleName == "shell");
                         if (module == null) continue;
                         module.ModuleInstallPath = InstallPath + "\\" + filename;
-                        module.IsShell = true;
                         System.IO.File.Copy(file, InstallPath + filename, true);
                     }
                 }

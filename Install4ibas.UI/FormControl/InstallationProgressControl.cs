@@ -28,12 +28,12 @@ namespace Install4ibas.UI
                 this.lab_Msg.Text = string.Format("正在执行安装步骤[{0}]", i);
                 this.progressBar.Value = 100 * i / step;
                 Application.DoEvents();
-                System.Threading.Thread.Sleep(2500);
+                System.Threading.Thread.Sleep(500);
             }
             this.progressBar.Value = 100;
             this.lab_Msg.Text = "安装完成，请稍候...";
             Application.DoEvents();
-            System.Threading.Thread.Sleep(1500);
+            System.Threading.Thread.Sleep(500);
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
         }
 

@@ -19,4 +19,9 @@ namespace Install4ibas.Tools.Common.InstallInformation
     {
         all, hana, mssql, mysql, oracle, pgsql
     }
+
+    public enum emModuleType
+    {
+        all, shell, basic, standard, other
+    }
 }

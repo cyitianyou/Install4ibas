@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Install4ibas.Tools.Plugin.FileOperation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_CopyModuleFile: IInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "CopyModuleFile";
+        const string STEPNAME = "复制模块安装文件";
 
         public string StepCode
         {
@@ -29,7 +30,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            throw new NotImplementedException();
+            FileOperation.CopyModules(this.AppSetting.SourcepackageDir, this.AppSetting.InstallDiraddress, this.AppSetting.InstallModules);
+            return true;
         }
     
     }
