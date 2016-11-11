@@ -10,11 +10,19 @@ namespace Install4ibas.Tools.Plugin.IISManager
 {
     public class IISManager : IIISManager
     {
-        protected ServerManager serverManager;
+        protected ServerManager _serverManager;
+        protected ServerManager serverManager
+        {
+            get
+            {
+                if (_serverManager == null)
+                    _serverManager = new ServerManager();
+                return _serverManager;
+            }
+        }
         protected bool checkedFullyInstalled;
         public IISManager()
         {
-            serverManager = new ServerManager();
             RegistryModules = new List<KeyValuePair<bool, string>>();
         }
         public virtual bool IsFullyInstalled()
@@ -139,7 +147,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
             var result = new List<string>();
             foreach (var item in serverManager.Sites)
             {
-                if (!onlyIbas || item.Applications.Count(c => c.Path.Equals("/SystemCenter",StringComparison.InvariantCultureIgnoreCase)) == 1)
+                if (!onlyIbas || item.Applications.Count(c => c.Path.Equals("/SystemCenter", StringComparison.InvariantCultureIgnoreCase)) == 1)
                 {
                     result.Add(item.Name);
                 }
