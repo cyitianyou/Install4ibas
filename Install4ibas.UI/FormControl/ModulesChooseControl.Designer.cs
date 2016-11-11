@@ -35,6 +35,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gp_Modules = new System.Windows.Forms.GroupBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.dr_Checked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dr_ModuleDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dr_Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dr_Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dr_PackageFilePath = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.chk_Other = new System.Windows.Forms.CheckBox();
             this.chk_Standard = new System.Windows.Forms.CheckBox();
             this.chk_Basis = new System.Windows.Forms.CheckBox();
@@ -120,12 +125,56 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dr_Checked,
+            this.dr_ModuleDescription,
+            this.dr_Type,
+            this.dr_Status,
+            this.dr_PackageFilePath});
+            this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView.Location = new System.Drawing.Point(3, 54);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.ReadOnly = true;
+            this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 29;
             this.dataGridView.Size = new System.Drawing.Size(638, 309);
             this.dataGridView.TabIndex = 3;
+            this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
+            // 
+            // dr_Checked
+            // 
+            this.dr_Checked.DataPropertyName = "Checked";
+            this.dr_Checked.Frozen = true;
+            this.dr_Checked.HeaderText = "";
+            this.dr_Checked.Name = "dr_Checked";
+            this.dr_Checked.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dr_Checked.Width = 40;
+            // 
+            // dr_ModuleDescription
+            // 
+            this.dr_ModuleDescription.DataPropertyName = "ModuleDescription";
+            this.dr_ModuleDescription.HeaderText = "描述";
+            this.dr_ModuleDescription.Name = "dr_ModuleDescription";
+            // 
+            // dr_Type
+            // 
+            this.dr_Type.DataPropertyName = "Type";
+            this.dr_Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.dr_Type.HeaderText = "类型";
+            this.dr_Type.Name = "dr_Type";
+            // 
+            // dr_Status
+            // 
+            this.dr_Status.DataPropertyName = "Status";
+            this.dr_Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.dr_Status.HeaderText = "状态";
+            this.dr_Status.Name = "dr_Status";
+            // 
+            // dr_PackageFilePath
+            // 
+            this.dr_PackageFilePath.DataPropertyName = "PackageFilePath";
+            this.dr_PackageFilePath.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.dr_PackageFilePath.HeaderText = "包名";
+            this.dr_PackageFilePath.Name = "dr_PackageFilePath";
             // 
             // chk_Other
             // 
@@ -139,6 +188,7 @@
             this.chk_Other.TabIndex = 2;
             this.chk_Other.Text = "其他模块";
             this.chk_Other.UseVisualStyleBackColor = true;
+            this.chk_Other.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // chk_Standard
             // 
@@ -153,6 +203,7 @@
             this.chk_Standard.TabIndex = 1;
             this.chk_Standard.Text = "标准模块";
             this.chk_Standard.UseVisualStyleBackColor = true;
+            this.chk_Standard.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // chk_Basis
             // 
@@ -165,6 +216,7 @@
             this.chk_Basis.TabIndex = 0;
             this.chk_Basis.Text = "基础模块";
             this.chk_Basis.UseVisualStyleBackColor = true;
+            this.chk_Basis.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // ModulesChooseControl
             // 
@@ -195,6 +247,11 @@
         private System.Windows.Forms.CheckBox chk_Other;
         private System.Windows.Forms.CheckBox chk_Standard;
         private System.Windows.Forms.CheckBox chk_Basis;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dr_Checked;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dr_ModuleDescription;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dr_Type;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dr_Status;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dr_PackageFilePath;
 
     }
 }

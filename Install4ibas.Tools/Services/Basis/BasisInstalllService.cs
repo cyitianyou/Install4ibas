@@ -9,6 +9,10 @@ namespace Install4ibas.Tools.Services.Basis
 {
     public abstract class BasisInstalllService : IInstallService
     {
+        public BasisInstalllService()
+        {
+            this._AppSetting = new AppSetting();
+        }
         const string SERVICECODE = "Basis";
         public virtual string ServiceCode
         {

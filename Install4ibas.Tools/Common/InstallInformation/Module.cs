@@ -61,10 +61,16 @@ namespace Install4ibas.Tools.Common.InstallInformation
         [DataMember(Name = "Status", Order = 6)]
         public emInstallStatus Status { get; set; }
         [DataMember(Name = "PackageFilePath", Order = 7)]
-        public string PackageFilePath;
+        public string PackageFilePath { get; set; }
         [DataMember(Name = "PackageFileList", Order = 8)]
-        public MyList<string> PackageFileList;
+        public MyList<string> PackageFileList { get; set; }
+        [DataMember(Name = "Checked", Order = 9)]
+        public bool Checked { get; set; }
 
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}-{2}", this.Type, this.ModuleName, this.ModuleDescription);
+        }
 
     }
     [CollectionDataContract(ItemName = "FilePath", Namespace = "http://ibas.club/install")]
