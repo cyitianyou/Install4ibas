@@ -158,14 +158,16 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                         var module = Modules.FirstOrDefault(c => c.ModuleName == modulename);
                         if (module == null) continue;
                         module.ModuleInstallPath = InstallPath + "\\" + filename;
-                        System.IO.File.Copy(file, InstallPath + filename, true);
+                        var packaddress = Path.Combine(InstallPath, "~packages");
+                        System.IO.File.Copy(file, packaddress, true);
                     }
                     else if (filename.StartsWith("ibas_4_shell_published") && filename.EndsWith("zip"))
                     {
                         var module = Modules.FirstOrDefault(c => c.ModuleName == "shell");
                         if (module == null) continue;
                         module.ModuleInstallPath = InstallPath + "\\" + filename;
-                        System.IO.File.Copy(file, InstallPath + filename, true);
+                        var packaddress=  Path.Combine(InstallPath, "~packages");
+                        System.IO.File.Copy(file, packaddress, true);
                     }
                 }
             }
