@@ -2,6 +2,7 @@
 using Microsoft.Web.Administration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -19,7 +20,8 @@ namespace Install4ibas.Tools.Common.InstallInformation
         public AppSetting()
         {
             this.Steps = new List<InstallInformationStep>();
-            this.InstallModules = new List<ibasModule>();
+            this.InstallModules = new ibasModules();
+            this.LoadDefaultModules();
         }
 
         #endregion
@@ -75,7 +77,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-         /// <summary>
+        /// <summary>
         /// 数据库地址
         /// </summary>
         public string DBServer
@@ -107,7 +109,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-         /// <summary>
+        /// <summary>
         /// B1类型
         /// </summary>
         public string B1Type
@@ -115,7 +117,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-           /// <summary>
+        /// <summary>
         /// B1用户
         /// </summary>
         public string B1User
@@ -131,7 +133,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-         /// <summary>
+        /// <summary>
         /// B1许可证
         /// </summary>
         public string B1Server
@@ -139,8 +141,8 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-        
-            /// <summary>
+
+        /// <summary>
         /// B1语言
         /// </summary>
         public string cmbLanguage
@@ -148,8 +150,8 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-        
-        
+
+
         #endregion
         #region IIS相关
         /// <summary>
@@ -162,7 +164,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
         }
         #endregion
         #region ibas模块
-        public IList<ibasModule> InstallModules;
+        public ibasModules InstallModules;
         #endregion
         #region Licenses相关
         #endregion
@@ -171,6 +173,25 @@ namespace Install4ibas.Tools.Common.InstallInformation
         public IList<InstallInformationStep> Steps;
         #endregion
         #region 加载数据
+        private void LoadDefaultModules()
+        {
+            try
+            {
+                var path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "ibasStandardModules.xml");
+                if (File.Exists(path))
+                {
+                    var xml = System.Xml.XmlReader.Create(path);
+                    var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(ibasModules));
+                    var model = serializer.ReadObject(xml) as ibasModules;
+                    if (model != null)
+                        this.InstallModules = model;
+                }
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
         public void LoadSiteName()
         {
             if (String.IsNullOrEmpty(this.SiteName)) return;
