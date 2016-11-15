@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gp_Choose = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.chk_UseLocal = new System.Windows.Forms.CheckBox();
@@ -152,22 +155,31 @@
             // dr_ModuleDescription
             // 
             this.dr_ModuleDescription.DataPropertyName = "ModuleDescription";
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            this.dr_ModuleDescription.DefaultCellStyle = dataGridViewCellStyle1;
             this.dr_ModuleDescription.HeaderText = "描述";
             this.dr_ModuleDescription.Name = "dr_ModuleDescription";
+            this.dr_ModuleDescription.ReadOnly = true;
             // 
             // dr_Type
             // 
             this.dr_Type.DataPropertyName = "Type";
-            this.dr_Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
+            this.dr_Type.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dr_Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
             this.dr_Type.HeaderText = "类型";
             this.dr_Type.Name = "dr_Type";
+            this.dr_Type.ReadOnly = true;
             // 
             // dr_Status
             // 
             this.dr_Status.DataPropertyName = "Status";
-            this.dr_Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Silver;
+            this.dr_Status.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dr_Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
             this.dr_Status.HeaderText = "状态";
             this.dr_Status.Name = "dr_Status";
+            this.dr_Status.ReadOnly = true;
             // 
             // dr_PackageFilePath
             // 

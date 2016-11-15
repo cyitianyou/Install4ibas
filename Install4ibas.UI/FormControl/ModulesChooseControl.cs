@@ -20,8 +20,12 @@ namespace Install4ibas.UI
 
         private void EditDataGridView()
         {
-            this.dr_Status.DataSource = Enum.GetValues(typeof(emInstallStatus));
-            this.dr_Type.DataSource = Enum.GetValues(typeof(emModuleType));
+            this.dr_Status.DataSource = Enumerator.GetValueAndDescriptions(typeof(emInstallStatus));
+            this.dr_Status.DisplayMember = "Key";
+            this.dr_Status.ValueMember = "Value";
+            this.dr_Type.DataSource = Enumerator.GetValueAndDescriptions(typeof(emModuleType));
+            this.dr_Type.DisplayMember = "Key";
+            this.dr_Type.ValueMember = "Value";
             this.dr_PackageFilePath.DropDownWidth = 200;
             this.dataGridView.AutoGenerateColumns = false;
             this.dataGridView.RowTemplate.Height = 21;
@@ -46,16 +50,26 @@ namespace Install4ibas.UI
         }
         private void BindDataGridViewData()
         {
-            var modules = this.ShellControl.installService.AppSetting.InstallModules;
+            bool standard = this.chk_Standard.Checked;
+            bool basic = this.chk_Basis.Checked;
+            bool other = this.chk_Other.Checked;
+            var modules = this.ShellControl.installService.AppSetting.InstallModules
+                                                    .Where(c =>
+                                                        (c.Type == emModuleType.all && other)
+                                                        || (c.Type == emModuleType.basic && basic)
+                                                        || (c.Type == emModuleType.other && other)
+                                                        || (c.Type == emModuleType.shell && basic)
+                                                        || (c.Type == emModuleType.standard && standard)
+                                                    ).ToList();
             if (modules != null)
             {
                 this.dataGridView.DataSource = modules;
-                for (int i = 0; i < modules.Count; i++)
+                for (int i = 0; i < modules.Count(); i++)
                 {
                     var cell = this.dataGridView.Rows[i].Cells["dr_PackageFilePath"] as DataGridViewComboBoxCell;
                     if (cell == null) continue;
                     cell.Items.Clear();
-                    cell.Items.AddRange(modules[i].PackageFileList.ToArray());
+                    cell.Items.AddRange(modules.ElementAt(i).PackageFileList.ToArray());
                 }
                 this.dataGridView.DataSource = modules;
             }
@@ -72,7 +86,7 @@ namespace Install4ibas.UI
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            //this.dataGridView.DataBindings.
+            this.BindDataGridViewData();
         }
 
 
