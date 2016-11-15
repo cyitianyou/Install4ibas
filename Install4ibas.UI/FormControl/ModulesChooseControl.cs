@@ -20,13 +20,17 @@ namespace Install4ibas.UI
 
         private void EditDataGridView()
         {
+            //对枚举数据下拉列表赋值,展示描述
             this.dr_Status.DataSource = Enumerator.GetValueAndDescriptions(typeof(emInstallStatus));
             this.dr_Status.DisplayMember = "Key";
             this.dr_Status.ValueMember = "Value";
             this.dr_Type.DataSource = Enumerator.GetValueAndDescriptions(typeof(emModuleType));
             this.dr_Type.DisplayMember = "Key";
             this.dr_Type.ValueMember = "Value";
+
+            //文件名下拉框加长以显示长名称
             this.dr_PackageFilePath.DropDownWidth = 200;
+            //dataGridView不根据数据源自动添加行
             this.dataGridView.AutoGenerateColumns = false;
             this.dataGridView.RowTemplate.Height = 21;
             this.dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
@@ -50,9 +54,11 @@ namespace Install4ibas.UI
         }
         private void BindDataGridViewData()
         {
+            //记录前端模块筛选情况
             bool standard = this.chk_Standard.Checked;
             bool basic = this.chk_Basis.Checked;
             bool other = this.chk_Other.Checked;
+            //根据模块类型筛选要展示的模块
             var modules = this.ShellControl.installService.AppSetting.InstallModules
                                                     .Where(c =>
                                                         (c.Type == emModuleType.all && other)
@@ -64,6 +70,7 @@ namespace Install4ibas.UI
             if (modules != null)
             {
                 this.dataGridView.DataSource = modules;
+                //对每个模块的路径列表单独赋值
                 for (int i = 0; i < modules.Count(); i++)
                 {
                     var cell = this.dataGridView.Rows[i].Cells["dr_PackageFilePath"] as DataGridViewComboBoxCell;
@@ -71,7 +78,6 @@ namespace Install4ibas.UI
                     cell.Items.Clear();
                     cell.Items.AddRange(modules.ElementAt(i).PackageFileList.ToArray());
                 }
-                this.dataGridView.DataSource = modules;
             }
         }
         public override void SaveAppSetting()
@@ -86,6 +92,7 @@ namespace Install4ibas.UI
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            //刷新数据
             this.BindDataGridViewData();
         }
 
