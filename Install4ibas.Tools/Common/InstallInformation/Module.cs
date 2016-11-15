@@ -29,41 +29,49 @@ namespace Install4ibas.Tools.Common.InstallInformation
             this.Type = emModuleType.all;
             this.Status = emInstallStatus.notInstalled;
         }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "ModuleId", Order = 1)]
         public String ModuleId { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "ModuleName", Order = 2)]
         public String ModuleName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "ModuleDescription", Order = 3)]
         public String ModuleDescription { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "ModuleInstallPath", Order = 4)]
         public String ModuleInstallPath { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "Type", Order = 5)]
-        public emModuleType Type
-        {
-            get
-            {
-                return _Type;
-            }
-            set
-            {
-                _Type = value;
-                if (_Type == emModuleType.basic
-                    || _Type == emModuleType.shell
-                    || _Type == emModuleType.standard)
-                {
-                    if (PackageFileList == null) PackageFileList = new MyList<string>();
-                    if (!PackageFileList.Contains(DOWNLOAD))
-                        PackageFileList.Add(DOWNLOAD);
-                }
-            }
-        }
-        private emModuleType _Type;
+        public emModuleType Type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "Status", Order = 6)]
         public emInstallStatus Status { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "PackageFilePath", Order = 7)]
         public string PackageFilePath { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "PackageFileList", Order = 8)]
         public MyList<string> PackageFileList { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [DataMember(Name = "Checked", Order = 9)]
         public bool Checked { get; set; }
 
