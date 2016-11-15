@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Install4ibas.Tools.Common.InstallInformation;
+using System.IO;
 
 namespace Install4ibas.UI
 {
@@ -20,6 +21,7 @@ namespace Install4ibas.UI
 
         private void EditDataGridView()
         {
+            this.btn_ChooseFolder.Height = this.txtFolder.Height;
             //对枚举数据下拉列表赋值,展示描述
             this.dr_Status.DataSource = Enumerator.GetValueAndDescriptions(typeof(emInstallStatus));
             this.dr_Status.DisplayMember = "Key";
@@ -94,6 +96,28 @@ namespace Install4ibas.UI
         {
             //刷新数据
             this.BindDataGridViewData();
+        }
+
+        private void btn_ChooseFolder_Click(object sender, EventArgs e)
+        {
+            var fbd = new FolderBrowserDialog();
+            fbd.Description = "选择本地ibas模块包存放路径";
+            fbd.ShowNewFolderButton = false;
+            if (!string.IsNullOrEmpty(this.txtFolder.Text) && Directory.Exists(this.txtFolder.Text))
+                fbd.SelectedPath = this.txtFolder.Text;
+            else
+                fbd.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                this.txtFolder.Text = fbd.SelectedPath;
+            }
+            fbd.Dispose();
+        }
+
+        private void txtFolder_TextChanged(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(this.txtFolder.Text)) return;
+            this.ShellControl.installService.AppSetting.InstallModules.GetLocalInfo(this.txtFolder.Text);
         }
 
 

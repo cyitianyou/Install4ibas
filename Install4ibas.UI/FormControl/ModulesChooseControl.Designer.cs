@@ -32,9 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gp_Choose = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_ChooseFolder = new System.Windows.Forms.Button();
             this.chk_UseLocal = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtFolder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gp_Modules = new System.Windows.Forms.GroupBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -53,9 +53,9 @@
             // 
             // gp_Choose
             // 
-            this.gp_Choose.Controls.Add(this.button1);
+            this.gp_Choose.Controls.Add(this.btn_ChooseFolder);
             this.gp_Choose.Controls.Add(this.chk_UseLocal);
-            this.gp_Choose.Controls.Add(this.textBox1);
+            this.gp_Choose.Controls.Add(this.txtFolder);
             this.gp_Choose.Controls.Add(this.label1);
             this.gp_Choose.Controls.Add(this.gp_Modules);
             this.gp_Choose.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -66,15 +66,16 @@
             this.gp_Choose.TabStop = false;
             this.gp_Choose.Text = "模块选择";
             // 
-            // button1
+            // btn_ChooseFolder
             // 
-            this.button1.Font = new System.Drawing.Font("宋体", 4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.button1.Location = new System.Drawing.Point(459, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 27);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_ChooseFolder.Font = new System.Drawing.Font("宋体", 4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btn_ChooseFolder.Location = new System.Drawing.Point(459, 38);
+            this.btn_ChooseFolder.Name = "btn_ChooseFolder";
+            this.btn_ChooseFolder.Size = new System.Drawing.Size(25, 27);
+            this.btn_ChooseFolder.TabIndex = 4;
+            this.btn_ChooseFolder.Text = "...";
+            this.btn_ChooseFolder.UseVisualStyleBackColor = true;
+            this.btn_ChooseFolder.Click += new System.EventHandler(this.btn_ChooseFolder_Click);
             // 
             // chk_UseLocal
             // 
@@ -88,12 +89,13 @@
             this.chk_UseLocal.Text = "优先使用本地包";
             this.chk_UseLocal.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtFolder
             // 
-            this.textBox1.Location = new System.Drawing.Point(138, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(316, 27);
-            this.textBox1.TabIndex = 1;
+            this.txtFolder.Location = new System.Drawing.Point(138, 38);
+            this.txtFolder.Name = "txtFolder";
+            this.txtFolder.Size = new System.Drawing.Size(316, 27);
+            this.txtFolder.TabIndex = 1;
+            this.txtFolder.TextChanged += new System.EventHandler(this.txtFolder_TextChanged);
             // 
             // label1
             // 
@@ -250,9 +252,9 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gp_Choose;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_ChooseFolder;
         private System.Windows.Forms.CheckBox chk_UseLocal;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtFolder;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox gp_Modules;
         private System.Windows.Forms.DataGridView dataGridView;
