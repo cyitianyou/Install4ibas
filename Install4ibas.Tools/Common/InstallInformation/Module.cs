@@ -15,10 +15,43 @@ namespace Install4ibas.Tools.Common.InstallInformation
     {
         public void GetLocalInfo(string folderPath)
         {
-            if (!Directory.Exists(folderPath)) return;
-            var list = FileModule.GetFileModules(folderPath);
-            if (list == null) return;
-            var group = list.GroupBy(c => true);
+            try
+            {
+                if (!Directory.Exists(folderPath)) return;
+                var list = FileModule.GetFileModules(folderPath);
+                if (list == null) return;
+                var modulesGroup = list.GroupBy(c => new { c.IsShell, c.ModuleName });
+                if (modulesGroup == null) return;
+                foreach (var group in modulesGroup)
+                {
+                    var ibas_Moudule = this.FirstOrDefault(c => (c.ModuleName == group.Key.ModuleName && c.Type != emModuleType.shell && !group.Key.IsShell)
+                                                                                           || (c.Type == emModuleType.shell && group.Key.IsShell)
+                                                                                   );
+                    //当前集合没有该模块
+                    if (ibas_Moudule == null)
+                    {
+                        ibas_Moudule = new ibasModule();
+                        ibas_Moudule.Type = group.Key.IsShell ? emModuleType.shell : emModuleType.other;
+                        ibas_Moudule.ModuleName = group.Key.ModuleName;
+                        ibas_Moudule.ModuleDescription = group.Key.ModuleName;
+                        this.Add(ibas_Moudule);
+                    }
+                    //添加模块包名列表
+                    foreach (var item in group.OrderBy(c=>c.FileDate))
+                    {
+                        ibas_Moudule.PackageFileList.Insert(0, item.FileName);
+                    }
+                    //模块默认选中第一个包名
+                    if (ibas_Moudule.PackageFileList.Count > 0)
+                    {
+                        ibas_Moudule.Checked = true;
+                        ibas_Moudule.PackageFilePath = ibas_Moudule.PackageFileList[0];
+                    }
+                }
+            }
+            catch(Exception)
+            {
+            }
         }
     }
     [DataContract(Namespace = "http://ibas.club/install")]
@@ -98,6 +131,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
     {
         public bool IsShell { get; set; }
         public string ModuleName { get; set; }
+        public string FileName { get; set; }
         public DateTime FileDate { get; set; }
 
         public static IEnumerable<FileModule> GetFileModules(string folderPath)
@@ -130,6 +164,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             try
             {
                 var module = new FileModule();
+                module.FileName = fileName;
                 if (fileName.StartsWith("ibas_4_modules_published_") && fileName.Contains("BizSys."))
                 {
                     module.IsShell = false;

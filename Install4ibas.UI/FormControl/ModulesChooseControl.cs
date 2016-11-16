@@ -31,7 +31,7 @@ namespace Install4ibas.UI
             this.dr_Type.ValueMember = "Value";
 
             //文件名下拉框加长以显示长名称
-            this.dr_PackageFilePath.DropDownWidth = 200;
+            //this.dr_PackageFilePath.DropDownWidth = 200;
             //dataGridView不根据数据源自动添加行
             this.dataGridView.AutoGenerateColumns = false;
             this.dataGridView.RowTemplate.Height = 21;
@@ -117,7 +117,26 @@ namespace Install4ibas.UI
         private void txtFolder_TextChanged(object sender, EventArgs e)
         {
             if (!Directory.Exists(this.txtFolder.Text)) return;
-            this.ShellControl.installService.AppSetting.InstallModules.GetLocalInfo(this.txtFolder.Text);
+            this.ShellControl.installService.AppSetting.GetLocalModulesInfo(this.txtFolder.Text);
+            //刷新数据
+            this.BindDataGridViewData();
+        }
+
+        private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 4)
+                {
+                    var value = Convert.ToString(e.Value);
+                    if (value.IndexOf("BizSys.") > -1)
+                    {
+                        e.Value = "..." + value.Substring(value.IndexOf("BizSys."));
+                        e.FormattingApplied = true;
+                    }
+                }
+            }
+            catch (Exception) { }
         }
 
 
