@@ -84,7 +84,8 @@ namespace Install4ibas.UI
         }
         public override void SaveAppSetting()
         {
-            base.SaveAppSetting();
+            if (!Directory.Exists(this.txtFolder.Text)) return;
+            this.MyAppSetting.SourcePackageDir = this.txtFolder.Text;
         }
 
         private void dataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)

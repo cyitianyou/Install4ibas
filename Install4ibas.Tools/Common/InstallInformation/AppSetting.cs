@@ -44,23 +44,6 @@ namespace Install4ibas.Tools.Common.InstallInformation
         }
         #endregion
         #region 数据库相关
-
-        /// <summary>
-        /// IIS地址
-        /// </summary>
-        public string IISAddress
-        {
-            set;
-            get;
-        }
-        /// <summary>
-        /// IIS端口号
-        /// </summary>
-        public string IISPort
-        {
-            set;
-            get;
-        }
         /// <summary>
         /// 数据库类型("HANA","MSSQL""MYSQL""ORACLE""PostgreSQL")
         /// </summary>
@@ -158,6 +141,22 @@ namespace Install4ibas.Tools.Common.InstallInformation
         /// 网站名
         /// </summary>
         public string SiteName
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// IIS地址
+        /// </summary>
+        public string IISAddress
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// IIS端口号
+        /// </summary>
+        public string IISPort
         {
             set;
             get;
