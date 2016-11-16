@@ -8,6 +8,7 @@ namespace Install4ibas.UI
     /// </summary>
     public class ChildControl : UserControl, IUIAction
     {
+        
         ButtonsVisibleStyle _ButtonsVisibleStyle;
         public ButtonsVisibleStyle ButtonsVisibleStyle {
             get
@@ -25,6 +26,7 @@ namespace Install4ibas.UI
         public ChildControl()
         {
             this.SetButtonsVisibleStyle();
+            this.InitializeComponent();
         }
         protected virtual void SetButtonsVisibleStyle()
         {
@@ -103,5 +105,19 @@ namespace Install4ibas.UI
             }
         }
         #endregion
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChildControl));
+            this.SuspendLayout();
+            // 
+            // ChildControl
+            // 
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Name = "ChildControl";
+            this.ResumeLayout(false);
+
+        }
     }
 }
