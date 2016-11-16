@@ -36,7 +36,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Name = "WelcomeControl";
             this.Size = new System.Drawing.Size(650, 440);
             this.ResumeLayout(false);
@@ -44,6 +43,7 @@
         }
 
         #endregion
+
 
     }
 }
