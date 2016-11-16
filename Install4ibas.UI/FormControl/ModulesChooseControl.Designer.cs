@@ -139,10 +139,12 @@
             this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView.Location = new System.Drawing.Point(3, 54);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 29;
             this.dataGridView.Size = new System.Drawing.Size(638, 309);
             this.dataGridView.TabIndex = 3;
+            this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
             // 
             // dr_Checked
@@ -172,6 +174,7 @@
             this.dr_Type.HeaderText = "类型";
             this.dr_Type.Name = "dr_Type";
             this.dr_Type.ReadOnly = true;
+            this.dr_Type.Width = 60;
             // 
             // dr_Status
             // 
@@ -182,13 +185,17 @@
             this.dr_Status.HeaderText = "状态";
             this.dr_Status.Name = "dr_Status";
             this.dr_Status.ReadOnly = true;
+            this.dr_Status.Width = 50;
             // 
             // dr_PackageFilePath
             // 
             this.dr_PackageFilePath.DataPropertyName = "PackageFilePath";
             this.dr_PackageFilePath.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.dr_PackageFilePath.DropDownWidth = 400;
             this.dr_PackageFilePath.HeaderText = "包名";
+            this.dr_PackageFilePath.MaxDropDownItems = 10;
             this.dr_PackageFilePath.Name = "dr_PackageFilePath";
+            this.dr_PackageFilePath.Width = 190;
             // 
             // chk_Other
             // 

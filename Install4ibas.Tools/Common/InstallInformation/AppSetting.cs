@@ -164,7 +164,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
         }
         #endregion
         #region ibas模块
-        public ibasModules InstallModules;
+        public ibasModules InstallModules { get; set; }
         #endregion
         #region Licenses相关
         #endregion
@@ -173,6 +173,16 @@ namespace Install4ibas.Tools.Common.InstallInformation
         public IList<InstallInformationStep> Steps;
         #endregion
         #region 加载数据
+        /// <summary>
+        /// 模块列表先恢复默认值
+        /// 然后读取本地模块,更新列表
+        /// </summary>
+        /// <param name="folderPath"></param>
+        public void GetLocalModulesInfo(string folderPath)
+        {
+            this.LoadDefaultModules();
+            this.InstallModules.GetLocalInfo(folderPath);
+        }
         private void LoadDefaultModules()
         {
             try
