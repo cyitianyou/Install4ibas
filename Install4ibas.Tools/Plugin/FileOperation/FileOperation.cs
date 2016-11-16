@@ -12,13 +12,27 @@ namespace Install4ibas.Tools.Plugin.FileOperation
     public class FileOperation
     {
         const string WebFolderName = "Install4ibas.Tools.Resource.WebFile.";
+        /// <summary>
+        /// 复制资源文件
+        /// </summary>
+        /// <param name="Path">目标文件夹</param>
         public static void CopyResourceFiles(string Path)
         {
             var ResourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-            foreach (var ResourceName in ResourceNames)
+            foreach (var ResourceName in ResourceNames.Where(c => c.StartsWith(WebFolderName)))
             {
                 var fileStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName);
                 if (fileStream == null) continue;
+                var fileName = ResourceName.Replace(WebFolderName, "").Replace(".", @"\");
+                fileName = fileName.Substring(0, fileName.LastIndexOf(@"\")) + "." + fileName.Substring(fileName.LastIndexOf(@"\") + 1);
+                if (Path.Contains(@"\"))
+                    if (!Directory.Exists(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\")))))
+                        Directory.CreateDirectory(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\"))));
+                if (File.Exists(System.IO.Path.Combine(Path, fileName))) continue;
+                StreamWriter sw = new StreamWriter(System.IO.Path.Combine(Path, fileName));
+                fileStream.CopyTo(sw.BaseStream);
+                sw.Flush();
+                sw.Close();
             }
         }
         #region 运行批处理脚本
@@ -29,14 +43,14 @@ namespace Install4ibas.Tools.Plugin.FileOperation
             {
                 proc = new Process();
                 proc.StartInfo.FileName = filename;
-               // proc.StartInfo.Arguments = string.Format("10");//this is argument
+                // proc.StartInfo.Arguments = string.Format("10");//this is argument
                 proc.StartInfo.CreateNoWindow = false;
                 proc.Start();
                 proc.WaitForExit();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception Occurred :{0}运行失败,{1}，{2}",filename, ex.Message, ex.StackTrace.ToString());
+                Console.WriteLine("Exception Occurred :{0}运行失败,{1}，{2}", filename, ex.Message, ex.StackTrace.ToString());
             }
         }
         /// <summary>
@@ -84,7 +98,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
             return ExecuteCmd(optionalFilePaths);
         }
         #endregion
-        public static IList<ibasModule> CopyModules(string SourcePath, string InstallPath,IList<ibasModule> Modules)
+        public static IList<ibasModule> CopyModules(string SourcePath, string InstallPath, IList<ibasModule> Modules)
         {
             if (Modules == null || Modules.Count == 0) return Modules;
             try
@@ -109,7 +123,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 //    string filename = Path.GetFileName(file);
                 //    if (filename.StartsWith("ibas_4_modules_published") && filename.EndsWith("zip"))
                 //    {
-                        
+
                 //        string modulename = filename.Substring(filename.LastIndexOf("_BizSys") + 8, filename.Length - filename.LastIndexOf("_BizSys") - 12);
                 //        var module = Modules.FirstOrDefault(c => c.ModuleName == modulename);
                 //        if (module == null) continue;
