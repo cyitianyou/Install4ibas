@@ -91,6 +91,7 @@
     <Compile Include="Services\Basis\BasisInstalllService.cs" />
     <Compile Include="Common\InstallInformation\DataType.cs" />
     <Compile Include="Services\Basis\IInstallService.cs" />
+    <Compile Include="Services\Basis\Step\BasicInstallStep.cs" />
     <Compile Include="Services\Basis\Step\IInstallStep.cs" />
     <Compile Include="Common\InstallInformation\AppSetting.cs" />
     <Compile Include="Services\Basis\Step\InstallStepManager.cs" />

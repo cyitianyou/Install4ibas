@@ -6,29 +6,24 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-    class InstallStep_ExecuteBat : IInstallStep
+    class InstallStep_ExecuteBat : BasicInstallStep
     {
         #region 常量,变量
         const string STEPCODE = "ExecuteBat";
         const string STEPNAME = "执行发布脚本";
 
-        public string StepCode
+        public override string StepCode
         {
             get { return STEPCODE; }
         }
 
-        public string StepName
+        public override string StepName
         {
             get { return STEPNAME; }
         }
 
-        public Tools.Common.InstallInformation.AppSetting AppSetting
-        {
-            get;
-            set;
-        }
         #endregion
-        public bool Excute()
+         public override bool Excute()
         {
             try
             {
@@ -41,5 +36,6 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 return false;
             }
         }
+
     }
 }

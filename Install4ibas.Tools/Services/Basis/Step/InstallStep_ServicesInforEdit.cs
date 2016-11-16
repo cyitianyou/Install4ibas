@@ -8,29 +8,24 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-    class InstallStep_ServicesInforEdit : IInstallStep
+    class InstallStep_ServicesInforEdit : BasicInstallStep
     {
         #region 常量,变量
         const string STEPCODE = "ServicesInforEdit";
         const string STEPNAME = "安装ServicesInformation配置文件";
 
-        public string StepCode
+        public override string StepCode
         {
             get { return STEPCODE; }
         }
 
-        public string StepName
+        public override string StepName
         {
             get { return STEPNAME; }
         }
 
-        public Tools.Common.InstallInformation.AppSetting AppSetting
-        {
-            get;
-            set;
-        }
         #endregion
-        public bool Excute()
+         public override bool Excute()
         {
             try
             {
@@ -47,5 +42,6 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 return false;
             }
         }
+
     }
 }

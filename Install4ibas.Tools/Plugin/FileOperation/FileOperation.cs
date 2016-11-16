@@ -21,7 +21,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 if (fileStream == null) continue;
             }
         }
-
+        #region 运行批处理脚本
         public static void RunBatFile(string filename)
         {
             Process proc = null;
@@ -83,93 +83,60 @@ namespace Install4ibas.Tools.Plugin.FileOperation
             string[] optionalFilePaths = new string[] { optionalFilePath };
             return ExecuteCmd(optionalFilePaths);
         }
-        public static IList<ibasModule> LoadModules(string SourcePath)
-        {
-            IList<ibasModule> Modules = new List<ibasModule>();
-            try
-            {
-                // 得到源目录的文件列表，该里面是包含文件以及目录路径的一个数组
-                // 如果你指向copy目标文件下面的文件而不包含目录请使用下面的方法
-                // string[] fileList = Directory.GetFiles（srcPath）；
-                string[] fileList = System.IO.Directory.GetFileSystemEntries(SourcePath);
-                // 遍历所有的文件和目录
-                foreach (string file in fileList)
-                {
-                    　if(System.IO.Directory.Exists(file))
-                  　{
-                         continue;
-                     }
-                    string filename = Path.GetFileName(file);
-                    if (filename.StartsWith("ibas_4_modules_published") && filename.EndsWith("zip"))
-                    {
-                        string modulename = filename.Substring(filename.LastIndexOf("_BizSys") + 8, filename.Length - filename.LastIndexOf("_BizSys") - 12);
-                        ibasModule module = new ibasModule();
-                        module.ModuleName = modulename;
-                        module.Type = emModuleType.all;
-                        Modules.Add(module);
-                    }
-                    else if (filename.StartsWith("ibas_4_shell_published") && filename.EndsWith("zip"))
-                    {
-                         ibasModule module = new ibasModule();
-                         module.ModuleName = "shell";
-                         module.Type = emModuleType.shell;
-                         Modules.Add(module);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-            return Modules;
-        }
-
+        #endregion
         public static IList<ibasModule> CopyModules(string SourcePath, string InstallPath,IList<ibasModule> Modules)
         {
             if (Modules == null || Modules.Count == 0) return Modules;
             try
             {
-                // 检查目标目录是否以目录分割字符结束如果不是则添加
-                if (InstallPath[InstallPath.Length - 1] != System.IO.Path.DirectorySeparatorChar)
-                {
-                    InstallPath += System.IO.Path.DirectorySeparatorChar;
-                }
                 // 判断目标目录是否存在如果不存在则新建
                 if (!System.IO.Directory.Exists(InstallPath))
                 {
                     System.IO.Directory.CreateDirectory(InstallPath);
                 }
+                #region 基于文件目录
                 // 得到源目录的文件列表，该里面是包含文件以及目录路径的一个数组
                 // 如果你指向copy目标文件下面的文件而不包含目录请使用下面的方法
                 // string[] fileList = Directory.GetFiles（srcPath）；
-                string[] fileList = System.IO.Directory.GetFileSystemEntries(SourcePath);
+                //string[] fileList = System.IO.Directory.GetFileSystemEntries(SourcePath);
                 // 遍历所有的文件和目录
-                foreach (string file in fileList)
-                {
-                    if (System.IO.Directory.Exists(file))
-                    {
-                        continue;
-                    }
-                    string filename = Path.GetFileName(file);
-                    if (filename.StartsWith("ibas_4_modules_published") && filename.EndsWith("zip"))
-                    {
+                //foreach (string file in fileList)
+                //{
+                //    if (System.IO.Directory.Exists(file))
+                //    {
+                //        continue;
+                //    }
+                //    string filename = Path.GetFileName(file);
+                //    if (filename.StartsWith("ibas_4_modules_published") && filename.EndsWith("zip"))
+                //    {
                         
-                        string modulename = filename.Substring(filename.LastIndexOf("_BizSys") + 8, filename.Length - filename.LastIndexOf("_BizSys") - 12);
-                        var module = Modules.FirstOrDefault(c => c.ModuleName == modulename);
-                        if (module == null) continue;
-                        module.ModuleInstallPath = InstallPath + "\\" + filename;
-                        var packaddress = Path.Combine(InstallPath, "~packages");
-                        System.IO.File.Copy(file, packaddress, true);
-                    }
-                    else if (filename.StartsWith("ibas_4_shell_published") && filename.EndsWith("zip"))
+                //        string modulename = filename.Substring(filename.LastIndexOf("_BizSys") + 8, filename.Length - filename.LastIndexOf("_BizSys") - 12);
+                //        var module = Modules.FirstOrDefault(c => c.ModuleName == modulename);
+                //        if (module == null) continue;
+                //        module.ModuleInstallPath = InstallPath + "\\" + filename;
+                //        var packaddress = Path.Combine(InstallPath, "~packages");
+                //        System.IO.File.Copy(file, packaddress, true);
+                //    }
+                //    else if (filename.StartsWith("ibas_4_shell_published") && filename.EndsWith("zip"))
+                //    {
+                //        var module = Modules.FirstOrDefault(c => c.ModuleName == "shell");
+                //        if (module == null) continue;
+                //        module.ModuleInstallPath = InstallPath + "\\" + filename;
+                //        var packaddress=  Path.Combine(InstallPath, "~packages");
+                //        System.IO.File.Copy(file, packaddress, true);
+                //    }
+                //}
+                #endregion
+                #region 基于模块列表
+                foreach (var module in Modules.Where(c => c.Checked))
+                {
+                    if (File.Exists(Path.Combine(SourcePath, module.PackageFileName)))
                     {
-                        var module = Modules.FirstOrDefault(c => c.ModuleName == "shell");
-                        if (module == null) continue;
-                        module.ModuleInstallPath = InstallPath + "\\" + filename;
-                        var packaddress=  Path.Combine(InstallPath, "~packages");
-                        System.IO.File.Copy(file, packaddress, true);
+                        module.ModuleInstallPath = InstallPath;
+                        File.Copy(Path.Combine(SourcePath, module.PackageFileName), Path.Combine(InstallPath, module.PackageFileName));
                     }
                 }
+                #endregion
             }
             catch (Exception e)
             {

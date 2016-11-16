@@ -10,31 +10,26 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-    class InstallStep_DbCreate : IInstallStep
+    class InstallStep_DbCreate : BasicInstallStep
     {
         #region 常量,变量
         const string STEPCODE = "DbCreate";
         const string STEPNAME = "创建数据库";
 
-        public string StepCode
+        public override string StepCode
         {
             get { return STEPCODE; }
         }
 
-        public string StepName
+        public override string StepName
         {
             get { return STEPNAME; }
         }
 
-        public Tools.Common.InstallInformation.AppSetting AppSetting
-        {
-            get;
-            set;
-        }
         #endregion
         bool B1Included { get { return string.IsNullOrEmpty(this.AppSetting.B1User) ? false : true; } }
  
-        public bool Excute()
+         public override bool Excute()
         {
               var shell = this.AppSetting.InstallModules.Where(c => c.ModuleName == "shell").FirstOrDefault();
             try
@@ -286,5 +281,6 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 throw new Exception(string.Format("配置AddonConfig失败.{0}", err.Message));
             }
         }
+
     }
 }
