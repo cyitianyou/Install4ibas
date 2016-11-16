@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
-
+using BTulz.LicensesManager.Licenses;
 namespace Install4ibas.Tools.Common.InstallInformation
 {
 
@@ -167,6 +167,10 @@ namespace Install4ibas.Tools.Common.InstallInformation
         public ibasModules InstallModules;
         #endregion
         #region Licenses相关
+        /// <summary>
+        /// 当前机器机器码 BTulz.LicensesManager.Licenses.ComputerCode.GetCode();
+        /// </summary>
+        public string CmpCode { get; set; }
         #endregion
         #region 安装步骤
         [DataMember(Name = "Steps")]

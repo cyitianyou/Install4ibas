@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Install4ibas.Tools.Common.InstallInformation;
+using System;
 using System.Windows.Forms;
 
 namespace Install4ibas.UI
@@ -21,6 +22,11 @@ namespace Install4ibas.UI
                     ShellControl.setButtonsVisible(this.ButtonsVisibleStyle);
             }
         }
+        public AppSetting MyAppSetting
+        {
+            get { return this.ShellControl.installService.AppSetting; }
+        }
+
         public ShellControl ShellControl;
         public ChildControl()
         {
