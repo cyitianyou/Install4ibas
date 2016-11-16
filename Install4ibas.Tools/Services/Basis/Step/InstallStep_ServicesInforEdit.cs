@@ -32,12 +32,20 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            var dbTrans = new DbTransformer();
-            dbTrans.DBTypeSign = this.AppSetting.DatabaseType;
-            dbTrans.SetMySQLMap(new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(dbTrans.DBTypeSign));
-            dbTrans.SetDB(new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(dbTrans.MySQLMap));
-            DataTable moduleinfor = SQLExecute.RunSQLGetTable("", dbTrans);
-            return true;
+            try
+            {
+                //TODO:添加逻辑代码
+                var dbTrans = new DbTransformer();
+                dbTrans.DBTypeSign = this.AppSetting.DatabaseType;
+                dbTrans.SetMySQLMap(new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(dbTrans.DBTypeSign));
+                dbTrans.SetDB(new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(dbTrans.MySQLMap));
+                DataTable moduleinfor = SQLExecute.RunSQLGetTable("", dbTrans);
+                return true;
+            }
+            catch (Exception error)
+            {
+                return false;
+            }
         }
     }
 }

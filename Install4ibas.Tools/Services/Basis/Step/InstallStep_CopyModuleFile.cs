@@ -30,8 +30,16 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            FileOperation.CopyModules(this.AppSetting.SourcePackageDir, this.AppSetting.InstallDiraddress, this.AppSetting.InstallModules);
-            return true;
+            try
+            {
+                //TODO:添加逻辑代码
+                FileOperation.CopyModules(this.AppSetting.SourcePackageDir, this.AppSetting.InstallDiraddress, this.AppSetting.InstallModules);
+                return true;
+            }
+            catch (Exception error)
+            {
+                return false;
+            }
         }
     
     }

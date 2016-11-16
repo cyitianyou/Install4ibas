@@ -29,7 +29,15 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            throw new NotImplementedException();
+            try
+            {
+                //TODO:添加逻辑代码
+                return true;
+            }
+            catch (Exception error)
+            {
+                return false;
+            }
         }
     }
 }

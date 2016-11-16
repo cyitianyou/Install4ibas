@@ -30,8 +30,16 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public bool Excute()
         {
-            FileOperation.RunBatFile(this.AppSetting.InstallDiraddress + "deploy_ibas_web_services.bat");
-            return true;
+            try
+            {
+                //TODO:添加逻辑代码
+                FileOperation.RunBatFile(this.AppSetting.InstallDiraddress + "deploy_ibas_web_services.bat");
+                return true;
+            }
+            catch (Exception error)
+            {
+                return false;
+            }
         }
     }
 }
