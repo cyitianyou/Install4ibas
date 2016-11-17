@@ -12,8 +12,9 @@ namespace Install4ibas.UnitTest
         public void TestMethod1()
         {
             //FileOperation.CopyResourceFiles("");
-            var service = new NewInstallService();
+            //var service = new NewInstallService();
             //service.GetPresetInstallInformation();
+            FileOperation.CopyResourceFiles(@"E:\WebSite\test");
         }
     }
 }

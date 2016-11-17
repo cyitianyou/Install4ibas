@@ -45,7 +45,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
                     if (ibas_Moudule.PackageFileList.Count > 0)
                     {
                         ibas_Moudule.Checked = true;
-                        ibas_Moudule.PackageFilePath = ibas_Moudule.PackageFileList[0];
+                        ibas_Moudule.PackageFileName = ibas_Moudule.PackageFileList[0];
                     }
                 }
             }
@@ -64,7 +64,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             this.ModuleName = "";
             this.ModuleDescription = "";
             this.ModuleInstallPath = "";
-            this.PackageFilePath = "";
+            this.PackageFileName = "";
             this.PackageFileList = new MyList<string>();
             this.Type = emModuleType.all;
             this.Status = emInstallStatus.notInstalled;
@@ -103,7 +103,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
         /// 
         /// </summary>
         [DataMember(Name = "PackageFilePath", Order = 7)]
-        public string PackageFilePath { get; set; }
+        public string PackageFileName { get; set; }
         /// <summary>
         /// 
         /// </summary>
