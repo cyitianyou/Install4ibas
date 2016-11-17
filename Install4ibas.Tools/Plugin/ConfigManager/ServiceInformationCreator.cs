@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Install4ibas.Tools.Common.InstallInformation;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -36,7 +38,11 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
         {
 
         }
-
+        public AppSetting MyAppsetting
+        {
+            set;
+            get;
+        }
         public string RootAddress
         {
             set;
@@ -53,7 +59,10 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
         {
             return string.Format(@"{0}\SystemCenter\ServiceInformations.config", this.WorkFolder).Replace(@"\\", @"\");
         }
-
+        public virtual string GetWebConfigPath()
+        {
+            return string.Format(@"{0}\Web.config", this.WorkFolder).Replace(@"\\", @"\");
+        }
         protected System.Data.IDbConnection DbConnection
         {
             set;
@@ -94,7 +103,8 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
                     xmlElement = this.GetServiceElement("RegisteredServiceProviders", xmlService, xmlElement);
                     var provider = this.GetProviderNode(this.RootAddress, xmlElement);
                     xmlElement = this.GetServiceElement("RootAddress", provider);
-                    xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServicePath);
+                    //xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServicePath);
+                    xmlElement.InnerText = this.RootAddress;
                     xmlElement = this.GetServiceElement("DataServiceAddress", provider, xmlElement);
                     xmlElement.InnerText = string.Format(@"/DataService/{0}.svc", item.ServicePath);
                     xmlElement = this.GetServiceElement("ApplicationPackageAddress", provider, xmlElement);
@@ -356,6 +366,62 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
             xmlDoc.Save(string.Format(@"{0}SystemCenter\ClientBin\BSUi.BusinessSystemCenter.B1Addon.x64.exe.config", folder));
             xmlDoc.Save(string.Format(@"{0}SystemCenter\ClientBin\BSUi.BusinessSystemCenter.B1Addon.x86.exe.config", folder));
             xmlDoc.Save(string.Format(@"{0}SystemCenter\ClientBin\BSUi.BusinessSystemCenter.WinCE.exe.config", folder));
+        }
+        void CreateWebConfig(IList<ServiceInformation> serviceinfors) {
+            System.Configuration.Configuration cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/", this.MyAppsetting.SiteName);
+            //设置appsetting
+            AppSettingsSection appSetting = cfg.AppSettings;
+            appSettingHandle(appSetting, "DatabaseType", this.MyAppsetting.DatabaseType);
+            appSettingHandle(appSetting, "DataSource", this.MyAppsetting.DBServer);
+            appSettingHandle(appSetting, "InitialCatalog", this.MyAppsetting.DBName);
+            appSettingHandle(appSetting, "UserID", this.MyAppsetting.DBUser);
+            appSettingHandle(appSetting, "Password", this.MyAppsetting.DBPassword);
+            appSettingHandle(appSetting, "B1Type", this.MyAppsetting.B1Type);
+            appSettingHandle(appSetting, "B1Server", this.MyAppsetting.B1Server);
+            var group = cfg.GetSectionGroup("system.serviceModel");
+            var ServicesSection = group.Sections["services"] as System.ServiceModel.Configuration.ServicesSection;
+            foreach (var item in serviceinfors)
+            {
+                System.ServiceModel.Configuration.ServiceElement targetser = null;
+                foreach (System.ServiceModel.Configuration.ServiceElement Service in ServicesSection.Services)
+	           {
+                   if (Service.Name.Contains(item.ServiceName))
+                   {
+                       targetser = Service;
+                   } 
+	           }
+                if (targetser==null)
+                {
+                    targetser =new System.ServiceModel.Configuration.ServiceElement();
+                    targetser.Name = "BizSys." + item.ServicePath + ".Service.DataService." + item.ServiceName + "JSON";
+                    var sep =new  System.ServiceModel.Configuration.ServiceEndpointElement();
+                    sep.BehaviorConfiguration = "AjaxJSON";
+                    sep.Binding = "webHttpBinding";
+                    sep.Contract = "BORep." + item.ServiceName + ".BORepository.IBORep" + item.ServiceName + "JSON";
+                    targetser.Endpoints.Add(sep);
+                    ServicesSection.Services.Add(targetser);
+                }
+                else {
+                targetser.Endpoints.Clear();
+                targetser.Name = "BizSys." + item.ServicePath + ".Service.DataService." + item.ServiceName + "JSON";
+                var sep1 = new System.ServiceModel.Configuration.ServiceEndpointElement();
+                sep1.BehaviorConfiguration = "AjaxJSON";
+                sep1.Binding = "webHttpBinding";
+                sep1.Contract = "BORep." + item.ServiceName + ".BORepository.IBORep" + item.ServiceName + "JSON";
+                targetser.Endpoints.Add(sep1);
+                }
+            }
+            cfg.Save();
+        }
+        private void appSettingHandle(AppSettingsSection appSetting,string key,string value)
+        {
+            if (appSetting.Settings[key] != null)
+                appSetting.Settings[key].Value = value;
+            else
+            {
+                var kve = new KeyValueConfigurationElement(key, value);
+                appSetting.Settings.Add(kve);
+            }
         }
     }
 }
