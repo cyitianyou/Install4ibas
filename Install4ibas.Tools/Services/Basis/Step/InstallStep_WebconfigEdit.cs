@@ -8,8 +8,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_WebconfigEdit : BasicInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "WebconfigEdit";
+        const string STEPNAME = "编辑Webconfig";
 
         public override string StepCode
         {

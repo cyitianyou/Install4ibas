@@ -8,8 +8,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_IIsWebsiteCreate : BasicInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "IIsWebsiteCreate";
+        const string STEPNAME = "创建网站和应用程序池";
 
         public override string StepCode
         {

@@ -9,8 +9,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_CopyToolsFile : BasicInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "CopyToolsFile";
+        const string STEPNAME = "拷贝工具文件";
 
         public override string StepCode
         {
@@ -28,7 +28,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
             try
             {
                 //TODO:添加逻辑代码
-                FileOperation.CopyResourceFiles(this.AppSetting.InstallDiraddress);
+                FileOperation.CopyToolsFiles(this.AppSetting.InstallDiraddress);
                 return true;
             }
             catch (Exception error)
