@@ -13,5 +13,7 @@ namespace Install4ibas.Tools.Services.Basis
         AppSetting AppSetting { get; set; }
 
         bool Excute();
+
+        event Common.ServiceEventHandle UpdateInstallationScheduleEvent;
     }
 }

@@ -8,36 +8,40 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-    class InstallStep_ServicesInforEdit : IInstallStep
+    class InstallStep_ServicesInforEdit : BasicInstallStep
     {
         #region 常量,变量
         const string STEPCODE = "ServicesInforEdit";
         const string STEPNAME = "安装ServicesInformation配置文件";
 
-        public string StepCode
+        public override string StepCode
         {
             get { return STEPCODE; }
         }
 
-        public string StepName
+        public override string StepName
         {
             get { return STEPNAME; }
         }
 
-        public Tools.Common.InstallInformation.AppSetting AppSetting
-        {
-            get;
-            set;
-        }
         #endregion
-        public bool Excute()
+         public override bool Excute()
         {
-            var dbTrans = new DbTransformer();
-            dbTrans.DBTypeSign = this.AppSetting.DatabaseType;
-            dbTrans.SetMySQLMap(new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(dbTrans.DBTypeSign));
-            dbTrans.SetDB(new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(dbTrans.MySQLMap));
-            DataTable moduleinfor = SQLExecute.RunSQLGetTable("", dbTrans);
-            return true;
+            try
+            {
+                //TODO:添加逻辑代码
+                var dbTrans = new DbTransformer();
+                dbTrans.DBTypeSign = this.AppSetting.DatabaseType;
+                dbTrans.SetMySQLMap(new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(dbTrans.DBTypeSign));
+                dbTrans.SetDB(new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(dbTrans.MySQLMap));
+                DataTable moduleinfor = SQLExecute.RunSQLGetTable("", dbTrans);
+                return true;
+            }
+            catch (Exception error)
+            {
+                return false;
+            }
         }
+
     }
 }

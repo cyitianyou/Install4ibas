@@ -12,11 +12,17 @@ namespace Install4ibas.UI
         }
         protected override void SetButtonsVisibleStyle()
         {
-            this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.NextEnable;
+            this.ButtonsVisibleStyle = ButtonsVisibleStyle.Back | ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.NextDisable;
         }
         public override void Initialize()
         {
             this.NextEvent += LicenseAcceptControl_NextEvent;
+            this.BackEvent += LicenseAcceptControl_BackEvent;
+        }
+
+        void LicenseAcceptControl_BackEvent(object sender, EventArgs e)
+        {
+            this.ShellControl.SetCurrentControl(ControlTypes.Welcome);
         }
 
         void LicenseAcceptControl_NextEvent(object sender, EventArgs e)
@@ -46,6 +52,11 @@ namespace Install4ibas.UI
                     this.ShellControl.installService = Install4ibas.Tools.Services.ServicesFactory.New().GetService(code);
                 this.ShellControl.SetCurrentControl(ControlTypes.ModulesChoose);
             }
+        }
+
+        private void chk_Accept_CheckedChanged(object sender, EventArgs e)
+        {
+            this.ButtonsVisibleStyle = this.ButtonsVisibleStyle ^ UI.ButtonsVisibleStyle.NextDisable ^ UI.ButtonsVisibleStyle.NextEnable;
         }
     }
 }

@@ -2,11 +2,12 @@
 using Microsoft.Web.Administration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
-
+using BTulz.LicensesManager.Licenses;
 namespace Install4ibas.Tools.Common.InstallInformation
 {
 
@@ -19,7 +20,8 @@ namespace Install4ibas.Tools.Common.InstallInformation
         public AppSetting()
         {
             this.Steps = new List<InstallInformationStep>();
-            this.InstallModules = new List<ibasModule>();
+            this.InstallModules = new ibasModules();
+            this.LoadDefaultModules();
         }
 
         #endregion
@@ -42,23 +44,6 @@ namespace Install4ibas.Tools.Common.InstallInformation
         }
         #endregion
         #region 数据库相关
-
-        /// <summary>
-        /// IIS地址
-        /// </summary>
-        public string IISAddress
-        {
-            set;
-            get;
-        }
-        /// <summary>
-        /// IIS端口号
-        /// </summary>
-        public string IISPort
-        {
-            set;
-            get;
-        }
         /// <summary>
         /// 数据库类型("HANA","MSSQL""MYSQL""ORACLE""PostgreSQL")
         /// </summary>
@@ -75,7 +60,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-         /// <summary>
+        /// <summary>
         /// 数据库地址
         /// </summary>
         public string DBServer
@@ -107,7 +92,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-         /// <summary>
+        /// <summary>
         /// B1类型
         /// </summary>
         public string B1Type
@@ -115,7 +100,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-           /// <summary>
+        /// <summary>
         /// B1用户
         /// </summary>
         public string B1User
@@ -131,7 +116,7 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-         /// <summary>
+        /// <summary>
         /// B1许可证
         /// </summary>
         public string B1Server
@@ -139,8 +124,8 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-        
-            /// <summary>
+
+        /// <summary>
         /// B1语言
         /// </summary>
         public string cmbLanguage
@@ -148,8 +133,8 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
-        
-        
+
+
         #endregion
         #region IIS相关
         /// <summary>
@@ -160,17 +145,66 @@ namespace Install4ibas.Tools.Common.InstallInformation
             set;
             get;
         }
+        /// <summary>
+        /// IIS地址
+        /// </summary>
+        public string IISAddress
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// IIS端口号
+        /// </summary>
+        public string IISPort
+        {
+            set;
+            get;
+        }
         #endregion
         #region ibas模块
-        public IList<ibasModule> InstallModules;
+        public ibasModules InstallModules { get; set; }
         #endregion
         #region Licenses相关
+        /// <summary>
+        /// 当前机器机器码 BTulz.LicensesManager.Licenses.ComputerCode.GetCode();
+        /// </summary>
+        public string CmpCode { get; set; }
         #endregion
         #region 安装步骤
         [DataMember(Name = "Steps")]
         public IList<InstallInformationStep> Steps;
         #endregion
         #region 加载数据
+        /// <summary>
+        /// 模块列表先恢复默认值
+        /// 然后读取本地模块,更新列表
+        /// </summary>
+        /// <param name="folderPath"></param>
+        public void GetLocalModulesInfo(string folderPath)
+        {
+            this.LoadDefaultModules();
+            this.InstallModules.GetLocalInfo(folderPath);
+        }
+        private void LoadDefaultModules()
+        {
+            try
+            {
+                var path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "ibasStandardModules.xml");
+                if (File.Exists(path))
+                {
+                    var xml = System.Xml.XmlReader.Create(path);
+                    var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(ibasModules));
+                    var model = serializer.ReadObject(xml) as ibasModules;
+                    if (model != null)
+                        this.InstallModules = model;
+                }
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
         public void LoadSiteName()
         {
             if (String.IsNullOrEmpty(this.SiteName)) return;

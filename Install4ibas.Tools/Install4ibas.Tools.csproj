@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BTulz.LicensesManager">
+      <HintPath>Dlls\BTulz.LicensesManager.dll</HintPath>
+    </Reference>
     <Reference Include="BTulz.ModelsTransformer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dlls\BTulz.ModelsTransformer.dll</HintPath>
@@ -51,6 +54,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -62,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Common\InstallInformation\Module.cs" />
     <Compile Include="Common\Licenses\LicensesInformation.cs" />
+    <Compile Include="Plugin\ConfigManager\ServiceInformationCreator.cs" />
     <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
     <Compile Include="Plugin\DbManager\SQLExecute.cs" />
     <Compile Include="Plugin\DbManager\SQLMapFactory.cs" />
@@ -86,6 +91,7 @@
     <Compile Include="Services\Basis\BasisInstalllService.cs" />
     <Compile Include="Common\InstallInformation\DataType.cs" />
     <Compile Include="Services\Basis\IInstallService.cs" />
+    <Compile Include="Services\Basis\Step\BasicInstallStep.cs" />
     <Compile Include="Services\Basis\Step\IInstallStep.cs" />
     <Compile Include="Common\InstallInformation\AppSetting.cs" />
     <Compile Include="Services\Basis\Step\InstallStepManager.cs" />
@@ -103,9 +109,7 @@
     <Compile Include="Services\NewInstall\NewInstallService.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resource\WebFile\~packages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.dll" />
     <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.exe" />
@@ -115,7 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -126,9 +130,11 @@
     <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\config\client.config" />
     <None Include="Resource\WebFile\Tools\7zip\7zSD.sfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resource\ibasModule\ibasStandardModules.xml" />
     <Content Include="Resource\SQLMaps\SQLMaps.xml" />
     <Content Include="Resource\WebFile\Tools\7zip\Config.txt" />
     <EmbeddedResource Include="Services\License\InstallSteps.xml" />
@@ -139,7 +145,12 @@
 
 REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
 
- if exist "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" copy /y "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" ..\..\..\Install4ibas\bin\Debug</PreBuildEvent>
+</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" copy /y "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" ..\..\..\Install4ibas\bin\Debug
+
+ if exist "$(ProjectDir)Resource\ibasModule\ibasStandardModules.xml" copy /y "$(ProjectDir)Resource\ibasModule\ibasStandardModules.xml" ..\..\..\Install4ibas\bin\Debug</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

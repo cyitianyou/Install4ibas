@@ -1,5 +1,6 @@
 ﻿using Install4ibas.Tools.Common.InstallInformation;
 using Install4ibas.Tools.Services.Basis.Step;
+using Install4ibas.Tools.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace Install4ibas.Tools.Services.Basis
 {
     public abstract class BasisInstalllService : IInstallService
     {
+        public BasisInstalllService()
+        {
+            this._AppSetting = new AppSetting();
+        }
         const string SERVICECODE = "Basis";
         public virtual string ServiceCode
         {
@@ -68,7 +73,9 @@ namespace Install4ibas.Tools.Services.Basis
             try
             {
                 var installStep = this.StepManager.GetInstallStep(step.StepCode);
+                installStep.UpdateInstallationScheduleEvent += OnUpdateInstallationSchedule;
                 installStep.Excute();
+                installStep.UpdateInstallationScheduleEvent -= OnUpdateInstallationSchedule;
                 return true;
             }
             catch (Exception error)
@@ -79,15 +86,19 @@ namespace Install4ibas.Tools.Services.Basis
         protected virtual void ExecutingStepDone(InstallInformationStep step)
         {
             step.Completed = true;
-            if (this.UpdateInstallationScheduleEvent != null)
-            {
-                var args = new Common.ServiceEventArgs();
-                this.UpdateInstallationScheduleEvent.Invoke(this, args);
-            }
+            var args = new Common.ServiceEventArgs();
+            OnUpdateInstallationSchedule(this, args);
         }
 
 
         public event Common.ServiceEventHandle UpdateInstallationScheduleEvent;
+        private void OnUpdateInstallationSchedule(object sender, ServiceEventArgs args)
+        {
+            if (this.UpdateInstallationScheduleEvent != null)
+            {
+                this.UpdateInstallationScheduleEvent.Invoke(sender, args);
+            }
+        }
 
         /// <summary>
         /// 检查我的初始化状态

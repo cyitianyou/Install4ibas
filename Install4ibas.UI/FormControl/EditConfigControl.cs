@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Install4ibas.Tools.Plugin.DbManager;
+using System.IO;
 
 namespace Install4ibas.UI
 {
@@ -178,6 +179,38 @@ namespace Install4ibas.UI
         }
         #endregion
 
+        private void btn_ChooseFolder_Click(object sender, EventArgs e)
+        {
+            var fbd = new FolderBrowserDialog();
+            fbd.Description = "选择ibas网站发布路径";
+            fbd.ShowNewFolderButton = false;
+            if (!string.IsNullOrEmpty(this.txtInputfolder.Text) && Directory.Exists(this.txtInputfolder.Text))
+                fbd.SelectedPath = this.txtInputfolder.Text;
+            else
+                fbd.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                this.txtInputfolder.Text = fbd.SelectedPath;
+            }
+            fbd.Dispose();
+        }
+        public override void SaveAppSetting()
+        {
+            this.MyAppSetting.B1Password = this.txtB1Password.Text;
+            this.MyAppSetting.B1Server = this.txtB1Server.Text;
+            this.MyAppSetting.B1User = this.txtB1User.Text;
+            this.MyAppSetting.B1Type = this.cmbB1Type.Text;
+            this.MyAppSetting.cmbLanguage = this.cmbLanguage.Text;
+            this.MyAppSetting.DatabaseType = this.cmbDBType.Text;
+            this.MyAppSetting.DBName = this.cmbDBName.Text;
+            this.MyAppSetting.DBPassword = this.txtDBPassword.Text;
+            this.MyAppSetting.DBServer = this.txtDBServer.Text;
+            this.MyAppSetting.DBUser = this.txtDBUser.Text;
+            this.MyAppSetting.IISAddress = this.txtIIS.Text;
+            this.MyAppSetting.IISPort = this.txtPort.Text;
+            this.MyAppSetting.InstallDiraddress = this.txtInputfolder.Text;
+            base.SaveAppSetting();
+        }
 
     }
 }
