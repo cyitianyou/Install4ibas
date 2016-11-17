@@ -11,7 +11,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
     {
         #region 常量,变量
         const string STEPCODE = "CopyModuleFile";
-        const string STEPNAME = "复制模块安装文件";
+        const string STEPNAME = "复制模块包";
 
         public override string StepCode
         {
