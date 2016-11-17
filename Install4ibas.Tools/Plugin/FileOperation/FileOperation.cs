@@ -24,6 +24,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 var fileStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName);
                 if (fileStream == null) continue;
                 var fileName = ResourceName.Replace(WebFolderName, "").Replace(".", @"\");
+                fileName = fileName.Replace("_7zip", "7zip");//不知道为什么资源文件路径7zip嵌入时变成了_7zip。这里给它替换回来
                 fileName = fileName.Substring(0, fileName.LastIndexOf(@"\")) + "." + fileName.Substring(fileName.LastIndexOf(@"\") + 1);
                 if (fileName.Contains(@"\") && !Directory.Exists(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\")))))
                         Directory.CreateDirectory(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\"))));
