@@ -274,8 +274,8 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
                     this.DbConnection.Close();
             }
         }
-    
-       private class ServiceInformation
+
+        private class ServiceInformation
         {
             public string ServiceName
             {
@@ -367,7 +367,8 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
             xmlDoc.Save(string.Format(@"{0}SystemCenter\ClientBin\BSUi.BusinessSystemCenter.B1Addon.x86.exe.config", folder));
             xmlDoc.Save(string.Format(@"{0}SystemCenter\ClientBin\BSUi.BusinessSystemCenter.WinCE.exe.config", folder));
         }
-        void CreateWebConfig(IList<ServiceInformation> serviceinfors) {
+        void CreateWebConfig(IList<ServiceInformation> serviceinfors)
+        {
             System.Configuration.Configuration cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/", this.MyAppsetting.SiteName);
             //设置appsetting
             AppSettingsSection appSetting = cfg.AppSettings;
@@ -384,36 +385,37 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
             {
                 System.ServiceModel.Configuration.ServiceElement targetser = null;
                 foreach (System.ServiceModel.Configuration.ServiceElement Service in ServicesSection.Services)
-	           {
-                   if (Service.Name.Contains(item.ServiceName))
-                   {
-                       targetser = Service;
-                   } 
-	           }
-                if (targetser==null)
                 {
-                    targetser =new System.ServiceModel.Configuration.ServiceElement();
-                    targetser.Name = "BizSys." + item.ServicePath + ".Service.DataService." + item.ServiceName + "JSON";
-                    var sep =new  System.ServiceModel.Configuration.ServiceEndpointElement();
+                    if (Service.Name.Contains(item.ServiceName))
+                    {
+                        targetser = Service;
+                    }
+                }
+                if (targetser == null)
+                {
+                    targetser = new System.ServiceModel.Configuration.ServiceElement();
+                    targetser.Name = string.Format("BizSys.{0}.Service.DataService.{1}JSON", item.ServicePath, item.ServiceName);
+                    var sep = new System.ServiceModel.Configuration.ServiceEndpointElement();
                     sep.BehaviorConfiguration = "AjaxJSON";
                     sep.Binding = "webHttpBinding";
-                    sep.Contract = "BORep." + item.ServiceName + ".BORepository.IBORep" + item.ServiceName + "JSON";
+                    sep.Contract = string.Format("BORep.{0}.BORepository.IBORep{0}JSON", item.ServiceName);
                     targetser.Endpoints.Add(sep);
                     ServicesSection.Services.Add(targetser);
                 }
-                else {
-                targetser.Endpoints.Clear();
-                targetser.Name = "BizSys." + item.ServicePath + ".Service.DataService." + item.ServiceName + "JSON";
-                var sep1 = new System.ServiceModel.Configuration.ServiceEndpointElement();
-                sep1.BehaviorConfiguration = "AjaxJSON";
-                sep1.Binding = "webHttpBinding";
-                sep1.Contract = "BORep." + item.ServiceName + ".BORepository.IBORep" + item.ServiceName + "JSON";
-                targetser.Endpoints.Add(sep1);
+                else
+                {
+                    targetser.Endpoints.Clear();
+                    targetser.Name = string.Format("BizSys.{0}.Service.DataService.{1}JSON", item.ServicePath, item.ServiceName);
+                    var sep1 = new System.ServiceModel.Configuration.ServiceEndpointElement();
+                    sep1.BehaviorConfiguration = "AjaxJSON";
+                    sep1.Binding = "webHttpBinding";
+                    sep1.Contract = string.Format("BORep.{0}.BORepository.IBORep{0}JSON", item.ServiceName);
+                    targetser.Endpoints.Add(sep1);
                 }
             }
             cfg.Save();
         }
-        private void appSettingHandle(AppSettingsSection appSetting,string key,string value)
+        private void appSettingHandle(AppSettingsSection appSetting, string key, string value)
         {
             if (appSetting.Settings[key] != null)
                 appSetting.Settings[key].Value = value;
