@@ -102,8 +102,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd "$(TargetDir)"
-if exist "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip" (
 del /q "setup.exe"
+if exist "..\..\..\Install4ibas.Tools\Dlls\Microsoft.Web.Administration.dll" (
+copy /y "..\..\..\Install4ibas.Tools\Dlls\Microsoft.Web.Administration.dll" Microsoft.Web.Administration.dll
+) else (print "no Microsoft.Web.Administration.dll")
+if exist "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip" (
 copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7zSD.sfx" 7zSD.sfx
 copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\Config.txt" Config.txt
 "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.7z -r Install4ibas.exe *.dll SQLMaps.xml
@@ -112,7 +115,6 @@ del /q "7zSD.sfx"
 del /q "Config.txt"
 del /q "setup.7z"
 ) else (print "no packager")
-
 cd "$(TargetDir)"
 if not exist ..\..\..\Release MD ..\..\..\Release
 cd "$(TargetDir)"
