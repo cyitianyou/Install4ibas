@@ -130,6 +130,7 @@
     <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\config\client.config" />
     <None Include="Resource\WebFile\Tools\7zip\7zSD.sfx" />
   </ItemGroup>
   <ItemGroup>
