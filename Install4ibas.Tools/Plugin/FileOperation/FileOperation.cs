@@ -25,8 +25,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 if (fileStream == null) continue;
                 var fileName = ResourceName.Replace(WebFolderName, "").Replace(".", @"\");
                 fileName = fileName.Substring(0, fileName.LastIndexOf(@"\")) + "." + fileName.Substring(fileName.LastIndexOf(@"\") + 1);
-                if (Path.Contains(@"\"))
-                    if (!Directory.Exists(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\")))))
+                if (fileName.Contains(@"\") && !Directory.Exists(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\")))))
                         Directory.CreateDirectory(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\"))));
                 if (File.Exists(System.IO.Path.Combine(Path, fileName))) continue;
                 StreamWriter sw = new StreamWriter(System.IO.Path.Combine(Path, fileName));

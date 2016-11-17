@@ -109,9 +109,7 @@
     <Compile Include="Services\NewInstall\NewInstallService.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resource\WebFile\~packages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.dll" />
     <EmbeddedResource Include="Resource\WebFile\Tools\7zip\7z.exe" />
@@ -121,7 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
