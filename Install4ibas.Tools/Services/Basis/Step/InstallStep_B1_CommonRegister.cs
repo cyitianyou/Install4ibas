@@ -8,8 +8,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_B1_CommonRegister : BasicInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "B1_CommonRegister";
+        const string STEPNAME = "B1_Common库中注册";
 
         public override string StepCode
         {

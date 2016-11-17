@@ -13,10 +13,10 @@ namespace Install4ibas.Tools.Plugin.FileOperation
     {
         const string WebFolderName = "Install4ibas.Tools.Resource.WebFile.";
         /// <summary>
-        /// 复制资源文件
+        /// 复制工具文件
         /// </summary>
         /// <param name="Path">目标文件夹</param>
-        public static void CopyResourceFiles(string Path)
+        public static void CopyToolsFiles(string Path)
         {
             var ResourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
             foreach (var ResourceName in ResourceNames.Where(c => c.StartsWith(WebFolderName)))
@@ -36,6 +36,10 @@ namespace Install4ibas.Tools.Plugin.FileOperation
             }
         }
         #region 运行批处理脚本
+        /// <summary>
+        /// 运行批处理脚本
+        /// </summary>
+        /// <param name="filename">脚本FullName</param>
         public static void RunBatFile(string filename)
         {
             Process proc = null;

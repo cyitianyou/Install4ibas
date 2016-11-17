@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Install4ibas.Tools.Plugin.IISManager;
+using Microsoft.Web.Administration;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -8,8 +11,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_IIsAPPCreate : BasicInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "IIsAPPCreate";
+        const string STEPNAME = "创建应用程序";
 
         public override string StepCode
         {
@@ -27,6 +30,16 @@ namespace Install4ibas.Tools.Services.Basis.Step
             try
             {
                 //TODO:添加逻辑代码
+                var manager = IISManagerFactory.New().CreateIISManager();
+                Site site = manager.GetSite(this.AppSetting.SiteName);
+                if (site == null) throw new Exception("网站未找到");
+                foreach (var item in this.AppSetting.InstallModules
+                                                        .Where(c=>c.Checked 
+                                                            && c.Status==Tools.Common.InstallInformation.emInstallStatus.notInstalled
+                                                            && !string.IsNullOrEmpty( c.ModuleInstallPath)))
+                {
+                    manager.CreateApplication(item.ModuleName, site, string.Format("/{0}", item.ModuleName), Path.Combine(this.AppSetting.InstallDiraddress, item.ModuleName), this.AppSetting.SiteName);
+                }
                 return true;
             }
             catch (Exception error)
