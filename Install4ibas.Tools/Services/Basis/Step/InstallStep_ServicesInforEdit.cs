@@ -30,7 +30,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         {
             try
             {
-                var sqlmap = new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(dbTrans.DBTypeSign);
+                var sqlmap = new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(this.AppSetting.DatabaseType);
                 var connection = new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(sqlmap);
                 ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
                 ServiceInforC.SetDBConnection(connection);
