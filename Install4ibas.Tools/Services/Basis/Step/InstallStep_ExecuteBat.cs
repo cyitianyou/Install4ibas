@@ -23,12 +23,12 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+        public override bool Excute()
         {
             try
             {
                 //TODO:添加逻辑代码
-                FileOperation.RunBatFile(this.AppSetting.InstallDiraddress + "deploy_ibas_web_services.bat");
+                FileOperation.RunBatFile(System.IO.Path.Combine(this.AppSetting.InstallDiraddress, "deploy_ibas_web_services.bat"));
                 return true;
             }
             catch (Exception error)
