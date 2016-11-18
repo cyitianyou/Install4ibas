@@ -12,6 +12,11 @@ namespace Install4ibas.Tools.Services.Basis.Step
 {
     class InstallStep_DbCreate : BasicInstallStep
     {
+        public InstallStep_DbCreate()
+        {
+            //System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Interop.SAPbobsCOM.x86.dll"));
+            //System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Interop.SAPbouiCOM.x86.dll"));
+        }
         #region 常量,变量
         const string STEPCODE = "DbCreate";
         const string STEPNAME = "创建数据库";
@@ -28,20 +33,22 @@ namespace Install4ibas.Tools.Services.Basis.Step
 
         #endregion
         bool B1Included { get { return string.IsNullOrEmpty(this.AppSetting.B1User) ? false : true; } }
- 
-         public override bool Excute()
+
+        public override bool Excute()
         {
-              var shell = this.AppSetting.InstallModules.Where(c => c.ModuleName == "shell").FirstOrDefault();
-            try
+            var shell = this.AppSetting.InstallModules.Where(c => c.Type == emModuleType.shell).FirstOrDefault();
+            if (shell != null)
             {
-                this.ModuleToDB(shell);
-               
+                try
+                {
+                    this.ModuleToDB(shell);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}", shell.ModuleName, e.Message));
+                }
             }
-            catch (Exception e)
-            {
-                throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}",shell.ModuleName,e.Message));
-            }
-            foreach (var item in this.AppSetting.InstallModules.Where(c => c.ModuleName != "shell"))
+            foreach (var item in this.AppSetting.InstallModules.Where(c => !(c.Type == emModuleType.shell)))
             {
                 try
                 {
@@ -51,7 +58,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 {
                     throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}", item.ModuleName, e.Message));
                 }
-               
+
             }
             return true;
         }
@@ -64,7 +71,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 var dsItems = dsGetter.Get();
                 dsGetter.AutoSelected(this.B1Included, this.GetCurrentDBType(), dsItems);
                 if (dsItems == null) return;
-             
+
                 var logPath = string.Format(@"{0}Log\data_structures_{1}.txt", System.AppDomain.CurrentDomain.BaseDirectory, DateTime.Now.ToString("yyyyMMddhhmmss"));
                 if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(logPath))) System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(logPath));
 
@@ -168,7 +175,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                     }
                     logFile.Close();
                 }
-              
+
             }
             catch (Exception ex)
             {
@@ -199,13 +206,13 @@ namespace Install4ibas.Tools.Services.Basis.Step
             {
                 SAPbobsCOM.Company Company = new SAPbobsCOM.Company();
                 Company.DbServerType = (SAPbobsCOM.BoDataServerTypes)System.Enum.Parse(typeof(SAPbobsCOM.BoDataServerTypes), this.AppSetting.B1Type);
-                Company.Server = this.AppSetting.DBServer; 
+                Company.Server = this.AppSetting.DBServer;
                 Company.DbUserName = this.AppSetting.DBUser;
-                Company.DbPassword = this.AppSetting.DBPassword; 
-                Company.CompanyDB = this.AppSetting.DBName; 
-                Company.UserName = this.AppSetting.B1User; 
-                Company.Password =  this.AppSetting.B1Password;
-                Company.LicenseServer =  this.AppSetting.B1Server ;
+                Company.DbPassword = this.AppSetting.DBPassword;
+                Company.CompanyDB = this.AppSetting.DBName;
+                Company.UserName = this.AppSetting.B1User;
+                Company.Password = this.AppSetting.B1Password;
+                Company.LicenseServer = this.AppSetting.B1Server;
                 Company.language = (SAPbobsCOM.BoSuppLangs)System.Enum.Parse(typeof(SAPbobsCOM.BoSuppLangs), this.AppSetting.cmbLanguage);
 
                 int ret = Company.Connect();
@@ -232,7 +239,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
             }
 
         }
-        
+
 
     }
 }
