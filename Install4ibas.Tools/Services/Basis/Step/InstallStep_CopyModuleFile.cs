@@ -24,12 +24,12 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+        public override bool Excute()
         {
             try
             {
                 //TODO:添加逻辑代码
-                var InstallDiraddress=Path.Combine(this.AppSetting.InstallDiraddress,"~packages");
+                var InstallDiraddress = Path.Combine(this.AppSetting.InstallDiraddress, "~packages");
                 var Modules = this.AppSetting.InstallModules;
                 var SourcePath = this.AppSetting.SourcePackageDir;
                 if (!Directory.Exists(InstallDiraddress))
@@ -38,7 +38,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 {
                     if (File.Exists(Path.Combine(SourcePath, module.PackageFileName)))
                     {
-                        module.ModuleInstallPath = InstallDiraddress;
+                        module.ModuleInstallPath = Path.Combine(InstallDiraddress, module.ModuleName);
                         File.Copy(Path.Combine(SourcePath, module.PackageFileName), Path.Combine(InstallDiraddress, module.PackageFileName));
                     }
                 }
