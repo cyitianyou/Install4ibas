@@ -103,8 +103,8 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
                     xmlElement = this.GetServiceElement("RegisteredServiceProviders", xmlService, xmlElement);
                     var provider = this.GetProviderNode(this.RootAddress, xmlElement);
                     xmlElement = this.GetServiceElement("RootAddress", provider);
-                    //xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServicePath);
-                    xmlElement.InnerText = this.RootAddress;
+                    xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServicePath);
+                    
                     xmlElement = this.GetServiceElement("DataServiceAddress", provider, xmlElement);
                     xmlElement.InnerText = string.Format(@"/DataService/{0}.svc", item.ServicePath);
                     xmlElement = this.GetServiceElement("ApplicationPackageAddress", provider, xmlElement);
@@ -367,8 +367,9 @@ namespace Install4ibas.Tools.Plugin.ConfigManager
             xmlDoc.Save(string.Format(@"{0}SystemCenter\ClientBin\BSUi.BusinessSystemCenter.B1Addon.x86.exe.config", folder));
             xmlDoc.Save(string.Format(@"{0}SystemCenter\ClientBin\BSUi.BusinessSystemCenter.WinCE.exe.config", folder));
         }
-        void CreateWebConfig(IList<ServiceInformation> serviceinfors)
+       public void CreateWebConfig()
         {
+            var serviceinfors = this.GetServiceInformations();
             System.Configuration.Configuration cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/", this.MyAppsetting.SiteName);
             //设置appsetting
             AppSettingsSection appSetting = cfg.AppSettings;
