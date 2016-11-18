@@ -29,7 +29,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
             try
             {
                 //TODO:添加逻辑代码
-                var InstallDiraddress=Path.Combine(this.AppSetting.InstallDiraddress,"~package");
+                var InstallDiraddress=Path.Combine(this.AppSetting.InstallDiraddress,"~packages");
                 var Modules = this.AppSetting.InstallModules;
                 var SourcePath = this.AppSetting.SourcePackageDir;
                 if (!Directory.Exists(InstallDiraddress))

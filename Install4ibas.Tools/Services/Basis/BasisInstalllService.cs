@@ -90,7 +90,7 @@ namespace Install4ibas.Tools.Services.Basis
             step.Completed = true;
             var total = this.AppSetting.Steps.Count;
             var index = this.AppSetting.Steps.IndexOf(step);
-            if (index > 0)
+            if (index > -1)
             {
                 var args = new Common.ServiceEventArgs();
                 args.ScheduleValue = (index + 1) * 100 / total;

@@ -10,7 +10,7 @@ namespace Install4ibas.Tools.Services.Common
         }
         public ServiceEventArgs(string message, int scheduleValue = 0, Exception error = null)
         {
-            this.Message = Message;
+            this.Message = message;
             this.ScheduleValue = scheduleValue;
             this.Error = error;
         }
