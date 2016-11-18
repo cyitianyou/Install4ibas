@@ -74,6 +74,8 @@ namespace Install4ibas.Tools.Services.Basis
             {
                 var installStep = this.StepManager.GetInstallStep(step.StepCode);
                 installStep.UpdateInstallationScheduleEvent += OnUpdateInstallationSchedule;
+                var args = new Common.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
+                OnUpdateInstallationSchedule(this, args);
                 installStep.Excute();
                 installStep.UpdateInstallationScheduleEvent -= OnUpdateInstallationSchedule;
                 return true;
@@ -86,8 +88,15 @@ namespace Install4ibas.Tools.Services.Basis
         protected virtual void ExecutingStepDone(InstallInformationStep step)
         {
             step.Completed = true;
-            var args = new Common.ServiceEventArgs();
-            OnUpdateInstallationSchedule(this, args);
+            var total = this.AppSetting.Steps.Count;
+            var index = this.AppSetting.Steps.IndexOf(step);
+            if (index > 0)
+            {
+                var args = new Common.ServiceEventArgs();
+                args.ScheduleValue = (index + 1) * 100 / total;
+                args.Message=string.Format("执行步骤[{0}]完成",step.StepName);
+                OnUpdateInstallationSchedule(this, args);
+            }
         }
 
 

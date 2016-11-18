@@ -22,19 +22,22 @@ namespace Install4ibas.UI
 
         public override void Initialize()
         {
-            int step = 10;
-            for (int i = 1; i < step + 1; i++)
-            {
-                this.lab_Msg.Text = string.Format("正在执行安装步骤[{0}]", i);
-                this.progressBar.Value = 100 * i / step;
-                Application.DoEvents();
-                System.Threading.Thread.Sleep(500);
-            }
-            this.progressBar.Value = 100;
-            this.lab_Msg.Text = "安装完成，请稍候...";
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(500);
+            this.ShellControl.installService.UpdateInstallationScheduleEvent += installService_UpdateInstallationScheduleEvent;
+            this.ShellControl.installService.Excute();
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
+        }
+
+        void installService_UpdateInstallationScheduleEvent(object sender, Tools.Services.Common.ServiceEventArgs e)
+        {
+            Application.DoEvents();
+            if(e.Error!=null)
+            {
+                MessageBox.Show(e.Error.Message);
+                return;
+            }
+            if (e.ScheduleValue > 0 && e.ScheduleValue <= 100) this.progressBar.Value = e.ScheduleValue;
+            this.lab_Msg.Text = e.Message;
+            Application.DoEvents();
         }
 
     }
