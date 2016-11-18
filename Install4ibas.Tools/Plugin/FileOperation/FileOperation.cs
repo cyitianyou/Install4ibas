@@ -47,8 +47,9 @@ namespace Install4ibas.Tools.Plugin.FileOperation
             {
                 proc = new Process();
                 proc.StartInfo.FileName = filename;
+                proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(filename);
                 // proc.StartInfo.Arguments = string.Format("10");//this is argument
-                proc.StartInfo.CreateNoWindow = false;
+                proc.StartInfo.CreateNoWindow = true;
                 proc.Start();
                 proc.WaitForExit();
             }
