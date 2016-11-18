@@ -48,19 +48,20 @@ namespace Install4ibas.Tools.Services.Basis.Step
         public IEnumerable<T> GetInstances<T>()
         {
             var objects = new List<T>();
-            foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+           // var assemblys = System.AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies().Where(c => c.FullName.Contains("Install4ibas.Tools")))
             {
-                var name = assembly.ManifestModule.ToString();
-                if (!name.Contains(".Step.")) continue;
                 try
                 {
-                    foreach (var item in assembly.GetExportedTypes())
+                    foreach (var item in assembly.GetTypes())
                     {
+                        if (!item.FullName.Contains(".Step.")) continue;
                         if (!item.IsClass) continue;
                         if (item.IsInterface) continue;
                         if (item.IsImport) continue;
                         if (item.IsGenericType) continue;
-                        if (!item.IsSubclassOf(typeof(T))) continue;
+                       // if (!item.IsSubclassOf(typeof(T))) continue;
+                        if (!typeof(T).IsAssignableFrom(item)) continue;
                         try
                         {
                             T obj = (T)Activator.CreateInstance(item);

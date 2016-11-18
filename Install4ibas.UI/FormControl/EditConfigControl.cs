@@ -19,6 +19,10 @@ namespace Install4ibas.UI
             this.txtInputfolder.Text = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             this.txtIIS.Text = string.Format("http://{0}", System.Net.Dns.GetHostName());
             this.txtPort.Text = "8000";
+            this.txtB1Server.Text = "127.0.0.1:30000";
+
+            this.txtSiteName.Text = "SBO_TEST";
+
             this.LoadComboxValuesDBType();
             this.LoadComboxValuesB1Type();
             this.LoadComboxValuesLanguageType();

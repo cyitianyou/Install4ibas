@@ -53,10 +53,13 @@
       <HintPath>Dlls\Microsoft.Web.Administration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -130,7 +133,9 @@
     <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resource\config\client.config" />
+    <None Include="Resource\config\client.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resource\WebFile\Tools\7zip\7zSD.sfx" />
   </ItemGroup>
   <ItemGroup>

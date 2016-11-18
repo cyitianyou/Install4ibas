@@ -109,7 +109,7 @@ copy /y "..\..\..\Install4ibas.Tools\Dlls\Microsoft.Web.Administration.dll" Micr
 if exist "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip" (
 copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7zSD.sfx" 7zSD.sfx
 copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\Config.txt" Config.txt
-"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.7z -r Install4ibas.exe *.dll SQLMaps.xml
+"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.7z -r Install4ibas.exe *.dll SQLMaps.xml ibasStandardModules.xml
 copy /b 7zSD.sfx + config.txt + setup.7z "setup.exe"
 del /q "7zSD.sfx"
 del /q "Config.txt"

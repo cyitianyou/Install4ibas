@@ -12,6 +12,11 @@ namespace Install4ibas.Tools.Services.Basis.Step
 {
     class InstallStep_DbCreate : BasicInstallStep
     {
+        public InstallStep_DbCreate()
+        {
+            //System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Interop.SAPbobsCOM.x86.dll"));
+            //System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Interop.SAPbouiCOM.x86.dll"));
+        }
         #region 常量,变量
         const string STEPCODE = "DbCreate";
         const string STEPNAME = "创建数据库";
@@ -28,20 +33,22 @@ namespace Install4ibas.Tools.Services.Basis.Step
 
         #endregion
         bool B1Included { get { return string.IsNullOrEmpty(this.AppSetting.B1User) ? false : true; } }
- 
-         public override bool Excute()
+
+        public override bool Excute()
         {
-              var shell = this.AppSetting.InstallModules.Where(c => c.ModuleName == "shell").FirstOrDefault();
-            try
+            var shell = this.AppSetting.InstallModules.Where(c => c.Type == emModuleType.shell).FirstOrDefault();
+            if (shell != null)
             {
-                this.ModuleToDB(shell);
-               
+                try
+                {
+                    this.ModuleToDB(shell);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}", shell.ModuleName, e.Message));
+                }
             }
-            catch (Exception e)
-            {
-                throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}",shell.ModuleName,e.Message));
-            }
-            foreach (var item in this.AppSetting.InstallModules.Where(c => c.ModuleName != "shell"))
+            foreach (var item in this.AppSetting.InstallModules.Where(c => !(c.Type == emModuleType.shell)))
             {
                 try
                 {
@@ -51,7 +58,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 {
                     throw new Exception(string.Format("创建模块{0}时发生错误，错误信息：{1}", item.ModuleName, e.Message));
                 }
-               
+
             }
             return true;
         }
@@ -64,7 +71,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 var dsItems = dsGetter.Get();
                 dsGetter.AutoSelected(this.B1Included, this.GetCurrentDBType(), dsItems);
                 if (dsItems == null) return;
-             
+
                 var logPath = string.Format(@"{0}Log\data_structures_{1}.txt", System.AppDomain.CurrentDomain.BaseDirectory, DateTime.Now.ToString("yyyyMMddhhmmss"));
                 if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(logPath))) System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(logPath));
 
@@ -166,11 +173,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
                         #endregion
                         logFile.WriteLine();
                     }
-                    if ((this.GetCurrentDBType() == emDatabaseType.mssql || this.GetCurrentDBType() == emDatabaseType.hana) && !string.IsNullOrEmpty(this.AppSetting.B1User))
-                        this.CreateAddonConfig();
                     logFile.Close();
                 }
-              
+
             }
             catch (Exception ex)
             {
@@ -201,13 +206,13 @@ namespace Install4ibas.Tools.Services.Basis.Step
             {
                 SAPbobsCOM.Company Company = new SAPbobsCOM.Company();
                 Company.DbServerType = (SAPbobsCOM.BoDataServerTypes)System.Enum.Parse(typeof(SAPbobsCOM.BoDataServerTypes), this.AppSetting.B1Type);
-                Company.Server = this.AppSetting.DBServer; 
+                Company.Server = this.AppSetting.DBServer;
                 Company.DbUserName = this.AppSetting.DBUser;
-                Company.DbPassword = this.AppSetting.DBPassword; 
-                Company.CompanyDB = this.AppSetting.DBName; 
-                Company.UserName = this.AppSetting.B1User; 
-                Company.Password =  this.AppSetting.B1Password;
-                Company.LicenseServer =  this.AppSetting.B1Server ;
+                Company.DbPassword = this.AppSetting.DBPassword;
+                Company.CompanyDB = this.AppSetting.DBName;
+                Company.UserName = this.AppSetting.B1User;
+                Company.Password = this.AppSetting.B1Password;
+                Company.LicenseServer = this.AppSetting.B1Server;
                 Company.language = (SAPbobsCOM.BoSuppLangs)System.Enum.Parse(typeof(SAPbobsCOM.BoSuppLangs), this.AppSetting.cmbLanguage);
 
                 int ret = Company.Connect();
@@ -234,53 +239,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
             }
 
         }
-        private void CreateAddonConfig()
-        {
-            try
-            {
-                var sqlTrans = new SqlTransformer();
-                sqlTrans.DBTypeSign = this.AppSetting.DatabaseType;
-                var sqlMap = new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, "SBO-COMMON").GetSQLMap(sqlTrans.DBTypeSign);
-                sqlMap.DefaultDatabase = string.Empty;
-                sqlTrans.SetDB(new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, "SBO-COMMON").GetDBConnection(sqlMap));
-                var encoding = System.Text.Encoding.UTF8;
-                string sqlStr;
-                if (string.IsNullOrEmpty(this.AppSetting.IISAddress) || string.IsNullOrEmpty(this.AppSetting.IISPort))
-                    sqlStr = string.Format(@"delete from ""AVA_ADDON_CONFIG"" where ""dbName""='BSUi.BusinessSystemCenter.B1Addon.exe.config'");
-                else
-                    sqlStr = string.Format(@"delete from ""AVA_ADDON_CONFIG"" where ""dbName""='{0}.{1}.BSUi.BusinessSystemCenter.B1Addon.exe.config'",this.AppSetting.DBName ,this.AppSetting.DBServer );
-                sqlTrans.AddScriptString(sqlStr);
 
-                string AddonConfig = string.Format(@"<?xml version=""1.0"" encoding=""utf-8""?>
-<configuration>
-<appSettings>
-<!-- 开启业务仓库服务路由-->
-<add key=""BOServiceRouting"" value=""true"" />
-</appSettings>
-<system.serviceModel>
-<bindings>
-<basicHttpBinding>
-<binding name=""BasicHttpBinding"" closeTimeout=""00:59:59"" openTimeout=""00:59:59"" receiveTimeout=""00:59:59"" sendTimeout=""00:59:59"" maxBufferSize=""2147483647"" maxReceivedMessageSize=""2147483647"" textEncoding=""utf-8"" transferMode=""Buffered"">
-</binding>
-</basicHttpBinding>
-</bindings>
-<client>
-<endpoint address=""{0}:{1}/SystemCenter/DataService/SystemCenter.svc"" binding=""basicHttpBinding"" bindingConfiguration=""BasicHttpBinding"" contract=""BORep.BusinessSystemCenter.BORepository.IBORepBusinessSystemCenterService"" name=""BasicHttpBinding_BORepBusinessSystemCenter"" />
-</client>
-</system.serviceModel>
-</configuration>", this.AppSetting.IISAddress,this.AppSetting.IISPort);
-                if (string.IsNullOrEmpty(this.AppSetting.IISAddress) || string.IsNullOrEmpty(this.AppSetting.IISPort))
-                    sqlStr = string.Format(@"insert into ""AVA_ADDON_CONFIG"" values ('BSUi.BusinessSystemCenter.B1Addon.exe.config',N'{2}',GETDATE())");
-                else
-                    sqlStr = string.Format(@"insert into ""AVA_ADDON_CONFIG"" values ('{0}.{1}.BSUi.BusinessSystemCenter.B1Addon.exe.config',N'{2}',GETDATE())", this.AppSetting.DBName,this.AppSetting.DBServer, AddonConfig);
-                sqlTrans.AddScriptString(sqlStr);
-                sqlTrans.Run();
-            }
-            catch (Exception err)
-            {
-                throw new Exception(string.Format("配置AddonConfig失败.{0}", err.Message));
-            }
-        }
 
     }
 }

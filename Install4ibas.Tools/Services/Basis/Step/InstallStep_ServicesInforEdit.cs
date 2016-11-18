@@ -1,4 +1,5 @@
 ﻿using BTulz.ModelsTransformer.Transformer;
+using Install4ibas.Tools.Plugin.ConfigManager;
 using Install4ibas.Tools.Plugin.DbManager;
 using System;
 using System.Collections.Generic;
@@ -29,12 +30,14 @@ namespace Install4ibas.Tools.Services.Basis.Step
         {
             try
             {
-                //TODO:添加逻辑代码
-                var dbTrans = new DbTransformer();
-                dbTrans.DBTypeSign = this.AppSetting.DatabaseType;
-                dbTrans.SetMySQLMap(new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(dbTrans.DBTypeSign));
-                dbTrans.SetDB(new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(dbTrans.MySQLMap));
-                DataTable moduleinfor = SQLExecute.RunSQLGetTable("", dbTrans);
+                var sqlmap = new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(this.AppSetting.DatabaseType);
+                var connection = new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(sqlmap);
+                ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
+                ServiceInforC.SetDBConnection(connection);
+                ServiceInforC.MyAppsetting = this.AppSetting;
+                ServiceInforC.RootAddress = this.AppSetting.IISAddress+":"+this.AppSetting.IISPort;
+                ServiceInforC.WorkFolder = this.AppSetting.InstallDiraddress;
+                ServiceInforC.GO();
                 return true;
             }
             catch (Exception error)

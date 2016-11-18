@@ -39,10 +39,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
@@ -63,6 +66,8 @@
     <Compile Include="TestIbasModules.cs" />
     <Compile Include="UnitTest2.cs" />
     <Compile Include="UnitTest1.cs" />
+    <Compile Include="UnitTest3.cs" />
+    <Compile Include="WebConfigTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Install4ibas.Tools\Install4ibas.Tools.csproj">

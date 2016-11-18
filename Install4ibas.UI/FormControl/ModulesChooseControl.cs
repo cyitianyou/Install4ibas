@@ -80,6 +80,7 @@ namespace Install4ibas.UI
                     cell.Items.Clear();
                     cell.Items.AddRange(modules.ElementAt(i).PackageFileList.ToArray());
                 }
+                this.dataGridView.DataSource = modules;
             }
         }
         public override void SaveAppSetting()

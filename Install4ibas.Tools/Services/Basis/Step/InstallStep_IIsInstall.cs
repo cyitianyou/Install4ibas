@@ -9,8 +9,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
     class InstallStep_IIsInstall : BasicInstallStep
     {
         #region 常量,变量
-        const string STEPCODE = "";
-        const string STEPNAME = "";
+        const string STEPCODE = "IIsInstall";
+        const string STEPNAME = "安装IIS";
 
         public override string StepCode
         {
