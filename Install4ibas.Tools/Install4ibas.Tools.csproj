@@ -150,7 +150,11 @@
 
 REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
 
-</PreBuildEvent>
+cd $(ProjectDir)
+copy /y Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll ..\Install4ibas\$(OutDir)Interop.SAPbobsCOM.x86.dll
+copy /y Dlls\B1\9.0\x86\Interop.SAPbouiCOM.dll  ..\Install4ibas\$(OutDir)Interop.SAPbouiCOM.x86.dll
+copy /y Dlls\B1\9.0\x64\Interop.SAPbobsCOM.dll ..\Install4ibas\$(OutDir)Interop.SAPbobsCOM.x64.dll
+copy /y Dlls\B1\9.0\x64\Interop.SAPbouiCOM.dll  ..\Install4ibas\$(OutDir)Interop.SAPbouiCOM.x64.dll</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>if exist "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" copy /y "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" ..\..\..\Install4ibas\bin\Debug
