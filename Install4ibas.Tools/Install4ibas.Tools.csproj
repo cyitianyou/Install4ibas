@@ -46,7 +46,8 @@
     </Reference>
     <Reference Include="Interop.SAPbobsCOM">
       <HintPath>Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

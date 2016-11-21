@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-    class InstallStep_DbCreate : BasicInstallStep
+   public class InstallStep_DbCreate : BasicInstallStep
     {
         public InstallStep_DbCreate()
         {
