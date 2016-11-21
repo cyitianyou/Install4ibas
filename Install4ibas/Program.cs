@@ -30,6 +30,7 @@ namespace Install4ibas
                         BitProcess = "x86";
                     }
                     System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format(@"Interop.SAPbobsCOM.{0}.dll", BitProcess)));
+                    System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format(@"Interop.SAPbouiCOM.{0}.dll", BitProcess)));
                 }
                 catch (Exception)
                 {
