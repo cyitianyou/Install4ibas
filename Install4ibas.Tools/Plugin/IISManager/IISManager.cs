@@ -45,13 +45,14 @@ namespace Install4ibas.Tools.Plugin.IISManager
             return false;
         }
 
-        [System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.PermitOnly,
-            Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures")]
+      //  [System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.PermitOnly,
+       //     Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures")]
         public bool GetConfigurationData(string key, string namedValue = "Selection")
         {
             try
             {
-                RegistryKey pRegKey = Registry.LocalMachine.OpenSubKey(RegistryPath);
+                RegistryKey localKey = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64);
+                RegistryKey pRegKey = localKey.OpenSubKey(RegistryPath);
                 pRegKey = pRegKey.OpenSubKey(key);
                 if (pRegKey == null) return false;
                 int value = -1;
