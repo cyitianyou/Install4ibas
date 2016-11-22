@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Core\Module.cs" />
     <Compile Include="Core\LicensesInformation.cs" />
+    <Compile Include="Core\ServiceInformation.cs" />
     <Compile Include="Plugin\ConfigManager\ServiceInformationCreator.cs" />
     <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
     <Compile Include="Plugin\DbManager\SQLExecute.cs" />
