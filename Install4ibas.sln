@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas", "Install4ibas\Install4ibas.csproj", "{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas", "Install4ibas\Install4ibas.x86.csproj", "{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.UI", "Install4ibas.UI\Install4ibas.UI.csproj", "{BF2A331E-DFD1-4D0F-9C7E-DA2DEDFC5D29}"
 EndProject
