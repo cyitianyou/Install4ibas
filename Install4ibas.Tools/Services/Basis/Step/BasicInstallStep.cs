@@ -18,7 +18,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
             get { return ""; }
         }
 
-        public Tools.Common.InstallInformation.AppSetting AppSetting
+        public Tools.Core.InstallInformation.AppSetting AppSetting
         {
             get;
             set;
@@ -29,8 +29,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
             return true;
         }
 
-        public event Common.ServiceEventHandle UpdateInstallationScheduleEvent;
-        private void OnUpdateInstallationSchedule(object sender, Install4ibas.Tools.Services.Common.ServiceEventArgs args)
+        public event Core.ServiceEventHandle UpdateInstallationScheduleEvent;
+        private void OnUpdateInstallationSchedule(object sender, Install4ibas.Tools.Services.Core.ServiceEventArgs args)
         {
             if (this.UpdateInstallationScheduleEvent != null)
             {

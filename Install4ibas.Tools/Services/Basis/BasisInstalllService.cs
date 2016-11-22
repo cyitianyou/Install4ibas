@@ -1,6 +1,6 @@
-﻿using Install4ibas.Tools.Common.InstallInformation;
+﻿using Install4ibas.Tools.Core.InstallInformation;
 using Install4ibas.Tools.Services.Basis.Step;
-using Install4ibas.Tools.Services.Common;
+using Install4ibas.Tools.Services.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +74,7 @@ namespace Install4ibas.Tools.Services.Basis
             {
                 var installStep = this.StepManager.GetInstallStep(step.StepCode);
                 installStep.UpdateInstallationScheduleEvent += OnUpdateInstallationSchedule;
-                var args = new Common.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
+                var args = new Core.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
                 OnUpdateInstallationSchedule(this, args);
                 installStep.Excute();
                 installStep.UpdateInstallationScheduleEvent -= OnUpdateInstallationSchedule;
@@ -92,7 +92,7 @@ namespace Install4ibas.Tools.Services.Basis
             var index = this.AppSetting.Steps.IndexOf(step);
             if (index > -1)
             {
-                var args = new Common.ServiceEventArgs();
+                var args = new Core.ServiceEventArgs();
                 args.ScheduleValue = (index + 1) * 100 / total;
                 args.Message=string.Format("执行步骤[{0}]完成",step.StepName);
                 OnUpdateInstallationSchedule(this, args);
@@ -100,7 +100,7 @@ namespace Install4ibas.Tools.Services.Basis
         }
 
 
-        public event Common.ServiceEventHandle UpdateInstallationScheduleEvent;
+        public event Core.ServiceEventHandle UpdateInstallationScheduleEvent;
         private void OnUpdateInstallationSchedule(object sender, ServiceEventArgs args)
         {
             if (this.UpdateInstallationScheduleEvent != null)

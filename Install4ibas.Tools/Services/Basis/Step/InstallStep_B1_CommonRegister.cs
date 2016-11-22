@@ -1,5 +1,5 @@
 ﻿using BTulz.ModelsTransformer.Transformer;
-using Install4ibas.Tools.Common.InstallInformation;
+using Install4ibas.Tools.Core.InstallInformation;
 using Install4ibas.Tools.Plugin.DbManager;
 using System;
 using System.Collections.Generic;

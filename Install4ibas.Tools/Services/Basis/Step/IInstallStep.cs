@@ -1,4 +1,4 @@
-﻿using Install4ibas.Tools.Common.InstallInformation;
+﻿using Install4ibas.Tools.Core.InstallInformation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,6 @@ namespace Install4ibas.Tools.Services.Basis
 
         bool Excute();
 
-        event Common.ServiceEventHandle UpdateInstallationScheduleEvent;
+        event Core.ServiceEventHandle UpdateInstallationScheduleEvent;
     }
 }

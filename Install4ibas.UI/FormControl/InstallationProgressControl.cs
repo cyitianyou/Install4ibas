@@ -27,7 +27,7 @@ namespace Install4ibas.UI
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
         }
 
-        void installService_UpdateInstallationScheduleEvent(object sender, Tools.Services.Common.ServiceEventArgs e)
+        void installService_UpdateInstallationScheduleEvent(object sender, Tools.Services.Core.ServiceEventArgs e)
         {
             Application.DoEvents();
             if(e.Error!=null)
