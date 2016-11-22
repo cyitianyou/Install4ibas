@@ -18,25 +18,6 @@ namespace Install4ibas
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                try
-                {
-                    string BitProcess = "";
-                    //if (System.Environment.Is64BitProcess)
-                    //{
-                    //    BitProcess = ".x64";
-                    //}
-                    //else
-                    //{
-                    //    BitProcess = ".x86";
-                    //}
-                    System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format(@"Interop.SAPbobsCOM{0}.dll", BitProcess)));
-                    System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format(@"Interop.SAPbouiCOM{0}.dll", BitProcess)));
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("引用DI失败,部分功能可能无法使用");
-                }
-
                 Application.Run(new MainForm());
             }
             else
@@ -49,5 +30,7 @@ namespace Install4ibas
                 System.Diagnostics.Process.Start(startInfo);
             }
         }
+
+        
     }
 }
