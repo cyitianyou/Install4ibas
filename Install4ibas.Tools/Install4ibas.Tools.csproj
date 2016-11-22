@@ -151,16 +151,24 @@
 
 REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" copy /y "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz.ModelsTransformer.B1\bin\Debug\BTulz.*.dll" "$(ProjectDir)Dlls\"
 
-cd $(ProjectDir)
+</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+
 copy /y Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll ..\Install4ibas\$(OutDir)Interop.SAPbobsCOM.x86.dll
 copy /y Dlls\B1\9.0\x86\Interop.SAPbouiCOM.dll  ..\Install4ibas\$(OutDir)Interop.SAPbouiCOM.x86.dll
 copy /y Dlls\B1\9.0\x64\Interop.SAPbobsCOM.dll ..\Install4ibas\$(OutDir)Interop.SAPbobsCOM.x64.dll
-copy /y Dlls\B1\9.0\x64\Interop.SAPbouiCOM.dll  ..\Install4ibas\$(OutDir)Interop.SAPbouiCOM.x64.dll</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>if exist "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" copy /y "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" ..\..\..\Install4ibas\bin\Debug
+copy /y Dlls\B1\9.0\x64\Interop.SAPbouiCOM.dll  ..\Install4ibas\$(OutDir)Interop.SAPbouiCOM.x64.dll
 
- if exist "$(ProjectDir)Resource\ibasModule\ibasStandardModules.xml" copy /y "$(ProjectDir)Resource\ibasModule\ibasStandardModules.xml" ..\..\..\Install4ibas\bin\Debug</PostBuildEvent>
+copy /y Dlls\Microsoft.Web.Administration.dll  ..\Install4ibas\$(OutDir)Microsoft.Web.Administration.dll
+
+copy /y "Resource\ibasModule\ibasStandardModules.xml"  ..\Install4ibas\$(OutDir)ibasStandardModules.xml
+
+copy /y "Resource\SQLMaps\SQLMaps.xml"  ..\Install4ibas\$(OutDir)SQLMaps.xml
+
+copy /y "Resource\WebFile\Tools\7zip\7zSD.sfx"  ..\Install4ibas\$(OutDir)Install4ibas.sfx
+copy /y "Resource\WebFile\Tools\7zip\Config.txt"  ..\Install4ibas\$(OutDir)Install4ibas.config.txt</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
