@@ -118,6 +118,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 newPool.ManagedRuntimeVersion = runtimeVersion;
                 newPool.ManagedPipelineMode = mode;
                 newPool.Enable32BitAppOnWin64 = true;
+                serverManager.CommitChanges();
                 return newPool;
             }
             catch (Exception error)
@@ -136,6 +137,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 }
                 site = serverManager.Sites.Add(siteName, protocolName, string.Format("*:{0}:", port), physicsPath);
                 site.Applications[0].ApplicationPoolName = siteName;
+                serverManager.CommitChanges();
                 return site;
             }
             catch (Exception error)
@@ -177,6 +179,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 string path = "system.webServer/directoryBrowse";//the attribue path in the applictionHostConfig.config file.
                 Microsoft.Web.Administration.ConfigurationSection dbS = config.GetSection(path, string.Format("{0}{1}", site.Name, Path));
                 dbS.Attributes["enabled"].Value = true;
+                serverManager.CommitChanges();
                 return newApp;
             }
             catch (Exception error)

@@ -52,8 +52,8 @@ namespace Install4ibas.Tools.Plugin.DbManager
                 constrBuider.Password = this.DBPassword;
                 constrBuider.InitialCatalog = this.DBName;
                 constrBuider.ConnectTimeout = 600;
-                if (!string.IsNullOrEmpty(map.DefaultDatabase))
-                    constrBuider.InitialCatalog = map.DefaultDatabase;
+                //if (!string.IsNullOrEmpty(map.DefaultDatabase))
+                //    constrBuider.InitialCatalog = map.DefaultDatabase;
 
                 return new SqlConnection(constrBuider.ConnectionString);
             }
