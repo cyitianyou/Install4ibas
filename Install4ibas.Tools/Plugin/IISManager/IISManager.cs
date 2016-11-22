@@ -45,8 +45,8 @@ namespace Install4ibas.Tools.Plugin.IISManager
             return false;
         }
 
-      //  [System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.PermitOnly,
-       //     Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures")]
+        //  [System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.PermitOnly,
+        //     Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures")]
         public bool GetConfigurationData(string key, string namedValue = "Selection")
         {
             try
@@ -129,7 +129,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
         {
             try
             {
-                Site site = serverManager.Sites[siteName];
+                Site site = serverManager.Sites.FirstOrDefault(c => c.Name == siteName);
                 if (site != null)
                 {
                     serverManager.Sites.Remove(site);
