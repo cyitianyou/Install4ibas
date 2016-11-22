@@ -68,8 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\InstallInformation\Module.cs" />
-    <Compile Include="Core\Licenses\LicensesInformation.cs" />
+    <Compile Include="Core\Module.cs" />
+    <Compile Include="Core\LicensesInformation.cs" />
     <Compile Include="Plugin\ConfigManager\ServiceInformationCreator.cs" />
     <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
     <Compile Include="Plugin\DbManager\SQLExecute.cs" />
@@ -93,11 +93,11 @@
     </Compile>
     <Compile Include="Services\AppendInstall\AppendInstallService.cs" />
     <Compile Include="Services\Basis\BasisInstalllService.cs" />
-    <Compile Include="Core\InstallInformation\DataType.cs" />
+    <Compile Include="Core\DataType.cs" />
     <Compile Include="Services\Basis\IInstallService.cs" />
     <Compile Include="Services\Basis\Step\BasicInstallStep.cs" />
     <Compile Include="Services\Basis\Step\IInstallStep.cs" />
-    <Compile Include="Core\InstallInformation\AppSetting.cs" />
+    <Compile Include="Core\AppSetting.cs" />
     <Compile Include="Services\Basis\Step\InstallStepManager.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_B1_CommonRegister.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_CopyModuleFile.cs" />

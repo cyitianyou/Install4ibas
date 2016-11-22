@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Install4ibas.Tools.Core.InstallInformation;
+using Install4ibas.Tools.Core;
 using System.IO;
 
 namespace Install4ibas.UI

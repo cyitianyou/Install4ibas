@@ -1,4 +1,4 @@
-﻿using Install4ibas.Tools.Core.InstallInformation;
+﻿using Install4ibas.Tools.Core;
 using Install4ibas.Tools.Services.Basis.Step;
 using Install4ibas.Tools.Services.Core;
 using System;

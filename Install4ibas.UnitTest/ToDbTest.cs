@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Install4ibas.Tools.Core.InstallInformation;
+using Install4ibas.Tools.Core;
 
 namespace Install4ibas.UnitTest
 {

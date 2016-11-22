@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace Install4ibas.Tools.Core.InstallInformation
+namespace Install4ibas.Tools.Core
 {
     public enum emPlatform
     {

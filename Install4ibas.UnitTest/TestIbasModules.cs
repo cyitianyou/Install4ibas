@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Install4ibas.Tools.Plugin.FileOperation;
 using System.IO;
-using Install4ibas.Tools.Core.InstallInformation;
+using Install4ibas.Tools.Core;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization;

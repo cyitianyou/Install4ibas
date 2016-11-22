@@ -18,7 +18,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
             get { return ""; }
         }
 
-        public Tools.Core.InstallInformation.AppSetting AppSetting
+        public Tools.Core.AppSetting AppSetting
         {
             get;
             set;
