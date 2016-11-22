@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Install4ibas.Tools.Plugin.FileOperation
+namespace Install4ibas.Tools.Plugin
 {
     public class FileOperation
     {

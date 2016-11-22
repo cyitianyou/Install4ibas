@@ -1,7 +1,7 @@
 ﻿using BTulz.ModelsTransformer.Transformer;
 using Install4ibas.Tools.Core;
 using Install4ibas.Tools.Plugin.DbManager;
-using Install4ibas.Tools.Plugin.FileOperation;
+using Install4ibas.Tools.Plugin.DbManager;
 using ModelTransformer.Transformer;
 using System;
 using System.Collections.Generic;

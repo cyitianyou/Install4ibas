@@ -80,16 +80,16 @@ namespace Install4ibas.Tools.Plugin.IISManager
             {
                 sb.Append(item.Value).Append(";");
             }
-            FileOperation.FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "iu"));
+            FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "iu"));
             RegIISForAspnet();
         }
 
         public virtual void RegIISForAspnet()
         {
             if (CheckOSBitness.Is64BitOperatingSystem())
-                FileOperation.FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
+                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
             else
-                FileOperation.FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
+                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
         }
 
         public virtual void UninstallIIS()
@@ -102,7 +102,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
             {
                 sb.Append(item.Value).Append(";");
             }
-            FileOperation.FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "uu"));
+            FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "uu"));
         }
         public virtual ApplicationPool CreateApplicationPool(string appPoolName, string runtimeVersion = "v4.0", ManagedPipelineMode mode = ManagedPipelineMode.Integrated)
         {

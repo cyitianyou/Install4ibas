@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Install4ibas.Tools.Plugin.i18n;
 using Install4ibas.Tools.Services.Basis;
 
 namespace Install4ibas.UI

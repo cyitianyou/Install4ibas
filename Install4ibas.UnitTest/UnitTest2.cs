@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Install4ibas.Tools.Plugin.FileOperation;
+using Install4ibas.Tools.Plugin.DbManager;
 using System.IO;
 using Install4ibas.Tools.Core;
 using System.Collections.Generic;

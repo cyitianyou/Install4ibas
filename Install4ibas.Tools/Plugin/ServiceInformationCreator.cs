@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Install4ibas.Tools.Plugin.ConfigManager
+namespace Install4ibas.Tools.Plugin
 {
     class ServiceInformationCreator
     {
