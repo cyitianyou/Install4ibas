@@ -12,7 +12,7 @@ namespace Install4ibas.Tools.Services.Basis
         string ServiceCode { get; }
         AppSetting AppSetting { get; }
 
-        bool Excute();
+        bool Excute(bool isFirstRun=true);
 
         event ServiceEventHandle UpdateInstallationScheduleEvent;
     }

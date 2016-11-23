@@ -25,6 +25,13 @@ namespace Install4ibas.Tools.Core
         }
 
         #endregion
+        #region 是否成功安装
+        public bool isSuccess
+        {
+            set;
+            get;
+        }
+        #endregion
         #region 基础信息
         /// <summary>
         /// 安装包文件夹

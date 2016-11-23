@@ -40,9 +40,10 @@ namespace Install4ibas.Tools.Services.Basis
             }
         }
 
-        public bool Excute()
+        public bool Excute(bool isFirstRun = true)
         {
-            this.BeforeExcute();
+            if (isFirstRun)
+                this.BeforeExcute();
             try
             {
                 foreach (var item in this.AppSetting.Steps)
@@ -94,7 +95,7 @@ namespace Install4ibas.Tools.Services.Basis
             {
                 var args = new Core.ServiceEventArgs();
                 args.ScheduleValue = (index + 1) * 100 / total;
-                args.Message=string.Format("执行步骤[{0}]完成",step.StepName);
+                args.Message = string.Format("执行步骤[{0}]完成", step.StepName);
                 OnUpdateInstallationSchedule(this, args);
             }
         }
@@ -159,6 +160,6 @@ namespace Install4ibas.Tools.Services.Basis
             }
         }
 
-        
+
     }
 }

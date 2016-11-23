@@ -23,8 +23,24 @@ namespace Install4ibas.UI
         public override void Initialize()
         {
             this.ShellControl.installService.UpdateInstallationScheduleEvent += installService_UpdateInstallationScheduleEvent;
-            this.ShellControl.installService.Excute();
+            this.ShellControl.installService.AppSetting.isSuccess = ExcuteService();
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
+        }
+
+        bool ExcuteService()
+        {
+            try
+            {
+                this.ShellControl.installService.Excute();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                if (MessageBox.Show(string.Format("{0}\n是否重新安装?", ex.Message), "出错了!", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                    return ExcuteService();
+                else
+                    return false;
+            }
         }
 
         void installService_UpdateInstallationScheduleEvent(object sender, Tools.Services.Core.ServiceEventArgs e)
