@@ -27,22 +27,31 @@ namespace Install4ibas.Tools.Plugin
         public event ServiceEventHandle UpdateInstallationScheduleEvent;
         public void OnUpdateInstallationSchedule(object sender, ServiceEventArgs e)
         {
-            if (UpdateInstallationScheduleEvent != null)
+            if (UpdateInstallationScheduleEvent != null && e != null)
+            {
+                e.EventType = EventType.UpdateInstallationSchedule;
                 this.UpdateInstallationScheduleEvent.Invoke(sender, e);
+            }
         }
 
         public event ServiceEventHandle WriteMessageLogEvent;
         public void OnWriteMessageLog(object sender, ServiceEventArgs e)
         {
-            if (WriteMessageLogEvent != null)
+            if (WriteMessageLogEvent != null && e != null)
+            {
+                e.EventType = EventType.WriteMessageLog;
                 this.WriteMessageLogEvent.Invoke(sender, e);
+            }
         }
 
         public event ServiceEventHandle WriteFileLogEvent;
         public void OnWriteFileLog(object sender, ServiceEventArgs e)
         {
-            if (WriteFileLogEvent != null)
+            if (WriteFileLogEvent != null && e != null)
+            {
+                e.EventType = EventType.WriteFileLog;
                 this.WriteFileLogEvent.Invoke(sender, e);
+            }
         }
     }
 }

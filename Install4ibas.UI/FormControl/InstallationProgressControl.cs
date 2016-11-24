@@ -11,6 +11,8 @@ namespace Install4ibas.UI
 {
     public partial class InstallationProgressControl : ChildControl
     {
+        private delegate void BetweenThreadsDelegate(Tools.Core.ServiceEventArgs e);
+        BetweenThreadsDelegate callBack ;
         public InstallationProgressControl()
         {
             InitializeComponent();
@@ -22,10 +24,53 @@ namespace Install4ibas.UI
 
         public override void Initialize()
         {
-            this.ShellControl.installService.MessageManager.UpdateInstallationScheduleEvent += installService_UpdateInstallationScheduleEvent;
+            callBack = new BetweenThreadsDelegate(Control_Event);
+            this.ShellControl.installService.MessageManager.UpdateInstallationScheduleEvent += MessageManager_Event;
+            this.ShellControl.installService.MessageManager.WriteMessageLogEvent += MessageManager_Event;
             this.ShellControl.installService.AppSetting.isSuccess = ExcuteService();
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
         }
+        
+        void MessageManager_Event(object sender, Tools.Core.ServiceEventArgs e)
+        {
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(callBack, e);
+                    Application.DoEvents();
+                }
+                else
+                {
+                    Control_Event(e);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
+        void Control_Event(Tools.Core.ServiceEventArgs e)
+        {
+            Application.DoEvents();
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+                return;
+            }
+            if (e.EventType == Tools.Core.EventType.WriteMessageLog)
+            {
+                this.lab_Msg.Text = e.Message;
+            }
+            else if (e.EventType == Tools.Core.EventType.UpdateInstallationSchedule)
+            {
+                if (e.ScheduleValue > 0 && e.ScheduleValue <= 100) this.progressBar.Value = e.ScheduleValue;
+                this.lab_Schedule.Text = e.Message;
+            }
+            Application.DoEvents();
+        }
+
+
 
         bool ExcuteService()
         {
@@ -43,18 +88,6 @@ namespace Install4ibas.UI
             }
         }
 
-        void installService_UpdateInstallationScheduleEvent(object sender, Tools.Core.ServiceEventArgs e)
-        {
-            Application.DoEvents();
-            if(e.Error!=null)
-            {
-                MessageBox.Show(e.Error.Message);
-                return;
-            }
-            if (e.ScheduleValue > 0 && e.ScheduleValue <= 100) this.progressBar.Value = e.ScheduleValue;
-            this.lab_Msg.Text = e.Message;
-            Application.DoEvents();
-        }
 
     }
 }
