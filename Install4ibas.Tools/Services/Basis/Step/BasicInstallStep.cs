@@ -30,7 +30,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         public event Core.ServiceEventHandle UpdateInstallationScheduleEvent;
-        private void OnUpdateInstallationSchedule(object sender, Install4ibas.Tools.Services.Core.ServiceEventArgs args)
+        private void OnUpdateInstallationSchedule(object sender, Install4ibas.Tools.Core.ServiceEventArgs args)
         {
             if (this.UpdateInstallationScheduleEvent != null)
             {

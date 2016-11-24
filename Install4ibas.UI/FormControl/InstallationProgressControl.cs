@@ -43,7 +43,7 @@ namespace Install4ibas.UI
             }
         }
 
-        void installService_UpdateInstallationScheduleEvent(object sender, Tools.Services.Core.ServiceEventArgs e)
+        void installService_UpdateInstallationScheduleEvent(object sender, Tools.Core.ServiceEventArgs e)
         {
             Application.DoEvents();
             if(e.Error!=null)

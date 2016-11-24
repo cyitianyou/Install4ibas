@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Install4ibas.Tools.Services.Core
+namespace Install4ibas.Tools.Core
 {
     public class ServiceEventArgs : EventArgs
     {
