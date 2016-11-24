@@ -49,7 +49,7 @@ namespace Install4ibas.Tools.Plugin
                 proc.StartInfo.FileName = filename;
                 proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(filename);
                 // proc.StartInfo.Arguments = string.Format("10");//this is argument
-                //proc.StartInfo.CreateNoWindow = true;
+                proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.RedirectStandardError = true;
