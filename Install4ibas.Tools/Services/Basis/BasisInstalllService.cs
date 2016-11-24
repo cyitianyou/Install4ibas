@@ -9,6 +9,7 @@ namespace Install4ibas.Tools.Services.Basis
 {
     public abstract class BasisInstalllService : IInstallService
     {
+        #region 初始化及属性
         public BasisInstalllService()
         {
             this._AppSetting = new AppSetting();
@@ -39,6 +40,18 @@ namespace Install4ibas.Tools.Services.Basis
             }
         }
 
+        public Plugin.MessageManager MessageManager
+        {
+            get
+            {
+                return Plugin.MessageManager.Instance;
+            }
+            set
+            {
+                Plugin.MessageManager.Instance = value;
+            }
+        }
+        #endregion
         public bool Excute(bool isFirstRun = true)
         {
             if (isFirstRun)
@@ -73,11 +86,9 @@ namespace Install4ibas.Tools.Services.Basis
             try
             {
                 var installStep = this.StepManager.GetInstallStep(step.StepCode);
-                installStep.UpdateInstallationScheduleEvent += OnUpdateInstallationSchedule;
                 var args = new Core.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
-                OnUpdateInstallationSchedule(this, args);
+                this.MessageManager.OnUpdateInstallationSchedule(this, args);
                 installStep.Excute();
-                installStep.UpdateInstallationScheduleEvent -= OnUpdateInstallationSchedule;
                 return true;
             }
             catch (Exception error)
@@ -95,19 +106,10 @@ namespace Install4ibas.Tools.Services.Basis
                 var args = new Core.ServiceEventArgs();
                 args.ScheduleValue = (index + 1) * 100 / total;
                 args.Message = string.Format("执行步骤[{0}]完成", step.StepName);
-                OnUpdateInstallationSchedule(this, args);
+                this.MessageManager.OnUpdateInstallationSchedule(this, args);
             }
         }
 
-
-        public event Core.ServiceEventHandle UpdateInstallationScheduleEvent;
-        private void OnUpdateInstallationSchedule(object sender, ServiceEventArgs args)
-        {
-            if (this.UpdateInstallationScheduleEvent != null)
-            {
-                this.UpdateInstallationScheduleEvent.Invoke(sender, args);
-            }
-        }
 
         /// <summary>
         /// 检查我的初始化状态
@@ -158,6 +160,9 @@ namespace Install4ibas.Tools.Services.Basis
                 throw new Exception(string.Format("获取预置方案失败，{0}", error.Message), error);
             }
         }
+
+
+
 
 
     }

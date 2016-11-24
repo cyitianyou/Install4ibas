@@ -28,14 +28,14 @@ namespace Install4ibas.Tools.Services.Basis.Step
         {
             return true;
         }
-
-        public event Core.ServiceEventHandle UpdateInstallationScheduleEvent;
-        private void OnUpdateInstallationSchedule(object sender, Install4ibas.Tools.Core.ServiceEventArgs args)
+        
+        public Plugin.MessageManager MessageManager
         {
-            if (this.UpdateInstallationScheduleEvent != null)
+            get
             {
-                this.UpdateInstallationScheduleEvent.Invoke(sender, args);
+                return Plugin.MessageManager.Instance;
             }
+            
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Install4ibas.UI
 
         public override void Initialize()
         {
-            this.ShellControl.installService.UpdateInstallationScheduleEvent += installService_UpdateInstallationScheduleEvent;
+            this.ShellControl.installService.MessageManager.UpdateInstallationScheduleEvent += installService_UpdateInstallationScheduleEvent;
             this.ShellControl.installService.AppSetting.isSuccess = ExcuteService();
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
         }

@@ -1,4 +1,5 @@
 ﻿using Install4ibas.Tools.Core;
+using Install4ibas.Tools.Plugin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace Install4ibas.Tools.Services.Basis
 
         bool Excute();
 
-        event Core.ServiceEventHandle UpdateInstallationScheduleEvent;
+        MessageManager MessageManager { get; }
     }
 }
