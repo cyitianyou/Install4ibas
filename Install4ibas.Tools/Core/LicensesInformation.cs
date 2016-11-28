@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Install4ibas.Tools.Common.Licenses
+namespace Install4ibas.Tools.Core
 {
-    class LicensesInformation
+    public class LicensesInformation
     {
         public LicensesInformation()
         {

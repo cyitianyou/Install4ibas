@@ -1,7 +1,6 @@
 ﻿using BTulz.ModelsTransformer.Transformer;
-using Install4ibas.Tools.Common.InstallInformation;
+using Install4ibas.Tools.Core;
 using Install4ibas.Tools.Plugin.DbManager;
-using Install4ibas.Tools.Plugin.FileOperation;
 using ModelTransformer.Transformer;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-    class InstallStep_DbCreate : BasicInstallStep
+   public class InstallStep_DbCreate : BasicInstallStep
     {
         public InstallStep_DbCreate()
         {

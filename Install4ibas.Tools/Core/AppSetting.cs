@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
 using BTulz.LicensesManager.Licenses;
-namespace Install4ibas.Tools.Common.InstallInformation
+namespace Install4ibas.Tools.Core
 {
 
     [DataContract(Namespace = "http://ibas.club/install")]
@@ -24,6 +24,13 @@ namespace Install4ibas.Tools.Common.InstallInformation
             this.LoadDefaultModules();
         }
 
+        #endregion
+        #region 是否成功安装
+        public bool isSuccess
+        {
+            set;
+            get;
+        }
         #endregion
         #region 基础信息
         /// <summary>

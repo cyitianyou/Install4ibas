@@ -1,4 +1,4 @@
-﻿using Install4ibas.Tools.Plugin.FileOperation;
+﻿using Install4ibas.Tools.Plugin.DbManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,7 +38,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 {
                     if (File.Exists(Path.Combine(SourcePath, module.PackageFileName)))
                     {
-                        module.ModuleInstallPath = Path.Combine(InstallDiraddress, module.ModuleName);
+                        module.ModuleInstallPath = Path.Combine(this.AppSetting.InstallDiraddress, module.ModuleName);
                         File.Copy(Path.Combine(SourcePath, module.PackageFileName), Path.Combine(InstallDiraddress, module.PackageFileName));
                     }
                 }

@@ -1,5 +1,5 @@
-﻿using Install4ibas.Tools.Common.InstallInformation;
-using Install4ibas.Tools.Services.Common;
+﻿using Install4ibas.Tools.Core;
+using Install4ibas.Tools.Plugin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,8 @@ namespace Install4ibas.Tools.Services.Basis
         string ServiceCode { get; }
         AppSetting AppSetting { get; }
 
-        bool Excute();
+        bool Excute(bool isFirstRun=true);
 
-        event ServiceEventHandle UpdateInstallationScheduleEvent;
+        MessageManager MessageManager { get; set; }
     }
 }

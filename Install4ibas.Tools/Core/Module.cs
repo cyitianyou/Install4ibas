@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Linq;
 
-namespace Install4ibas.Tools.Common.InstallInformation
+namespace Install4ibas.Tools.Core
 {
 
     [CollectionDataContract(Name = "ibasModules", Namespace = "http://ibas.club/install")]

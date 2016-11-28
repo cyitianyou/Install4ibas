@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas", "Install4ibas\Install4ibas.csproj", "{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.x86", "Install4ibas\Install4ibas.x86.csproj", "{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.UI", "Install4ibas.UI\Install4ibas.UI.csproj", "{BF2A331E-DFD1-4D0F-9C7E-DA2DEDFC5D29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.Tools", "Install4ibas.Tools\Install4ibas.Tools.csproj", "{0C4E7178-9566-4898-8BCB-CBF4FF4193A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.UnitTest", "Install4ibas.UnitTest\Install4ibas.UnitTest.csproj", "{D16B5007-3A6E-41FC-9F8A-D088F31F6977}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.x64", "Install4ibas\Install4ibas.x64.csproj", "{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D16B5007-3A6E-41FC-9F8A-D088F31F6977}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D16B5007-3A6E-41FC-9F8A-D088F31F6977}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D16B5007-3A6E-41FC-9F8A-D088F31F6977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

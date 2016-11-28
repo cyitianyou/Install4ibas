@@ -4,17 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Install4ibas</RootNamespace>
-    <AssemblyName>Install4ibas</AssemblyName>
+    <RootNamespace>Install4ibas.x64</RootNamespace>
+    <AssemblyName>Install4ibas.x64</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -34,16 +34,30 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Properties\Settings.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,40 +68,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="app.config" />
-    <None Include="Properties\app.manifest" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Install4ibas.Tools\Install4ibas.Tools.csproj">
@@ -102,23 +82,15 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd "$(TargetDir)"
-del /q "setup.exe"
-if exist "..\..\..\Install4ibas.Tools\Dlls\Microsoft.Web.Administration.dll" (
-copy /y "..\..\..\Install4ibas.Tools\Dlls\Microsoft.Web.Administration.dll" Microsoft.Web.Administration.dll
-) else (print "no Microsoft.Web.Administration.dll")
 if exist "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip" (
-copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7zSD.sfx" 7zSD.sfx
-copy /y "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\Config.txt" Config.txt
-"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.7z -r Install4ibas.exe *.dll SQLMaps.xml ibasStandardModules.xml
-copy /b 7zSD.sfx + config.txt + setup.7z "setup.exe"
-del /q "7zSD.sfx"
-del /q "Config.txt"
-del /q "setup.7z"
+"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x64.7z -r Install4ibas.exe *.dll SQLMaps.xml ibasStandardModules.xml
+copy /b Install4ibas.sfx + Install4ibas.config.txt + setup.x86.7z "setup.x64.exe"
 ) else (print "no packager")
+
 cd "$(TargetDir)"
 if not exist ..\..\..\Release MD ..\..\..\Release
 cd "$(TargetDir)"
-copy /y "setup.exe" ..\..\..\Release</PostBuildEvent>
+copy /y "setup.x64.exe" ..\..\..\Release</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

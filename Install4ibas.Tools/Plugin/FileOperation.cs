@@ -1,4 +1,4 @@
-﻿using Install4ibas.Tools.Common.InstallInformation;
+﻿using Install4ibas.Tools.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Install4ibas.Tools.Plugin.FileOperation
+namespace Install4ibas.Tools.Plugin
 {
     public class FileOperation
     {
@@ -27,7 +27,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 fileName = fileName.Replace("_7zip", "7zip");//不知道为什么资源文件路径7zip嵌入时变成了_7zip。这里给它替换回来
                 fileName = fileName.Substring(0, fileName.LastIndexOf(@"\")) + "." + fileName.Substring(fileName.LastIndexOf(@"\") + 1);
                 if (fileName.Contains(@"\") && !Directory.Exists(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\")))))
-                        Directory.CreateDirectory(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\"))));
+                    Directory.CreateDirectory(System.IO.Path.Combine(Path, fileName.Substring(0, fileName.LastIndexOf(@"\"))));
                 if (File.Exists(System.IO.Path.Combine(Path, fileName))) continue;
                 StreamWriter sw = new StreamWriter(System.IO.Path.Combine(Path, fileName));
                 fileStream.CopyTo(sw.BaseStream);
@@ -50,7 +50,17 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(filename);
                 // proc.StartInfo.Arguments = string.Format("10");//this is argument
                 proc.StartInfo.CreateNoWindow = true;
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
                 proc.Start();
+                StreamReader reader = proc.StandardOutput;
+                string output=string.Empty;
+                while ((output=reader.ReadLine())!=null)
+                {
+                    MessageManager.Instance.OnWriteMessageLog(null, new ServiceEventArgs(output));
+                }
+
                 proc.WaitForExit();
             }
             catch (Exception ex)
@@ -58,6 +68,7 @@ namespace Install4ibas.Tools.Plugin.FileOperation
                 Console.WriteLine("Exception Occurred :{0}运行失败,{1}，{2}", filename, ex.Message, ex.StackTrace.ToString());
             }
         }
+
         /// <summary>
         /// 执行命令行
         /// </summary>

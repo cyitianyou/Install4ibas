@@ -1,6 +1,5 @@
-﻿using Install4ibas.Tools.Common.InstallInformation;
+﻿using Install4ibas.Tools.Core;
 using Install4ibas.Tools.Services.Basis.Step;
-using Install4ibas.Tools.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ namespace Install4ibas.Tools.Services.Basis
 {
     public abstract class BasisInstalllService : IInstallService
     {
+        #region 初始化及属性
         public BasisInstalllService()
         {
             this._AppSetting = new AppSetting();
@@ -40,9 +40,22 @@ namespace Install4ibas.Tools.Services.Basis
             }
         }
 
-        public bool Excute()
+        public Plugin.MessageManager MessageManager
         {
-            this.BeforeExcute();
+            get
+            {
+                return Plugin.MessageManager.Instance;
+            }
+            set
+            {
+                Plugin.MessageManager.Instance = value;
+            }
+        }
+        #endregion
+        public bool Excute(bool isFirstRun = true)
+        {
+            if (isFirstRun)
+                this.BeforeExcute();
             try
             {
                 foreach (var item in this.AppSetting.Steps)
@@ -64,7 +77,7 @@ namespace Install4ibas.Tools.Services.Basis
             }
             catch (Exception error)
             {
-                return false;
+                throw error;
             }
         }
 
@@ -73,11 +86,9 @@ namespace Install4ibas.Tools.Services.Basis
             try
             {
                 var installStep = this.StepManager.GetInstallStep(step.StepCode);
-                installStep.UpdateInstallationScheduleEvent += OnUpdateInstallationSchedule;
-                var args = new Common.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
-                OnUpdateInstallationSchedule(this, args);
+                var args = new Core.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
+                this.MessageManager.OnUpdateInstallationSchedule(this, args);
                 installStep.Excute();
-                installStep.UpdateInstallationScheduleEvent -= OnUpdateInstallationSchedule;
                 return true;
             }
             catch (Exception error)
@@ -92,22 +103,13 @@ namespace Install4ibas.Tools.Services.Basis
             var index = this.AppSetting.Steps.IndexOf(step);
             if (index > -1)
             {
-                var args = new Common.ServiceEventArgs();
+                var args = new Core.ServiceEventArgs();
                 args.ScheduleValue = (index + 1) * 100 / total;
-                args.Message=string.Format("执行步骤[{0}]完成",step.StepName);
-                OnUpdateInstallationSchedule(this, args);
+                args.Message = string.Format("执行步骤[{0}]完成", step.StepName);
+                this.MessageManager.OnUpdateInstallationSchedule(this, args);
             }
         }
 
-
-        public event Common.ServiceEventHandle UpdateInstallationScheduleEvent;
-        private void OnUpdateInstallationSchedule(object sender, ServiceEventArgs args)
-        {
-            if (this.UpdateInstallationScheduleEvent != null)
-            {
-                this.UpdateInstallationScheduleEvent.Invoke(sender, args);
-            }
-        }
 
         /// <summary>
         /// 检查我的初始化状态
@@ -159,6 +161,9 @@ namespace Install4ibas.Tools.Services.Basis
             }
         }
 
-        
+
+
+
+
     }
 }

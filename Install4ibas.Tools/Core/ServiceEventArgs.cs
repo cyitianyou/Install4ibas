@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Install4ibas.Tools.Services.Common
+namespace Install4ibas.Tools.Core
 {
     public class ServiceEventArgs : EventArgs
     {
@@ -18,5 +18,15 @@ namespace Install4ibas.Tools.Services.Common
         public int ScheduleValue { get; set; }
         public string Message { get; set; }
         public Exception Error { get; set; }
+
+        public EventType EventType { get; set; }
+
+    }
+
+    public enum EventType
+    {
+        UpdateInstallationSchedule,
+        WriteMessageLog,
+        WriteFileLog
     }
 }

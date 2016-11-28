@@ -28,5 +28,11 @@ namespace Install4ibas.UI
         {
             this.ButtonsVisibleStyle = UI.ButtonsVisibleStyle.Finish;
         }
+
+        public override void LoadAppSetting()
+        {
+            if (!this.ShellControl.installService.AppSetting.isSuccess)
+                this.label1.Text = "安装失败！";
+        }
     }
 }

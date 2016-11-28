@@ -46,7 +46,8 @@
     </Reference>
     <Reference Include="Interop.SAPbobsCOM">
       <HintPath>Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,24 +68,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\InstallInformation\Module.cs" />
-    <Compile Include="Common\Licenses\LicensesInformation.cs" />
-    <Compile Include="Plugin\ConfigManager\ServiceInformationCreator.cs" />
+    <Compile Include="Core\Module.cs" />
+    <Compile Include="Core\LicensesInformation.cs" />
+    <Compile Include="Core\ServiceInformation.cs" />
+    <Compile Include="Plugin\MessageManager.cs" />
+    <Compile Include="Plugin\ServiceInformationCreator.cs" />
     <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
     <Compile Include="Plugin\DbManager\SQLExecute.cs" />
     <Compile Include="Plugin\DbManager\SQLMapFactory.cs" />
-    <Compile Include="Plugin\FileOperation\DataStructureItem.cs" />
-    <Compile Include="Plugin\FileOperation\DataStructuresGetter.cs" />
-    <Compile Include="Plugin\FileOperation\FileOperation.cs" />
-    <Compile Include="Plugin\i18n\i18n.cs" />
+    <Compile Include="Plugin\DbManager\DataStructureItem.cs" />
+    <Compile Include="Plugin\DbManager\DataStructuresGetter.cs" />
+    <Compile Include="Plugin\FileOperation.cs" />
     <Compile Include="Plugin\IISManager\CheckOSBitness.cs" />
     <Compile Include="Plugin\IISManager\CheckOSInfo.cs" />
     <Compile Include="Plugin\IISManager\IIISManager.cs" />
     <Compile Include="Plugin\IISManager\IISManager.cs" />
     <Compile Include="Plugin\IISManager\IISManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\ServiceEventArgs.cs" />
-    <Compile Include="Common\ServiceEventHandle.cs" />
+    <Compile Include="Core\ServiceEventArgs.cs" />
+    <Compile Include="Core\ServiceEventHandle.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -92,11 +94,11 @@
     </Compile>
     <Compile Include="Services\AppendInstall\AppendInstallService.cs" />
     <Compile Include="Services\Basis\BasisInstalllService.cs" />
-    <Compile Include="Common\InstallInformation\DataType.cs" />
+    <Compile Include="Core\DataType.cs" />
     <Compile Include="Services\Basis\IInstallService.cs" />
     <Compile Include="Services\Basis\Step\BasicInstallStep.cs" />
     <Compile Include="Services\Basis\Step\IInstallStep.cs" />
-    <Compile Include="Common\InstallInformation\AppSetting.cs" />
+    <Compile Include="Core\AppSetting.cs" />
     <Compile Include="Services\Basis\Step\InstallStepManager.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_B1_CommonRegister.cs" />
     <Compile Include="Services\Basis\Step\InstallStep_CopyModuleFile.cs" />
@@ -133,9 +135,9 @@
     <EmbeddedResource Include="Services\AppendInstall\InstallSteps.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resource\config\client.config">
+    <EmbeddedResource Include="Resource\config\client.config">
       <SubType>Designer</SubType>
-    </None>
+    </EmbeddedResource>
     <None Include="Resource\WebFile\Tools\7zip\7zSD.sfx" />
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +155,21 @@ REM if exist "%25ibasSourceCode%25\BasisLibrary\BTulz.ModelsTransformer\02\BTulz
 </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if exist "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" copy /y "$(ProjectDir)Resource\SQLMaps\SQLMaps.xml" ..\..\..\Install4ibas\bin\Debug
+    <PostBuildEvent>cd $(ProjectDir)
 
- if exist "$(ProjectDir)Resource\ibasModule\ibasStandardModules.xml" copy /y "$(ProjectDir)Resource\ibasModule\ibasStandardModules.xml" ..\..\..\Install4ibas\bin\Debug</PostBuildEvent>
+copy /y Dlls\B1\9.0\x86\Interop.SAPbobsCOM.dll ..\Install4ibas\$(OutDir)Interop.SAPbobsCOM.x86.dll
+copy /y Dlls\B1\9.0\x86\Interop.SAPbouiCOM.dll  ..\Install4ibas\$(OutDir)Interop.SAPbouiCOM.x86.dll
+copy /y Dlls\B1\9.0\x64\Interop.SAPbobsCOM.dll ..\Install4ibas\$(OutDir)Interop.SAPbobsCOM.x64.dll
+copy /y Dlls\B1\9.0\x64\Interop.SAPbouiCOM.dll  ..\Install4ibas\$(OutDir)Interop.SAPbouiCOM.x64.dll
+
+copy /y Dlls\Microsoft.Web.Administration.dll  ..\Install4ibas\$(OutDir)Microsoft.Web.Administration.dll
+
+copy /y "Resource\ibasModule\ibasStandardModules.xml"  ..\Install4ibas\$(OutDir)ibasStandardModules.xml
+
+copy /y "Resource\SQLMaps\SQLMaps.xml"  ..\Install4ibas\$(OutDir)SQLMaps.xml
+
+copy /y "Resource\WebFile\Tools\7zip\7zSD.sfx"  ..\Install4ibas\$(OutDir)Install4ibas.sfx
+copy /y "Resource\WebFile\Tools\7zip\Config.txt"  ..\Install4ibas\$(OutDir)Install4ibas.config.txt</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -45,13 +45,14 @@ namespace Install4ibas.Tools.Plugin.IISManager
             return false;
         }
 
-        [System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.PermitOnly,
-            Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures")]
+        //  [System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.PermitOnly,
+        //     Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Notifications\OptionalFeatures")]
         public bool GetConfigurationData(string key, string namedValue = "Selection")
         {
             try
             {
-                RegistryKey pRegKey = Registry.LocalMachine.OpenSubKey(RegistryPath);
+                RegistryKey localKey = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64);
+                RegistryKey pRegKey = localKey.OpenSubKey(RegistryPath);
                 pRegKey = pRegKey.OpenSubKey(key);
                 if (pRegKey == null) return false;
                 int value = -1;
@@ -79,16 +80,16 @@ namespace Install4ibas.Tools.Plugin.IISManager
             {
                 sb.Append(item.Value).Append(";");
             }
-            FileOperation.FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "iu"));
+            FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "iu"));
             RegIISForAspnet();
         }
 
         public virtual void RegIISForAspnet()
         {
             if (CheckOSBitness.Is64BitOperatingSystem())
-                FileOperation.FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
+                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
             else
-                FileOperation.FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
+                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
         }
 
         public virtual void UninstallIIS()
@@ -101,7 +102,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
             {
                 sb.Append(item.Value).Append(";");
             }
-            FileOperation.FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "uu"));
+            FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "uu"));
         }
         public virtual ApplicationPool CreateApplicationPool(string appPoolName, string runtimeVersion = "v4.0", ManagedPipelineMode mode = ManagedPipelineMode.Integrated)
         {
@@ -117,6 +118,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 newPool.ManagedRuntimeVersion = runtimeVersion;
                 newPool.ManagedPipelineMode = mode;
                 newPool.Enable32BitAppOnWin64 = true;
+                serverManager.CommitChanges();
                 return newPool;
             }
             catch (Exception error)
@@ -128,13 +130,14 @@ namespace Install4ibas.Tools.Plugin.IISManager
         {
             try
             {
-                Site site = serverManager.Sites[siteName];
+                Site site = serverManager.Sites.FirstOrDefault(c => c.Name == siteName);
                 if (site != null)
                 {
                     serverManager.Sites.Remove(site);
                 }
                 site = serverManager.Sites.Add(siteName, protocolName, string.Format("*:{0}:", port), physicsPath);
                 site.Applications[0].ApplicationPoolName = siteName;
+                serverManager.CommitChanges();
                 return site;
             }
             catch (Exception error)
@@ -176,6 +179,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 string path = "system.webServer/directoryBrowse";//the attribue path in the applictionHostConfig.config file.
                 Microsoft.Web.Administration.ConfigurationSection dbS = config.GetSection(path, string.Format("{0}{1}", site.Name, Path));
                 dbS.Attributes["enabled"].Value = true;
+                serverManager.CommitChanges();
                 return newApp;
             }
             catch (Exception error)

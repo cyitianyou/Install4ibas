@@ -11,6 +11,8 @@ namespace Install4ibas.UI
 {
     public partial class InstallationProgressControl : ChildControl
     {
+        private delegate void BetweenThreadsDelegate(Tools.Core.ServiceEventArgs e);
+        BetweenThreadsDelegate callBack ;
         public InstallationProgressControl()
         {
             InitializeComponent();
@@ -22,23 +24,70 @@ namespace Install4ibas.UI
 
         public override void Initialize()
         {
-            this.ShellControl.installService.UpdateInstallationScheduleEvent += installService_UpdateInstallationScheduleEvent;
-            this.ShellControl.installService.Excute();
+            callBack = new BetweenThreadsDelegate(Control_Event);
+            this.ShellControl.installService.MessageManager.UpdateInstallationScheduleEvent += MessageManager_Event;
+            this.ShellControl.installService.MessageManager.WriteMessageLogEvent += MessageManager_Event;
+            this.ShellControl.installService.AppSetting.isSuccess = ExcuteService();
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
         }
-
-        void installService_UpdateInstallationScheduleEvent(object sender, Tools.Services.Common.ServiceEventArgs e)
+        
+        void MessageManager_Event(object sender, Tools.Core.ServiceEventArgs e)
+        {
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(callBack, e);
+                    Application.DoEvents();
+                }
+                else
+                {
+                    Control_Event(e);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
+        void Control_Event(Tools.Core.ServiceEventArgs e)
         {
             Application.DoEvents();
-            if(e.Error!=null)
+            if (e.Error != null)
             {
                 MessageBox.Show(e.Error.Message);
                 return;
             }
-            if (e.ScheduleValue > 0 && e.ScheduleValue <= 100) this.progressBar.Value = e.ScheduleValue;
-            this.lab_Msg.Text = e.Message;
+            if (e.EventType == Tools.Core.EventType.WriteMessageLog)
+            {
+                this.lab_Msg.Text = e.Message;
+            }
+            else if (e.EventType == Tools.Core.EventType.UpdateInstallationSchedule)
+            {
+                if (e.ScheduleValue > 0 && e.ScheduleValue <= 100) this.progressBar.Value = e.ScheduleValue;
+                this.lab_Schedule.Text = e.Message;
+            }
             Application.DoEvents();
         }
+
+
+
+        bool ExcuteService(bool isFirstRun = true)
+        {
+            try
+            {
+                this.ShellControl.installService.Excute(isFirstRun);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                if (MessageBox.Show(string.Format("{0}\n是否重新安装?", ex.Message), "出错了!", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                    return ExcuteService(false);
+                else
+                    return false;
+            }
+        }
+
 
     }
 }

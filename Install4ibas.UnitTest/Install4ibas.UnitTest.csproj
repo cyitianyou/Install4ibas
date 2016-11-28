@@ -67,6 +67,7 @@
     <Compile Include="UnitTest2.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="UnitTest3.cs" />
+    <Compile Include="ToDbTest.cs" />
     <Compile Include="WebConfigTest.cs" />
   </ItemGroup>
   <ItemGroup>

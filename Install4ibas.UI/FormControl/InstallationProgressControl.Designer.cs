@@ -30,6 +30,7 @@
         {
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.lab_Msg = new System.Windows.Forms.Label();
+            this.lab_Schedule = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // progressBar
@@ -49,10 +50,19 @@
             this.lab_Msg.Size = new System.Drawing.Size(0, 17);
             this.lab_Msg.TabIndex = 1;
             // 
+            // lab_Schedule
+            // 
+            this.lab_Schedule.AutoSize = true;
+            this.lab_Schedule.Location = new System.Drawing.Point(58, 141);
+            this.lab_Schedule.Name = "lab_Schedule";
+            this.lab_Schedule.Size = new System.Drawing.Size(0, 17);
+            this.lab_Schedule.TabIndex = 2;
+            // 
             // InstallationProgressControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lab_Schedule);
             this.Controls.Add(this.lab_Msg);
             this.Controls.Add(this.progressBar);
             this.Name = "InstallationProgressControl";
@@ -66,5 +76,6 @@
 
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label lab_Msg;
+        private System.Windows.Forms.Label lab_Schedule;
     }
 }
