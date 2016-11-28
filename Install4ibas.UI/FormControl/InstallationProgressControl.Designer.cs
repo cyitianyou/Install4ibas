@@ -46,6 +46,7 @@
             // 
             this.lab_Msg.AutoSize = true;
             this.lab_Msg.Location = new System.Drawing.Point(58, 240);
+            this.lab_Msg.MaximumSize = new System.Drawing.Size(530, 0);
             this.lab_Msg.Name = "lab_Msg";
             this.lab_Msg.Size = new System.Drawing.Size(0, 17);
             this.lab_Msg.TabIndex = 1;
