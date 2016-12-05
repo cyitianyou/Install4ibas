@@ -29,6 +29,7 @@ namespace Install4ibas
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.shellControl1 = new Install4ibas.UI.ShellControl();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@ namespace Install4ibas
             this.ClientSize = new System.Drawing.Size(710, 518);
             this.Controls.Add(this.shellControl1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
