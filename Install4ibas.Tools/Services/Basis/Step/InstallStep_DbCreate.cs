@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-   public class InstallStep_DbCreate : BasicInstallStep
+    public class InstallStep_DbCreate : BasicInstallStep
     {
         public InstallStep_DbCreate()
         {
@@ -165,7 +165,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
                                 }
                                 catch (Exception error)
                                 {
-                                    throw new Exception(string.Format("执行[{0}]脚本，错误：{1}", item, error.ToString()));
+                                    if (!item.Contains(string.Format(@"DataStructures\SQLs\SQL_SYS_mssql_Initialization.sql")))
+                                        throw new Exception(string.Format("执行[{0}]脚本，错误：{1}", item, error.ToString()));
                                 }
                             }
                         }

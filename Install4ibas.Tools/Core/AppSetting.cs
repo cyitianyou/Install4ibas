@@ -7,7 +7,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
-using BTulz.LicensesManager.Licenses;
 namespace Install4ibas.Tools.Core
 {
 

@@ -77,7 +77,7 @@ namespace Install4ibas.Tools.Services.Basis
             }
             catch (Exception error)
             {
-                return false;
+                throw error;
             }
         }
 

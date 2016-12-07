@@ -72,17 +72,17 @@ namespace Install4ibas.UI
 
 
 
-        bool ExcuteService()
+        bool ExcuteService(bool isFirstRun = true)
         {
             try
             {
-                this.ShellControl.installService.Excute();
+                this.ShellControl.installService.Excute(isFirstRun);
                 return true;
             }
             catch (Exception ex)
             {
                 if (MessageBox.Show(string.Format("{0}\n是否重新安装?", ex.Message), "出错了!", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
-                    return ExcuteService();
+                    return ExcuteService(false);
                 else
                     return false;
             }
