@@ -8,7 +8,22 @@ namespace Install4ibas.Tools.Plugin.Messages
 {
     public class FileMessageRecorder
     {
+        static FileMessageRecorder _Instance;
+        public static FileMessageRecorder Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                    _Instance = new FileMessageRecorder();
+                return _Instance;
+            }
+            set
+            {
+                _Instance = value;
+            }
+        }
         #region 初始化及基本属性
+
         public FileMessageRecorder(string folder, string fileName)
         {
             this.WorkFolder = folder;
@@ -20,7 +35,7 @@ namespace Install4ibas.Tools.Plugin.Messages
         {
 
         }
-
+        public FileMessageRecorder() { }
         string _WorkFolder;
         /// <summary>
         /// 工作目录，日志文件目录
