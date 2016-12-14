@@ -11,29 +11,6 @@ namespace Install4ibas.Tools.Plugin
 {
     class ServiceInformationCreator
     {
-        /*
-         示例：
-            <ServiceInformations xmlns="http://www.avatech.com.cn/ServiceRouting" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-              <ServiceInformation>
-                <ServiceName>BusinessPartner</ServiceName>
-                <ModuleID>ef7efd2a-d2b6-4c8e-a361-20c87db825b1</ModuleID>
-                <ServiceDescription>业务伙伴服务</ServiceDescription>
-                <RegisteredServiceProviders>
-                  <ServiceProvider>
-                    <RootAddress>http://localhost:2208</RootAddress>
-                    <DataServiceAddress>/DataService/BusinessPartner.svc</DataServiceAddress>
-                    <ApplicationPackageAddress></ApplicationPackageAddress>
-                  </ServiceProvider>
-                  <ServiceProvider>
-                    <RootAddress>http://ibas-publish.avatech.com.cn:8000/BusinessPartner</RootAddress>
-                    <DataServiceAddress>/DataService/BusinessPartner.svc</DataServiceAddress>
-                    <ApplicationPackageAddress></ApplicationPackageAddress>
-                  </ServiceProvider>
-                </RegisteredServiceProviders>
-              </ServiceInformation>
-            </ServiceInformations>
-         */
-
         public ServiceInformationCreator()
         {
 
@@ -220,7 +197,7 @@ namespace Install4ibas.Tools.Plugin
             return (System.Xml.XmlElement)node;
         }
 
-        IList<ServiceInformation> GetServiceInformations()
+      public  IList<ServiceInformation> GetServiceInformations()
         {
             try
             {

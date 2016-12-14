@@ -1,5 +1,6 @@
 ﻿using Install4ibas.Tools.Services.AppendInstall;
 using Install4ibas.Tools.Services.Basis;
+using Install4ibas.Tools.Services.License;
 using Install4ibas.Tools.Services.NewInstall;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,9 @@ namespace Install4ibas.Tools.Services
                     service = new NewInstallService();
                     break;
                 case AppendInstallService.SERVICECODE:
+                    service = new AppendInstallService();
+                    break;
+                case LicenseInstallService.SERVICECODE:
                     service = new AppendInstallService();
                     break;
                 default:
