@@ -217,6 +217,26 @@ namespace Install4ibas.Tools.Core
             Site site = IISManagerFactory.New().CreateIISManager().GetSite(this.SiteName); ;
             if (site == null) return;
             //使用Site信息对AppSetting赋值
+            this.InstallDiraddress = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+            #region 数据库相关
+        //    public string DatabaseType
+        //public emPlatform Platform
+        //public string DBServer
+        //public string DBUser
+        //public string DBPassword
+        //public string DBName
+        //public string B1Type
+        //public string B1User
+        //public string B1Password
+        //public string B1Server
+        //public string cmbLanguage
+            #endregion
+            #region IIS相关
+        //public string SiteName
+        //public string IISAddress
+        //public string IISPort
+      
+        #endregion
         }
         #endregion
     }
