@@ -22,7 +22,10 @@ namespace Install4ibas.UI
 
         void FinishControl_FinishEvent(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (MessageBox.Show("是否现在创建License?", "", MessageBoxButtons.YesNo) == DialogResult.OK)
+                this.ShellControl.SetCurrentControl(ControlTypes.LicenseCreateControl);
+            else
+                Application.Exit();
         }
         protected override void SetButtonsVisibleStyle()
         {
