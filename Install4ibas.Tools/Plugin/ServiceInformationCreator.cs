@@ -278,7 +278,7 @@ namespace Install4ibas.Tools.Plugin
         void CreateClientConfig()
         {
             var myAssembly = this.GetType().Assembly;
-            var myNamespace = this.GetType().Namespace;
+            var myNamespace = "Install4ibas.Tools.Resource";
             System.IO.Stream setStream = null;
             foreach (var item in myAssembly.GetManifestResourceNames())
             {

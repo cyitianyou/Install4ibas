@@ -213,7 +213,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 Company.UserName = this.AppSetting.B1User;
                 Company.Password = this.AppSetting.B1Password;
                 Company.LicenseServer = this.AppSetting.B1Server;
-                Company.language = (SAPbobsCOM.BoSuppLangs)System.Enum.Parse(typeof(SAPbobsCOM.BoSuppLangs), this.AppSetting.cmbLanguage);
+                SAPbobsCOM.BoSuppLangs language ;
+                if (System.Enum.TryParse<SAPbobsCOM.BoSuppLangs>(this.AppSetting.cmbLanguage, out language))
+                    Company.language = language;
 
                 int ret = Company.Connect();
                 if (ret != 0)
