@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btn_ChooseFolder = new System.Windows.Forms.Button();
             this.btn_Import = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txt_Path = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txt_SiteName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.btn_ChooseFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -62,23 +62,33 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.btn_ChooseFolder);
-            this.splitContainer2.Panel1.Controls.Add(this.btn_Import);
-            this.splitContainer2.Panel1.Controls.Add(this.textBox4);
-            this.splitContainer2.Panel1.Controls.Add(this.label2);
-            this.splitContainer2.Panel1.Controls.Add(this.textBox3);
-            this.splitContainer2.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.btn_ChooseFolder);
+            this.splitContainer1.Panel1.Controls.Add(this.btn_Import);
+            this.splitContainer1.Panel1.Controls.Add(this.txt_Path);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.splitContainer1.Panel1.Controls.Add(this.txt_SiteName);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(650, 440);
             this.splitContainer1.TabIndex = 2;
             // 
+            // btn_ChooseFolder
+            // 
+            this.btn_ChooseFolder.Font = new System.Drawing.Font("宋体", 4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btn_ChooseFolder.Location = new System.Drawing.Point(500, 13);
+            this.btn_ChooseFolder.Name = "btn_ChooseFolder";
+            this.btn_ChooseFolder.Size = new System.Drawing.Size(25, 28);
+            this.btn_ChooseFolder.TabIndex = 8;
+            this.btn_ChooseFolder.Text = "...";
+            this.btn_ChooseFolder.UseVisualStyleBackColor = true;
+            this.btn_ChooseFolder.Click += new System.EventHandler(this.btn_ChooseFolder_Click);
+            // 
             // btn_Import
             // 
-            this.btn_Import.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Import.Location = new System.Drawing.Point(540, 13);
+            this.btn_Import.Location = new System.Drawing.Point(542, 13);
             this.btn_Import.Name = "btn_Import";
             this.btn_Import.Size = new System.Drawing.Size(75, 28);
             this.btn_Import.TabIndex = 7;
@@ -86,30 +96,28 @@
             this.btn_Import.UseVisualStyleBackColor = true;
             this.btn_Import.Click += new System.EventHandler(this.btn_Import_Click);
             // 
-            // textBox4
+            // txt_Path
             // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.Location = new System.Drawing.Point(356, 13);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(138, 27);
-            this.textBox4.TabIndex = 5;
+            this.txt_Path.Location = new System.Drawing.Point(356, 13);
+            this.txt_Path.Name = "txt_Path";
+            this.txt_Path.Size = new System.Drawing.Size(138, 27);
+            this.txt_Path.TabIndex = 5;
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(308, 16);
+            this.label2.Location = new System.Drawing.Point(299, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "路径:";
             // 
-            // textBox3
+            // txt_SiteName
             // 
-            this.textBox3.Location = new System.Drawing.Point(69, 14);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(179, 27);
-            this.textBox3.TabIndex = 1;
+            this.txt_SiteName.Location = new System.Drawing.Point(69, 14);
+            this.txt_SiteName.Name = "txt_SiteName";
+            this.txt_SiteName.Size = new System.Drawing.Size(179, 27);
+            this.txt_SiteName.TabIndex = 1;
             // 
             // label1
             // 
@@ -166,7 +174,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(26, 386);
+            this.groupBox2.Size = new System.Drawing.Size(96, 100);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "许可信息";
@@ -180,19 +188,8 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(20, 360);
+            this.textBox2.Size = new System.Drawing.Size(90, 74);
             this.textBox2.TabIndex = 1;
-            // 
-            // btn_ChooseFolder
-            // 
-            this.btn_ChooseFolder.Font = new System.Drawing.Font("宋体", 4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.btn_ChooseFolder.Location = new System.Drawing.Point(500, 13);
-            this.btn_ChooseFolder.Name = "btn_ChooseFolder";
-            this.btn_ChooseFolder.Size = new System.Drawing.Size(25, 28);
-            this.btn_ChooseFolder.TabIndex = 8;
-            this.btn_ChooseFolder.Text = "...";
-            this.btn_ChooseFolder.UseVisualStyleBackColor = true;
-            this.btn_ChooseFolder.Click += new System.EventHandler(this.btn_ChooseFolder_Click);
             // 
             // LicenseCreateControl
             // 
@@ -201,9 +198,9 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "LicenseCreateControl";
             this.Size = new System.Drawing.Size(650, 440);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
-            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -222,9 +219,9 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btn_Import;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txt_Path;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txt_SiteName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.GroupBox groupBox1;
