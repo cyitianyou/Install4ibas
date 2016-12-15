@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Install4ibas.Tools.Plugin
 {
-    class ServiceInformationCreator
+    public class ServiceInformationCreator
     {
         public ServiceInformationCreator()
         {

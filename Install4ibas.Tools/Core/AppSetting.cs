@@ -2,6 +2,7 @@
 using Microsoft.Web.Administration;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -216,27 +217,44 @@ namespace Install4ibas.Tools.Core
             if (String.IsNullOrEmpty(this.SiteName)) return;
             Site site = IISManagerFactory.New().CreateIISManager().GetSite(this.SiteName); ;
             if (site == null) return;
+            System.Configuration.Configuration cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/", this.SiteName);
+            //设置appsetting
+            AppSettingsSection appSetting = cfg.AppSettings;
             //使用Site信息对AppSetting赋值
-            this.InstallDiraddress = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
             #region 数据库相关
-        //    public string DatabaseType
-        //public emPlatform Platform
-        //public string DBServer
-        //public string DBUser
-        //public string DBPassword
-        //public string DBName
-        //public string B1Type
-        //public string B1User
-        //public string B1Password
-        //public string B1Server
-        //public string cmbLanguage
+             //public emPlatform Platform
+             //public string B1User
+            //public string B1Password
+            this.DatabaseType = GetValue(appSetting, "DatabaseType");
+            this.DBServer = GetValue(appSetting, "DataSource");
+            this.DBName = GetValue(appSetting, "InitialCatalog");
+            this.DBUser = GetValue(appSetting, "UserID");
+            this.DBPassword = GetValue(appSetting, "Password");
+            this.B1Type = GetValue(appSetting, "B1Type");
+            this.B1Server = GetValue(appSetting, "B1Server");
+            this.cmbLanguage = SAPbobsCOM.BoSuppLangs.ln_Chinese.ToString();
             #endregion
             #region IIS相关
-        //public string SiteName
-        //public string IISAddress
-        //public string IISPort
-      
+            this.InstallDiraddress = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+            if (site.Bindings.Count > 0)
+            {
+                var binding = site.Bindings[0];
+                var endPoint = binding.EndPoint;
+                //public string IISAddress
+                this.IISAddress = endPoint.Address.ToString();
+                //public string IISPort
+                this.IISAddress = endPoint.Port.ToString();
+            }
+            
         #endregion
+        }
+
+        private string GetValue(AppSettingsSection appSetting, string key)
+        {
+            if (appSetting.Settings[key] != null)
+                return appSetting.Settings[key].Value;
+            else
+                return "";
         }
         #endregion
     }

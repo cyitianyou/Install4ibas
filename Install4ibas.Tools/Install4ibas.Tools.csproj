@@ -71,6 +71,7 @@
     <Compile Include="Plugin\MessageManager.cs" />
     <Compile Include="Plugin\Messages\FileMessageRecorder.cs" />
     <Compile Include="Plugin\Messages\Message.cs" />
+    <Compile Include="Plugin\Serializer.cs" />
     <Compile Include="Plugin\ServiceInformationCreator.cs" />
     <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
     <Compile Include="Plugin\DbManager\SQLExecute.cs" />

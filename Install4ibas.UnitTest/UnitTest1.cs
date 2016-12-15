@@ -16,6 +16,7 @@ namespace Install4ibas.UnitTest
         {
             Site site = IISManagerFactory.New().CreateIISManager().GetSite("SBO_TEST"); ;
             var path = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+            var binding = site.Bindings[0];
         }
     }
 }
