@@ -1,4 +1,6 @@
-﻿using Install4ibas.Tools.Plugin.IISManager;
+﻿using Install4ibas.Tools.Plugin;
+using Install4ibas.Tools.Plugin.DbManager;
+using Install4ibas.Tools.Plugin.IISManager;
 using Microsoft.Web.Administration;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,9 @@ namespace Install4ibas.Tools.Core
         {
             this.Steps = new List<InstallInformationStep>();
             this.InstallModules = new ibasModules();
+            this.Licenses = new LicensesInformation();
             this.LoadDefaultModules();
+            
         }
 
         #endregion
@@ -176,7 +180,7 @@ namespace Install4ibas.Tools.Core
         /// <summary>
         /// 当前机器机器码 BTulz.LicensesManager.Licenses.ComputerCode.GetCode();
         /// </summary>
-        public string CmpCode { get; set; }
+        public LicensesInformation Licenses { get; set; }
         #endregion
         #region 安装步骤
         [DataMember(Name = "Steps")]
@@ -247,6 +251,30 @@ namespace Install4ibas.Tools.Core
             }
             
         #endregion
+            #region Licences相关
+            var sqlmap = new SQLMapFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetSQLMap(this.DatabaseType);
+            var connection = new dbConnectionFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetDBConnection(sqlmap);
+            ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
+            ServiceInforC.SetDBConnection(connection);
+            ServiceInforC.MyAppsetting = this;
+            ServiceInforC.RootAddress = this.IISAddress + ":" + this.IISPort;
+            ServiceInforC.WorkFolder = this.InstallDiraddress;
+            var list = ServiceInforC.GetServiceInformations();
+
+            Licenses.Company = "公司需手动填写";
+            Licenses.Contacts = "联系人需手动填写";
+            Licenses.eMail = "邮箱需手动填写";
+            Licenses.ExpirationDate = new DateTime(2099, 12, 31);
+            Licenses.LicensedComputerCodes = new string[] { ComputerCode.GetCode() };
+            Licenses.LicensedDataBases = new string[] { this.DBName };
+            Licenses.UserCount = 50;
+            var ModuleList = new List<string>();
+            foreach (var item in list)
+            {
+                ModuleList.Add(string.Format("{0}|{1}", item.ModuleID, item.ServiceDescription));
+            }
+            Licenses.LicensedModules = ModuleList.ToArray();
+            #endregion
         }
 
         private string GetValue(AppSettingsSection appSetting, string key)
