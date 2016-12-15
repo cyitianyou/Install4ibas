@@ -5,6 +5,7 @@ using System.IO;
 using Install4ibas.Tools.Plugin;
 using Install4ibas.Tools.Plugin.IISManager;
 using Microsoft.Web.Administration;
+using Install4ibas.Tools.Core;
 
 namespace Install4ibas.UnitTest
 {
@@ -14,9 +15,10 @@ namespace Install4ibas.UnitTest
         [TestMethod]
         public void TestMethod1()
         {
-            Site site = IISManagerFactory.New().CreateIISManager().GetSite("SBO_TEST"); ;
-            var path = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
-            var binding = site.Bindings[0];
+            AppSetting appSetting = new AppSetting();
+            appSetting.SiteName = "SBO_TEST";
+            appSetting.LoadSiteName();
+            var str = appSetting.Licenses.ToString();
         }
     }
 }

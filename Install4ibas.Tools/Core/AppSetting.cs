@@ -261,9 +261,9 @@ namespace Install4ibas.Tools.Core
             ServiceInforC.WorkFolder = this.InstallDiraddress;
             var list = ServiceInforC.GetServiceInformations();
 
-            Licenses.Company = "公司需手动填写";
-            Licenses.Contacts = "联系人需手动填写";
-            Licenses.eMail = "邮箱需手动填写";
+            Licenses.Company = "需手动填写";
+            Licenses.Contacts = "需手动填写";
+            Licenses.eMail = "需手动填写";
             Licenses.ExpirationDate = new DateTime(2099, 12, 31);
             Licenses.LicensedComputerCodes = new string[] { ComputerCode.GetCode() };
             Licenses.LicensedDataBases = new string[] { this.DBName };

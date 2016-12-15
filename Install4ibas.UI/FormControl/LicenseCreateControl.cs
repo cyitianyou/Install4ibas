@@ -22,9 +22,15 @@ namespace Install4ibas.UI
             this.ButtonsVisibleStyle = ButtonsVisibleStyle.Finish;
         }
 
-        private void splitContainer1_SizeChanged(object sender, EventArgs e)
+        private void btn_ChooseFolder_Click(object sender, EventArgs e)
         {
-            this.splitContainer1.SplitterDistance = this.splitContainer1.Width / 2;
+
         }
+
+        private void btn_Import_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
