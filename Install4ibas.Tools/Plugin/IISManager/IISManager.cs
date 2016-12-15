@@ -117,7 +117,10 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 newPool = serverManager.ApplicationPools.Add(appPoolName);
                 newPool.ManagedRuntimeVersion = runtimeVersion;
                 newPool.ManagedPipelineMode = mode;
-                newPool.Enable32BitAppOnWin64 = true;
+                if (!Environment.Is64BitProcess)
+                    newPool.Enable32BitAppOnWin64 = true;
+                else
+                    newPool.Enable32BitAppOnWin64 = false;
                 serverManager.CommitChanges();
                 return newPool;
             }

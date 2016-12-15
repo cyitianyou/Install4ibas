@@ -79,6 +79,9 @@ namespace Install4ibas.UI
                 case ControlTypes.Finish:
                     control = new FinishControl();
                     break;
+                case ControlTypes.LicenseCreateControl:
+                    control = new LicenseCreateControl();
+                    break;
                 default:
                     break;
             }

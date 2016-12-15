@@ -86,6 +86,12 @@
     <Compile Include="FormControl\InstallationProgressControl.Designer.cs">
       <DependentUpon>InstallationProgressControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormControl\LicenseCreateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControl\LicenseCreateControl.Designer.cs">
+      <DependentUpon>LicenseCreateControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="IUIAction.cs" />
     <Compile Include="FormControl\LicenseAcceptControl.cs">
       <SubType>UserControl</SubType>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormControl\LicenseAcceptControl.resx">
       <DependentUpon>LicenseAcceptControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControl\LicenseCreateControl.resx">
+      <DependentUpon>LicenseCreateControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormControl\ModulesChooseControl.resx">
       <DependentUpon>ModulesChooseControl.cs</DependentUpon>
