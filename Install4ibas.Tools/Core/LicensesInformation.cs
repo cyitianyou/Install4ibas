@@ -92,7 +92,7 @@ namespace Install4ibas.Tools.Core
             tmp.AppendLine(string.Format("公司名称：{0}", this.Company));
             tmp.AppendLine(string.Format("联系人：{0}", this.Contacts));
             tmp.AppendLine(string.Format("Email：{0}", this.eMail));
-            tmp.AppendLine(string.Format("到期日：{0}", this.ExpirationDate.ToString("yyyy/MM/dd")));
+            tmp.AppendLine(string.Format("到期日：{0}", this.ExpirationDate.ToString("yyyy-MM-dd")));
             tmp.AppendLine(string.Format("用户数：{0}", this.UserCount.ToString()));
             tmp.AppendLine(string.Format("机器码："));
             if (this.LicensedComputerCodes != null && this.LicensedComputerCodes.Length > 0)

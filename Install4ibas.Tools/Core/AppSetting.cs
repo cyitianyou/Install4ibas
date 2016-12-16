@@ -216,7 +216,7 @@ namespace Install4ibas.Tools.Core
 
             }
         }
-        public void LoadSiteName()
+        public void LoadSiteInfo()
         {
             if (String.IsNullOrEmpty(this.SiteName)) return;
             Site site = IISManagerFactory.New().CreateIISManager().GetSite(this.SiteName); ;

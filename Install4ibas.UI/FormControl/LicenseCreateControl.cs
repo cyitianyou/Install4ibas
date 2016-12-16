@@ -23,6 +23,12 @@ namespace Install4ibas.UI
             this.ButtonsVisibleStyle = ButtonsVisibleStyle.Finish;
         }
 
+        public override void LoadAppSetting()
+        {
+            this.txt_SiteName.Text = this.ShellControl.installService.AppSetting.SiteName;
+            this.txt_WebInfo.Text = this.ShellControl.installService.AppSetting.Licenses.ToString();
+        }
+
         private void btn_ChooseFolder_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -34,7 +40,9 @@ namespace Install4ibas.UI
                 txt_Path.Text = fileDialog.FileName;
             }
             txt_LicenseInfo.Text = readtxt(txt_Path.Text);
-
+            this.splitContainer2.Panel1Collapsed = false;
+            this.splitContainer2.Panel2Collapsed = false;
+            this.splitContainer2.SplitterDistance = this.splitContainer2.Width / 2;
         }
         private string readtxt(string path)
         {
@@ -45,23 +53,33 @@ namespace Install4ibas.UI
             {
                 while (!fileReader.EndOfStream)
                 {
-                    tmp.AppendLine(fileReader.ReadLine());
+                    var line = fileReader.ReadLine();
+                    if (string.Equals(line, "DATAS:")) break;
+                    tmp.AppendLine(line);
                 }
             }
             return tmp.ToString();
         }
         private void btn_Import_Click(object sender, EventArgs e)
         {
-            string InstallDiraddress = this.MyAppSetting.InstallDiraddress;
-            DirectoryInfo TheFolder = new DirectoryInfo(InstallDiraddress);
-            //遍历文件夹
-            foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
+            try
             {
-                if (File.Exists(txt_Path.Text))
+                string InstallDiraddress = this.MyAppSetting.InstallDiraddress;
+                DirectoryInfo TheFolder = new DirectoryInfo(InstallDiraddress);
+                //遍历文件夹
+                foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
                 {
-                    string copypath = Path.Combine(NextFolder.FullName, Path.GetFileName(txt_Path.Text));
-                    File.Copy(txt_Path.Text, copypath, true);
+                    if (File.Exists(txt_Path.Text))
+                    {
+                        string copypath = Path.Combine(NextFolder.FullName, Path.GetFileName(txt_Path.Text));
+                        File.Copy(txt_Path.Text, copypath, true);
+                    }
                 }
+                MessageBox.Show(string.Format("导入成功"));
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(string.Format("导入失败，因为：{0}", error.Message));
             }
         }
 
