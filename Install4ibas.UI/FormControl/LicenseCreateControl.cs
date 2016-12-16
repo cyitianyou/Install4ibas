@@ -42,7 +42,7 @@ namespace Install4ibas.UI
                 try
                 {
                     txt_Path.Text = fileDialog.FileName;
-                    txt_LicenseInfo.Text = readtxt(txt_Path.Text);
+                    txt_LicenseInfo.Text = ReadTxt(txt_Path.Text);
                     this.splitContainer2.Panel1Collapsed = false;
                     this.splitContainer2.Panel2Collapsed = false;
                     this.splitContainer2.SplitterDistance = this.splitContainer2.Width / 2;
@@ -54,7 +54,7 @@ namespace Install4ibas.UI
             }
             
         }
-        private string readtxt(string path)
+        private string ReadTxt(string path)
         {
             LicensesInformation license = LicensesInformation.ReadLicenseFile(path);
             if (license == null)
