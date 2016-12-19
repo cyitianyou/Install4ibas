@@ -71,10 +71,8 @@
             this.gp_Config.Controls.Add(this.gpDB);
             this.gp_Config.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gp_Config.Location = new System.Drawing.Point(0, 0);
-            this.gp_Config.Margin = new System.Windows.Forms.Padding(2);
             this.gp_Config.Name = "gp_Config";
-            this.gp_Config.Padding = new System.Windows.Forms.Padding(2);
-            this.gp_Config.Size = new System.Drawing.Size(433, 311);
+            this.gp_Config.Size = new System.Drawing.Size(650, 441);
             this.gp_Config.TabIndex = 0;
             this.gp_Config.TabStop = false;
             this.gp_Config.Text = "编辑配置信息";
@@ -92,11 +90,9 @@
             this.groupBox1.Controls.Add(this.labPort);
             this.groupBox1.Controls.Add(this.txtIIS);
             this.groupBox1.Controls.Add(this.labIIS);
-            this.groupBox1.Location = new System.Drawing.Point(5, 26);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(8, 37);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(418, 87);
+            this.groupBox1.Size = new System.Drawing.Size(627, 123);
             this.groupBox1.TabIndex = 49;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "网站信息";
@@ -104,9 +100,10 @@
             // btn_ChooseFolder
             // 
             this.btn_ChooseFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ChooseFolder.Location = new System.Drawing.Point(378, 50);
+            this.btn_ChooseFolder.Location = new System.Drawing.Point(567, 71);
+            this.btn_ChooseFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_ChooseFolder.Name = "btn_ChooseFolder";
-            this.btn_ChooseFolder.Size = new System.Drawing.Size(21, 21);
+            this.btn_ChooseFolder.Size = new System.Drawing.Size(32, 30);
             this.btn_ChooseFolder.TabIndex = 69;
             this.btn_ChooseFolder.Text = "……";
             this.btn_ChooseFolder.UseVisualStyleBackColor = true;
@@ -115,9 +112,10 @@
             // txtSiteName
             // 
             this.txtSiteName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSiteName.Location = new System.Drawing.Point(355, 25);
+            this.txtSiteName.Location = new System.Drawing.Point(442, 35);
+            this.txtSiteName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSiteName.Name = "txtSiteName";
-            this.txtSiteName.Size = new System.Drawing.Size(44, 21);
+            this.txtSiteName.Size = new System.Drawing.Size(154, 27);
             this.txtSiteName.TabIndex = 68;
             this.txtSiteName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSiteName.WordWrap = false;
@@ -126,18 +124,20 @@
             // 
             this.txtInputfolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInputfolder.Location = new System.Drawing.Point(69, 50);
+            this.txtInputfolder.Location = new System.Drawing.Point(104, 71);
+            this.txtInputfolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtInputfolder.Name = "txtInputfolder";
-            this.txtInputfolder.Size = new System.Drawing.Size(303, 21);
+            this.txtInputfolder.Size = new System.Drawing.Size(452, 27);
             this.txtInputfolder.TabIndex = 44;
             // 
             // labSiteName
             // 
             this.labSiteName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labSiteName.AutoSize = true;
-            this.labSiteName.Location = new System.Drawing.Point(320, 30);
+            this.labSiteName.Location = new System.Drawing.Point(392, 42);
+            this.labSiteName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labSiteName.Name = "labSiteName";
-            this.labSiteName.Size = new System.Drawing.Size(29, 12);
+            this.labSiteName.Size = new System.Drawing.Size(42, 17);
             this.labSiteName.TabIndex = 67;
             this.labSiteName.Text = "名称";
             this.labSiteName.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -145,18 +145,20 @@
             // labInputFolder
             // 
             this.labInputFolder.AutoSize = true;
-            this.labInputFolder.Location = new System.Drawing.Point(10, 52);
+            this.labInputFolder.Location = new System.Drawing.Point(15, 74);
+            this.labInputFolder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labInputFolder.Name = "labInputFolder";
-            this.labInputFolder.Size = new System.Drawing.Size(65, 12);
+            this.labInputFolder.Size = new System.Drawing.Size(93, 17);
             this.labInputFolder.TabIndex = 45;
             this.labInputFolder.Text = "文件路径：";
             // 
             // txtPort
             // 
             this.txtPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPort.Location = new System.Drawing.Point(251, 25);
+            this.txtPort.Location = new System.Drawing.Point(318, 35);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(32, 21);
+            this.txtPort.Size = new System.Drawing.Size(46, 27);
             this.txtPort.TabIndex = 66;
             this.txtPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPort.WordWrap = false;
@@ -165,27 +167,30 @@
             // 
             this.labPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labPort.AutoSize = true;
-            this.labPort.Location = new System.Drawing.Point(218, 30);
+            this.labPort.Location = new System.Drawing.Point(269, 42);
+            this.labPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labPort.Name = "labPort";
-            this.labPort.Size = new System.Drawing.Size(29, 12);
+            this.labPort.Size = new System.Drawing.Size(42, 17);
             this.labPort.TabIndex = 65;
             this.labPort.Text = "端口";
             this.labPort.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtIIS
             // 
-            this.txtIIS.Location = new System.Drawing.Point(69, 25);
+            this.txtIIS.Location = new System.Drawing.Point(104, 35);
+            this.txtIIS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtIIS.Name = "txtIIS";
-            this.txtIIS.Size = new System.Drawing.Size(105, 21);
+            this.txtIIS.Size = new System.Drawing.Size(156, 27);
             this.txtIIS.TabIndex = 62;
             this.txtIIS.WordWrap = false;
             // 
             // labIIS
             // 
             this.labIIS.AutoSize = true;
-            this.labIIS.Location = new System.Drawing.Point(10, 30);
+            this.labIIS.Location = new System.Drawing.Point(15, 42);
+            this.labIIS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labIIS.Name = "labIIS";
-            this.labIIS.Size = new System.Drawing.Size(53, 12);
+            this.labIIS.Size = new System.Drawing.Size(76, 17);
             this.labIIS.TabIndex = 61;
             this.labIIS.Text = "网站地址";
             this.labIIS.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -214,9 +219,11 @@
             this.gpDB.Controls.Add(this.txtDBPassword);
             this.gpDB.Controls.Add(this.txtDBUser);
             this.gpDB.Controls.Add(this.txtDBServer);
-            this.gpDB.Location = new System.Drawing.Point(5, 118);
+            this.gpDB.Location = new System.Drawing.Point(8, 167);
+            this.gpDB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gpDB.Name = "gpDB";
-            this.gpDB.Size = new System.Drawing.Size(418, 174);
+            this.gpDB.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpDB.Size = new System.Drawing.Size(627, 246);
             this.gpDB.TabIndex = 48;
             this.gpDB.TabStop = false;
             this.gpDB.Text = "数据库信息";
@@ -224,18 +231,20 @@
             // butDITest
             // 
             this.butDITest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.butDITest.Location = new System.Drawing.Point(220, 138);
+            this.butDITest.Location = new System.Drawing.Point(330, 195);
+            this.butDITest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.butDITest.Name = "butDITest";
-            this.butDITest.Size = new System.Drawing.Size(181, 23);
+            this.butDITest.Size = new System.Drawing.Size(272, 33);
             this.butDITest.TabIndex = 62;
             this.butDITest.Text = "测试DI连接";
             this.butDITest.UseVisualStyleBackColor = true;
             // 
             // butCOList
             // 
-            this.butCOList.Location = new System.Drawing.Point(12, 138);
+            this.butCOList.Location = new System.Drawing.Point(18, 195);
+            this.butCOList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.butCOList.Name = "butCOList";
-            this.butCOList.Size = new System.Drawing.Size(191, 23);
+            this.butCOList.Size = new System.Drawing.Size(286, 33);
             this.butCOList.TabIndex = 61;
             this.butCOList.Text = "获取公司列表";
             this.butCOList.UseVisualStyleBackColor = true;
@@ -244,10 +253,9 @@
             // cmbDBName
             // 
             this.cmbDBName.FormattingEnabled = true;
-            this.cmbDBName.Location = new System.Drawing.Point(89, 104);
-            this.cmbDBName.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbDBName.Location = new System.Drawing.Point(134, 147);
             this.cmbDBName.Name = "cmbDBName";
-            this.cmbDBName.Size = new System.Drawing.Size(115, 20);
+            this.cmbDBName.Size = new System.Drawing.Size(170, 25);
             this.cmbDBName.TabIndex = 60;
             // 
             // cmbLanguage
@@ -255,18 +263,20 @@
             this.cmbLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
-            this.cmbLanguage.Location = new System.Drawing.Point(285, 54);
+            this.cmbLanguage.Location = new System.Drawing.Point(428, 76);
+            this.cmbLanguage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(117, 20);
+            this.cmbLanguage.Size = new System.Drawing.Size(174, 25);
             this.cmbLanguage.TabIndex = 59;
             // 
             // labLanguage
             // 
             this.labLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labLanguage.AutoSize = true;
-            this.labLanguage.Location = new System.Drawing.Point(218, 57);
+            this.labLanguage.Location = new System.Drawing.Point(327, 81);
+            this.labLanguage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labLanguage.Name = "labLanguage";
-            this.labLanguage.Size = new System.Drawing.Size(53, 12);
+            this.labLanguage.Size = new System.Drawing.Size(77, 17);
             this.labLanguage.TabIndex = 58;
             this.labLanguage.Text = "B1语言：";
             // 
@@ -275,27 +285,30 @@
             this.cmbB1Type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbB1Type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbB1Type.FormattingEnabled = true;
-            this.cmbB1Type.Location = new System.Drawing.Point(285, 28);
+            this.cmbB1Type.Location = new System.Drawing.Point(428, 40);
+            this.cmbB1Type.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbB1Type.Name = "cmbB1Type";
-            this.cmbB1Type.Size = new System.Drawing.Size(117, 20);
+            this.cmbB1Type.Size = new System.Drawing.Size(174, 25);
             this.cmbB1Type.TabIndex = 57;
             // 
             // labB1Type
             // 
             this.labB1Type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labB1Type.AutoSize = true;
-            this.labB1Type.Location = new System.Drawing.Point(218, 32);
+            this.labB1Type.Location = new System.Drawing.Point(327, 45);
+            this.labB1Type.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labB1Type.Name = "labB1Type";
-            this.labB1Type.Size = new System.Drawing.Size(53, 12);
+            this.labB1Type.Size = new System.Drawing.Size(77, 17);
             this.labB1Type.TabIndex = 56;
             this.labB1Type.Text = "B1类型：";
             // 
             // txtB1Server
             // 
             this.txtB1Server.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtB1Server.Location = new System.Drawing.Point(285, 78);
+            this.txtB1Server.Location = new System.Drawing.Point(428, 110);
+            this.txtB1Server.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtB1Server.Name = "txtB1Server";
-            this.txtB1Server.Size = new System.Drawing.Size(117, 21);
+            this.txtB1Server.Size = new System.Drawing.Size(174, 27);
             this.txtB1Server.TabIndex = 55;
             this.txtB1Server.WordWrap = false;
             // 
@@ -303,9 +316,10 @@
             // 
             this.labB1Server.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labB1Server.AutoSize = true;
-            this.labB1Server.Location = new System.Drawing.Point(218, 83);
+            this.labB1Server.Location = new System.Drawing.Point(327, 118);
+            this.labB1Server.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labB1Server.Name = "labB1Server";
-            this.labB1Server.Size = new System.Drawing.Size(65, 12);
+            this.labB1Server.Size = new System.Drawing.Size(94, 17);
             this.labB1Server.TabIndex = 54;
             this.labB1Server.Text = "B1许可证：";
             // 
@@ -313,55 +327,61 @@
             // 
             this.labB1User.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labB1User.AutoSize = true;
-            this.labB1User.Location = new System.Drawing.Point(218, 109);
+            this.labB1User.Location = new System.Drawing.Point(327, 154);
+            this.labB1User.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labB1User.Name = "labB1User";
-            this.labB1User.Size = new System.Drawing.Size(53, 12);
+            this.labB1User.Size = new System.Drawing.Size(77, 17);
             this.labB1User.TabIndex = 53;
             this.labB1User.Text = "B1用户：";
             // 
             // labDBUser
             // 
             this.labDBUser.AutoSize = true;
-            this.labDBUser.Location = new System.Drawing.Point(10, 83);
+            this.labDBUser.Location = new System.Drawing.Point(15, 118);
+            this.labDBUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labDBUser.Name = "labDBUser";
-            this.labDBUser.Size = new System.Drawing.Size(77, 12);
+            this.labDBUser.Size = new System.Drawing.Size(110, 17);
             this.labDBUser.TabIndex = 51;
             this.labDBUser.Text = "数据库用户：";
             // 
             // labDBName
             // 
             this.labDBName.AutoSize = true;
-            this.labDBName.Location = new System.Drawing.Point(10, 109);
+            this.labDBName.Location = new System.Drawing.Point(15, 154);
+            this.labDBName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labDBName.Name = "labDBName";
-            this.labDBName.Size = new System.Drawing.Size(77, 12);
+            this.labDBName.Size = new System.Drawing.Size(110, 17);
             this.labDBName.TabIndex = 50;
             this.labDBName.Text = "数据库名称：";
             // 
             // labDBServer
             // 
             this.labDBServer.AutoSize = true;
-            this.labDBServer.Location = new System.Drawing.Point(10, 57);
+            this.labDBServer.Location = new System.Drawing.Point(15, 81);
+            this.labDBServer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labDBServer.Name = "labDBServer";
-            this.labDBServer.Size = new System.Drawing.Size(77, 12);
+            this.labDBServer.Size = new System.Drawing.Size(110, 17);
             this.labDBServer.TabIndex = 49;
             this.labDBServer.Text = "数据库地址：";
             // 
             // labDBType
             // 
             this.labDBType.AutoSize = true;
-            this.labDBType.Location = new System.Drawing.Point(10, 32);
+            this.labDBType.Location = new System.Drawing.Point(15, 45);
+            this.labDBType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labDBType.Name = "labDBType";
-            this.labDBType.Size = new System.Drawing.Size(77, 12);
+            this.labDBType.Size = new System.Drawing.Size(110, 17);
             this.labDBType.TabIndex = 48;
             this.labDBType.Text = "数据库类型：";
             // 
             // txtB1Password
             // 
             this.txtB1Password.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtB1Password.Location = new System.Drawing.Point(356, 104);
+            this.txtB1Password.Location = new System.Drawing.Point(534, 147);
+            this.txtB1Password.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtB1Password.Name = "txtB1Password";
             this.txtB1Password.PasswordChar = '*';
-            this.txtB1Password.Size = new System.Drawing.Size(47, 21);
+            this.txtB1Password.Size = new System.Drawing.Size(68, 27);
             this.txtB1Password.TabIndex = 47;
             this.txtB1Password.WordWrap = false;
             // 
@@ -369,54 +389,58 @@
             // 
             this.cmbDBType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDBType.FormattingEnabled = true;
-            this.cmbDBType.Location = new System.Drawing.Point(89, 28);
+            this.cmbDBType.Location = new System.Drawing.Point(134, 40);
+            this.cmbDBType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbDBType.Name = "cmbDBType";
-            this.cmbDBType.Size = new System.Drawing.Size(115, 20);
+            this.cmbDBType.Size = new System.Drawing.Size(170, 25);
             this.cmbDBType.TabIndex = 41;
             this.cmbDBType.SelectedIndexChanged += new System.EventHandler(this.cmbDBType_SelectedIndexChanged);
             // 
             // txtB1User
             // 
             this.txtB1User.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtB1User.Location = new System.Drawing.Point(285, 104);
+            this.txtB1User.Location = new System.Drawing.Point(428, 147);
+            this.txtB1User.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtB1User.Name = "txtB1User";
-            this.txtB1User.Size = new System.Drawing.Size(64, 21);
+            this.txtB1User.Size = new System.Drawing.Size(94, 27);
             this.txtB1User.TabIndex = 46;
             this.txtB1User.WordWrap = false;
             // 
             // txtDBPassword
             // 
-            this.txtDBPassword.Location = new System.Drawing.Point(157, 78);
+            this.txtDBPassword.Location = new System.Drawing.Point(236, 110);
+            this.txtDBPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDBPassword.Name = "txtDBPassword";
             this.txtDBPassword.PasswordChar = '*';
-            this.txtDBPassword.Size = new System.Drawing.Size(47, 21);
+            this.txtDBPassword.Size = new System.Drawing.Size(68, 27);
             this.txtDBPassword.TabIndex = 45;
             this.txtDBPassword.WordWrap = false;
             // 
             // txtDBUser
             // 
-            this.txtDBUser.Location = new System.Drawing.Point(89, 78);
+            this.txtDBUser.Location = new System.Drawing.Point(134, 110);
+            this.txtDBUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDBUser.Name = "txtDBUser";
-            this.txtDBUser.Size = new System.Drawing.Size(62, 21);
+            this.txtDBUser.Size = new System.Drawing.Size(91, 27);
             this.txtDBUser.TabIndex = 44;
             this.txtDBUser.WordWrap = false;
             // 
             // txtDBServer
             // 
-            this.txtDBServer.Location = new System.Drawing.Point(89, 52);
+            this.txtDBServer.Location = new System.Drawing.Point(134, 74);
+            this.txtDBServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDBServer.Name = "txtDBServer";
-            this.txtDBServer.Size = new System.Drawing.Size(115, 21);
+            this.txtDBServer.Size = new System.Drawing.Size(170, 27);
             this.txtDBServer.TabIndex = 42;
             this.txtDBServer.WordWrap = false;
             // 
             // EditConfigControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gp_Config);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "EditConfigControl";
-            this.Size = new System.Drawing.Size(433, 311);
+            this.Size = new System.Drawing.Size(650, 441);
             this.gp_Config.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
