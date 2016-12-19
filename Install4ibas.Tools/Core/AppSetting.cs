@@ -1,13 +1,15 @@
-﻿using Install4ibas.Tools.Plugin.IISManager;
+﻿using Install4ibas.Tools.Plugin;
+using Install4ibas.Tools.Plugin.DbManager;
+using Install4ibas.Tools.Plugin.IISManager;
 using Microsoft.Web.Administration;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
-using BTulz.LicensesManager.Licenses;
 namespace Install4ibas.Tools.Core
 {
 
@@ -21,7 +23,9 @@ namespace Install4ibas.Tools.Core
         {
             this.Steps = new List<InstallInformationStep>();
             this.InstallModules = new ibasModules();
+            this.Licenses = new LicensesInformation();
             this.LoadDefaultModules();
+            
         }
 
         #endregion
@@ -176,7 +180,7 @@ namespace Install4ibas.Tools.Core
         /// <summary>
         /// 当前机器机器码 BTulz.LicensesManager.Licenses.ComputerCode.GetCode();
         /// </summary>
-        public string CmpCode { get; set; }
+        public LicensesInformation Licenses { get; set; }
         #endregion
         #region 安装步骤
         [DataMember(Name = "Steps")]
@@ -212,12 +216,73 @@ namespace Install4ibas.Tools.Core
 
             }
         }
-        public void LoadSiteName()
+        public void LoadSiteInfo()
         {
             if (String.IsNullOrEmpty(this.SiteName)) return;
             Site site = IISManagerFactory.New().CreateIISManager().GetSite(this.SiteName); ;
             if (site == null) return;
+            System.Configuration.Configuration cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/", this.SiteName);
+            //设置appsetting
+            AppSettingsSection appSetting = cfg.AppSettings;
             //使用Site信息对AppSetting赋值
+            #region 数据库相关
+             //public emPlatform Platform
+             //public string B1User
+            //public string B1Password
+            this.DatabaseType = GetValue(appSetting, "DatabaseType");
+            this.DBServer = GetValue(appSetting, "DataSource");
+            this.DBName = GetValue(appSetting, "InitialCatalog");
+            this.DBUser = GetValue(appSetting, "UserID");
+            this.DBPassword = GetValue(appSetting, "Password");
+            this.B1Type = GetValue(appSetting, "B1Type");
+            this.B1Server = GetValue(appSetting, "B1Server");
+            this.cmbLanguage = SAPbobsCOM.BoSuppLangs.ln_Chinese.ToString();
+            #endregion
+            #region IIS相关
+            this.InstallDiraddress = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+            if (site.Bindings.Count > 0)
+            {
+                var binding = site.Bindings[0];
+                var endPoint = binding.EndPoint;
+                //public string IISAddress
+                this.IISAddress = endPoint.Address.ToString();
+                //public string IISPort
+                this.IISAddress = endPoint.Port.ToString();
+            }
+            
+        #endregion
+            #region Licences相关
+            var sqlmap = new SQLMapFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetSQLMap(this.DatabaseType);
+            var connection = new dbConnectionFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetDBConnection(sqlmap);
+            ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
+            ServiceInforC.SetDBConnection(connection);
+            ServiceInforC.MyAppsetting = this;
+            ServiceInforC.RootAddress = this.IISAddress + ":" + this.IISPort;
+            ServiceInforC.WorkFolder = this.InstallDiraddress;
+            var list = ServiceInforC.GetServiceInformations();
+
+            Licenses.Company = "需手动填写";
+            Licenses.Contacts = "需手动填写";
+            Licenses.eMail = "需手动填写";
+            Licenses.ExpirationDate = new DateTime(2099, 12, 31);
+            Licenses.LicensedComputerCodes = new string[] { ComputerCode.GetCode() };
+            Licenses.LicensedDataBases = new string[] { this.DBName };
+            Licenses.UserCount = 50;
+            var ModuleList = new List<string>();
+            foreach (var item in list)
+            {
+                ModuleList.Add(string.Format("{0}|{1}", item.ModuleID, item.ServiceDescription));
+            }
+            Licenses.LicensedModules = ModuleList.ToArray();
+            #endregion
+        }
+
+        private string GetValue(AppSettingsSection appSetting, string key)
+        {
+            if (appSetting.Settings[key] != null)
+                return appSetting.Settings[key].Value;
+            else
+                return "";
         }
         #endregion
     }

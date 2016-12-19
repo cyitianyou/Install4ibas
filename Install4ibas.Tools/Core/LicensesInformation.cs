@@ -86,41 +86,110 @@ namespace Install4ibas.Tools.Core
             get;
         }
 
-        public byte[] GetKeyBytes(int toLength)
+        public override string ToString()
         {
             var tmp = new StringBuilder();
-            tmp.Append(this.Company);
-            tmp.Append(this.ExpirationDate.ToString("yyyy/MM/dd"));
-            tmp.Append(this.UserCount.ToString());
-            //if (this.LicensedComputerCodes != null)
-            //    foreach (var item in this.LicensedComputerCodes)
-            //    {
-            //        tmp.Append(item);
-            //    }
-            //if (this.LicensedDataBases != null)
-            //    foreach (var item in this.LicensedDataBases)
-            //    {
-            //        tmp.Append(item);
-            //    }
-            var tmpDatas = System.Text.Encoding.Default.GetBytes(tmp.ToString());
-            byte[] datas = new byte[toLength];
-            if (tmpDatas.Length > toLength)
-                for (int i = 0; i < toLength; i++)
-                {
-                    datas[i] = tmpDatas[i];
-                }
-            else
+            tmp.AppendLine(string.Format("公司名称：{0}", this.Company));
+            tmp.AppendLine(string.Format("联系人：{0}", this.Contacts));
+            tmp.AppendLine(string.Format("Email：{0}", this.eMail));
+            tmp.AppendLine(string.Format("到期日：{0}", this.ExpirationDate.ToString("yyyy-MM-dd")));
+            tmp.AppendLine(string.Format("用户数：{0}", this.UserCount.ToString()));
+            tmp.AppendLine(string.Format("机器码："));
+            if (this.LicensedComputerCodes != null && this.LicensedComputerCodes.Length > 0)
             {
-                for (int i = 0; i < tmpDatas.Length; i++)
+                for (int i = 0; i < this.LicensedComputerCodes.Length; i++)
                 {
-                    datas[i] = tmpDatas[i];
-                }
-                for (int i = tmpDatas.Length; i < toLength; i++)
-                {
-                    datas[i] = 0x01;
+                    var item = this.LicensedComputerCodes[i];
+                    tmp.AppendLine(string.Format("--{0};", item));
                 }
             }
-            return datas;
+            tmp.AppendLine(string.Format("数据库:"));
+            if (this.LicensedDataBases != null && this.LicensedDataBases.Length > 0)
+            {
+                for (int i = 0; i < this.LicensedDataBases.Length; i++)
+                {
+                    var item = this.LicensedDataBases[i];
+                    tmp.AppendLine(string.Format("--{0};", item));
+                }
+            }
+            tmp.AppendLine(string.Format("模块:"));
+            if (this.LicensedModules != null && this.LicensedModules.Length > 0)
+            {
+                for (int i = 0; i < this.LicensedModules.Length; i++)
+                {
+                    var item = this.LicensedModules[i];
+                    tmp.AppendLine(string.Format("--{0};", item));
+                }
+            }
+            return tmp.ToString();
+        }
+
+       public static LicensesInformation ReadLicenseFile(string filePath)
+        {
+            var license = new LicensesInformation();
+            #region 解析授权文件内容
+            System.IO.StreamReader fileReader;
+            using (fileReader = System.IO.File.OpenText(filePath))
+            {
+                while (!fileReader.EndOfStream)
+                {
+                    var tmpLine = fileReader.ReadLine();
+                    if (string.IsNullOrEmpty(tmpLine)) continue;
+                    if (tmpLine.StartsWith("Company:"))
+                        license.Company = tmpLine.Replace("Company:", "");
+                    if (tmpLine.StartsWith("Contacts:"))
+                        license.Contacts = tmpLine.Replace("Contacts:", "");
+                    if (tmpLine.StartsWith("eMail:"))
+                        license.eMail = tmpLine.Replace("eMail:", "");
+                    if (tmpLine.StartsWith("ExpirationDate:"))
+                        license.ExpirationDate = DateTime.Parse(tmpLine.Replace("ExpirationDate:", ""));
+                    if (tmpLine.StartsWith("UserCount:"))
+                        license.UserCount = int.Parse(tmpLine.Replace("UserCount:", ""));
+                    if (tmpLine.StartsWith("ComputerCodes:"))
+                    {
+                        var values = new List<string>();
+                        while (!fileReader.EndOfStream)
+                        {
+                            tmpLine = fileReader.ReadLine();
+                            if (!tmpLine.StartsWith("--"))
+                                break;
+                            values.Add(tmpLine.Replace("--", "").Replace(";", "").Trim());
+                        }
+                        license.LicensedComputerCodes = values.ToArray();
+                    }
+                    if (tmpLine.StartsWith("DataBases:"))
+                    {
+                        var values = new List<string>();
+                        while (!fileReader.EndOfStream)
+                        {
+                            tmpLine = fileReader.ReadLine();
+                            if (!tmpLine.StartsWith("--"))
+                                break;
+                            values.Add(tmpLine.Replace("--", "").Replace(";", "").Trim());
+                        }
+                        license.LicensedDataBases = values.ToArray();
+                    }
+                    if (tmpLine.StartsWith("Modules:"))
+                    {
+                        var values = new List<string>();
+                        while (!fileReader.EndOfStream)
+                        {
+                            tmpLine = fileReader.ReadLine();
+                            if (!tmpLine.StartsWith("--"))
+                                break;
+                            values.Add(tmpLine.Replace("--", "").Replace(";", "").Trim());
+                        }
+                        license.LicensedModules = values.ToArray();
+                    }
+                    if (tmpLine == "DATAS:")
+                    {
+                        break;
+                    }
+                }
+                fileReader.Close();
+            }
+            #endregion
+            return license;
         }
     }
 }

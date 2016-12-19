@@ -33,9 +33,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BTulz.LicensesManager">
-      <HintPath>Dlls\BTulz.LicensesManager.dll</HintPath>
-    </Reference>
     <Reference Include="BTulz.ModelsTransformer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dlls\BTulz.ModelsTransformer.dll</HintPath>
@@ -68,10 +65,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ComputerCode.cs" />
     <Compile Include="Core\Module.cs" />
     <Compile Include="Core\LicensesInformation.cs" />
     <Compile Include="Core\ServiceInformation.cs" />
     <Compile Include="Plugin\MessageManager.cs" />
+    <Compile Include="Plugin\Messages\FileMessageRecorder.cs" />
+    <Compile Include="Plugin\Messages\Message.cs" />
+    <Compile Include="Plugin\Serializer.cs" />
     <Compile Include="Plugin\ServiceInformationCreator.cs" />
     <Compile Include="Plugin\DbManager\dbConnectionFactory.cs" />
     <Compile Include="Plugin\DbManager\SQLExecute.cs" />

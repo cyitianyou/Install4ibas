@@ -59,7 +59,7 @@ namespace Install4ibas.UI
             if (!this.ShellControl.installService.ServiceCode.Equals(NewInstallService.SERVICECODE))
             {
                 this.ShellControl.installService.AppSetting.SiteName = Convert.ToString(this.cmb_Sites.SelectedItem);
-                this.ShellControl.installService.AppSetting.LoadSiteName();
+                this.ShellControl.installService.AppSetting.LoadSiteInfo();
             }
         }
 
@@ -74,7 +74,8 @@ namespace Install4ibas.UI
                     ) throw new Exception("请选择要执行的操作。");  //都没选中
                 if (!this.radio_New.Checked && String.IsNullOrEmpty(Convert.ToString(this.cmb_Sites.SelectedItem)))
                     throw new Exception("请选择已安装的ibas网站。");
-                if (this.radio_License.Checked) ;//TODO:此处跳转到License管理后续流程
+                if (this.radio_License.Checked)
+                    type=ControlTypes.LicenseCreateControl;//TODO:此处跳转到License管理后续流程
 
                 this.ShellControl.SetCurrentControl(type);
             }

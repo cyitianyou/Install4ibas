@@ -131,9 +131,10 @@ namespace Install4ibas.UI
                 if (e.ColumnIndex == 4)
                 {
                     var value = Convert.ToString(e.Value);
-                    if (value.IndexOf("BizSys.") > -1)
+                    Int32 index = value.IndexOf("published_");
+                    if (index > -1 && value.Length > index + 26)
                     {
-                        e.Value = "..." + value.Substring(value.IndexOf("BizSys."));
+                        e.Value = value.Substring(value.IndexOf("published_") + 10, 15);
                         e.FormattingApplied = true;
                     }
                 }

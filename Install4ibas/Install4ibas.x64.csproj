@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AVA.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -78,6 +81,9 @@
       <Project>{bf2a331e-dfd1-4d0f-9c7e-da2dedfc5d29}</Project>
       <Name>Install4ibas.UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AVA.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

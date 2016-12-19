@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Install4ibas.Tools.Plugin.Messages;
+using System.IO;
 
 namespace Install4ibas.UI
 {
@@ -27,8 +29,24 @@ namespace Install4ibas.UI
             callBack = new BetweenThreadsDelegate(Control_Event);
             this.ShellControl.installService.MessageManager.UpdateInstallationScheduleEvent += MessageManager_Event;
             this.ShellControl.installService.MessageManager.WriteMessageLogEvent += MessageManager_Event;
+            this.ShellControl.installService.MessageManager.WriteFileLogEvent += MessageManager_WriteFileLogEvent;
             this.ShellControl.installService.AppSetting.isSuccess = ExcuteService();
             this.ShellControl.SetCurrentControl(ControlTypes.Finish);
+        }
+        private FileMessageRecorder FileRecorder
+        {
+            get
+            {
+                return FileMessageRecorder.Instance;
+            }
+            set
+            {
+                FileMessageRecorder.Instance = value;
+            }
+        }
+        void MessageManager_WriteFileLogEvent(object sender, Tools.Core.ServiceEventArgs args)
+        {
+            FileRecorder.Recording(args.MessageType, args.Message);
         }
         
         void MessageManager_Event(object sender, Tools.Core.ServiceEventArgs e)
@@ -76,6 +94,8 @@ namespace Install4ibas.UI
         {
             try
             {
+                this.FileRecorder.WorkFileName = "";
+                this.FileRecorder.WorkFolder = Path.Combine( this.ShellControl.installService.AppSetting.InstallDiraddress, "~packages");
                 this.ShellControl.installService.Excute(isFirstRun);
                 return true;
             }

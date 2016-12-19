@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Install4ibas.Tools.Plugin.Messages;
+using System;
 
 namespace Install4ibas.Tools.Core
 {
@@ -20,7 +21,7 @@ namespace Install4ibas.Tools.Core
         public Exception Error { get; set; }
 
         public EventType EventType { get; set; }
-
+        public emMessageType MessageType { get; set; }
     }
 
     public enum EventType

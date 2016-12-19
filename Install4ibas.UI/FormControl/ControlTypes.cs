@@ -35,5 +35,9 @@ namespace Install4ibas.UI
         /// 完成界面
         /// </summary>
         Finish = 7,
+        /// <summary>
+        /// 导入许可证
+        /// </summary>
+        LicenseCreateControl = 8,
     }
 }

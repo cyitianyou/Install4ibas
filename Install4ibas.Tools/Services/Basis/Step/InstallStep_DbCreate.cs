@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Install4ibas.Tools.Services.Basis.Step
 {
-   public class InstallStep_DbCreate : BasicInstallStep
+    public class InstallStep_DbCreate : BasicInstallStep
     {
         public InstallStep_DbCreate()
         {
@@ -165,7 +165,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
                                 }
                                 catch (Exception error)
                                 {
-                                    throw new Exception(string.Format("执行[{0}]脚本，错误：{1}", item, error.ToString()));
+                                    if (!item.Contains(string.Format(@"DataStructures\SQLs\SQL_SYS_mssql_Initialization.sql")))
+                                        throw new Exception(string.Format("执行[{0}]脚本，错误：{1}", item, error.ToString()));
                                 }
                             }
                         }
@@ -212,7 +213,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 Company.UserName = this.AppSetting.B1User;
                 Company.Password = this.AppSetting.B1Password;
                 Company.LicenseServer = this.AppSetting.B1Server;
-                Company.language = (SAPbobsCOM.BoSuppLangs)System.Enum.Parse(typeof(SAPbobsCOM.BoSuppLangs), this.AppSetting.cmbLanguage);
+                SAPbobsCOM.BoSuppLangs language ;
+                if (System.Enum.TryParse<SAPbobsCOM.BoSuppLangs>(this.AppSetting.cmbLanguage, out language))
+                    Company.language = language;
 
                 int ret = Company.Connect();
                 if (ret != 0)
