@@ -101,7 +101,7 @@
             // 
             this.btn_ChooseFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_ChooseFolder.Location = new System.Drawing.Point(567, 71);
-            this.btn_ChooseFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_ChooseFolder.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ChooseFolder.Name = "btn_ChooseFolder";
             this.btn_ChooseFolder.Size = new System.Drawing.Size(32, 30);
             this.btn_ChooseFolder.TabIndex = 69;
@@ -113,7 +113,7 @@
             // 
             this.txtSiteName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSiteName.Location = new System.Drawing.Point(442, 35);
-            this.txtSiteName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSiteName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSiteName.Name = "txtSiteName";
             this.txtSiteName.Size = new System.Drawing.Size(154, 27);
             this.txtSiteName.TabIndex = 68;
@@ -125,7 +125,7 @@
             this.txtInputfolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtInputfolder.Location = new System.Drawing.Point(104, 71);
-            this.txtInputfolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtInputfolder.Margin = new System.Windows.Forms.Padding(4);
             this.txtInputfolder.Name = "txtInputfolder";
             this.txtInputfolder.Size = new System.Drawing.Size(452, 27);
             this.txtInputfolder.TabIndex = 44;
@@ -155,10 +155,10 @@
             // txtPort
             // 
             this.txtPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPort.Location = new System.Drawing.Point(318, 35);
-            this.txtPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPort.Location = new System.Drawing.Point(308, 35);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(4);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(46, 27);
+            this.txtPort.Size = new System.Drawing.Size(53, 27);
             this.txtPort.TabIndex = 66;
             this.txtPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPort.WordWrap = false;
@@ -167,7 +167,7 @@
             // 
             this.labPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labPort.AutoSize = true;
-            this.labPort.Location = new System.Drawing.Point(269, 42);
+            this.labPort.Location = new System.Drawing.Point(263, 42);
             this.labPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labPort.Name = "labPort";
             this.labPort.Size = new System.Drawing.Size(42, 17);
@@ -178,7 +178,7 @@
             // txtIIS
             // 
             this.txtIIS.Location = new System.Drawing.Point(104, 35);
-            this.txtIIS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIIS.Margin = new System.Windows.Forms.Padding(4);
             this.txtIIS.Name = "txtIIS";
             this.txtIIS.Size = new System.Drawing.Size(156, 27);
             this.txtIIS.TabIndex = 62;
@@ -220,9 +220,9 @@
             this.gpDB.Controls.Add(this.txtDBUser);
             this.gpDB.Controls.Add(this.txtDBServer);
             this.gpDB.Location = new System.Drawing.Point(8, 167);
-            this.gpDB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpDB.Margin = new System.Windows.Forms.Padding(4);
             this.gpDB.Name = "gpDB";
-            this.gpDB.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpDB.Padding = new System.Windows.Forms.Padding(4);
             this.gpDB.Size = new System.Drawing.Size(627, 246);
             this.gpDB.TabIndex = 48;
             this.gpDB.TabStop = false;
@@ -232,7 +232,7 @@
             // 
             this.butDITest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butDITest.Location = new System.Drawing.Point(330, 195);
-            this.butDITest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.butDITest.Margin = new System.Windows.Forms.Padding(4);
             this.butDITest.Name = "butDITest";
             this.butDITest.Size = new System.Drawing.Size(272, 33);
             this.butDITest.TabIndex = 62;
@@ -242,7 +242,7 @@
             // butCOList
             // 
             this.butCOList.Location = new System.Drawing.Point(18, 195);
-            this.butCOList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.butCOList.Margin = new System.Windows.Forms.Padding(4);
             this.butCOList.Name = "butCOList";
             this.butCOList.Size = new System.Drawing.Size(286, 33);
             this.butCOList.TabIndex = 61;
@@ -264,7 +264,7 @@
             this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Location = new System.Drawing.Point(428, 76);
-            this.cmbLanguage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbLanguage.Margin = new System.Windows.Forms.Padding(4);
             this.cmbLanguage.Name = "cmbLanguage";
             this.cmbLanguage.Size = new System.Drawing.Size(174, 25);
             this.cmbLanguage.TabIndex = 59;
@@ -286,7 +286,7 @@
             this.cmbB1Type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbB1Type.FormattingEnabled = true;
             this.cmbB1Type.Location = new System.Drawing.Point(428, 40);
-            this.cmbB1Type.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbB1Type.Margin = new System.Windows.Forms.Padding(4);
             this.cmbB1Type.Name = "cmbB1Type";
             this.cmbB1Type.Size = new System.Drawing.Size(174, 25);
             this.cmbB1Type.TabIndex = 57;
@@ -306,7 +306,7 @@
             // 
             this.txtB1Server.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtB1Server.Location = new System.Drawing.Point(428, 110);
-            this.txtB1Server.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtB1Server.Margin = new System.Windows.Forms.Padding(4);
             this.txtB1Server.Name = "txtB1Server";
             this.txtB1Server.Size = new System.Drawing.Size(174, 27);
             this.txtB1Server.TabIndex = 55;
@@ -378,7 +378,7 @@
             // 
             this.txtB1Password.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtB1Password.Location = new System.Drawing.Point(534, 147);
-            this.txtB1Password.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtB1Password.Margin = new System.Windows.Forms.Padding(4);
             this.txtB1Password.Name = "txtB1Password";
             this.txtB1Password.PasswordChar = '*';
             this.txtB1Password.Size = new System.Drawing.Size(68, 27);
@@ -390,7 +390,7 @@
             this.cmbDBType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDBType.FormattingEnabled = true;
             this.cmbDBType.Location = new System.Drawing.Point(134, 40);
-            this.cmbDBType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbDBType.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDBType.Name = "cmbDBType";
             this.cmbDBType.Size = new System.Drawing.Size(170, 25);
             this.cmbDBType.TabIndex = 41;
@@ -400,7 +400,7 @@
             // 
             this.txtB1User.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtB1User.Location = new System.Drawing.Point(428, 147);
-            this.txtB1User.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtB1User.Margin = new System.Windows.Forms.Padding(4);
             this.txtB1User.Name = "txtB1User";
             this.txtB1User.Size = new System.Drawing.Size(94, 27);
             this.txtB1User.TabIndex = 46;
@@ -409,7 +409,7 @@
             // txtDBPassword
             // 
             this.txtDBPassword.Location = new System.Drawing.Point(236, 110);
-            this.txtDBPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDBPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtDBPassword.Name = "txtDBPassword";
             this.txtDBPassword.PasswordChar = '*';
             this.txtDBPassword.Size = new System.Drawing.Size(68, 27);
@@ -419,7 +419,7 @@
             // txtDBUser
             // 
             this.txtDBUser.Location = new System.Drawing.Point(134, 110);
-            this.txtDBUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDBUser.Margin = new System.Windows.Forms.Padding(4);
             this.txtDBUser.Name = "txtDBUser";
             this.txtDBUser.Size = new System.Drawing.Size(91, 27);
             this.txtDBUser.TabIndex = 44;
@@ -428,7 +428,7 @@
             // txtDBServer
             // 
             this.txtDBServer.Location = new System.Drawing.Point(134, 74);
-            this.txtDBServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDBServer.Margin = new System.Windows.Forms.Padding(4);
             this.txtDBServer.Name = "txtDBServer";
             this.txtDBServer.Size = new System.Drawing.Size(170, 27);
             this.txtDBServer.TabIndex = 42;

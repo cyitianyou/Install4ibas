@@ -65,6 +65,8 @@ namespace Install4ibas.UI
         {
             try
             {
+                if (string.IsNullOrEmpty(txt_Path.Text)) throw new Exception("请先选择License文件");
+                if (!File.Exists(txt_Path.Text)) throw new Exception("指定路径不存在License文件");
                 string InstallDiraddress = this.MyAppSetting.InstallDiraddress;
                 DirectoryInfo TheFolder = new DirectoryInfo(InstallDiraddress);
                 //遍历文件夹
