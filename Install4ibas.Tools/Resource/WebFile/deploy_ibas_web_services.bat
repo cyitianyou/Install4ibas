@@ -66,23 +66,18 @@ REM 取模块名称，此处变量涉及延迟处理问题
 SET MY_PACKAGES_FOLDER=%%~nm
 SET MY_PACKAGES_NAME=!MY_PACKAGES_FOLDER:~48,99!
 SET MY_PACKAGES_FOLDER=%WORK_FOLDER%!MY_PACKAGES_FOLDER:~48,99!
-SET CODE_MOUDLE_FOLDER=%ibasSourceCode%\BizSys.!MY_PACKAGES_NAME!\0401\Release
 
 if not exist %PACKAGES_TEMP_FOLDER% md %PACKAGES_TEMP_FOLDER% >> %LOGFILE%
 if exist %PACKAGES_TEMP_FOLDER%\*.* del /f /s /q %PACKAGES_TEMP_FOLDER%\*.* >> %LOGFILE%
 %ibasTools%\7zip\7z.exe x %PACKAGES_FOLDER%\%%m -o%PACKAGES_TEMP_FOLDER%\ -aoa >> %LOGFILE%
 
-if not exist !CODE_MOUDLE_FOLDER! md !CODE_MOUDLE_FOLDER! >> %LOGFILE%
-if exist !CODE_MOUDLE_FOLDER!\*.* del /f /s /q !CODE_MOUDLE_FOLDER!\*.* >> %LOGFILE%
-%ibasTools%\7zip\7z.exe x %PACKAGES_FOLDER%\%%m -o!CODE_MOUDLE_FOLDER!\ -aoa >> %LOGFILE%
-
 if exist %PACKAGES_TEMP_FOLDER%\Services\ if not exist !MY_PACKAGES_FOLDER! md !MY_PACKAGES_FOLDER! >> %LOGFILE%
-if exist %PACKAGES_TEMP_FOLDER%\Services\ if exist %PACKAGES_TEMP_FOLDER%\Services\ xcopy /s /y %PACKAGES_TEMP_FOLDER%\Services\*.* !MY_PACKAGES_FOLDER! >> %LOGFILE%
+if exist %PACKAGES_TEMP_FOLDER%\Services\ if exist %PACKAGES_TEMP_FOLDER%\Services\ xcopy /s /y /c %PACKAGES_TEMP_FOLDER%\Services\*.* !MY_PACKAGES_FOLDER! >> %LOGFILE%
 if exist %PACKAGES_TEMP_FOLDER%\Services\ if exist !MY_PACKAGES_FOLDER!\web.config del /f /s /q !MY_PACKAGES_FOLDER!\web.config >> %LOGFILE%
 
 if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ if not exist !MY_PACKAGES_FOLDER! md !MY_PACKAGES_FOLDER! >> %LOGFILE%
 if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ if not exist !MY_PACKAGES_FOLDER!\DataStructures md !MY_PACKAGES_FOLDER!\DataStructures >> %LOGFILE%
-if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ xcopy /s /y %PACKAGES_TEMP_FOLDER%\DataStructures\*.* !MY_PACKAGES_FOLDER!\DataStructures >> %LOGFILE%
+if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ xcopy /s /y /c %PACKAGES_TEMP_FOLDER%\DataStructures\*.* !MY_PACKAGES_FOLDER!\DataStructures >> %LOGFILE%
 
 if not exist %SYSTEM_CENTER%\ClientBin md %SYSTEM_CENTER%\ClientBin
 if not exist !MY_PACKAGES_FOLDER! copy /y %PACKAGES_TEMP_FOLDER%\BSUi.*.zip %SYSTEM_CENTER%\ClientBin >> %LOGFILE%
@@ -90,7 +85,7 @@ if not exist !MY_PACKAGES_FOLDER! copy /y %PACKAGES_TEMP_FOLDER%\BSUi.*.zip %SYS
 if not exist %INTEGRATION_SERVICES% md %INTEGRATION_SERVICES%
 if exist %PACKAGES_TEMP_FOLDER%\BizSys.!MY_PACKAGES_NAME!.Integration.B1.zip %ibasTools%\7zip\7z.exe x %PACKAGES_TEMP_FOLDER%\BizSys.!MY_PACKAGES_NAME!.Integration.B1.zip -o%INTEGRATION_SERVICES%\ -aoa >> %LOGFILE%
 
-if exist %PACKAGES_TEMP_FOLDER%\extraServices\ xcopy /s /y %PACKAGES_TEMP_FOLDER%\extraServices\*.*  >> %LOGFILE%
+if exist %PACKAGES_TEMP_FOLDER%\extraServices\ xcopy /s /y /c %PACKAGES_TEMP_FOLDER%\extraServices\*.*  >> %LOGFILE%
 
 if exist %PACKAGES_FOLDER%\%%m move /y %PACKAGES_FOLDER%\%%m %MY_PACKAGES_BACKUP_FOLDER%\ >> %LOGFILE%
 
@@ -105,7 +100,6 @@ if exist !MY_PACKAGES_FOLDER!\bin %ibasTools%\7zip\7z.exe x %SYSTEM_CENTER%\Libr
 
 :DEPLOY_SHELL
 SET MY_PACKAGES_FOLDER=%SYSTEM_CENTER%
-SET CODE_SHELL_FOLDER=%ibasSourceCode%\BusinessSystemShell\04\Release
 if not exist %MY_PACKAGES_FOLDER% md %MY_PACKAGES_FOLDER% >> %LOGFILE%
 if not exist %MY_PACKAGES_FOLDER%\DataStructures md %MY_PACKAGES_FOLDER%\DataStructures >> %LOGFILE%
 if not exist %MY_PACKAGES_FOLDER%\Libraries md %MY_PACKAGES_FOLDER%\Libraries >> %LOGFILE%
@@ -120,18 +114,14 @@ if not exist %PACKAGES_TEMP_FOLDER% md %PACKAGES_TEMP_FOLDER% >> %LOGFILE%
 if exist %PACKAGES_TEMP_FOLDER%\*.* del /f /s /q %PACKAGES_TEMP_FOLDER%\*.* >> %LOGFILE%
 %ibasTools%\7zip\7z.exe x %PACKAGES_FOLDER%\%%m -o%PACKAGES_TEMP_FOLDER%\ -aoa >> %LOGFILE%
 
-if not exist %CODE_SHELL_FOLDER% md %CODE_SHELL_FOLDER% >> %LOGFILE%
-if exist %CODE_SHELL_FOLDER%\*.* del /f /s /q %CODE_SHELL_FOLDER%\*.* >> %LOGFILE%
-%ibasTools%\7zip\7z.exe x %PACKAGES_FOLDER%\%%m -o%CODE_SHELL_FOLDER%\ -aoa >> %LOGFILE%
-
-if exist %PACKAGES_TEMP_FOLDER%\Services\ xcopy /s /y %PACKAGES_TEMP_FOLDER%\Services\*.* %MY_PACKAGES_FOLDER% >> %LOGFILE%
+if exist %PACKAGES_TEMP_FOLDER%\Services\ xcopy /s /y /c %PACKAGES_TEMP_FOLDER%\Services\*.* %MY_PACKAGES_FOLDER% >> %LOGFILE%
 if exist %MY_PACKAGES_FOLDER%\web.config if not exist %WORK_FOLDER%\web.config copy /y %MY_PACKAGES_FOLDER%\web.config %WORK_FOLDER% >> %LOGFILE%
 if exist %MY_PACKAGES_FOLDER%\web.config del /f /s /q %MY_PACKAGES_FOLDER%\web.config >> %LOGFILE%
 
 if exist %MY_PACKAGES_FOLDER%\clientaccesspolicy.xml if not exist %WORK_FOLDER%\clientaccesspolicy.xml copy /y %MY_PACKAGES_FOLDER%\clientaccesspolicy.xml %WORK_FOLDER% >> %LOGFILE%
 if exist %MY_PACKAGES_FOLDER%\CrossDomain.xml if not exist %WORK_FOLDER%\CrossDomain.xml copy /y %MY_PACKAGES_FOLDER%\CrossDomain.xml %WORK_FOLDER% >> %LOGFILE%
 
-if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ xcopy /s /y %PACKAGES_TEMP_FOLDER%\DataStructures\*.* %MY_PACKAGES_FOLDER%\DataStructures >> %LOGFILE%
+if exist %PACKAGES_TEMP_FOLDER%\DataStructures\ xcopy /s /y /c %PACKAGES_TEMP_FOLDER%\DataStructures\*.* %MY_PACKAGES_FOLDER%\DataStructures >> %LOGFILE%
 if exist %PACKAGES_TEMP_FOLDER%\BOBas.BusinessObjectsCommon.DB.*.zip copy /y %PACKAGES_TEMP_FOLDER%\BOBas.BusinessObjectsCommon.DB.*.zip %MY_PACKAGES_FOLDER%\Libraries >> %LOGFILE%
 
 if exist %PACKAGES_TEMP_FOLDER%\Setup.BusinessSystemCenter.B1.Bundle.zip copy /y %PACKAGES_TEMP_FOLDER%\Setup.BusinessSystemCenter.B1.Bundle.zip %MY_PACKAGES_FOLDER%\ClientBin >> %LOGFILE%
