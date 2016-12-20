@@ -17,7 +17,7 @@ namespace Install4ibas.UnitTest
         {
             AppSetting appSetting = new AppSetting();
             appSetting.SiteName = "SBO_TEST";
-            appSetting.LoadSiteName();
+            appSetting.LoadSiteInfo();
             var str = appSetting.Licenses.ToString();
         }
     }
