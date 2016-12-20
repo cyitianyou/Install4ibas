@@ -33,7 +33,9 @@ namespace Install4ibas.UI
         {
             this.SetButtonsVisibleStyle();
             this.InitializeComponent();
+            this.ControlAdded += Control_ControlAdded;
         }
+        
         protected virtual void SetButtonsVisibleStyle()
         {
             this.ButtonsVisibleStyle = ButtonsVisibleStyle.Cancel | ButtonsVisibleStyle.Back
@@ -125,5 +127,36 @@ namespace Install4ibas.UI
             this.ResumeLayout(false);
 
         }
+
+        #region 所有TextBox支持Ctrl+A全选
+        void Control_ControlAdded(object sender, ControlEventArgs e)
+        {
+            //使“未来”生效
+            e.Control.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Control_ControlAdded);
+            //使“子孙”生效
+            foreach (Control c in e.Control.Controls)
+            {
+                Control_ControlAdded(sender, new ControlEventArgs(c));
+            }
+            //使“过去”生效
+            TextBox textBox = e.Control as TextBox;
+            if (textBox != null)
+            {
+                textBox.KeyPress += TextBox_KeyPress;
+            }
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox == null)
+                return;
+            if (e.KeyChar == (char)1)       // Ctrl-A 相当于输入了AscII=1的控制字符
+            {
+                textBox.SelectAll();
+                e.Handled = true;      // 不再发出“噔”的声音
+            }
+        }
+        #endregion
     }
 }

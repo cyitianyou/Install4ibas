@@ -142,20 +142,22 @@ namespace Install4ibas.Tools.Plugin
             System.Xml.XmlNode provider = null;
             if (serviceNode.HasChildNodes)
             {
-                foreach (System.Xml.XmlNode item in serviceNode.ChildNodes)
-                {
-                    foreach (System.Xml.XmlNode node in item.ChildNodes)
-                    {
-                        if (node.Name != "RootAddress") continue;
-                        var tmp = Convert.ToString(node.InnerText);
-                        if (!tmp.StartsWith(this.RootAddress, StringComparison.InvariantCultureIgnoreCase) || string.IsNullOrEmpty(tmp))
-                            continue;
-                        provider = item;
-                        break;
-                    }
-                    if (provider != null)
-                        break;
-                }
+                serviceNode.RemoveAll();
+                //foreach (System.Xml.XmlNode item in serviceNode.ChildNodes)
+                //{
+                    
+                    //foreach (System.Xml.XmlNode node in item.ChildNodes)
+                    //{
+                    //    if (node.Name != "RootAddress") continue;
+                    //    var tmp = Convert.ToString(node.InnerText);
+                    //    if (!tmp.StartsWith(this.RootAddress, StringComparison.InvariantCultureIgnoreCase) || string.IsNullOrEmpty(tmp))
+                    //        continue;
+                    //    provider = item;
+                    //    break;
+                    //}
+                    //if (provider != null)
+                    //    break;
+                //}
             }
             if (provider == null)
             {

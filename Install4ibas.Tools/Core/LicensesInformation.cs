@@ -100,7 +100,7 @@ namespace Install4ibas.Tools.Core
                 for (int i = 0; i < this.LicensedComputerCodes.Length; i++)
                 {
                     var item = this.LicensedComputerCodes[i];
-                    tmp.AppendLine(string.Format("--{0};", item));
+                    tmp.AppendLine(string.Format("{0};", item));
                 }
             }
             tmp.AppendLine(string.Format("数据库:"));
@@ -109,7 +109,7 @@ namespace Install4ibas.Tools.Core
                 for (int i = 0; i < this.LicensedDataBases.Length; i++)
                 {
                     var item = this.LicensedDataBases[i];
-                    tmp.AppendLine(string.Format("--{0};", item));
+                    tmp.AppendLine(string.Format("{0};", item));
                 }
             }
             tmp.AppendLine(string.Format("模块:"));
@@ -118,7 +118,7 @@ namespace Install4ibas.Tools.Core
                 for (int i = 0; i < this.LicensedModules.Length; i++)
                 {
                     var item = this.LicensedModules[i];
-                    tmp.AppendLine(string.Format("--{0};", item));
+                    tmp.AppendLine(string.Format("{0};", item));
                 }
             }
             return tmp.ToString();
