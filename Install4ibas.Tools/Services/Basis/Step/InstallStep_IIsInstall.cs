@@ -23,19 +23,11 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+        public override void Excute()
         {
-            try
-            {
-                IIISManager manager = IISManagerFactory.New().CreateIISManager();
-                if (!manager.IsFullyInstalled())
-                    manager.InstallIIS();
-                return true;
-            }
-            catch(Exception error)
-            {
-                return false;
-            }
+            IIISManager manager = IISManagerFactory.New().CreateIISManager();
+            if (!manager.IsFullyInstalled())
+                manager.InstallIIS();
         }
 
     }

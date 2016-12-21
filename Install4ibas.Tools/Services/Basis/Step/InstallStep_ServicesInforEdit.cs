@@ -26,24 +26,16 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+        public override void Excute()
         {
-            try
-            {
-                var sqlmap = new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(this.AppSetting.DatabaseType);
-                var connection = new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(sqlmap);
-                ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
-                ServiceInforC.SetDBConnection(connection);
-                ServiceInforC.MyAppsetting = this.AppSetting;
-                ServiceInforC.RootAddress = this.AppSetting.IISAddress+":"+this.AppSetting.IISPort;
-                ServiceInforC.WorkFolder = this.AppSetting.InstallDiraddress;
-                ServiceInforC.GO();
-                return true;
-            }
-            catch (Exception error)
-            {
-                return false;
-            }
+            var sqlmap = new SQLMapFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetSQLMap(this.AppSetting.DatabaseType);
+            var connection = new dbConnectionFactory(this.AppSetting.DBServer, this.AppSetting.DBUser, this.AppSetting.DBPassword, this.AppSetting.DBName).GetDBConnection(sqlmap);
+            ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
+            ServiceInforC.SetDBConnection(connection);
+            ServiceInforC.MyAppsetting = this.AppSetting;
+            ServiceInforC.RootAddress = this.AppSetting.IISAddress + ":" + this.AppSetting.IISPort;
+            ServiceInforC.WorkFolder = this.AppSetting.InstallDiraddress;
+            ServiceInforC.GO();
         }
 
     }

@@ -23,20 +23,12 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+        public override void Excute()
         {
-            try
-            {
-                //TODO:添加逻辑代码
-                var manager=IISManagerFactory.New().CreateIISManager();
-                manager.CreateSite(this.AppSetting.SiteName,Convert.ToInt32( this.AppSetting.IISPort), this.AppSetting.InstallDiraddress, "http");
-                manager.CreateApplicationPool(this.AppSetting.SiteName, "v4.0", Microsoft.Web.Administration.ManagedPipelineMode.Integrated);
-                return true;
-            }
-            catch (Exception error)
-            {
-                return false;
-            }
+            //TODO:添加逻辑代码
+            var manager = IISManagerFactory.New().CreateIISManager();
+            manager.CreateSite(this.AppSetting.SiteName, Convert.ToInt32(this.AppSetting.IISPort), this.AppSetting.InstallDiraddress, "http");
+            manager.CreateApplicationPool(this.AppSetting.SiteName, "v4.0", Microsoft.Web.Administration.ManagedPipelineMode.Integrated);
         }
 
     }

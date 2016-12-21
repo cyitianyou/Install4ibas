@@ -25,19 +25,11 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-        public override bool Excute()
+        public override void Excute()
         {
-            try
-            {
-                //TODO:添加逻辑代码
-                if ((this.GetCurrentDBType() == emDatabaseType.mssql || this.GetCurrentDBType() == emDatabaseType.hana) && !string.IsNullOrEmpty(this.AppSetting.B1User))
-                    this.CreateAddonConfig();
-                return true;
-            }
-            catch (Exception error)
-            {
-                return false;
-            }
+            //TODO:添加逻辑代码
+            if ((this.GetCurrentDBType() == emDatabaseType.mssql || this.GetCurrentDBType() == emDatabaseType.hana) && !string.IsNullOrEmpty(this.AppSetting.B1User))
+                this.CreateAddonConfig();
         }
 
         emDatabaseType GetCurrentDBType()

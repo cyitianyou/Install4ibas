@@ -23,18 +23,10 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+        public override void Excute()
         {
-            try
-            {
-                //TODO:添加逻辑代码
-                FileOperation.CopyToolsFiles(this.AppSetting.InstallDiraddress);
-                return true;
-            }
-            catch (Exception error)
-            {
-                return false;
-            }
+            //TODO:添加逻辑代码
+            FileOperation.CopyToolsFiles(this.AppSetting.InstallDiraddress);
         }
 
     }

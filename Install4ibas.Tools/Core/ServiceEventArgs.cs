@@ -9,11 +9,16 @@ namespace Install4ibas.Tools.Core
         public ServiceEventArgs()
         {
         }
+        public ServiceEventArgs(Exception error)
+        {
+            this.Error = error;
+        }
         public ServiceEventArgs(string message, int scheduleValue = 0, Exception error = null)
         {
             this.Message = message;
             this.ScheduleValue = scheduleValue;
             this.Error = error;
+            this.MessageType = emMessageType.success;
         }
         #endregion
         public int ScheduleValue { get; set; }

@@ -25,26 +25,18 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+        public override void Excute()
         {
-            try
+            //TODO:添加逻辑代码
+            var manager = IISManagerFactory.New().CreateIISManager();
+            Site site = manager.GetSite(this.AppSetting.SiteName);
+            if (site == null) throw new Exception("网站未找到");
+            foreach (var item in this.AppSetting.InstallModules
+                                                    .Where(c => c.Checked
+                                                        && c.Status == Tools.Core.emInstallStatus.notInstalled
+                                                        && !string.IsNullOrEmpty(c.ModuleInstallPath)))
             {
-                //TODO:添加逻辑代码
-                var manager = IISManagerFactory.New().CreateIISManager();
-                Site site = manager.GetSite(this.AppSetting.SiteName);
-                if (site == null) throw new Exception("网站未找到");
-                foreach (var item in this.AppSetting.InstallModules
-                                                        .Where(c=>c.Checked 
-                                                            && c.Status==Tools.Core.emInstallStatus.notInstalled
-                                                            && !string.IsNullOrEmpty( c.ModuleInstallPath)))
-                {
-                    manager.CreateApplication(item.ModuleName, site, string.Format("/{0}", item.ModuleName), Path.Combine(this.AppSetting.InstallDiraddress, item.ModuleName), this.AppSetting.SiteName);
-                }
-                return true;
-            }
-            catch (Exception error)
-            {
-                return false;
+                manager.CreateApplication(item.ModuleName, site, string.Format("/{0}", item.ModuleName), Path.Combine(this.AppSetting.InstallDiraddress, item.ModuleName), this.AppSetting.SiteName);
             }
         }
 

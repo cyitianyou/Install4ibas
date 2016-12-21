@@ -24,30 +24,21 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-        public override bool Excute()
+        public override void Excute()
         {
-            try
+            //TODO:添加逻辑代码
+            var InstallDiraddress = Path.Combine(this.AppSetting.InstallDiraddress, "~packages");
+            var Modules = this.AppSetting.InstallModules;
+            var SourcePath = this.AppSetting.SourcePackageDir;
+            if (!Directory.Exists(InstallDiraddress))
+                Directory.CreateDirectory(InstallDiraddress);
+            foreach (var module in Modules.Where(c => c.Checked))
             {
-                //TODO:添加逻辑代码
-                var InstallDiraddress = Path.Combine(this.AppSetting.InstallDiraddress, "~packages");
-                var Modules = this.AppSetting.InstallModules;
-                var SourcePath = this.AppSetting.SourcePackageDir;
-                if (!Directory.Exists(InstallDiraddress))
-                    Directory.CreateDirectory(InstallDiraddress);
-                foreach (var module in Modules.Where(c => c.Checked))
+                if (File.Exists(Path.Combine(SourcePath, module.PackageFileName)))
                 {
-                    if (File.Exists(Path.Combine(SourcePath, module.PackageFileName)))
-                    {
-                        module.ModuleInstallPath = Path.Combine(this.AppSetting.InstallDiraddress, module.ModuleName);
-                        File.Copy(Path.Combine(SourcePath, module.PackageFileName), Path.Combine(InstallDiraddress, module.PackageFileName));
-                    }
+                    module.ModuleInstallPath = Path.Combine(this.AppSetting.InstallDiraddress, module.ModuleName);
+                    File.Copy(Path.Combine(SourcePath, module.PackageFileName), Path.Combine(InstallDiraddress, module.PackageFileName));
                 }
-                //FileOperation.CopyModules(this.AppSetting.SourcePackageDir, InstallDiraddress, this.AppSetting.InstallModules);
-                return true;
-            }
-            catch (Exception error)
-            {
-                return false;
             }
         }
 

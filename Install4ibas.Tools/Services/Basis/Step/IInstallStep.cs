@@ -13,7 +13,7 @@ namespace Install4ibas.Tools.Services.Basis
         string StepName { get; }
         AppSetting AppSetting { get; set; }
 
-        bool Excute();
+        void Excute();
 
         MessageManager MessageManager { get; }
     }
