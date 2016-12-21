@@ -79,6 +79,9 @@ namespace Install4ibas.Tools.Services.Basis
             }
             catch (Exception error)
             {
+                var args = new Core.ServiceEventArgs();
+                args.Error = error;
+                this.MessageManager.OnWriteFileLog(this, args);//写入日志文件
                 throw error;
             }
         }
@@ -89,7 +92,8 @@ namespace Install4ibas.Tools.Services.Basis
             {
                 var installStep = this.StepManager.GetInstallStep(step.StepCode);
                 var args = new Core.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
-                this.MessageManager.OnUpdateInstallationSchedule(this, args);
+                this.MessageManager.OnUpdateInstallationSchedule(this, args);//更新界面进度
+                this.MessageManager.OnWriteFileLog(this, args);//写入日志文件
                 installStep.Excute();
             }
             catch (Exception error)
@@ -107,7 +111,9 @@ namespace Install4ibas.Tools.Services.Basis
                 var args = new Core.ServiceEventArgs();
                 args.ScheduleValue = (index + 1) * 100 / total;
                 args.Message = string.Format("执行步骤[{0}]完成", step.StepName);
-                this.MessageManager.OnUpdateInstallationSchedule(this, args);
+                args.MessageType = Plugin.Messages.emMessageType.success;
+                this.MessageManager.OnUpdateInstallationSchedule(this, args);//更新界面进度
+                this.MessageManager.OnWriteFileLog(this, args);//写入日志文件
             }
         }
 

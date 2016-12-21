@@ -14,7 +14,7 @@ namespace Install4ibas.UI
     public partial class InstallationProgressControl : ChildControl
     {
         private delegate void BetweenThreadsDelegate(Tools.Core.ServiceEventArgs e);
-        BetweenThreadsDelegate callBack ;
+        BetweenThreadsDelegate callBack;
         public InstallationProgressControl()
         {
             InitializeComponent();
@@ -46,9 +46,12 @@ namespace Install4ibas.UI
         }
         void MessageManager_WriteFileLogEvent(object sender, Tools.Core.ServiceEventArgs args)
         {
-            FileRecorder.Recording(args.MessageType, args.Message);
+            if (args.Error != null)
+                FileRecorder.Recording(args.Error);
+            else
+                FileRecorder.Recording(args.MessageType, args.Message);
         }
-        
+
         void MessageManager_Event(object sender, Tools.Core.ServiceEventArgs e)
         {
             try
@@ -63,7 +66,7 @@ namespace Install4ibas.UI
                     Control_Event(e);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -89,13 +92,21 @@ namespace Install4ibas.UI
         }
 
 
-
+        int count;
+        string dateString;
         bool ExcuteService(bool isFirstRun = true)
         {
+            if (isFirstRun)
+            {
+                count = 1;
+                dateString=DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            }
+            else
+                count++;
             try
             {
-                this.FileRecorder.WorkFileName = "";
-                this.FileRecorder.WorkFolder = Path.Combine( this.ShellControl.installService.AppSetting.InstallDiraddress, "~packages");
+                this.FileRecorder.WorkFileName = string.Format("deploy_ibas_log_{0}_{1}.log", dateString,count);
+                this.FileRecorder.WorkFolder = Path.Combine(this.ShellControl.installService.AppSetting.InstallDiraddress, "~packages","Log");
                 this.ShellControl.installService.Excute(isFirstRun);
                 return true;
             }
