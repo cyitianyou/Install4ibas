@@ -61,15 +61,17 @@ namespace Install4ibas.Tools.Services.Basis
                 foreach (var item in this.AppSetting.Steps)
                 {
                     //循环方案步骤
-                    var executed = false;
                     if (!item.Completed)
                     {
-                        //步骤没有完成
-                        executed = this.ExecutingStep(item);//运行步骤
-                        if (executed)
+                        try
+                        {
+                            this.ExecutingStep(item);//运行步骤
                             this.ExecutingStepDone(item);//执行完成
-                        else
-                            throw new Exception(string.Format("步骤[{0} - {1}]执行返回失败，运行终止。", item.StepCode, item.StepName));
+                        }
+                        catch (Exception error)
+                        {
+                            throw new Exception(string.Format("步骤[{0} - {1}]执行失败，错误信息：[{2}]", item.StepCode, item.StepName,error.Message),error);
+                        }
                     }
                 }
                 //安装完成
@@ -81,7 +83,7 @@ namespace Install4ibas.Tools.Services.Basis
             }
         }
 
-        protected virtual bool ExecutingStep(InstallInformationStep step)
+        protected virtual void ExecutingStep(InstallInformationStep step)
         {
             try
             {
@@ -89,11 +91,10 @@ namespace Install4ibas.Tools.Services.Basis
                 var args = new Core.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
                 this.MessageManager.OnUpdateInstallationSchedule(this, args);
                 installStep.Excute();
-                return true;
             }
             catch (Exception error)
             {
-                return false;
+                throw error;
             }
         }
         protected virtual void ExecutingStepDone(InstallInformationStep step)

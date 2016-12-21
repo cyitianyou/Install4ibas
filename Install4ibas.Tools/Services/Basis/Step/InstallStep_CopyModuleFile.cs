@@ -24,7 +24,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-        public override bool Excute()
+        public override void Excute()
         {
             try
             {
@@ -43,11 +43,10 @@ namespace Install4ibas.Tools.Services.Basis.Step
                     }
                 }
                 //FileOperation.CopyModules(this.AppSetting.SourcePackageDir, InstallDiraddress, this.AppSetting.InstallModules);
-                return true;
             }
             catch (Exception error)
             {
-                return false;
+                throw error;
             }
         }
 

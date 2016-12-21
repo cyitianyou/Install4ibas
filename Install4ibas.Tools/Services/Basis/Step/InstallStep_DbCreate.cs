@@ -33,7 +33,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         bool B1Included { get { return string.IsNullOrEmpty(this.AppSetting.B1User) ? false : true; } }
 
-        public override bool Excute()
+        public override void Excute()
         {
             var shell = this.AppSetting.InstallModules.Where(c => c.Type == emModuleType.shell).FirstOrDefault();
             if (shell != null)
@@ -59,7 +59,6 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 }
 
             }
-            return true;
         }
         private void ModuleToDB(ibasModule module)
         {

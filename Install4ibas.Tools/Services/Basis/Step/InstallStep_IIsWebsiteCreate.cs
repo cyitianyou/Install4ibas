@@ -23,7 +23,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+         public override void Excute()
         {
             try
             {
@@ -31,11 +31,10 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 var manager=IISManagerFactory.New().CreateIISManager();
                 manager.CreateSite(this.AppSetting.SiteName,Convert.ToInt32( this.AppSetting.IISPort), this.AppSetting.InstallDiraddress, "http");
                 manager.CreateApplicationPool(this.AppSetting.SiteName, "v4.0", Microsoft.Web.Administration.ManagedPipelineMode.Integrated);
-                return true;
             }
             catch (Exception error)
             {
-                return false;
+                throw error;
             }
         }
 

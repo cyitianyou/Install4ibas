@@ -26,7 +26,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+         public override void Excute()
         {
             try
             {
@@ -38,11 +38,10 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 ServiceInforC.RootAddress = this.AppSetting.IISAddress+":"+this.AppSetting.IISPort;
                 ServiceInforC.WorkFolder = this.AppSetting.InstallDiraddress;
                 ServiceInforC.GO();
-                return true;
             }
             catch (Exception error)
             {
-                return false;
+                throw error;
             }
         }
 

@@ -24,9 +24,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
             set;
         }
 
-        public virtual bool Excute()
+        public virtual void Excute()
         {
-            return true;
         }
         
         public Plugin.MessageManager MessageManager

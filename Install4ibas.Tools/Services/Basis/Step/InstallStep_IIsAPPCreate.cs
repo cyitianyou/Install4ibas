@@ -25,7 +25,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
         }
 
         #endregion
-         public override bool Excute()
+         public override void Excute()
         {
             try
             {
@@ -40,11 +40,10 @@ namespace Install4ibas.Tools.Services.Basis.Step
                 {
                     manager.CreateApplication(item.ModuleName, site, string.Format("/{0}", item.ModuleName), Path.Combine(this.AppSetting.InstallDiraddress, item.ModuleName), this.AppSetting.SiteName);
                 }
-                return true;
             }
             catch (Exception error)
             {
-                return false;
+                throw error;
             }
         }
 
