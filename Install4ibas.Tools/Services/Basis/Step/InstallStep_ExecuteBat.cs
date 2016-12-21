@@ -25,15 +25,8 @@ namespace Install4ibas.Tools.Services.Basis.Step
         #endregion
         public override void Excute()
         {
-            try
-            {
-                //TODO:添加逻辑代码
-                FileOperation.RunBatFile(System.IO.Path.Combine(this.AppSetting.InstallDiraddress, "deploy_ibas_web_services.bat"));
-            }
-            catch (Exception error)
-            {
-                throw error;
-            }
+            //TODO:添加逻辑代码
+            FileOperation.RunBatFile(System.IO.Path.Combine(this.AppSetting.InstallDiraddress, "deploy_ibas_web_services.bat"));
         }
 
     }

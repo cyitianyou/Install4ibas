@@ -70,7 +70,7 @@ namespace Install4ibas.Tools.Services.Basis
                         }
                         catch (Exception error)
                         {
-                            throw new Exception(string.Format("步骤[{0} - {1}]执行失败，错误信息：[{2}]", item.StepCode, item.StepName,error.Message),error);
+                            throw new Exception(string.Format("步骤[{0} - {1}]执行失败，错误信息：[{2}]", item.StepCode, item.StepName, error.Message), error);
                         }
                     }
                 }
@@ -88,18 +88,11 @@ namespace Install4ibas.Tools.Services.Basis
 
         protected virtual void ExecutingStep(InstallInformationStep step)
         {
-            try
-            {
-                var installStep = this.StepManager.GetInstallStep(step.StepCode);
-                var args = new Core.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
-                this.MessageManager.OnUpdateInstallationSchedule(this, args);//更新界面进度
-                this.MessageManager.OnWriteFileLog(this, args);//写入日志文件
-                installStep.Excute();
-            }
-            catch (Exception error)
-            {
-                throw error;
-            }
+            var installStep = this.StepManager.GetInstallStep(step.StepCode);
+            var args = new Core.ServiceEventArgs(string.Format("正在执行步骤[{0}]", step.StepName));
+            this.MessageManager.OnUpdateInstallationSchedule(this, args);//更新界面进度
+            this.MessageManager.OnWriteFileLog(this, args);//写入日志文件
+            installStep.Excute();
         }
         protected virtual void ExecutingStepDone(InstallInformationStep step)
         {
