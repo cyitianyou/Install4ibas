@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Install4ibas.Properties {
+namespace Install4ibas.x86.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
