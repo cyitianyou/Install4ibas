@@ -35,12 +35,14 @@ namespace Install4ibas.Tools.Services.Basis.Step
             }
             else
             {
-              var  proc = new Process();
-              proc.StartInfo.FileName = Path.Combine(System.Environment.CurrentDirectory, "Install4IIS.exe");
-              proc.StartInfo.WorkingDirectory = System.Environment.CurrentDirectory;
-              // proc.StartInfo.Arguments = string.Format("10");//this is argument
-              proc.StartInfo.CreateNoWindow = false;
-              proc.StartInfo.UseShellExecute = true;
+                var proc = new Process();
+                proc.StartInfo.FileName = Path.Combine(System.Environment.CurrentDirectory, "Install4IIS.exe");
+                proc.StartInfo.WorkingDirectory = System.Environment.CurrentDirectory;
+                // proc.StartInfo.Arguments = string.Format("10");//this is argument
+                proc.StartInfo.CreateNoWindow = false;
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+                proc.WaitForExit();
             }
         }
 
