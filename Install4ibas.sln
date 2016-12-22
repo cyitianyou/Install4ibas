@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.UnitTest", "In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.x64", "Install4ibas\Install4ibas.x64.csproj", "{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4IIS", "Install4IIS\Install4IIS.csproj", "{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
