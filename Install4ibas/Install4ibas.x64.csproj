@@ -93,7 +93,7 @@
     <PostBuildEvent>cd "$(TargetDir)"
 if exist "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip" (
 copy Install4ibas.x64.exe Install4ibas.exe
-"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x64.7z -r Install4ibas.exe Install4IIS.exe *.dll SQLMaps.xml ibasStandardModules.xml
+"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x64.7z -r Install4ibas.exe *.dll SQLMaps.xml ibasStandardModules.xml
 copy /b Install4ibas.sfx + Install4ibas.config.txt + setup.x64.7z "setup.x64.exe"
 del Install4ibas.exe
 del setup.x64.7z
