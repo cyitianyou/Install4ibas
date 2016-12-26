@@ -25,7 +25,7 @@ namespace Install4ibas.Tools.Core
             this.InstallModules = new ibasModules();
             this.Licenses = new LicensesInformation();
             this.LoadDefaultModules();
-            
+
         }
 
         #endregion
@@ -226,8 +226,8 @@ namespace Install4ibas.Tools.Core
             AppSettingsSection appSetting = cfg.AppSettings;
             //使用Site信息对AppSetting赋值
             #region 数据库相关
-             //public emPlatform Platform
-             //public string B1User
+            //public emPlatform Platform
+            //public string B1User
             //public string B1Password
             this.DatabaseType = GetValue(appSetting, "DatabaseType");
             this.DBServer = GetValue(appSetting, "DataSource");
@@ -249,8 +249,24 @@ namespace Install4ibas.Tools.Core
                 //public string IISPort
                 this.IISAddress = endPoint.Port.ToString();
             }
-            
-        #endregion
+            this.LoadDefaultModules();
+            foreach (var item in  site.Applications)
+            {
+                var module=this.InstallModules.FirstOrDefault(c=>item.Path.Equals(string.Format("/{0}",c.ModuleName)));
+                if(module!=null)
+                {
+                    module.Status = emInstallStatus.Installed;
+                }
+                else
+                {
+                    module = new ibasModule();
+                    module.Type = emModuleType.other;
+                    module.ModuleName = item.Path.Substring(1);
+                    module.ModuleDescription = module.ModuleName;
+                    module.Status = emInstallStatus.Installed;
+                }
+            }
+            #endregion
             #region Licences相关
             var sqlmap = new SQLMapFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetSQLMap(this.DatabaseType);
             var connection = new dbConnectionFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetDBConnection(sqlmap);

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.x86", "Install4ibas\Install4ibas.x86.csproj", "{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F} = {ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.UI", "Install4ibas.UI\Install4ibas.UI.csproj", "{BF2A331E-DFD1-4D0F-9C7E-DA2DEDFC5D29}"
 EndProject
@@ -12,6 +15,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.UnitTest", "Install4ibas.UnitTest\Install4ibas.UnitTest.csproj", "{D16B5007-3A6E-41FC-9F8A-D088F31F6977}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4ibas.x64", "Install4ibas\Install4ibas.x64.csproj", "{4771E622-4FBE-4BE8-80FB-1D2BB5C57AB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F} = {ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install4IIS", "Install4IIS\Install4IIS.csproj", "{ABACC352-0EFA-43DC-8E59-72A2FAC8D61F}"
 EndProject
