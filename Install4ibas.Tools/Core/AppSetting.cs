@@ -194,7 +194,8 @@ namespace Install4ibas.Tools.Core
         /// <param name="folderPath"></param>
         public void GetLocalModulesInfo(string folderPath)
         {
-            this.LoadDefaultModules();
+            if (this.InstallModules.Count == 0)
+                this.LoadDefaultModules();
             this.InstallModules.GetLocalInfo(folderPath);
         }
         private void LoadDefaultModules()
@@ -250,11 +251,11 @@ namespace Install4ibas.Tools.Core
                 this.IISAddress = endPoint.Port.ToString();
             }
             this.LoadDefaultModules();
-            foreach (var item in  site.Applications)
+            foreach (var item in site.Applications)
             {
                 if (item.Path == "/") continue;
-                var module=this.InstallModules.FirstOrDefault(c=>item.Path.Equals(string.Format("/{0}",c.ModuleName)));
-                if(module!=null)
+                var module = this.InstallModules.FirstOrDefault(c => item.Path.Equals(string.Format("/{0}", c.ModuleName)));
+                if (module != null)
                 {
                     module.Status = emInstallStatus.Installed;
                 }
