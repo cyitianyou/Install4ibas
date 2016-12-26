@@ -36,6 +36,12 @@ namespace Install4ibas.Tools.Core
                         ibas_Moudule.ModuleDescription = group.Key.ModuleName;
                         this.Add(ibas_Moudule);
                     }
+                    else
+                    {
+                        if (ibas_Moudule.Status == emInstallStatus.Installed)
+                            ibas_Moudule.Status = emInstallStatus.canUpdate;
+                    }
+                            
                     //添加模块包名列表
                     foreach (var item in group.OrderBy(c=>c.FileDate))
                     {

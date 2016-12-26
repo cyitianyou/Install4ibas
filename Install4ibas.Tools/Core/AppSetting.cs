@@ -252,6 +252,7 @@ namespace Install4ibas.Tools.Core
             this.LoadDefaultModules();
             foreach (var item in  site.Applications)
             {
+                if (item.Path == "/") continue;
                 var module=this.InstallModules.FirstOrDefault(c=>item.Path.Equals(string.Format("/{0}",c.ModuleName)));
                 if(module!=null)
                 {
