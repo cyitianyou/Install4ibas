@@ -115,8 +115,9 @@ namespace Install4ibas.Tools.Plugin.IISManager
 
         public virtual void UpdateSvcConfig()
         {
+            ServerManager sm = new ServerManager();
             #region 添加MIEI
-            ConfigurationElementCollection staticContentCollection = serverManager.GetApplicationHostConfiguration()
+            ConfigurationElementCollection staticContentCollection = sm.GetApplicationHostConfiguration()
                                                                                                                                     .GetSection("system.webServer/staticContent")
                                                                                                                                     .GetCollection();
             ConfigurationElement mimeTypeEl = staticContentCollection.FirstOrDefault(a => (string)a.Attributes["fileExtension"].Value == ".svc");
@@ -128,7 +129,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
             staticContentCollection.Add(mimeMapElement);
             #endregion
             #region 添加处理程序映射
-            ConfigurationElementCollection handlersCollection = serverManager.GetApplicationHostConfiguration()
+            ConfigurationElementCollection handlersCollection = sm.GetApplicationHostConfiguration()
                                                                                                                                     .GetSection("system.webServer/handlers")
                                                                                                                                     .GetCollection();
             ConfigurationElement handleEl = handlersCollection.FirstOrDefault(a => (string)a.Attributes["path"].Value == "*.svc"
@@ -142,7 +143,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
             addElement["type"] = "System.ServiceModel.Activation.HttpHandler";
             handlersCollection.Add(addElement);
             #endregion
-            serverManager_CommitChanges();
+            sm.CommitChanges();
         }
 
         public virtual ApplicationPool CreateApplicationPool(string appPoolName, string runtimeVersion = "v4.0", ManagedPipelineMode mode = ManagedPipelineMode.Integrated)
