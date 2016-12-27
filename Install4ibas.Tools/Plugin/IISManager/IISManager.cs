@@ -26,6 +26,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
         private void serverManager_CommitChanges()
         {
             serverManager.CommitChanges();
+            serverManager.Dispose();
             _serverManager = new ServerManager();
         }
         protected bool checkedFullyInstalled;

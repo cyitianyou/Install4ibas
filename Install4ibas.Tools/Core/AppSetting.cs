@@ -248,7 +248,7 @@ namespace Install4ibas.Tools.Core
                 //public string IISAddress
                 this.IISAddress = endPoint.Address.ToString();
                 //public string IISPort
-                this.IISAddress = endPoint.Port.ToString();
+                this.IISPort = endPoint.Port.ToString();
             }
             this.LoadDefaultModules();
             foreach (var item in site.Applications)
