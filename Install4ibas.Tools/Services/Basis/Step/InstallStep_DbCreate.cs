@@ -64,6 +64,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
         {
             try
             {
+                var args = new Core.ServiceEventArgs(string.Format("开始创建模块[{0}]的数据结构", module.ModuleDescription));
+                this.MessageManager.OnWriteMessageLog(this, args);
+
                 var dsGetter = new DataStructuresGetter();
                 dsGetter.WorkFolder = module.ModuleInstallPath;
                 var dsItems = dsGetter.Get();
@@ -91,6 +94,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
                         logFile.WriteLine(string.Format(" group：{0}", gpKey));
                         #region 数据结构创建
                         #region ibas
+                        args = new Core.ServiceEventArgs(string.Format("正在创建模块[{0}]的ibas数据结构", module.ModuleDescription));
+                        this.MessageManager.OnWriteMessageLog(this, args);
+
                         files = new List<string>();
                         foreach (var item in gpDSItems[gpKey].Where(c => c.ItemType == emDSItemType.data_structure
                             && c.Platform == emPlatform.ibas))
@@ -116,6 +122,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
                         }
                         #endregion
                         #region b1
+                        args = new Core.ServiceEventArgs(string.Format("正在创建模块[{0}]的b1数据结构", module.ModuleDescription));
+                        this.MessageManager.OnWriteMessageLog(this, args);
+
                         files = new List<string>();
                         foreach (var item in gpDSItems[gpKey].Where(c => c.ItemType == emDSItemType.data_structure
                             && c.Platform == emPlatform.b1))
@@ -142,6 +151,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
                         #endregion
                         #endregion
                         #region sql脚本
+                        args = new Core.ServiceEventArgs(string.Format("正在执行模块[{0}]的sql脚本", module.ModuleDescription));
+                        this.MessageManager.OnWriteMessageLog(this, args);
+
                         files = new List<string>();
                         foreach (var item in gpDSItems[gpKey].Where(c => c.ItemType == emDSItemType.sql_script))
                         {

@@ -226,5 +226,60 @@ namespace Install4ibas.UI
             this.txtSiteName.Text = this.MyAppSetting.SiteName;
         }
 
+        private void butDITest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SAPbobsCOM.Company b1Company = CompanyConnectTest();
+                MessageBox.Show(string.Format("成功连接至账套[{0}/{1}]", b1Company.CompanyDB, b1Company.CompanyName));
+                b1Company.Disconnect();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(b1Company);
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        SAPbobsCOM.Company CompanyConnectTest()
+        {
+            try
+            {
+                SAPbobsCOM.Company Company = new SAPbobsCOM.Company();
+                Company.DbServerType = (SAPbobsCOM.BoDataServerTypes)System.Enum.Parse(typeof(SAPbobsCOM.BoDataServerTypes), this.cmbB1Type.Text);
+                Company.Server = this.txtDBServer.Text;
+                Company.DbUserName = this.txtDBUser.Text;
+                Company.DbPassword = this.txtDBPassword.Text;
+                Company.CompanyDB = this.cmbDBName.Text;
+                Company.UserName = this.txtB1User.Text;
+                Company.Password = this.txtB1Password.Text;
+                Company.LicenseServer = this.txtB1Server.Text;
+                SAPbobsCOM.BoSuppLangs language;
+                if (System.Enum.TryParse<SAPbobsCOM.BoSuppLangs>(this.cmbLanguage.Text, out language))
+                    Company.language = language;
+
+                int ret = Company.Connect();
+                if (ret != 0)
+                    throw new Exception(string.Format("连接B1失败，{0}", Company.GetLastErrorDescription()));
+                return Company;
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("[DI API]初始化失败");
+                if ((ex) is System.IO.FileNotFoundException & ex.Message.IndexOf("632F4591-AA62-4219-8FB6-22BCF5F60090") > 0)
+                {
+                    string msg_no_di = string.Format("{0}，{1}", message, "可能是此计算机没有安装匹配的{0}位版本DI。");
+                    if ((System.Environment.Is64BitProcess))
+                        //'64位客户端
+                        message = string.Format(msg_no_di, "64");
+                    else
+                        //'32位客户端
+                        message = string.Format(msg_no_di, "32");
+                }
+                else
+                    message = string.Format("{0}，{1}", message, ex.Message);
+                throw new Exception(message, ex);
+            }
+        }
     }
 }

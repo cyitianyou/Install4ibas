@@ -91,18 +91,29 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd "$(TargetDir)"
+if not exist .\~packages MD .\~packages
 if exist "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip" (
 copy Install4ibas.x64.exe Install4ibas.exe
-"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x64.7z -r Install4ibas.exe *.dll SQLMaps.xml ibasStandardModules.xml
-copy /b Install4ibas.sfx + Install4ibas.config.txt + setup.x64.7z "setup.x64.exe"
-del Install4ibas.exe
+reg 打包带模块的
+"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x64.7z -r Install4ibas.exe ~packages *.dll SQLMaps.xml ibasStandardModules.xml
+copy /b Install4ibas.sfx + Install4ibas.config.txt + setup.x64.7z "setup.x64(包含标准模块).exe"
 del setup.x64.7z
+
+reg 打包带模块的
+"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x64.7z -r Install4ibas.exe *.dll SQLMaps.xml ibasStandardModules.xml
+copy /b Install4ibas.sfx + Install4ibas.config.txt + setup.x64.7z "setup.x64(不包含标准模块).exe"
+del setup.x64.7z
+
+reg 删除残留文件
+del Install4ibas.exe
+
 ) else (print "no packager")
 
 cd "$(TargetDir)"
 if not exist ..\..\..\Release MD ..\..\..\Release
 cd "$(TargetDir)"
-copy /y "setup.x64.exe" ..\..\..\Release</PostBuildEvent>
+copy /y "setup.x64(不包含标准模块).exe" ..\..\..\Release
+copy /y "setup.x64(包含标准模块).exe" ..\..\..\Release</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -238,6 +238,7 @@
             this.butDITest.TabIndex = 62;
             this.butDITest.Text = "测试DI连接";
             this.butDITest.UseVisualStyleBackColor = true;
+            this.butDITest.Click += new System.EventHandler(this.butDITest_Click);
             // 
             // butCOList
             // 
