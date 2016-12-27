@@ -49,17 +49,17 @@ namespace Install4ibas.Tools.Plugin
                 proc.StartInfo.FileName = filename;
                 proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(filename);
                 // proc.StartInfo.Arguments = string.Format("10");//this is argument
-                proc.StartInfo.CreateNoWindow = true;
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
+                proc.StartInfo.CreateNoWindow = false;
+                proc.StartInfo.UseShellExecute = true;
+                //proc.StartInfo.RedirectStandardOutput = true;
+                //proc.StartInfo.RedirectStandardError = true;
                 proc.Start();
-                StreamReader reader = proc.StandardOutput;
-                string output=string.Empty;
-                while ((output=reader.ReadLine())!=null)
-                {
-                    MessageManager.Instance.OnWriteMessageLog(null, new ServiceEventArgs(output));
-                }
+                //StreamReader reader = proc.StandardOutput;
+                //string output=string.Empty;
+                //while ((output=reader.ReadLine())!=null)
+                //{
+                //    MessageManager.Instance.OnWriteMessageLog(null, new ServiceEventArgs(output));
+                //}
 
                 proc.WaitForExit();
             }

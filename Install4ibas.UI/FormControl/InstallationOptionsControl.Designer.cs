@@ -121,6 +121,7 @@
             this.radio_EditPort.TabStop = true;
             this.radio_EditPort.Text = "修改ibas的IP/端口";
             this.radio_EditPort.UseVisualStyleBackColor = true;
+            this.radio_EditPort.Visible = false;
             this.radio_EditPort.CheckedChanged += new System.EventHandler(this.radio_CheckedChanged);
             // 
             // InstallationOptionsControl

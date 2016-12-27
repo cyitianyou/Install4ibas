@@ -20,6 +20,14 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 return _serverManager;
             }
         }
+        /// <summary>
+        /// 配置提交后,需要重新实例化才能再次提交
+        /// </summary>
+        private void serverManager_CommitChanges()
+        {
+            serverManager.CommitChanges();
+            _serverManager = new ServerManager();
+        }
         protected bool checkedFullyInstalled;
         public IISManager()
         {
@@ -121,7 +129,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                     newPool.Enable32BitAppOnWin64 = true;
                 else
                     newPool.Enable32BitAppOnWin64 = false;
-                serverManager.CommitChanges();
+                serverManager_CommitChanges();
                 return newPool;
             }
             catch (Exception error)
@@ -140,7 +148,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 }
                 site = serverManager.Sites.Add(siteName, protocolName, string.Format("*:{0}:", port), physicsPath);
                 site.Applications[0].ApplicationPoolName = siteName;
-                serverManager.CommitChanges();
+                serverManager_CommitChanges();
                 return site;
             }
             catch (Exception error)
@@ -182,7 +190,7 @@ namespace Install4ibas.Tools.Plugin.IISManager
                 string path = "system.webServer/directoryBrowse";//the attribue path in the applictionHostConfig.config file.
                 Microsoft.Web.Administration.ConfigurationSection dbS = config.GetSection(path, string.Format("{0}{1}", site.Name, Path));
                 dbS.Attributes["enabled"].Value = true;
-                serverManager.CommitChanges();
+                serverManager_CommitChanges();
                 return newApp;
             }
             catch (Exception error)

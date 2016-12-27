@@ -40,14 +40,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gp_Modules = new System.Windows.Forms.GroupBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.chk_Other = new System.Windows.Forms.CheckBox();
-            this.chk_Standard = new System.Windows.Forms.CheckBox();
-            this.chk_Basis = new System.Windows.Forms.CheckBox();
             this.dr_Checked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dr_ModuleDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dr_Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dr_Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dr_PackageFilePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_Other = new System.Windows.Forms.CheckBox();
+            this.chk_Standard = new System.Windows.Forms.CheckBox();
+            this.chk_Basis = new System.Windows.Forms.CheckBox();
             this.gp_Choose.SuspendLayout();
             this.gp_Modules.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -90,6 +90,7 @@
             this.chk_UseLocal.TabIndex = 2;
             this.chk_UseLocal.Text = "优先使用本地包";
             this.chk_UseLocal.UseVisualStyleBackColor = true;
+            this.chk_UseLocal.Visible = false;
             // 
             // txtFolder
             // 
@@ -149,48 +150,6 @@
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
             // 
-            // chk_Other
-            // 
-            this.chk_Other.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chk_Other.AutoSize = true;
-            this.chk_Other.Checked = true;
-            this.chk_Other.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_Other.Location = new System.Drawing.Point(535, 27);
-            this.chk_Other.Name = "chk_Other";
-            this.chk_Other.Size = new System.Drawing.Size(98, 21);
-            this.chk_Other.TabIndex = 2;
-            this.chk_Other.Text = "其他模块";
-            this.chk_Other.UseVisualStyleBackColor = true;
-            this.chk_Other.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // chk_Standard
-            // 
-            this.chk_Standard.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chk_Standard.AutoSize = true;
-            this.chk_Standard.Checked = true;
-            this.chk_Standard.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_Standard.Location = new System.Drawing.Point(257, 27);
-            this.chk_Standard.Name = "chk_Standard";
-            this.chk_Standard.Size = new System.Drawing.Size(98, 21);
-            this.chk_Standard.TabIndex = 1;
-            this.chk_Standard.Text = "标准模块";
-            this.chk_Standard.UseVisualStyleBackColor = true;
-            this.chk_Standard.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // chk_Basis
-            // 
-            this.chk_Basis.AutoSize = true;
-            this.chk_Basis.Checked = true;
-            this.chk_Basis.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_Basis.Location = new System.Drawing.Point(16, 27);
-            this.chk_Basis.Name = "chk_Basis";
-            this.chk_Basis.Size = new System.Drawing.Size(98, 21);
-            this.chk_Basis.TabIndex = 0;
-            this.chk_Basis.Text = "基础模块";
-            this.chk_Basis.UseVisualStyleBackColor = true;
-            this.chk_Basis.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
             // dr_Checked
             // 
             this.dr_Checked.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -249,6 +208,48 @@
             this.dr_PackageFilePath.ReadOnly = true;
             this.dr_PackageFilePath.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dr_PackageFilePath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // chk_Other
+            // 
+            this.chk_Other.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chk_Other.AutoSize = true;
+            this.chk_Other.Checked = true;
+            this.chk_Other.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Other.Location = new System.Drawing.Point(535, 27);
+            this.chk_Other.Name = "chk_Other";
+            this.chk_Other.Size = new System.Drawing.Size(98, 21);
+            this.chk_Other.TabIndex = 2;
+            this.chk_Other.Text = "其他模块";
+            this.chk_Other.UseVisualStyleBackColor = true;
+            this.chk_Other.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            // 
+            // chk_Standard
+            // 
+            this.chk_Standard.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chk_Standard.AutoSize = true;
+            this.chk_Standard.Checked = true;
+            this.chk_Standard.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Standard.Location = new System.Drawing.Point(257, 27);
+            this.chk_Standard.Name = "chk_Standard";
+            this.chk_Standard.Size = new System.Drawing.Size(98, 21);
+            this.chk_Standard.TabIndex = 1;
+            this.chk_Standard.Text = "标准模块";
+            this.chk_Standard.UseVisualStyleBackColor = true;
+            this.chk_Standard.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            // 
+            // chk_Basis
+            // 
+            this.chk_Basis.AutoSize = true;
+            this.chk_Basis.Checked = true;
+            this.chk_Basis.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Basis.Location = new System.Drawing.Point(16, 27);
+            this.chk_Basis.Name = "chk_Basis";
+            this.chk_Basis.Size = new System.Drawing.Size(98, 21);
+            this.chk_Basis.TabIndex = 0;
+            this.chk_Basis.Text = "基础模块";
+            this.chk_Basis.UseVisualStyleBackColor = true;
+            this.chk_Basis.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // ModulesChooseControl
             // 

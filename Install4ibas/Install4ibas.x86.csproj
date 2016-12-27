@@ -7,8 +7,8 @@
     <ProjectGuid>{32A2C4B1-1F86-4FB1-ABF8-C1475681BB99}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Install4ibas</RootNamespace>
-    <AssemblyName>Install4ibas</AssemblyName>
+    <RootNamespace>Install4ibas.x86</RootNamespace>
+    <AssemblyName>Install4ibas.x86</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -109,8 +109,13 @@
   <PropertyGroup>
     <PostBuildEvent>cd "$(TargetDir)"
 if exist "..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip" (
-"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x86.7z -r Install4ibas.exe *.dll SQLMaps.xml ibasStandardModules.xml
+copy Install4ibas.x86.exe Install4ibas.exe
+"..\..\..\Install4ibas.Tools\Resource\WebFile\Tools\7zip\7z.exe" a setup.x86.7z -r Install4ibas.exe Install4IIS.exe *.dll SQLMaps.xml ibasStandardModules.xml
 copy /b Install4ibas.sfx + Install4ibas.config.txt + setup.x86.7z "setup.x86.exe"
+del Install4ibas.exe
+del setup.x86.7z
+del Install4ibas.sfx
+del Install4ibas.config.txt
 ) else (print "no packager")
 
 cd "$(TargetDir)"
