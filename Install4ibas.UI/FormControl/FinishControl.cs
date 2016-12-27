@@ -35,7 +35,24 @@ namespace Install4ibas.UI
         public override void LoadAppSetting()
         {
             if (!this.ShellControl.installService.AppSetting.isSuccess)
+            {
                 this.label1.Text = "安装失败！";
+                this.link_License.Visible = false;
+            }
+        }
+
+        private void link_License_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                this.ShellControl.installService.AppSetting.UpdateLicense();
+                this.ShellControl.SetCurrentControl(ControlTypes.LicenseCreateControl);
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(string.Format("获取网站信息生成License出错,错误如下:[{0}]", error.Message));
+            }
+            
         }
     }
 }

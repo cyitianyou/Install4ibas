@@ -270,6 +270,12 @@ namespace Install4ibas.Tools.Core
             }
             #endregion
             #region Licences相关
+            this.UpdateLicense();
+            #endregion
+        }
+
+        public void UpdateLicense()
+        {
             var sqlmap = new SQLMapFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetSQLMap(this.DatabaseType);
             var connection = new dbConnectionFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetDBConnection(sqlmap);
             ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
@@ -292,7 +298,6 @@ namespace Install4ibas.Tools.Core
                 ModuleList.Add(string.Format("{0}|{1}", item.ModuleID, item.ServiceDescription));
             }
             Licenses.LicensedModules = ModuleList.ToArray();
-            #endregion
         }
 
         private string GetValue(AppSettingsSection appSetting, string key)

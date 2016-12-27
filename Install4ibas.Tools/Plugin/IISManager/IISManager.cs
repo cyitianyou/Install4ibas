@@ -91,16 +91,8 @@ namespace Install4ibas.Tools.Plugin.IISManager
             }
             FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "iu"));
             RegIISForAspnet();
+            this.UpdateSvcConfig();
         }
-
-        public virtual void RegIISForAspnet()
-        {
-            if (CheckOSBitness.Is64BitOperatingSystem())
-                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
-            else
-                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
-        }
-
         public virtual void UninstallIIS()
         {
             if (!checkedFullyInstalled)
@@ -113,6 +105,46 @@ namespace Install4ibas.Tools.Plugin.IISManager
             }
             FileOperation.ExecuteCmd(sb.ToString().Replace("[option]", "uu"));
         }
+        public virtual void RegIISForAspnet()
+        {
+            if (CheckOSBitness.Is64BitOperatingSystem())
+                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework64\v4.0.30319\aspnet_regiis -i"));
+            else
+                FileOperation.ExecuteCmd(Path.Combine(System.Environment.GetEnvironmentVariable("windir"), @"Microsoft.Net\Framework\v4.0.30319\aspnet_regiis -i"));
+        }
+
+        public virtual void UpdateSvcConfig()
+        {
+            #region 添加MIEI
+            ConfigurationElementCollection staticContentCollection = serverManager.GetApplicationHostConfiguration()
+                                                                                                                                    .GetSection("system.webServer/staticContent")
+                                                                                                                                    .GetCollection();
+            ConfigurationElement mimeTypeEl = staticContentCollection.FirstOrDefault(a => (string)a.Attributes["fileExtension"].Value == ".svc");
+            if (mimeTypeEl != null)
+                staticContentCollection.Remove(mimeTypeEl);
+            ConfigurationElement mimeMapElement = staticContentCollection.CreateElement("mimeMap");
+            mimeMapElement["fileExtension"] = ".svc";
+            mimeMapElement["mimeType"] = "application/octet-stream";
+            staticContentCollection.Add(mimeMapElement);
+            #endregion
+            #region 添加处理程序映射
+            ConfigurationElementCollection handlersCollection = serverManager.GetApplicationHostConfiguration()
+                                                                                                                                    .GetSection("system.webServer/handlers")
+                                                                                                                                    .GetCollection();
+            ConfigurationElement handleEl = handlersCollection.FirstOrDefault(a => (string)a.Attributes["path"].Value == "*.svc"
+                                                                                                                                        && (string)a.Attributes["name"].Value == "svc-Integrated");
+            if (handleEl != null)
+                handlersCollection.Remove(handleEl);
+            ConfigurationElement addElement = handlersCollection.CreateElement("add");
+            addElement["path"] = "*.svc";
+            addElement["name"] = "svc-Integrated";
+            addElement["verb"] = "*";
+            addElement["type"] = "System.ServiceModel.Activation.HttpHandler";
+            handlersCollection.Add(addElement);
+            #endregion
+            serverManager_CommitChanges();
+        }
+
         public virtual ApplicationPool CreateApplicationPool(string appPoolName, string runtimeVersion = "v4.0", ManagedPipelineMode mode = ManagedPipelineMode.Integrated)
         {
             try
