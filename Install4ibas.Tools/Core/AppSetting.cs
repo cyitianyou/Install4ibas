@@ -246,7 +246,7 @@ namespace Install4ibas.Tools.Core
                 var binding = site.Bindings[0];
                 var endPoint = binding.EndPoint;
                 //public string IISAddress
-                this.IISAddress = endPoint.Address.ToString();
+                this.IISAddress = GetValue(appSetting, "IISAddress");
                 //public string IISPort
                 this.IISPort = endPoint.Port.ToString();
             }
