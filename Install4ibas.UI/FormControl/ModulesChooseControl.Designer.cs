@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gp_Choose = new System.Windows.Forms.GroupBox();
             this.btn_ChooseFolder = new System.Windows.Forms.Button();
             this.chk_UseLocal = new System.Windows.Forms.CheckBox();
@@ -40,14 +40,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gp_Modules = new System.Windows.Forms.GroupBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.chk_Other = new System.Windows.Forms.CheckBox();
-            this.chk_Standard = new System.Windows.Forms.CheckBox();
-            this.chk_Basis = new System.Windows.Forms.CheckBox();
             this.dr_Checked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dr_ModuleDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dr_Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dr_Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dr_PackageFilePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_Other = new System.Windows.Forms.CheckBox();
+            this.chk_Standard = new System.Windows.Forms.CheckBox();
+            this.chk_Basis = new System.Windows.Forms.CheckBox();
             this.gp_Choose.SuspendLayout();
             this.gp_Modules.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -82,14 +82,13 @@
             // chk_UseLocal
             // 
             this.chk_UseLocal.AutoSize = true;
-            this.chk_UseLocal.Checked = true;
-            this.chk_UseLocal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_UseLocal.Location = new System.Drawing.Point(495, 40);
             this.chk_UseLocal.Name = "chk_UseLocal";
-            this.chk_UseLocal.Size = new System.Drawing.Size(149, 21);
+            this.chk_UseLocal.Size = new System.Drawing.Size(132, 21);
             this.chk_UseLocal.TabIndex = 2;
-            this.chk_UseLocal.Text = "优先使用本地包";
+            this.chk_UseLocal.Text = "使用默认目录";
             this.chk_UseLocal.UseVisualStyleBackColor = true;
+            this.chk_UseLocal.CheckedChanged += new System.EventHandler(this.chk_UseLocal_CheckedChanged);
             // 
             // txtFolder
             // 
@@ -149,6 +148,65 @@
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
             // 
+            // dr_Checked
+            // 
+            this.dr_Checked.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dr_Checked.DataPropertyName = "Checked";
+            dataGridViewCellStyle6.NullValue = false;
+            this.dr_Checked.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dr_Checked.Frozen = true;
+            this.dr_Checked.HeaderText = "";
+            this.dr_Checked.Name = "dr_Checked";
+            this.dr_Checked.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dr_Checked.Width = 5;
+            // 
+            // dr_ModuleDescription
+            // 
+            this.dr_ModuleDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dr_ModuleDescription.DataPropertyName = "ModuleDescription";
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Silver;
+            this.dr_ModuleDescription.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dr_ModuleDescription.HeaderText = "描述";
+            this.dr_ModuleDescription.Name = "dr_ModuleDescription";
+            this.dr_ModuleDescription.ReadOnly = true;
+            this.dr_ModuleDescription.Width = 76;
+            // 
+            // dr_Type
+            // 
+            this.dr_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dr_Type.DataPropertyName = "Type";
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Silver;
+            this.dr_Type.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dr_Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.dr_Type.HeaderText = "类型";
+            this.dr_Type.Name = "dr_Type";
+            this.dr_Type.ReadOnly = true;
+            this.dr_Type.Width = 48;
+            // 
+            // dr_Status
+            // 
+            this.dr_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dr_Status.DataPropertyName = "Status";
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Silver;
+            this.dr_Status.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dr_Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.dr_Status.HeaderText = "状态";
+            this.dr_Status.Name = "dr_Status";
+            this.dr_Status.ReadOnly = true;
+            this.dr_Status.Width = 48;
+            // 
+            // dr_PackageFilePath
+            // 
+            this.dr_PackageFilePath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dr_PackageFilePath.DataPropertyName = "PackageFileName";
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Silver;
+            this.dr_PackageFilePath.DefaultCellStyle = dataGridViewCellStyle10;
+            this.dr_PackageFilePath.HeaderText = "模块生成日期";
+            this.dr_PackageFilePath.Name = "dr_PackageFilePath";
+            this.dr_PackageFilePath.ReadOnly = true;
+            this.dr_PackageFilePath.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dr_PackageFilePath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // chk_Other
             // 
             this.chk_Other.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -190,65 +248,6 @@
             this.chk_Basis.Text = "基础模块";
             this.chk_Basis.UseVisualStyleBackColor = true;
             this.chk_Basis.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
-            // 
-            // dr_Checked
-            // 
-            this.dr_Checked.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dr_Checked.DataPropertyName = "Checked";
-            dataGridViewCellStyle1.NullValue = false;
-            this.dr_Checked.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dr_Checked.Frozen = true;
-            this.dr_Checked.HeaderText = "";
-            this.dr_Checked.Name = "dr_Checked";
-            this.dr_Checked.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dr_Checked.Width = 5;
-            // 
-            // dr_ModuleDescription
-            // 
-            this.dr_ModuleDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dr_ModuleDescription.DataPropertyName = "ModuleDescription";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
-            this.dr_ModuleDescription.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dr_ModuleDescription.HeaderText = "描述";
-            this.dr_ModuleDescription.Name = "dr_ModuleDescription";
-            this.dr_ModuleDescription.ReadOnly = true;
-            this.dr_ModuleDescription.Width = 76;
-            // 
-            // dr_Type
-            // 
-            this.dr_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dr_Type.DataPropertyName = "Type";
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Silver;
-            this.dr_Type.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dr_Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.dr_Type.HeaderText = "类型";
-            this.dr_Type.Name = "dr_Type";
-            this.dr_Type.ReadOnly = true;
-            this.dr_Type.Width = 48;
-            // 
-            // dr_Status
-            // 
-            this.dr_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dr_Status.DataPropertyName = "Status";
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Silver;
-            this.dr_Status.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dr_Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.dr_Status.HeaderText = "状态";
-            this.dr_Status.Name = "dr_Status";
-            this.dr_Status.ReadOnly = true;
-            this.dr_Status.Width = 48;
-            // 
-            // dr_PackageFilePath
-            // 
-            this.dr_PackageFilePath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dr_PackageFilePath.DataPropertyName = "PackageFileName";
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Silver;
-            this.dr_PackageFilePath.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dr_PackageFilePath.HeaderText = "模块生成日期";
-            this.dr_PackageFilePath.Name = "dr_PackageFilePath";
-            this.dr_PackageFilePath.ReadOnly = true;
-            this.dr_PackageFilePath.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dr_PackageFilePath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ModulesChooseControl
             // 

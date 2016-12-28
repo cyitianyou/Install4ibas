@@ -300,6 +300,7 @@ namespace Install4ibas.Tools.Plugin
             appSettingHandle(appSetting, "Password", this.MyAppsetting.DBPassword);
             appSettingHandle(appSetting, "B1Type", this.MyAppsetting.B1Type);
             appSettingHandle(appSetting, "B1Server", this.MyAppsetting.B1Server);
+            appSettingHandle(appSetting, "IISAddress", this.MyAppsetting.IISAddress);
             var group = cfg.GetSectionGroup("system.serviceModel");
             var ServicesSection = group.Sections["services"] as System.ServiceModel.Configuration.ServicesSection;
             foreach (var item in serviceinfors)

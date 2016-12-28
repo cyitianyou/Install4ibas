@@ -17,6 +17,7 @@ namespace Install4ibas.UI
         {
             InitializeComponent();
             this.EditDataGridView();
+            this.chk_UseLocal.Visible = Directory.Exists(Path.Combine(Environment.CurrentDirectory, "~packages"));
         }
 
         private void EditDataGridView()
@@ -140,6 +141,14 @@ namespace Install4ibas.UI
                 }
             }
             catch (Exception) { }
+        }
+
+        private void chk_UseLocal_CheckedChanged(object sender, EventArgs e)
+        {
+            if(this.chk_UseLocal.Checked)
+            {
+                this.txtFolder.Text = Path.Combine(Environment.CurrentDirectory, "~packages");
+            }
         }
 
 

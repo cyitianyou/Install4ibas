@@ -87,6 +87,7 @@ namespace Install4ibas.UI
             {
                 if (e.ScheduleValue > 0 && e.ScheduleValue <= 100) this.progressBar.Value = e.ScheduleValue;
                 this.lab_Schedule.Text = e.Message;
+                this.lab_Msg.Text = "";
             }
             Application.DoEvents();
         }

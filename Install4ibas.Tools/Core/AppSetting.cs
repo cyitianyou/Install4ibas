@@ -194,7 +194,8 @@ namespace Install4ibas.Tools.Core
         /// <param name="folderPath"></param>
         public void GetLocalModulesInfo(string folderPath)
         {
-            this.LoadDefaultModules();
+            if (this.InstallModules.Count == 0)
+                this.LoadDefaultModules();
             this.InstallModules.GetLocalInfo(folderPath);
         }
         private void LoadDefaultModules()
@@ -245,15 +246,16 @@ namespace Install4ibas.Tools.Core
                 var binding = site.Bindings[0];
                 var endPoint = binding.EndPoint;
                 //public string IISAddress
-                this.IISAddress = endPoint.Address.ToString();
+                this.IISAddress = GetValue(appSetting, "IISAddress");
                 //public string IISPort
-                this.IISAddress = endPoint.Port.ToString();
+                this.IISPort = endPoint.Port.ToString();
             }
             this.LoadDefaultModules();
-            foreach (var item in  site.Applications)
+            foreach (var item in site.Applications)
             {
-                var module=this.InstallModules.FirstOrDefault(c=>item.Path.Equals(string.Format("/{0}",c.ModuleName)));
-                if(module!=null)
+                if (item.Path == "/") continue;
+                var module = this.InstallModules.FirstOrDefault(c => item.Path.Equals(string.Format("/{0}", c.ModuleName)));
+                if (module != null)
                 {
                     module.Status = emInstallStatus.Installed;
                 }
@@ -268,6 +270,12 @@ namespace Install4ibas.Tools.Core
             }
             #endregion
             #region Licences相关
+            this.UpdateLicense();
+            #endregion
+        }
+
+        public void UpdateLicense()
+        {
             var sqlmap = new SQLMapFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetSQLMap(this.DatabaseType);
             var connection = new dbConnectionFactory(this.DBServer, this.DBUser, this.DBPassword, this.DBName).GetDBConnection(sqlmap);
             ServiceInformationCreator ServiceInforC = new ServiceInformationCreator();
@@ -290,7 +298,6 @@ namespace Install4ibas.Tools.Core
                 ModuleList.Add(string.Format("{0}|{1}", item.ModuleID, item.ServiceDescription));
             }
             Licenses.LicensedModules = ModuleList.ToArray();
-            #endregion
         }
 
         private string GetValue(AppSettingsSection appSetting, string key)

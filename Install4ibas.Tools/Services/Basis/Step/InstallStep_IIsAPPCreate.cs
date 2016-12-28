@@ -33,9 +33,10 @@ namespace Install4ibas.Tools.Services.Basis.Step
             if (site == null) throw new Exception("网站未找到");
             foreach (var item in this.AppSetting.InstallModules
                                                     .Where(c => c.Checked
-                                                        && c.Status == Tools.Core.emInstallStatus.notInstalled
+                                                        && c.Status != Tools.Core.emInstallStatus.Installed
                                                         && !string.IsNullOrEmpty(c.ModuleInstallPath)))
             {
+                site = manager.GetSite(this.AppSetting.SiteName);
                 manager.CreateApplication(item.ModuleName, site, string.Format("/{0}", item.ModuleName), Path.Combine(this.AppSetting.InstallDiraddress, item.ModuleName), this.AppSetting.SiteName);
             }
         }

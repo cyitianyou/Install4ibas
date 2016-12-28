@@ -41,6 +41,7 @@ namespace Install4ibas.Tools.Plugin
             {
                 e.EventType = EventType.WriteMessageLog;
                 this.WriteMessageLogEvent.Invoke(sender, e);
+                this.OnWriteFileLog(sender, e);
             }
         }
 
