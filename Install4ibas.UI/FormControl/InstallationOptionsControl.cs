@@ -26,6 +26,12 @@ namespace Install4ibas.UI
         public override void Initialize()
         {
             this.NextEvent += InstallationOptionsControl_NextEvent;
+            this.BackEvent += InstallationOptionsControl_BackEvent;
+        }
+
+        void InstallationOptionsControl_BackEvent(object sender, EventArgs e)
+        {
+            this.ShellControl.SetCurrentControl(ControlTypes.LicenseAccept);
         }
         public override void LoadAppSetting()
         {

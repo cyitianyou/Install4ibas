@@ -23,6 +23,12 @@ namespace Install4ibas.UI
         public override void Initialize()
         {
             this.NextEvent += EditConfigControl_NextEvent;
+            this.BackEvent += EditConfigControl_BackEvent;
+        }
+
+        void EditConfigControl_BackEvent(object sender, EventArgs e)
+        {
+            this.ShellControl.SetCurrentControl(ControlTypes.ModulesChoose);
         }
 
         void EditConfigControl_NextEvent(object sender, EventArgs e)
