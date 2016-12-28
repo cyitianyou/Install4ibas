@@ -23,6 +23,12 @@ namespace Install4ibas.UI
         public override void Initialize()
         {
             this.NextEvent += EditConfigControl_NextEvent;
+            this.BackEvent += EditConfigControl_BackEvent;
+        }
+
+        void EditConfigControl_BackEvent(object sender, EventArgs e)
+        {
+            this.ShellControl.SetCurrentControl(ControlTypes.ModulesChoose);
         }
 
         void EditConfigControl_NextEvent(object sender, EventArgs e)
@@ -62,7 +68,6 @@ namespace Install4ibas.UI
         }
         private void cmbDBType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.txtB1Server.Text = string.Empty;
             var myGroup = this.gpDB;
             if (myGroup == null) return;
             var mapFactory = BTulz.ModelsTransformer.Transformer.SQLs.SQLMapFactory.New();
@@ -210,21 +215,90 @@ namespace Install4ibas.UI
         }
         public override void LoadAppSetting()
         {
-            this.txtB1Password.Text = this.MyAppSetting.B1Password;
-            this.txtB1Server.Text = this.MyAppSetting.B1Server;
-            this.txtB1User.Text = this.MyAppSetting.B1User;
-            this.cmbB1Type.Text = this.MyAppSetting.B1Type;
-            this.cmbLanguage.Text = this.MyAppSetting.cmbLanguage;
-            this.cmbDBType.Text = this.MyAppSetting.DatabaseType;
-            this.cmbDBName.Text = this.MyAppSetting.DBName;
-            this.txtDBPassword.Text = this.MyAppSetting.DBPassword;
-            this.txtDBServer.Text = this.MyAppSetting.DBServer;
-            this.txtDBUser.Text = this.MyAppSetting.DBUser;
-            this.txtIIS.Text = this.MyAppSetting.IISAddress;
-            this.txtPort.Text = this.MyAppSetting.IISPort;
-            this.txtInputfolder.Text = this.MyAppSetting.InstallDiraddress;
-            this.txtSiteName.Text = this.MyAppSetting.SiteName;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.DatabaseType))
+                this.cmbDBType.Text = this.MyAppSetting.DatabaseType;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.B1Password))
+                this.txtB1Password.Text = this.MyAppSetting.B1Password;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.B1Server))
+                this.txtB1Server.Text = this.MyAppSetting.B1Server;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.B1User))
+                this.txtB1User.Text = this.MyAppSetting.B1User;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.B1Type))
+                this.cmbB1Type.Text = this.MyAppSetting.B1Type;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.cmbLanguage))
+                this.cmbLanguage.Text = this.MyAppSetting.cmbLanguage;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.DBName))
+                this.cmbDBName.Text = this.MyAppSetting.DBName;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.DBPassword))
+                this.txtDBPassword.Text = this.MyAppSetting.DBPassword;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.DBServer))
+                this.txtDBServer.Text = this.MyAppSetting.DBServer;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.DBUser))
+                this.txtDBUser.Text = this.MyAppSetting.DBUser;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.IISAddress))
+                this.txtIIS.Text = this.MyAppSetting.IISAddress;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.IISPort))
+                this.txtPort.Text = this.MyAppSetting.IISPort;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.InstallDiraddress))
+                this.txtInputfolder.Text = this.MyAppSetting.InstallDiraddress;
+            if (!string.IsNullOrEmpty(this.MyAppSetting.SiteName))
+                this.txtSiteName.Text = this.MyAppSetting.SiteName;
         }
 
+        private void butDITest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SAPbobsCOM.Company b1Company = CompanyConnectTest();
+                MessageBox.Show(string.Format("成功连接至账套[{0}/{1}]", b1Company.CompanyDB, b1Company.CompanyName));
+                b1Company.Disconnect();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(b1Company);
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        SAPbobsCOM.Company CompanyConnectTest()
+        {
+            try
+            {
+                SAPbobsCOM.Company Company = new SAPbobsCOM.Company();
+                Company.DbServerType = (SAPbobsCOM.BoDataServerTypes)System.Enum.Parse(typeof(SAPbobsCOM.BoDataServerTypes), this.cmbB1Type.Text);
+                Company.Server = this.txtDBServer.Text;
+                Company.DbUserName = this.txtDBUser.Text;
+                Company.DbPassword = this.txtDBPassword.Text;
+                Company.CompanyDB = this.cmbDBName.Text;
+                Company.UserName = this.txtB1User.Text;
+                Company.Password = this.txtB1Password.Text;
+                Company.LicenseServer = this.txtB1Server.Text;
+                SAPbobsCOM.BoSuppLangs language;
+                if (System.Enum.TryParse<SAPbobsCOM.BoSuppLangs>(this.cmbLanguage.Text, out language))
+                    Company.language = language;
+
+                int ret = Company.Connect();
+                if (ret != 0)
+                    throw new Exception(string.Format("连接B1失败，{0}", Company.GetLastErrorDescription()));
+                return Company;
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("[DI API]初始化失败");
+                if ((ex) is System.IO.FileNotFoundException & ex.Message.IndexOf("632F4591-AA62-4219-8FB6-22BCF5F60090") > 0)
+                {
+                    string msg_no_di = string.Format("{0}，{1}", message, "可能是此计算机没有安装匹配的{0}位版本DI。");
+                    if ((System.Environment.Is64BitProcess))
+                        //'64位客户端
+                        message = string.Format(msg_no_di, "64");
+                    else
+                        //'32位客户端
+                        message = string.Format(msg_no_di, "32");
+                }
+                else
+                    message = string.Format("{0}，{1}", message, ex.Message);
+                throw new Exception(message, ex);
+            }
+        }
     }
 }

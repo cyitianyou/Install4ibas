@@ -26,6 +26,12 @@ namespace Install4ibas.UI
         public override void Initialize()
         {
             this.NextEvent += InstallationOptionsControl_NextEvent;
+            this.BackEvent += InstallationOptionsControl_BackEvent;
+        }
+
+        void InstallationOptionsControl_BackEvent(object sender, EventArgs e)
+        {
+            this.ShellControl.SetCurrentControl(ControlTypes.LicenseAccept);
         }
         public override void LoadAppSetting()
         {
@@ -59,8 +65,8 @@ namespace Install4ibas.UI
             if (!this.ShellControl.installService.ServiceCode.Equals(NewInstallService.SERVICECODE))
             {
                 this.ShellControl.installService.AppSetting.SiteName = Convert.ToString(this.cmb_Sites.SelectedItem);
-                this.ShellControl.installService.AppSetting.LoadSiteInfo();
             }
+            this.ShellControl.installService.AppSetting.LoadSiteInfo();
         }
 
         void InstallationOptionsControl_NextEvent(object sender, EventArgs e)

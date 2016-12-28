@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gp_Choose = new System.Windows.Forms.GroupBox();
             this.btn_ChooseFolder = new System.Windows.Forms.Button();
             this.chk_UseLocal = new System.Windows.Forms.CheckBox();
@@ -82,15 +82,13 @@
             // chk_UseLocal
             // 
             this.chk_UseLocal.AutoSize = true;
-            this.chk_UseLocal.Checked = true;
-            this.chk_UseLocal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_UseLocal.Location = new System.Drawing.Point(495, 40);
             this.chk_UseLocal.Name = "chk_UseLocal";
-            this.chk_UseLocal.Size = new System.Drawing.Size(149, 21);
+            this.chk_UseLocal.Size = new System.Drawing.Size(132, 21);
             this.chk_UseLocal.TabIndex = 2;
-            this.chk_UseLocal.Text = "优先使用本地包";
+            this.chk_UseLocal.Text = "使用默认目录";
             this.chk_UseLocal.UseVisualStyleBackColor = true;
-            this.chk_UseLocal.Visible = false;
+            this.chk_UseLocal.CheckedChanged += new System.EventHandler(this.chk_UseLocal_CheckedChanged);
             // 
             // txtFolder
             // 
@@ -154,8 +152,8 @@
             // 
             this.dr_Checked.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dr_Checked.DataPropertyName = "Checked";
-            dataGridViewCellStyle1.NullValue = false;
-            this.dr_Checked.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.NullValue = false;
+            this.dr_Checked.DefaultCellStyle = dataGridViewCellStyle6;
             this.dr_Checked.Frozen = true;
             this.dr_Checked.HeaderText = "";
             this.dr_Checked.Name = "dr_Checked";
@@ -166,8 +164,8 @@
             // 
             this.dr_ModuleDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dr_ModuleDescription.DataPropertyName = "ModuleDescription";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
-            this.dr_ModuleDescription.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Silver;
+            this.dr_ModuleDescription.DefaultCellStyle = dataGridViewCellStyle7;
             this.dr_ModuleDescription.HeaderText = "描述";
             this.dr_ModuleDescription.Name = "dr_ModuleDescription";
             this.dr_ModuleDescription.ReadOnly = true;
@@ -177,8 +175,8 @@
             // 
             this.dr_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dr_Type.DataPropertyName = "Type";
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Silver;
-            this.dr_Type.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Silver;
+            this.dr_Type.DefaultCellStyle = dataGridViewCellStyle8;
             this.dr_Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
             this.dr_Type.HeaderText = "类型";
             this.dr_Type.Name = "dr_Type";
@@ -189,8 +187,8 @@
             // 
             this.dr_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dr_Status.DataPropertyName = "Status";
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Silver;
-            this.dr_Status.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Silver;
+            this.dr_Status.DefaultCellStyle = dataGridViewCellStyle9;
             this.dr_Status.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
             this.dr_Status.HeaderText = "状态";
             this.dr_Status.Name = "dr_Status";
@@ -201,8 +199,8 @@
             // 
             this.dr_PackageFilePath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dr_PackageFilePath.DataPropertyName = "PackageFileName";
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Silver;
-            this.dr_PackageFilePath.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Silver;
+            this.dr_PackageFilePath.DefaultCellStyle = dataGridViewCellStyle10;
             this.dr_PackageFilePath.HeaderText = "模块生成日期";
             this.dr_PackageFilePath.Name = "dr_PackageFilePath";
             this.dr_PackageFilePath.ReadOnly = true;

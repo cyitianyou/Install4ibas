@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.link_License = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -41,10 +42,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "安装完成!";
             // 
+            // link_License
+            // 
+            this.link_License.AutoSize = true;
+            this.link_License.Location = new System.Drawing.Point(222, 320);
+            this.link_License.Name = "link_License";
+            this.link_License.Size = new System.Drawing.Size(156, 17);
+            this.link_License.TabIndex = 1;
+            this.link_License.TabStop = true;
+            this.link_License.Text = "立即去申请License";
+            this.link_License.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_License_LinkClicked);
+            // 
             // FinishControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.link_License);
             this.Controls.Add(this.label1);
             this.Name = "FinishControl";
             this.Size = new System.Drawing.Size(650, 440);
@@ -56,5 +69,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel link_License;
     }
 }

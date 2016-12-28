@@ -17,14 +17,24 @@ namespace Install4ibas.Tools.Plugin.IISManager
             }
             return _Instance;
         }
-        static IIISManager IISManager;
+        //static IIISManager IISManager;
         public IIISManager CreateIISManager()
         {
-            if (IISManager == null)
-            {
-                IISManager = new IISManager();
-            }
+            //if (IISManager == null)
+            //{
+            var IISManager = new IISManager();
+            //}
             return IISManager;
+        }
+
+        //static IIISInstaller IISInstaller;
+        public IIISInstaller CreateIISInstaller()
+        {
+            //if (IISInstaller == null)
+            //{
+            var IISInstaller = new IISInstaller();
+            //}
+            return IISInstaller;
         }
     }
 }

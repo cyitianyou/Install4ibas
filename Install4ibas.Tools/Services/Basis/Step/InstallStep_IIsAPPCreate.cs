@@ -36,6 +36,7 @@ namespace Install4ibas.Tools.Services.Basis.Step
                                                         && c.Status != Tools.Core.emInstallStatus.Installed
                                                         && !string.IsNullOrEmpty(c.ModuleInstallPath)))
             {
+                site = manager.GetSite(this.AppSetting.SiteName);
                 manager.CreateApplication(item.ModuleName, site, string.Format("/{0}", item.ModuleName), Path.Combine(this.AppSetting.InstallDiraddress, item.ModuleName), this.AppSetting.SiteName);
             }
         }

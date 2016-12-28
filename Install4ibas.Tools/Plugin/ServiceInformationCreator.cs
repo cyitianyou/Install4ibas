@@ -80,7 +80,7 @@ namespace Install4ibas.Tools.Plugin
                     xmlElement = this.GetServiceElement("RegisteredServiceProviders", xmlService, xmlElement);
                     var provider = this.GetProviderNode(this.RootAddress, xmlElement);
                     xmlElement = this.GetServiceElement("RootAddress", provider);
-                    xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServicePath);
+                    xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServiceName);
                     
                     xmlElement = this.GetServiceElement("DataServiceAddress", provider, xmlElement);
                     xmlElement.InnerText = string.Format(@"/DataService/{0}.svc", item.ServicePath);
@@ -300,6 +300,7 @@ namespace Install4ibas.Tools.Plugin
             appSettingHandle(appSetting, "Password", this.MyAppsetting.DBPassword);
             appSettingHandle(appSetting, "B1Type", this.MyAppsetting.B1Type);
             appSettingHandle(appSetting, "B1Server", this.MyAppsetting.B1Server);
+            appSettingHandle(appSetting, "IISAddress", this.MyAppsetting.IISAddress);
             var group = cfg.GetSectionGroup("system.serviceModel");
             var ServicesSection = group.Sections["services"] as System.ServiceModel.Configuration.ServicesSection;
             foreach (var item in serviceinfors)
