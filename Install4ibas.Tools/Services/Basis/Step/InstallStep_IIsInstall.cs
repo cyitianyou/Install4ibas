@@ -29,9 +29,9 @@ namespace Install4ibas.Tools.Services.Basis.Step
         {
             if (System.Environment.Is64BitProcess)
             {
-                IIISManager manager = IISManagerFactory.New().CreateIISManager();
-                if (!manager.IsFullyInstalled())
-                    manager.InstallIIS();
+                IIISInstaller installer = IISManagerFactory.New().CreateIISInstaller();
+                if (!installer.IsFullyInstalled())
+                    installer.InstallIIS();
             }
             else
             {

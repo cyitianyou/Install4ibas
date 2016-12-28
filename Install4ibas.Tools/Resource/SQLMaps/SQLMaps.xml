@@ -584,424 +584,6 @@
       </SQLMapDataType>
     </sql_DataTypes>
   </SQLMap>
-  <!--以下是java架构配置-->
-  <SQLMap>
-    <MyMapSign>MYSQL.2</MyMapSign>
-    <Remarks></Remarks>
-    <DbConnetionClassName>MySql.Data.dll;MySql.Data.MySqlClient.MySqlConnection</DbConnetionClassName>
-    <DefaultDatabase>information_schema</DefaultDatabase>
-    <DbConnectionItems>
-      <DbConnectionItem>
-        <ItemName>DBServer</ItemName>
-        <ItemValue>localhost</ItemValue>
-        <StringBuilderKey>Server</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBName</ItemName>
-        <ItemValue>ibcp_demo</ItemValue>
-        <StringBuilderKey>Database</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBUser</ItemName>
-        <ItemValue>root</ItemValue>
-        <StringBuilderKey>UserID</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBPassword</ItemName>
-        <ItemValue>1q2w3e</ItemValue>
-        <StringBuilderKey>Password</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>ConnectionTimeout</ItemName>
-        <ItemValue>600</ItemValue>
-        <StringBuilderKey>Connection Timeout</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>Pooling</ItemName>
-        <ItemValue>true</ItemValue>
-        <StringBuilderKey>Pooling</StringBuilderKey>
-      </DbConnectionItem>
-    </DbConnectionItems>
-    <sql_CreateDatabase>
-      <Identifier>`</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        Create Database If Not Exists `$DBName$` Character Set UTF8;&#xD;
-      </TemplateString>
-    </sql_CreateDatabase>
-    <sql_CreateTable>
-      <Identifier>`</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        USE `$DBName$`;
-        CREATE TABLE IF NOT EXISTS `{0}`({1});&#xD;
-      </TemplateString>
-      <AlterFieldTemplateString>
-        DROP PROCEDURE IF EXISTS tmp_alter_table_column_{0}_{1};&#xD;
-        CREATE PROCEDURE tmp_alter_table_column_{0}_{1} () BEGIN&#xD;
-        DECLARE count int;SELECT count(*) INTO count FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` = '$DBName$' AND `table_name` = '{0}' AND `column_name` = '{1}';&#xD;
-        IF count = 0 THEN ALTER TABLE `{0}` ADD COLUMN {2};END IF;&#xD;
-        END;&#xD;
-        call tmp_alter_table_column_{0}_{1};&#xD;
-        DROP PROCEDURE IF EXISTS tmp_alter_table_column_{0}_{1};&#xD;
-      </AlterFieldTemplateString>
-      <AlterPrimaryKeyTemplateString>
-        DROP PROCEDURE IF EXISTS tmp_alter_table_primarykey_{0};&#xD;
-        CREATE PROCEDURE tmp_alter_table_primarykey_{0} () BEGIN&#xD;
-        DECLARE count int;SELECT count(*) INTO count FROM `information_schema`.`statistics` WHERE `TABLE_SCHEMA` = '$DBName$' AND `table_name` = '{0}' AND `index_name` = 'PRIMARY';&#xD;
-        IF count = 0 THEN ALTER TABLE `{0}` ADD PRIMARY KEY({1}); ELSE ALTER TABLE `{0}` DROP PRIMARY KEY; ALTER TABLE `{0}` ADD PRIMARY KEY({1}); END IF;&#xD;
-        END;&#xD;
-        call tmp_alter_table_primarykey_{0};&#xD;
-        DROP PROCEDURE IF EXISTS tmp_alter_table_primarykey_{0};&#xD;
-      </AlterPrimaryKeyTemplateString>
-    </sql_CreateTable>
-    <sql_CreateTableUniqueIndex>
-      <Identifier>`</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        USE `$DBName$`;
-        DROP PROCEDURE IF EXISTS tmp_alter_table_unique_index_{0};&#xD;
-        CREATE PROCEDURE tmp_alter_table_unique_index_{0} () BEGIN&#xD;
-        DECLARE count int;SELECT count(*) INTO count FROM `information_schema`.`statistics` WHERE `TABLE_SCHEMA` = '$DBName$' AND `table_name` = '{0}' AND `index_name` = '{0}_UNIQUE_INDEX';&#xD;
-        IF count = 0 THEN ALTER TABLE `{0}` ADD UNIQUE `{0}_UNIQUE_INDEX` ({1}); ELSE DROP INDEX `{0}_UNIQUE_INDEX` ON `{0}`;ALTER TABLE `{0}` ADD UNIQUE `{0}_UNIQUE_INDEX` ({1}); END IF;&#xD;
-        END;&#xD;
-        call tmp_alter_table_unique_index_{0};&#xD;
-        DROP PROCEDURE IF EXISTS tmp_alter_table_unique_index_{0};&#xD;
-      </TemplateString>
-    </sql_CreateTableUniqueIndex>
-    <sql_RegisterBO>
-      <Identifier>`</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        USE `$DBName$`;
-        INSERT INTO `AVA_SYS_ONNM`(`ObjectCode`,`AutoKey`,`DocSubType`) VALUES(N'{0}',1,'--') ON DUPLICATE KEY UPDATE `AutoKey` = `AutoKey`;&#xD;
-      </TemplateString>
-      <BOSubTemplateString>
-      </BOSubTemplateString>
-    </sql_RegisterBO>
-    <sql_RegisterBOTable>
-      <Identifier>`</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        USE `$DBName$`;
-        REPLACE INTO `AVA_SYS_OBOI`(`Mapped`,`Descrp`,`ObjectType`,`Name`,`Code`) VALUES(N'{0}',N'{1}',N'{2}',N'{3}',N'{4}');&#xD;
-      </TemplateString>
-      <BOFieldTemplateString>
-        REPLACE INTO `AVA_SYS_BOI1`(`Name`,`Property`,`Mapped`,`Descrp`,`DataType`,`EditType`,`EditSize`,`Searched`,`Systemed`) VALUES(N'{9}',N'{10}',N'{1}',N'{2}',N'{3}',N'{4}',{5},N'{7}',N'{8}');&#xD;
-      </BOFieldTemplateString>
-    </sql_RegisterBOTable>
-    <sql_DataTypes>
-      <SQLMapDataType>
-        <OriginalType>ntext</OriginalType>
-        <TargetType>text</TargetType>
-      </SQLMapDataType>
-    </sql_DataTypes>
-  </SQLMap>
-  <SQLMap>
-    <MyMapSign>PostgreSQL.2</MyMapSign>
-    <Remarks></Remarks>
-    <DbConnetionClassName>Npgsql.dll;Npgsql.NpgsqlConnection</DbConnetionClassName>
-    <!--<DefaultDatabase>postgres</DefaultDatabase>-->
-    <DbConnectionItems>
-      <DbConnectionItem>
-        <ItemName>DBServer</ItemName>
-        <ItemValue>localhost</ItemValue>
-        <StringBuilderKey>Server</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBName</ItemName>
-        <ItemValue>ibcp_demo</ItemValue>
-        <StringBuilderKey>Database</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBUser</ItemName>
-        <ItemValue>postgres</ItemValue>
-        <StringBuilderKey>UserID</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBPassword</ItemName>
-        <ItemValue>1q2w3e</ItemValue>
-        <StringBuilderKey>Password</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>ConnectionTimeout</ItemName>
-        <ItemValue>600</ItemValue>
-        <StringBuilderKey>Timeout</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>Pooling</ItemName>
-        <ItemValue>true</ItemValue>
-        <StringBuilderKey>Pooling</StringBuilderKey>
-      </DbConnectionItem>
-    </DbConnectionItems>
-    <sql_CreateDatabase>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        <!--CREATE DATABASE "$DBName$";&#xD;-->
-      </TemplateString>
-    </sql_CreateDatabase>
-    <sql_CreateTable>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        CREATE OR REPLACE FUNCTION tmp_create_table_{0}()  RETURNS void AS
-        $_$ BEGIN&#xD;
-        IF NOT EXISTS (SELECT 0 FROM information_schema.tables WHERE "table_catalog" = '$DBName$' AND "table_name" = '{0}') THEN&#xD;
-        CREATE TABLE "{0}"({1});&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        $_$ LANGUAGE plpgsql;&#xD;
-        select tmp_create_table_{0}();&#xD;
-        DROP FUNCTION IF EXISTS tmp_create_table_{0}();&#xD;
-      </TemplateString>
-      <AlterFieldTemplateString>
-        CREATE OR REPLACE FUNCTION tmp_alter_table_column_{0}_{1}() RETURNS void AS
-        $_$ BEGIN&#xD;
-        IF NOT EXISTS (select * from information_schema.columns where "table_catalog" = '$DBName$' and "table_name" = '{0}' and "column_name" = '{1}') THEN&#xD;
-        ALTER TABLE "{0}" ADD COLUMN {2};&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        $_$ LANGUAGE plpgsql;&#xD;
-        select tmp_alter_table_column_{0}_{1}();&#xD;
-        DROP FUNCTION IF EXISTS tmp_alter_table_column_{0}_{1}();&#xD;
-      </AlterFieldTemplateString>
-      <AlterPrimaryKeyTemplateString>
-        CREATE OR REPLACE FUNCTION tmp_alter_table_primarykey_{0}() RETURNS void AS
-        $_$ BEGIN&#xD;
-        IF NOT EXISTS (select 0 from information_schema.table_constraints where "table_catalog" = '$DBName$' and "table_name" = '{0}' and "constraint_name" = LOWER('K{0}') and "constraint_type" = 'PRIMARY KEY') THEN&#xD;
-        ALTER TABLE "{0}" ADD constraint K{0} PRIMARY KEY({1});&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        $_$ LANGUAGE plpgsql;&#xD;
-        select tmp_alter_table_primarykey_{0}();&#xD;
-        DROP FUNCTION IF EXISTS tmp_alter_table_primarykey_{0}();&#xD;
-      </AlterPrimaryKeyTemplateString>
-    </sql_CreateTable>
-    <sql_CreateTableUniqueIndex>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        CREATE OR REPLACE FUNCTION tmp_alter_table_unique_index_{0}() RETURNS void AS
-        $_$ BEGIN&#xD;
-        IF EXISTS (select * from information_schema.columns where "table_catalog" = '$DBName$' and "table_name" = '{0}' and "column_name" = '{1}') THEN&#xD;
-        CREATE UNIQUE INDEX "{0}_UNIQUE_INDEX" ON "{0}" ({1});&#xD;
-        ELSE
-        DROP INDEX IF EXISTS "{0}_UNIQUE_INDEX";&#xD;
-        CREATE UNIQUE INDEX "{0}_UNIQUE_INDEX" ON "{0}" ({1});&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        $_$ LANGUAGE plpgsql;&#xD;
-        select tmp_alter_table_unique_index_{0}();&#xD;
-        DROP FUNCTION IF EXISTS tmp_alter_table_unique_index_{0}();&#xD;
-      </TemplateString>
-    </sql_CreateTableUniqueIndex>
-    <sql_RegisterBO>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        CREATE OR REPLACE FUNCTION tmp_insert_bo_informations() RETURNS void AS
-        $_$ BEGIN&#xD;
-        IF NOT EXISTS (select 0 from "AVA_SYS_ONNM" where "ObjectCode" = '{0}') THEN&#xD;
-        INSERT INTO "AVA_SYS_ONNM"("ObjectCode","AutoKey","DocSubType") VALUES(N'{0}',1,'--');&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        $_$ LANGUAGE plpgsql;&#xD;
-        select tmp_insert_bo_informations();&#xD;
-        DROP FUNCTION IF EXISTS tmp_insert_bo_informations();&#xD;
-      </TemplateString>
-      <BOSubTemplateString>
-      </BOSubTemplateString>
-    </sql_RegisterBO>
-    <sql_RegisterBOTable>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        DELETE FROM "AVA_SYS_OBOI" WHERE "Name" =N'{3}'&#xD;
-        INSERT INTO "AVA_SYS_OBOI"("Mapped","Descrp","ObjectType","Name","Code") VALUES(N'{0}',N'{1}',N'{2}',N'{3}',N'{4}')&#xD;
-      </TemplateString>
-      <BOFieldTemplateString>
-        DELETE FROM "AVA_SYS_BOI1" WHERE "Name" = N'{9}' AND "Property" = N'{10}'&#xD;
-        INSERT INTO "AVA_SYS_BOI1"("Name","Property","Mapped","Descrp","DataType","EditType","EditSize","Searched","Systemed") VALUES(N'{9}',N'{10}',N'{1}',N'{2}',N'{3}',N'{4}',{5},N'{7}',N'{8}')&#xD;
-      </BOFieldTemplateString>
-    </sql_RegisterBOTable>
-    <sql_DataTypes>
-      <SQLMapDataType>
-        <OriginalType>ntext</OriginalType>
-        <TargetType>text</TargetType>
-      </SQLMapDataType>
-      <SQLMapDataType>
-        <OriginalType>nvarchar</OriginalType>
-        <TargetType>varchar</TargetType>
-      </SQLMapDataType>
-      <SQLMapDataType>
-        <OriginalType>int</OriginalType>
-        <TargetType>integer</TargetType>
-      </SQLMapDataType>
-      <SQLMapDataType>
-        <OriginalType>datetime</OriginalType>
-        <TargetType>date</TargetType>
-      </SQLMapDataType>
-    </sql_DataTypes>
-  </SQLMap>
-  <SQLMap>
-    <MyMapSign>HANA.2</MyMapSign>
-    <Remarks></Remarks>
-    <DbConnetionClassName>BOBas.BusinessObjectsCommon.DB.HANA.dll;BOBas.BusinessObjectsCommon.DB.HANA.DB.HANABoDBConnection</DbConnetionClassName>
-    <DefaultDatabase>SYSTEM</DefaultDatabase>
-    <DbConnectionItems>
-      <DbConnectionItem>
-        <ItemName>ODBC Driver</ItemName>
-        <ItemValue>{HDBODBC}</ItemValue>
-        <StringBuilderKey>DRIVER</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBServer</ItemName>
-        <ItemValue>localhost:30015</ItemValue>
-        <StringBuilderKey>SERVERNODE</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBName</ItemName>
-        <ItemValue>ibcp_demo</ItemValue>
-        <StringBuilderKey>DATABASE</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBUser</ItemName>
-        <ItemValue>SYSTEM</ItemValue>
-        <StringBuilderKey>UID</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>DBPassword</ItemName>
-        <ItemValue>Aa123456</ItemValue>
-        <StringBuilderKey>PWD</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>ConnectionTimeout</ItemName>
-        <ItemValue>600</ItemValue>
-        <StringBuilderKey>ConnectionTimeout</StringBuilderKey>
-      </DbConnectionItem>
-      <DbConnectionItem>
-        <ItemName>Pooling</ItemName>
-        <ItemValue>true</ItemValue>
-        <StringBuilderKey>Pooling</StringBuilderKey>
-      </DbConnectionItem>
-    </DbConnectionItems>
-    <sql_CreateDatabase>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString></TemplateString>
-    </sql_CreateDatabase>
-    <sql_CreateTable>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        CREATE PROCEDURE "$DBName$"."tmp_create_table_{0}"()&#xD;
-        LANGUAGE SQLSCRIPT AS&#xD;
-        BEGIN&#xD;
-        DECLARE v_count INT;&#xD;
-        SELECT count(0) into v_count FROM "TABLES" WHERE "SCHEMA_NAME" = '$DBName$' AND "TABLE_NAME" = '{0}';&#xD;
-        IF :v_count = 0 THEN&#xD;
-        CREATE ROW TABLE "$DBName$"."{0}"({1});&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        CALL "$DBName$"."tmp_create_table_{0}"();&#xD;
-        DROP PROCEDURE "$DBName$"."tmp_create_table_{0}";&#xD;
-      </TemplateString>
-      <AlterFieldTemplateString>
-        CREATE PROCEDURE "$DBName$"."tmp_alter_table_column_{0}_{1}"()&#xD;
-        LANGUAGE SQLSCRIPT AS&#xD;
-        BEGIN&#xD;
-        DECLARE v_count INT;&#xD;
-        SELECT count(0) into v_count FROM "TABLE_COLUMNS" WHERE "SCHEMA_NAME" = '$DBName$' AND "TABLE_NAME" = '{0}' AND "COLUMN_NAME" = '{1}';&#xD;
-        IF :v_count = 0 THEN&#xD;
-        EXEC 'ALTER TABLE "$DBName$"."{0}" ADD ({2})';&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        CALL "$DBName$"."tmp_alter_table_column_{0}_{1}"();&#xD;
-        DROP PROCEDURE "$DBName$"."tmp_alter_table_column_{0}_{1}";&#xD;
-      </AlterFieldTemplateString>
-      <AlterPrimaryKeyTemplateString>
-        CREATE PROCEDURE "$DBName$"."tmp_alter_table_primarykey_{0}"()&#xD;
-        LANGUAGE SQLSCRIPT AS&#xD;
-        BEGIN&#xD;
-        DECLARE v_count INT;&#xD;
-        SELECT count(0) into v_count FROM "INDEXES" WHERE "SCHEMA_NAME" = '$DBName$' AND "TABLE_NAME" = '{0}' AND "CONSTRAINT" = 'PRIMARY KEY' AND "INDEX_NAME" = 'K{0}';&#xD;
-        IF :v_count = 0 THEN&#xD;
-        EXEC 'ALTER TABLE "$DBName$"."{0}" ADD CONSTRAINT "K{0}" PRIMARY KEY ({1})';&#xD;
-        ELSE&#xD;
-        EXEC 'ALTER TABLE "$DBName$"."{0}" DROP PRIMARY KEY';&#xD;
-        EXEC 'ALTER TABLE "$DBName$"."{0}" ADD CONSTRAINT "K{0}" PRIMARY KEY ({1})';&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        CALL "$DBName$"."tmp_alter_table_primarykey_{0}"();&#xD;
-        DROP PROCEDURE "$DBName$"."tmp_alter_table_primarykey_{0}";&#xD;
-      </AlterPrimaryKeyTemplateString>
-    </sql_CreateTable>
-    <sql_CreateTableUniqueIndex>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        CREATE PROCEDURE "$DBName$"."tmp_alter_table_unique_index_{0}"()&#xD;
-        LANGUAGE SQLSCRIPT AS&#xD;
-        BEGIN&#xD;
-        DECLARE v_count INT;&#xD;
-        SELECT count(0) into v_count FROM "INDEXES" WHERE "SCHEMA_NAME" = '$DBName$' AND "TABLE_NAME" = '{0}' AND "INDEX_NAME" = '{0}_UNIQUE_INDEX';
-        IF :v_count = 0 THEN&#xD;
-        EXEC 'CREATE UNIQUE INDEX "{0}_UNIQUE_INDEX" ON "$DBName$"."{0}" ({1})';&#xD;
-        ELSE&#xD;
-        EXEC 'DROP INDEX "$DBName$"."{0}_UNIQUE_INDEX"';&#xD;
-        EXEC 'CREATE UNIQUE INDEX "{0}_UNIQUE_INDEX" ON "$DBName$"."{0}" ({1})';&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        CALL "$DBName$"."tmp_alter_table_unique_index_{0}"();&#xD;
-        DROP PROCEDURE "$DBName$"."tmp_alter_table_unique_index_{0}";&#xD;
-      </TemplateString>
-    </sql_CreateTableUniqueIndex>
-    <sql_RegisterBO>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        CREATE PROCEDURE "$DBName$"."tmp_insert_bo_informations"()&#xD;
-        LANGUAGE SQLSCRIPT AS&#xD;
-        BEGIN&#xD;
-        DECLARE v_count INT;&#xD;
-        SELECT count(0) into v_count FROM "$DBName$"."AVA_SYS_ONNM" WHERE "ObjectCode" = '{0}';&#xD;
-        IF :v_count = 0 THEN&#xD;
-        INSERT INTO "$DBName$"."AVA_SYS_ONNM"("ObjectCode","AutoKey","DocSubType") VALUES(N'{0}',1,'--');&#xD;
-        END IF;&#xD;
-        END;&#xD;
-        CALL "$DBName$"."tmp_insert_bo_informations"();&#xD;
-        DROP PROCEDURE "$DBName$"."tmp_insert_bo_informations";&#xD;      </TemplateString>
-      <BOSubTemplateString>
-      </BOSubTemplateString>
-    </sql_RegisterBO>
-    <sql_RegisterBOTable>
-      <Identifier>"</Identifier>
-      <KeyWord i:nil="true"/>
-      <TemplateString>
-        DELETE FROM "$DBName$"."AVA_SYS_OBOI" WHERE "Name" =N'{3}'&#xD;
-        INSERT INTO "$DBName$"."AVA_SYS_OBOI"("Mapped","Descrp","ObjectType","Name","Code") VALUES(N'{0}',N'{1}',N'{2}',N'{3}',N'{4}')&#xD;
-      </TemplateString>
-      <BOFieldTemplateString>
-        DELETE FROM "$DBName$"."AVA_SYS_BOI1" WHERE "Name" = N'{9}' AND "Property" = N'{10}'&#xD;
-        INSERT INTO "$DBName$"."AVA_SYS_BOI1"("Name","Property","Mapped","Descrp","DataType","EditType","EditSize","Searched","Systemed") VALUES(N'{9}',N'{10}',N'{1}',N'{2}',N'{3}',N'{4}',{5},N'{7}',N'{8}')&#xD;
-      </BOFieldTemplateString>
-    </sql_RegisterBOTable>
-    <sql_DataTypes>
-      <SQLMapDataType>
-        <OriginalType>int</OriginalType>
-        <TargetType>integer</TargetType>
-      </SQLMapDataType>
-      <SQLMapDataType>
-        <OriginalType>datetime</OriginalType>
-        <TargetType>date</TargetType>
-      </SQLMapDataType>
-      <SQLMapDataType>
-        <OriginalType>bit</OriginalType>
-        <TargetType>varbinary</TargetType>
-      </SQLMapDataType>
-    </sql_DataTypes>
-  </SQLMap>
   <SQLMap>
     <MyMapSign>MSSQL.2</MyMapSign>
     <Remarks i:nil="true"/>
@@ -1076,7 +658,7 @@
         USE "$DBName$"&#xD;
         IF NOT EXISTS (SELECT 0 FROM "AVA_SYS_ONNM" WHERE ObjectCode = N'{0}')&#xD;
         INSERT INTO "AVA_SYS_ONNM"(ObjectCode,AutoKey,DocSubType) VALUES(N'{0}',1,'--')&#xD;
-       </TemplateString>
+      </TemplateString>
       <BOSubTemplateString>
       </BOSubTemplateString>
     </sql_RegisterBO>
@@ -1091,6 +673,103 @@
       <BOFieldTemplateString>
         DELETE FROM "AVA_SYS_BOI1" WHERE Name = N'{9}' AND Property = N'{10}'&#xD;
         INSERT INTO "AVA_SYS_BOI1"(Name,Property,Mapped,Descrp,DataType,EditType,EditSize,Searched,Systemed) VALUES(N'{9}',N'{10}',N'{1}',N'{2}',N'{3}',N'{4}',{5},N'{7}',N'{8}')&#xD;
+      </BOFieldTemplateString>
+    </sql_RegisterBOTable>
+    <sql_DataTypes/>
+  </SQLMap>
+  <SQLMap>
+    <MyMapSign>MSSQL</MyMapSign>
+    <Remarks i:nil="true"/>
+    <DbConnetionClassName/>
+    <DefaultDatabase>master</DefaultDatabase>
+    <DbConnectionItems>
+      <DbConnectionItem>
+        <ItemName>DBServer</ItemName>
+        <ItemValue>127.0.0.1</ItemValue>
+        <StringBuilderKey>DataSource</StringBuilderKey>
+      </DbConnectionItem>
+      <DbConnectionItem>
+        <ItemName>DBName</ItemName>
+        <ItemValue>ibas_</ItemValue>
+        <StringBuilderKey>InitialCatalog</StringBuilderKey>
+      </DbConnectionItem>
+      <DbConnectionItem>
+        <ItemName>DBUser</ItemName>
+        <ItemValue>sa</ItemValue>
+        <StringBuilderKey>UserID</StringBuilderKey>
+      </DbConnectionItem>
+      <DbConnectionItem>
+        <ItemName>DBPassword</ItemName>
+        <ItemValue></ItemValue>
+        <StringBuilderKey>Password</StringBuilderKey>
+      </DbConnectionItem>
+      <DbConnectionItem>
+        <ItemName>ConnectionTimeout</ItemName>
+        <ItemValue>600</ItemValue>
+        <StringBuilderKey>ConnectionTimeout</StringBuilderKey>
+      </DbConnectionItem>
+    </DbConnectionItems>
+    <sql_CreateDatabase>
+      <Identifier>"</Identifier>
+      <KeyWord i:nil="true"/>
+      <TemplateString>
+        IF NOT EXISTS (SELECT 0 FROM sys.databases where name = '$DBName$')&#xD;
+        CREATE DATABASE "$DBName$" &#xD;
+      </TemplateString>
+    </sql_CreateDatabase>
+    <sql_CreateTable>
+      <Identifier>"</Identifier>
+      <KeyWord i:nil="true"/>
+      <TemplateString>
+        USE "$DBName$"&#xD;
+        IF NOT EXISTS (SELECT 0 FROM sys.sysobjects WHERE name = '{0}' AND type = 'u')&#xD;
+        CREATE TABLE "{0}"({1})&#xD;
+      </TemplateString>
+      <AlterFieldTemplateString>
+        IF NOT EXISTS (SELECT 0 FROM sys.syscolumns WHERE object_name(id) = '{0}' AND name = '{1}')&#xD;
+        ALTER TABLE "{0}" ADD {2}&#xD;
+      </AlterFieldTemplateString>
+      <AlterPrimaryKeyTemplateString>
+        IF NOT EXISTS (SELECT 0 FROM sys.sysobjects WHERE xtype = 'PK' AND object_name(id) = 'K{0}')&#xD;
+        ALTER TABLE "{0}" ADD CONSTRAINT K{0} PRIMARY KEY ({1})&#xD;
+      </AlterPrimaryKeyTemplateString>
+    </sql_CreateTable>
+    <sql_CreateTableUniqueIndex>
+      <Identifier>"</Identifier>
+      <KeyWord i:nil="true"/>
+      <TemplateString>
+        USE "$DBName$"&#xD;
+        IF EXISTS (SELECT name FROM sys.indexes WHERE object_name(object_id)='{0}' AND name = '{0}_UNIQUE_INDEX')&#xD;
+        DROP INDEX {0}.{0}_UNIQUE_INDEX&#xD;
+        CREATE UNIQUE INDEX {0}_UNIQUE_INDEX ON {0}({1})&#xD;
+      </TemplateString>
+    </sql_CreateTableUniqueIndex>
+    <sql_RegisterBO>
+      <Identifier>"</Identifier>
+      <KeyWord i:nil="true"/>
+      <TemplateString>
+        USE "$DBName$"&#xD;
+        IF NOT EXISTS (SELECT 0 FROM "AVA_SYS_ONNM" WHERE ObjectCode = N'{0}')&#xD;
+        INSERT INTO "AVA_SYS_ONNM"(ObjectCode,AutoKey,DocSubType) VALUES(N'{0}',1,'--')&#xD;
+        DELETE FROM "AVA_SYS_OUDO" WHERE Code = N'{0}'&#xD;
+        INSERT INTO "AVA_SYS_OUDO"(Code,Name,TableName,ObjectType) VALUES(N'{0}',N'{1}',N'{2}',N'{3}')&#xD;
+      </TemplateString>
+      <BOSubTemplateString>
+        DELETE FROM "AVA_SYS_UDO1" WHERE Code = N'{0}' AND ChildTableName = N'{1}'&#xD;
+        INSERT INTO "AVA_SYS_UDO1"(Code,ChildTableName) VALUES(N'{0}',N'{1}')&#xD;
+      </BOSubTemplateString>
+    </sql_RegisterBO>
+    <sql_RegisterBOTable>
+      <Identifier>"</Identifier>
+      <KeyWord i:nil="true"/>
+      <TemplateString>
+        USE "$DBName$"&#xD;
+        DELETE FROM "AVA_SYS_OUTB" WHERE TableName =N'{0}'&#xD;
+        INSERT INTO "AVA_SYS_OUTB"(TableName,Descrp,ObjectType) VALUES(N'{0}',N'{1}',N'{2}')&#xD;
+      </TemplateString>
+      <BOFieldTemplateString>
+        DELETE FROM "AVA_SYS_CUFD" WHERE TableName = N'{0}' AND FieldName = N'{1}'&#xD;
+        INSERT INTO "AVA_SYS_CUFD"(TableName,FieldName,Descrp,DataType,EditType,EditSize,Dflt,IndexID,Sys) VALUES(N'{0}',N'{1}',N'{2}',N'{3}',N'{4}',{5},N'{6}',N'{7}',N'{8}')&#xD;
       </BOFieldTemplateString>
     </sql_RegisterBOTable>
     <sql_DataTypes/>

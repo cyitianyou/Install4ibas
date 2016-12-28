@@ -69,6 +69,8 @@
     <Compile Include="Core\Module.cs" />
     <Compile Include="Core\LicensesInformation.cs" />
     <Compile Include="Core\ServiceInformation.cs" />
+    <Compile Include="Plugin\IISManager\IIISInstaller.cs" />
+    <Compile Include="Plugin\IISManager\IISInstaller.cs" />
     <Compile Include="Plugin\MessageManager.cs" />
     <Compile Include="Plugin\Messages\FileMessageRecorder.cs" />
     <Compile Include="Plugin\Messages\Message.cs" />

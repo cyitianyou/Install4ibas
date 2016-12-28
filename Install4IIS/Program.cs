@@ -20,17 +20,18 @@ namespace Install4IIS
             ShowWindow(ParenthWnd, 0);//隐藏本dos窗体, 0: 后台执行；1:正常启动；2:最小化到任务栏；3:最大化
 
             //作自己的事情
-            IIISManager manager = IISManagerFactory.New().CreateIISManager();
+            IIISInstaller installer = IISManagerFactory.New().CreateIISInstaller();
+            
             if (args.Length >= 1 && args[0] == "-u") //卸载
             {
-                if (!manager.IsFullyInstalled())
-                    manager.UninstallIIS();
+                if (!installer.IsFullyInstalled())
+                    installer.UninstallIIS();
             }
             else
             {
                 System.Console.WriteLine("正在安装IIS,请稍候...");
-                if (!manager.IsFullyInstalled())
-                    manager.InstallIIS();
+                if (!installer.IsFullyInstalled())
+                    installer.InstallIIS();
             }
 
             Console.Write("Exit");

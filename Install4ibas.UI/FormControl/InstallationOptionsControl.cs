@@ -59,8 +59,8 @@ namespace Install4ibas.UI
             if (!this.ShellControl.installService.ServiceCode.Equals(NewInstallService.SERVICECODE))
             {
                 this.ShellControl.installService.AppSetting.SiteName = Convert.ToString(this.cmb_Sites.SelectedItem);
-                this.ShellControl.installService.AppSetting.LoadSiteInfo();
             }
+            this.ShellControl.installService.AppSetting.LoadSiteInfo();
         }
 
         void InstallationOptionsControl_NextEvent(object sender, EventArgs e)
