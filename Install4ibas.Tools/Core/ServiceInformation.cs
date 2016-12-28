@@ -58,7 +58,7 @@ namespace Install4ibas.Tools.Core
                 if (this.ServiceName == "SystemApplicationCenter"
                     || this.ServiceName == "ApprovalProcess")
                 {
-                    //this.ServicePath = "SystemCenter";
+                    this.ServicePath = "SystemCenter";
                     this.BOServiceContract = string.Format("BORep.{0}.BORepository.IBORep{0}Service", "BusinessSystemCenter");
                 }
             }

@@ -80,7 +80,7 @@ namespace Install4ibas.Tools.Plugin
                     xmlElement = this.GetServiceElement("RegisteredServiceProviders", xmlService, xmlElement);
                     var provider = this.GetProviderNode(this.RootAddress, xmlElement);
                     xmlElement = this.GetServiceElement("RootAddress", provider);
-                    xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServicePath);
+                    xmlElement.InnerText = string.Format(@"{0}/{1}", this.RootAddress, item.ServiceName);
                     
                     xmlElement = this.GetServiceElement("DataServiceAddress", provider, xmlElement);
                     xmlElement.InnerText = string.Format(@"/DataService/{0}.svc", item.ServicePath);
