@@ -219,59 +219,69 @@ namespace Install4ibas.Tools.Core
         }
         public void LoadSiteInfo()
         {
-            if (String.IsNullOrEmpty(this.SiteName)) return;
-            Site site = IISManagerFactory.New().CreateIISManager().GetSite(this.SiteName); ;
-            if (site == null) return;
-            System.Configuration.Configuration cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/", this.SiteName);
-            //设置appsetting
-            AppSettingsSection appSetting = cfg.AppSettings;
-            //使用Site信息对AppSetting赋值
-            #region 数据库相关
-            //public emPlatform Platform
-            //public string B1User
-            //public string B1Password
-            this.DatabaseType = GetValue(appSetting, "DatabaseType");
-            this.DBServer = GetValue(appSetting, "DataSource");
-            this.DBName = GetValue(appSetting, "InitialCatalog");
-            this.DBUser = GetValue(appSetting, "UserID");
-            this.DBPassword = GetValue(appSetting, "Password");
-            this.B1Type = GetValue(appSetting, "B1Type");
-            this.B1Server = GetValue(appSetting, "B1Server");
-            this.cmbLanguage = SAPbobsCOM.BoSuppLangs.ln_Chinese.ToString();
-            #endregion
-            #region IIS相关
-            this.InstallDiraddress = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
-            if (site.Bindings.Count > 0)
+            if (String.IsNullOrEmpty(this.SiteName))
             {
-                var binding = site.Bindings[0];
-                var endPoint = binding.EndPoint;
-                //public string IISAddress
-                this.IISAddress = GetValue(appSetting, "IISAddress");
-                //public string IISPort
-                this.IISPort = endPoint.Port.ToString();
+                this.IISAddress = string.Format("http://{0}", System.Net.Dns.GetHostName());
+                this.IISPort = "8000";
+                this.B1Server = "127.0.0.1:30000";
+                this.cmbLanguage = SAPbobsCOM.BoSuppLangs.ln_Chinese.ToString();
+                this.DatabaseType = "MSSQL";
             }
-            this.LoadDefaultModules();
-            foreach (var item in site.Applications)
+            else
             {
-                if (item.Path == "/") continue;
-                var module = this.InstallModules.FirstOrDefault(c => item.Path.Equals(string.Format("/{0}", c.ModuleName)));
-                if (module != null)
+                Site site = IISManagerFactory.New().CreateIISManager().GetSite(this.SiteName); ;
+                if (site == null) return;
+                System.Configuration.Configuration cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/", this.SiteName);
+                //设置appsetting
+                AppSettingsSection appSetting = cfg.AppSettings;
+                //使用Site信息对AppSetting赋值
+                #region 数据库相关
+                //public emPlatform Platform
+                //public string B1User
+                //public string B1Password
+                this.DatabaseType = GetValue(appSetting, "DatabaseType");
+                this.DBServer = GetValue(appSetting, "DataSource");
+                this.DBName = GetValue(appSetting, "InitialCatalog");
+                this.DBUser = GetValue(appSetting, "UserID");
+                this.DBPassword = GetValue(appSetting, "Password");
+                this.B1Type = GetValue(appSetting, "B1Type");
+                this.B1Server = GetValue(appSetting, "B1Server");
+                this.cmbLanguage = SAPbobsCOM.BoSuppLangs.ln_Chinese.ToString();
+                #endregion
+                #region IIS相关
+                this.InstallDiraddress = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+                if (site.Bindings.Count > 0)
                 {
-                    module.Status = emInstallStatus.Installed;
+                    var binding = site.Bindings[0];
+                    var endPoint = binding.EndPoint;
+                    //public string IISAddress
+                    this.IISAddress = GetValue(appSetting, "IISAddress");
+                    //public string IISPort
+                    this.IISPort = endPoint.Port.ToString();
                 }
-                else
+                this.LoadDefaultModules();
+                foreach (var item in site.Applications)
                 {
-                    module = new ibasModule();
-                    module.Type = emModuleType.other;
-                    module.ModuleName = item.Path.Substring(1);
-                    module.ModuleDescription = module.ModuleName;
-                    module.Status = emInstallStatus.Installed;
+                    if (item.Path == "/") continue;
+                    var module = this.InstallModules.FirstOrDefault(c => item.Path.Equals(string.Format("/{0}", c.ModuleName)));
+                    if (module != null)
+                    {
+                        module.Status = emInstallStatus.Installed;
+                    }
+                    else
+                    {
+                        module = new ibasModule();
+                        module.Type = emModuleType.other;
+                        module.ModuleName = item.Path.Substring(1);
+                        module.ModuleDescription = module.ModuleName;
+                        module.Status = emInstallStatus.Installed;
+                    }
                 }
+                #endregion
+                #region Licences相关
+                this.UpdateLicense();
+                #endregion
             }
-            #endregion
-            #region Licences相关
-            this.UpdateLicense();
-            #endregion
         }
 
         public void UpdateLicense()

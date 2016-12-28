@@ -41,6 +41,7 @@
             // radio_New
             // 
             this.radio_New.AutoSize = true;
+            this.radio_New.Checked = true;
             this.radio_New.Location = new System.Drawing.Point(30, 120);
             this.radio_New.Name = "radio_New";
             this.radio_New.Size = new System.Drawing.Size(160, 21);
@@ -57,7 +58,6 @@
             this.radio_Append.Name = "radio_Append";
             this.radio_Append.Size = new System.Drawing.Size(184, 21);
             this.radio_Append.TabIndex = 1;
-            this.radio_Append.TabStop = true;
             this.radio_Append.Text = "现有ibas上追加模块";
             this.radio_Append.UseVisualStyleBackColor = true;
             this.radio_Append.CheckedChanged += new System.EventHandler(this.radio_CheckedChanged);
@@ -69,7 +69,6 @@
             this.radio_License.Name = "radio_License";
             this.radio_License.Size = new System.Drawing.Size(179, 21);
             this.radio_License.TabIndex = 2;
-            this.radio_License.TabStop = true;
             this.radio_License.Text = "ibas的License管理";
             this.radio_License.UseVisualStyleBackColor = true;
             this.radio_License.CheckedChanged += new System.EventHandler(this.radio_CheckedChanged);
@@ -118,7 +117,6 @@
             this.radio_EditPort.Name = "radio_EditPort";
             this.radio_EditPort.Size = new System.Drawing.Size(177, 21);
             this.radio_EditPort.TabIndex = 5;
-            this.radio_EditPort.TabStop = true;
             this.radio_EditPort.Text = "修改ibas的IP/端口";
             this.radio_EditPort.UseVisualStyleBackColor = true;
             this.radio_EditPort.Visible = false;
